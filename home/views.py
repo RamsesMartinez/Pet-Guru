@@ -23,5 +23,10 @@ def reglamento(request):
     }
     return render(request, template, context)
 
-
+def question(request):
+    template = 'single-question.html'    
+    context={       
+        'title': "PetGurú - Pregúnta",
+    }
+    return render(request, template, context)
 

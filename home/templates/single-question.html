@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+{% block content %}
+  <div class="pageContainer">
+    <header class="unam-primary sticky-top">
+      <div class="container-fluid mainMenu">
+        <!-- Image and text -->
+        <nav class="navbar navbar-light bg-light navbar-expand-lg">
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img id="mainLogo" src="assets/images/logo.png" class="d-inline-block align-top mr-2" alt="FMVZ logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ml-auto mr-2">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Consultas</a> 
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="nosotros.html">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="reglamento.html">Reglamento</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div id="cuestionContainer">
+      <h2 class="py-3 text-center">¿Es necesario hacerle análisis de sangre?</h2>
+      <div id="galleryContainer">
+        <div id="gallery" style="display:none;">
+          <img alt="Image 1 Title" src="assets/images/questions/thumb1.jpg"
+          data-image="assets/images/questions/thumb1.jpg"
+          data-description="Image 1 Description">
+          <img alt="Image 2 Title" src="assets/images/questions/thumb2.jpg"
+          data-image="assets/images/questions/thumb2.jpg"
+          data-description="Image 2 Description">
+          <img alt="Image 3 Title" src="assets/images/questions/thumb3.jpg"
+          data-image="assets/images/questions/thumb3.jpg"
+          data-description="Image 3 Description">
+          <img alt="Image 4 Title" src="assets/images/questions/thumb4.jpg"
+          data-image="assets/images/questions/thumb4.jpg"
+          data-description="Image 4 Description">
+        </div>
+      </div>
+      <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
+        <p class="questionSingle">
+          Las clínicas veterinarias más completas ofrecen a sus clientes la posibilidad de hacer análisis de sangre, más que nada cuando ya son ancianos, porque de esta manera se pueden detectar enfermedades del riñón y del hígado. La diabetes y problemas de tiroides también son diagnosticados mediante análisis de sangre.
+        </p>
+      </div>
+    </div>
+{% endblock %}
