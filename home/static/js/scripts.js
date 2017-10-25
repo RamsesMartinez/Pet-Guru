@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // Forms handlers
     $(".mailitbtn").on("click", function(e) {
       e.preventDefault();
       swal({
@@ -148,6 +149,30 @@ $(document).ready(function() {
         }).then(function () {
           document.faunaquest.submit();
         });
+    });
+    // Login form handler
+    $( "#LogInOut" ).click(function(e) {
+      e.preventDefault();
+      swal({
+        title: "¡Felicidades!",
+        text: "Bienvenido Juan Perez",
+        type: "success",
+        confirmButtonText: "Vamos",
+        confirmButtonClass: 'btn btn-success'
+        }).then(function () {
+            $(".logIn").css('display', 'none');
+            $(".newQuestion").css("display","inline");
+        });
+    });
+    // Sinlge Question gallery
+    jQuery(document).ready(function(){ 
+        jQuery("#gallery").unitegallery(); 
+    }); 
+    // Animal icons popover
+    $(document).ready(function(){
+        if (screen.width>=1100) {
+            $('[data-toggle="popover"]').popover();   
+        }
     });
 });
 
