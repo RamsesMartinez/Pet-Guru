@@ -1,0 +1,24 @@
+<nav class="navbar navbar-light bg-light navbar-expand-lg">
+  <a class="navbar-brand d-flex align-items-center" href="index.html">
+    <img id="mainLogo" src="../static/images/logo.png" class="d-inline-block align-top mr-2" alt="FMVZ logo">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav  ml-auto mr-2">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'home:index.html' %}">Consultas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home:nosotros.html' %}">Nosotros</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home:reglamento.html' %}">Reglamento</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="analytics/index.html">Estadísticas</a>
+      </li>
+    </ul>
+  </div>
+</nav>
