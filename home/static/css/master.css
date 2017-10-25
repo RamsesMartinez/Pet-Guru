@@ -137,6 +137,9 @@ a.unam-dark:hover {
 .mainMenu {
   padding: 0; }
 
+.navbar-nav li a {
+  font-size: 20px; }
+
 .logIn {
   margin: 0;
   padding: 0;
@@ -238,6 +241,9 @@ a.unam-dark:hover {
     width: auto;
     height: 70px;
     margin-right: 20px; }
+
+  .navbar-nav li a {
+    font-size: 25px; }
 
   .h1 {
     font-size: 4.5rem;
