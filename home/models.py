@@ -61,6 +61,7 @@ class Question(models.Model):
     lymph_nodes = models.CharField(max_length=100, default='')
     clinic_history = models.TextField(default='', blank=True, null=True)
     date = models.DateTimeField(editable=False, auto_now=True, null=True)
+    image = models.ImageField(upload_to='questions', blank=True, null=True)
 
     def __str__(self):
         return '%s' % self.id
