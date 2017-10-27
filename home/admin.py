@@ -4,5 +4,5 @@ from .models import Question
 
 @admin.register(Question)
 class ContactoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'species', 'question', 'date',)
-    list_editable = ('question',)
+    list_display = ('id', 'especie', 'pregunta', 'date',)
+    list_editable = ('pregunta',)
