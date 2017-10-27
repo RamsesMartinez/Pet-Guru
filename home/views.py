@@ -52,10 +52,11 @@ class NuevaPregunta(CreateView):
         'mucosas',
         'linfonodos',
         'ruminales',
-        'clinica'
+        'clinica',
+        'imagen'
     ]
     template_name = 'question/nueva_pregunta'
 
     def form_valid(self, form):
         self.object = form.save()
-        return index()
+        return reglamento()

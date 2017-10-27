@@ -1,20 +1,20 @@
 $(document).ready(function() {
     // Forms handlers
-    $(".mailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.vacaquest.submit();
-        });
-    });
+    // $(".mailitbtn").on("click", function(e) {
+    //   e.preventDefault();
+    //   swal({
+    //     title: "Su pregunta será enviada!",
+    //     text: "Espere pronto una respuesta",
+    //     type: "success",
+    //     showCancelButton: true,
+    //     cancelButtonText: "Cancelar",
+    //     cancelButtonClass: 'btn btn-danger',
+    //     confirmButtonText: "Entendido",
+    //     confirmButtonClass: 'btn btn-success'
+    //     }).then(function () {
+    //       document.vacaquest.submit();
+    //     });
+    // });
     $(".caballomailitbtn").on("click", function(e) {
       e.preventDefault();
       swal({

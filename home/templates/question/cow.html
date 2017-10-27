@@ -32,129 +32,240 @@
           class="form-control validate {% if form.informacion.errors %}invalid{% endif %}" 
           name="{{ form.informacion.name }}" 
           rows="5" 
+          /></textarea>
+        </div>
+        <hr>
+        <h4>Reseña</h4>
+        <div class="form-group d-none">
+          <label 
+          for="{{ form.especie.id_for_label }}"
+          data-error="{% for e in form.especie.errors %}{{ e }}{% endfor %}"
+          />Especie</label>
+          <input id="{{ form.especie.id_for_label }}" 
+          type="text" 
+          class="form-control" 
+          name="{{ form.especie.name }}" 
+          value="BV"
+          maxlength="{{ form.especie.field.max_length }}"
           />
-        </textarea>
-      </div>
-      <hr>
-      <h4>Reseña</h4>
-      <div class="form-group d-none">
-        <label 
-        for="{{ form.especie.id_for_label }}"
-        data-error="{% for e in form.especie.errors %}{{ e }}{% endfor %}"
-        />Especie</label>
-        <input id="{{ form.especie.id_for_label }}" 
-        type="text" 
-        class="form-control" 
-        name="{{ form.especie.name }}" 
-        value="BV"
-        maxlength="{{ form.especie.field.max_length }}"
-        />
-      </div>
-      <div class="form-group">
-        <label 
-        for="{{ form.edad.id_for_label }}"
-        data-error="{% for e in form.edad.errors %}{{ e }}{% endfor %}"
-        />Edad</label>
-        <input id="{{ form.edad.id_for_label }}" 
-        type="text" 
-        class="form-control validate {% if form.edad.errors %}invalid{% endif %}" 
-        name="{{ form.edad.name }}" 
-        value="{{ form.edad.value }}"
-        maxlength="{{ form.edad.field.max_length }}"
-        placeholder="3 años"
-        />
-      </div>
-      <div class="form-group">
-        <label 
-        for="{{ form.peso.id_for_label }}"
-        data-error="{% for e in form.peso.errors %}{{ e }}{% endfor %}"
-        />Peso (kg)</label>
-        <input id="{{ form.peso.id_for_label }}" 
-        type="text" 
-        class="form-control validate {% if form.peso.errors %}invalid{% endif %}" 
-        name="{{ form.peso.name }}" 
-        value="{{ form.peso.value }}"
-        maxlength="{{ form.peso.field.max_length }}"
-        placeholder="0 - 800kg"
-        />
-      </div>
-      <fieldset class="form-group">
+        </div>
         <div class="form-group">
-          <p class="col-form-legend">Sexo</p>
-          <div class="col-sm-10">
-            {% for genero in sex %}
-            <div class="form-check">
-              <label 
-              for="{{ form.sexo.id_for_label }}"
-              class="form-check-label"
-              data-error="{% for e in form.sexo.errors %}{{ e }}{% endfor %}"
-              />
-              <input id="{{ form.sexo.id_for_label }}" 
-              type="radio" 
-              class="form-check-input" 
-              name="{{ form.sexo.name }}" 
-              value="{{ form.sexo.value }}"
-              maxlength="{{ form.sexo.field.max_length }}"
-              />
+          <label 
+          for="{{ form.edad.id_for_label }}"
+          data-error="{% for e in form.edad.errors %}{{ e }}{% endfor %}"
+          />Edad</label>
+          <input id="{{ form.edad.id_for_label }}" 
+          type="text" 
+          class="form-control validate {% if form.edad.errors %}invalid{% endif %}" 
+          name="{{ form.edad.name }}" 
+          value="{{ form.edad.value }}"
+          maxlength="{{ form.edad.field.max_length }}"
+          placeholder="3 años"
+          />
+        </div>
+        <div class="form-group">
+          <label 
+          for="{{ form.peso.id_for_label }}"
+          data-error="{% for e in form.peso.errors %}{{ e }}{% endfor %}"
+          />Peso (kg)</label>
+          <input id="{{ form.peso.id_for_label }}" 
+          type="text" 
+          class="form-control validate {% if form.peso.errors %}invalid{% endif %}" 
+          name="{{ form.peso.name }}" 
+          value="{{ form.peso.value }}"
+          maxlength="{{ form.peso.field.max_length }}"
+          placeholder="0 - 800kg"
+          />
+        </div>
+        <fieldset class="form-group">
+          <div class="form-group">
+            <p class="col-form-legend">Sexo</p>
+            <div class="col-sm-10">
+              {% for genero in sex %}
+              <div class="form-check">
+                <label 
+                for="{{ form.sexo.id_for_label }}"
+                class="form-check-label"
+                data-error="{% for e in form.sexo.errors %}{{ e }}{% endfor %}"
+                />
+                <input id="{{ form.sexo.id_for_label }}" 
+                type="radio" 
+                class="form-check-input" 
+                name="{{ form.sexo.name }}" 
+                value="{{ form.sexo.value }}"
+                maxlength="{{ form.sexo.field.max_length }}"
+                />
               </label>
             </div>
             {% endfor %}
           </div>
         </div>
       </fieldset>
-    <div class="form-group">
-      <label for="Estado_fisiologico" class="col-form-label">Estado Fisiológico</label>
-      <input type="text" class="form-control" id="Estado_fisiologico" name="Estado_fisiologico" placeholder="Lactante / Gestante / Crecimiento">
-    </div>
-    <hr>
-    <div class="form-group">
-      <h4>Motivo de consulta</h4>
-      <label for="Consulta" class="col-form-label">Escriba el motivo:</label>
-      <input type="text" class="form-control" id="Consulta" name="Consulta" placeholder="Descripción de la consulta">
-    </div>
-    <hr>
-    <div class="form-group">
-      <h4>Exámen físico general</h4>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="FC" class="col-form-label">Frecuencia Cardiaca (lpm)</label>
-          <input type="text" class="form-control" id="FC" name="FC">
+      <div class="form-group">
+        <label 
+        for="{{ form.fisiologico.id_for_label }}"
+        data-error="{% for e in form.fisiologico.errors %}{{ e }}{% endfor %}"
+        class="col-form-label"
+        />Estado Fisiológico</label>
+        <input id="{{ form.fisiologico.id_for_label }}" 
+        type="text" 
+        class="form-control validate {% if form.fisiologico.errors %}invalid{% endif %}"
+        name="{{ form.fisiologico.name }}" 
+        value="{{ form.fisiologico.value }}"
+        maxlength="{{ form.fisiologico.field.max_length }}"
+        placeholder="Lactante / Gestante / Crecimiento"
+        />
+      </div>
+      <hr>
+      <div class="form-group">
+        <h4>Motivo de consulta</h4>
+        <label 
+        for="{{ form.motivo.id_for_label }}"
+        data-error="{% for e in form.motivo.errors %}{{ e }}{% endfor %}"
+        class="col-form-label"
+        />Escriba el motivo:</label>
+        <input id="{{ form.motivo.id_for_label }}" 
+        type="text" 
+        class="form-control validate {% if form.motivo.errors %}invalid{% endif %}"
+        name="{{ form.motivo.name }}" 
+        value="{{ form.motivo.value }}"
+        maxlength="{{ form.motivo.field.max_length }}"
+        placeholder="Descripción de la consulta"
+        />
+      </div>
+      <hr>
+      <div class="form-group">
+        <h4>Exámen físico general</h4>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label 
+            for="{{ form.cardiaca.id_for_label }}"
+            data-error="{% for e in form.cardiaca.errors %}{{ e }}{% endfor %}"
+            class="col-form-label"
+            />Frecuencia Cardiaca (lpm)</label>
+            <input id="{{ form.cardiaca.id_for_label }}" 
+            type="text" 
+            class="form-control validate {% if form.cardiaca.errors %}invalid{% endif %}"
+            name="{{ form.cardiaca.name }}" 
+            value="{{ form.cardiaca.value }}"
+            maxlength="{{ form.cardiaca.field.max_length }}"
+            placeholder="30 lpm"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label 
+            for="{{ form.respiratoria.id_for_label }}"
+            data-error="{% for e in form.respiratoria.errors %}{{ e }}{% endfor %}"
+            class="col-form-label"
+            />Frecuencia Respiratoria (rpm)</label>
+            <input id="{{ form.respiratoria.id_for_label }}" 
+            type="text" 
+            class="form-control validate {% if form.respiratoria.errors %}invalid{% endif %}"
+            name="{{ form.respiratoria.name }}" 
+            value="{{ form.respiratoria.value }}"
+            maxlength="{{ form.respiratoria.field.max_length }}"
+            placeholder="25 rpm"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label 
+            for="{{ form.temperatura.id_for_label }}"
+            data-error="{% for e in form.temperatura.errors %}{{ e }}{% endfor %}"
+            class="col-form-label"
+            />Temperatura (°C)</label>
+            <input id="{{ form.temperatura.id_for_label }}" 
+            type="text" 
+            class="form-control validate {% if form.temperatura.errors %}invalid{% endif %}"
+            name="{{ form.temperatura.name }}" 
+            value="{{ form.temperatura.value }}"
+            maxlength="{{ form.temperatura.field.max_length }}"
+            placeholder="37°"
+            />
+          </div>
         </div>
-        <div class="form-group col-md-4">
-          <label for="FR" class="col-form-label">Frecuencia Respiratoria (rpm)</label>
-          <input type="text" class="form-control" id="FR" name="FR">
+        <div class="form-group">
+          <label 
+          for="{{ form.llenado.id_for_label }}"
+          data-error="{% for e in form.llenado.errors %}{{ e }}{% endfor %}"
+          class="col-form-label"
+          />Tiempo de llenado capilar:</label>
+          <input id="{{ form.llenado.id_for_label }}" 
+          type="text" 
+          class="form-control validate {% if form.llenado.errors %}invalid{% endif %}"
+          name="{{ form.llenado.name }}" 
+          value="{{ form.llenado.value }}"
+          maxlength="{{ form.llenado.field.max_length }}"
+          placeholder="5 segundos"
+          />
+          <label 
+          for="{{ form.mucosas.id_for_label }}"
+          data-error="{% for e in form.mucosas.errors %}{{ e }}{% endfor %}"
+          class="col-form-label"
+          />Coloración de Mucosas:</label>
+          <input id="{{ form.mucosas.id_for_label }}" 
+          type="text" 
+          class="form-control validate {% if form.mucosas.errors %}invalid{% endif %}"
+          name="{{ form.mucosas.name }}" 
+          value="{{ form.mucosas.value }}"
+          maxlength="{{ form.mucosas.field.max_length }}"
+          />
+          <label 
+          for="{{ form.linfonodos.id_for_label }}"
+          data-error="{% for e in form.linfonodos.errors %}{{ e }}{% endfor %}"
+          class="col-form-label"
+          />Linfonodos:</label>
+          <input id="{{ form.linfonodos.id_for_label }}" 
+          type="text" 
+          class="form-control validate {% if form.linfonodos.errors %}invalid{% endif %}"
+          name="{{ form.linfonodos.name }}" 
+          value="{{ form.linfonodos.value }}"
+          maxlength="{{ form.linfonodos.field.max_length }}"
+          />
         </div>
-        <div class="form-group col-md-4">
-          <label for="Temp" class="col-form-label">Temperatura (°C)</label>
-          <input type="text" class="form-control" id="Temp" name="Temp">
+        <div class="form-group">
+          <label 
+          for="{{ form.ruminales.id_for_label }}"
+          data-error="{% for e in form.ruminales.errors %}{{ e }}{% endfor %}"
+          class="col-form-label"
+          />Movimientos Ruminales</label>
+          <input id="{{ form.ruminales.id_for_label }}" 
+          type="text" 
+          class="form-control validate {% if form.ruminales.errors %}invalid{% endif %}"
+          name="{{ form.ruminales.name }}" 
+          value="{{ form.ruminales.value }}"
+          maxlength="{{ form.ruminales.field.max_length }}"
+          />
+        </div>
+        <div class="form-group">
+          <label 
+          for="{{ form.clinica.id_for_label }}"
+          data-error="{% for e in form.clinica.errors %}{{ e }}{% endfor %}"
+          class="col-form-label"
+          />Historia Clínica</label>
+          <textarea id="{{ form.clinica.id_for_label }}" 
+          class="form-control validate {% if form.clinica.errors %}invalid{% endif %}" 
+          name="{{ form.clinica.name }}" 
+          rows="3" 
+          /></textarea>
+        </div>
+        <div class="form-group">
+          <label 
+          for="{{ form.imagen.id_for_label }}"
+          data-error="{% for e in form.imagen.errors %}{{ e }}{% endfor %}"
+          class="col-form-label"
+          />Imagenes</label>
+          <input id="{{ form.imagen.id_for_label }}" 
+          type="file" 
+          class="form-control"
+          name="{{ form.imagen.name }}"
+          />
         </div>
       </div>
-      <div class="form-group">
-        <label for="Capilar" class="col-form-label">Tiempo de llenado capilar:</label>
-        <input type="text" class="form-control" id="Capilar" name="Capilar" placeholder="">
-        <label for="Mucosas" class="col-form-label">Coloración de Mucosas:</label>
-        <input type="text" class="form-control" id="Mucosas" name="Mucosas" placeholder="">
-        <label for="Linfonodo" class="col-form-label">Linfonodos:</label>
-        <input type="text" class="form-control" id="Linfonodo" name="Linfonodo" placeholder="">
+      <div class="buttonSection d-flex flex-wrap justify-content-around">
+        <input type="submit" class="mailitbtn btn btn-success" value="Crear Pregunta" />
+        <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
       </div>
-      <div class="form-group">
-        <label for="MovRum" class="col-form-label">Movimientos Ruminales</label>
-        <input type="text" class="form-control" id="MovRum" name="MovRum">
-      </div>
-      <div class="form-group">
-        <label for="Clinica">Historia Clínica</label>
-        <textarea class="form-control" id="Clinica" name="Clinica" rows="3"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="images">Imagenes</label>
-        <input type="file" name="imgages[]" multiple>
-      </div>
-    </div>
-    <div class="buttonSection d-flex flex-wrap justify-content-around">
-      <input type="submit" class="mailitbtn btn btn-success" value="Crear Pregunta" />
-      <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 </div>
 </div>
