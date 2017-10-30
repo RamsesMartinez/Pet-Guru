@@ -55,8 +55,8 @@ class NuevaPregunta(CreateView):
         'clinica',
         'imagen'
     ]
-    template_name = 'question/nueva_pregunta'
+    template_name = 'question/cow.html'
 
     def form_valid(self, form):
         self.object = form.save()
-        return reglamento()
+        return redirect('home:reglamento')
