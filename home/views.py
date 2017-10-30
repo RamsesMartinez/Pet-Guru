@@ -4,13 +4,24 @@ from django.views.generic import CreateView
 
 from django.http import HttpResponse
 from .models import Question
-
+from .forms import AnimalesForm
 # Create your views here.
 def index(request):
-    template = 'index.html'    
+    template = 'index.html'  
+
+    my_form = AnimalesForm
+
     context={    	
     	'title': "PetGurú - Inicio",
+        'form': my_form,
     }
+
+    # Capturamos el método POST 
+    if request.method == 'POST':
+        print(request.POST)
+    
+    
+
     return render(request, template, context)
 
 def nosotros(request):
@@ -35,6 +46,7 @@ def question(request):
     return render(request, template, context)
 
 class NuevaPregunta(CreateView):
+
     model = Question
     fields = [
         'especie',
