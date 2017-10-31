@@ -1,10 +1,37 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import login as login_django
+from django.contrib.auth import logout as logout_django
+from django.http import JsonResponse, HttpResponse
 
 
 # Create your views here.
 def index(request):
+
+    if request.method == 'POST':      
+        print("entra")
+        email = json.loads(request.POST.get('email'))
+        password = json.loads(request.POST.get('password'))     
+        print(email)   
+        print(password)
+
+        user = authenticate(request, username='Rich', password=password)
+        if user is not None:
+            login_django(request, user)
+            # Redirect to a success page.
+            data = {
+               'check': "valido"
+            }
+            print("Valido")    
+            return JsonResponse(data)        
+        else:
+            # Return an 'invalid login' error message.
+            print("No valido")            
+            data = {
+               'check': "No valido"
+            }
+            return JsonResponse(data)        
 
     template = 'index.html'    
     context={    	
@@ -13,25 +40,6 @@ def index(request):
     return render(request, template, context)
 
 def nosotros(request):
-
-    if request.method == 'POST':        
-        print("entra")
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, email=username, password=password)
-        if user is not None:
-            login(request, user)
-            # Redirect to a success page.
-            print("Valido")
-            return redirect('home:reglamento')
-            ...
-        else:
-            # Return an 'invalid login' error message.
-            print("No valido")
-            return redirect('home:index')
-            
-            ...
-            
 
     template = 'nosotros.html'    
     context={    	
@@ -52,4 +60,9 @@ def question(request):
         'title': "PetGurú - Pregúnta",
     }
     return render(request, template, context)
+
+@login_required(login_url='home:inicio')
+def logout(request):
+    logout_django(request)
+    return redirect('home:inicio')
 
