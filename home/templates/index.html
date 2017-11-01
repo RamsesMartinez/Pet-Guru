@@ -61,16 +61,17 @@
               <div class="logIn bcard bg-light mx-auto">
                 <div class="card-header unam-primary text-uppercase">Inicia Sesión</div>
                 <div class="card-body">
-                  <form>
+                  <form method="post">
+                    {% csrf_token %}
                     <div class="form-group">
                       <label for="exampleInputEmail1">Usuario</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuario">
+                      <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Usuario">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Contraseña</label>
-                      <input type="Contraseña" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                      <input type="Contraseña" class="form-control" id="password" name='password' placeholder="Contraseña">
                     </div>
-                    <a id="LogInOut" href="#" class="nav-link unam-primary text-white text-center">Ingresar</a>
+                    <input id="LogInOut" type="submit" name="" class="col s12 nav-link unam-primary text-white text-center" value="Ingresar">                    
                   </form>
                 </div>
               </div>

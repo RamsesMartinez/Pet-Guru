@@ -13,6 +13,28 @@ body {
   margin: 0 auto;
   background-color: #FFFFFF; }
 
+/*Input for Form on Index*/
+input.link {
+  color: #fefefe;
+  font-weight: 300;
+  transition: all .3s ease; }
+
+input.link:hover {
+  text-decoration: none;
+  color: #a0a0a0; }
+
+input.unam-primary:hover {
+  background-color: #FFFFFF !important;
+  color: #016FB9 !important;
+  border: 1px solid #016FB9 !important;
+  transition: all 0.7s ease-in-out; }
+
+input.unam-dark:hover {
+  background-color: #FFFFFF !important;
+  color: #064789 !important;
+  border: 1px solid #064789 !important;
+  transition: all 0.7s ease-in-out; }
+
 a.link {
   color: #fefefe;
   font-weight: 300;
