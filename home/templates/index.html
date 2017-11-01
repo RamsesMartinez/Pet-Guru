@@ -1,4 +1,6 @@
 {% extends 'base/base.html' %}
+
+
 {% block content %}
 <div class="pageContainer">
   <header class="unam-primary sticky-top">
@@ -82,7 +84,7 @@
           </div>
           <hr class="my-4">
           <div class="row d-flex justify-content-center">
-            <div class="collapse" id="collapseExample">
+            <div class="collapse show" id="collapseExample">
               <div class="card card-body speciesMenu">
                 <h5 class="text-center">Elige un espécimen</h5>
                 <div class="animals m-auto d-flex flex-row flex-wrap">
@@ -164,6 +166,13 @@
 
 
 <!-- Animal´s modals -->
+
+
+<!-- Podrias ahorrar codigo asi... -->
+{% block question %}
+  
+{% endblock question %}
+
 <!-- Vaca -->
 <div class="modal fade" id="vacaModal" tabindex="-1" role="dialog" aria-labelledby="vacaModal" aria-hidden="true">
   {% include 'question/cow.html' %}

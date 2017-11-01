@@ -4,9 +4,13 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
 from django.http import JsonResponse, HttpResponse
+from django.views.generic import CreateView
 
-
+from django.http import HttpResponse
+from .models import Question
+from .forms import AnimalesForm
 # Create your views here.
+
 def index(request):
     if request.method == 'POST':
 
@@ -31,8 +35,15 @@ def index(request):
             return JsonResponse(data)
 
     template = 'index.html'
-    context = {
-        'title': "PetGurú - Inicio",
+    my_form = AnimalesForm(request.POST or None)
+    if request.method == 'POST':
+        if my_form.is_valid():
+            my_form.save()
+            return redirect ('home:inicio')
+
+    context={    	
+    	'title': "PetGurú - Inicio",
+        'form': my_form,
     }
     return render(request, template, context)
 
@@ -65,3 +76,31 @@ def question(request):
 def logout(request):
     logout_django(request)
     return redirect('home:inicio')
+
+# No usada hasta el momento
+# class NuevaPregunta(CreateView):
+#     model = Question
+#     fields = [
+#         'especie',
+#         'pregunta',
+#         'informacion',
+#         'edad',
+#         'peso',
+#         'sexo',
+#         'fisiologico',
+#         'motivo',
+#         'cardiaca',
+#         'respiratoria',
+#         'temperatura',
+#         'llenado',
+#         'mucosas',
+#         'linfonodos',
+#         'ruminales',
+#         'clinica',
+#         'imagen'
+#     ]
+#     template_name = 'question/cow.html'
+
+#     def form_valid(self, form):
+#         self.object = form.save()
+#         return redirect('home:reglamento')
