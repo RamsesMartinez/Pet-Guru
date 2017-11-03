@@ -11,24 +11,26 @@ from .models import Question
 from .forms import VacaForm, Login
 # Create your views here.
 
+
 def index(request):
-    message = ''
+    if request.user.is_authenticated():
+        return redirect('home:user')
+
+    message = None
     Login_form = Login(request.POST or None)
     
-
     if request.method == 'POST':
         userLog = request.POST['username']
         passLog = request.POST['password']
-        authuser = authenticate( username = userLog , password = passLog)
-        if authuser is not None:
-            login_django(request, authuser)
+        user = authenticate( username = userLog , password = passLog)
+        if user is not None:
+            login_django(request, user)
             return redirect('home:usuario')
         else:
             message = "Usuario o contraseña incorrectos."
 
-
     context = {
-        'title': "PetGurú - Nosotros",
+        'title': "PetGurú - Inicio",
         'message' : message,
         'form' : Login_form,
     }
@@ -66,6 +68,7 @@ def logout(request):
     return redirect('home:inicio')
 
 
+@login_required(login_url='home:inicio')
 def user(request):
     template = 'user.html'
     my_form = VacaForm(request.POST or None)
