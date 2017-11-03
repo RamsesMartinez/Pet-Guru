@@ -70,14 +70,14 @@ QUEEN = (
   (NOTVERIFIED, 'No Verificado'),
   )
 
-BREEDINGCOLOR = 'BC'
+LARVACOLOR = 'BC'
 PERFORATED = 'PR'
 FATTY = 'FT'
 APRICOTS = 'APR'
 NOTVERIFIED = 'NV'
 
-BREEDING = (
-  (BREEDINGCOLOR, 'Larvas de color anormal'),
+LARVA = (
+  (LARVACOLOR, 'Larvas de color anormal'),
   (PERFORATED, 'Perforadas'),
   (FATTY, 'Aspecto grasoso'),
   (APRICOTS, 'Opérculos raídos'),
@@ -103,20 +103,225 @@ ADULTBEES = (
 EXCREMENT = (
   (PRESENT, 'Presente'),
   (NOTPRESENT, 'No Presente'),
-  (NOTVERIFIED, 'NO Verificado')
+  (NOTVERIFIED, 'NO Verificado'),
   )
 
 LARVA = (
   (PRESENT, 'Presente'),
   (NOTPRESENT, 'No Presente'),
-  (NOTVERIFIED, 'NO Verificado')
+  (NOTVERIFIED, 'NO Verificado'),
   )
 
 DEADBEES = (
   (PRESENT, 'Presente'),
   (NOTPRESENT, 'No Presente'),
-  (NOTVERIFIED, 'NO Verificado')
+  (NOTVERIFIED, 'NO Verificado'),
   )
 
 # Birds tuples
 
+YOUNG = 'YN'
+ADULT = 'SL'
+
+# Add int fiel to put age in number
+AGE = (
+  (YOUNG, 'Joven'),
+  (ADULT, 'Adulto'),
+  )
+
+CAGE = 'CG'
+FREE = 'FR'
+HENHOUSE = 'HH'
+
+CONFINEMENT = (
+  (CAGE, 'Jaula'),
+  (HENHOUSE, 'Gallinero'),
+  (FREE, 'Libre'),
+  )
+
+YES = 'YS'
+NO = 'NO'
+
+DRINK = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+FOOD = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+LIQUID = 'LQ'
+WHITE = 'WH'
+GREEN = 'GR'
+OTHER = 'TH'
+COMPACT = 'CM'
+
+DEFECATION = (
+  (COMPACT, 'Compactas'),
+  (LIQUID, 'Líquidas'),
+  (WHITE, 'Blancas'),
+  (GREEN, 'Verdes'),
+  (OTHER, 'Otros'),
+  )
+
+SCALY = 'SC'
+FLUSHED = 'FL'
+
+LEGS = (
+  (SCALY, 'Escamosas'),
+  (FLUSHED, 'Enrojecidas'),
+  )
+
+# Wildlife doesn´t require tuples
+
+# Aquatic organisms tuples
+
+AQFATTEN = 'FT'
+AQREPRODUCTIVE = 'RP'
+ORNAMENTAL = 'RN'
+
+AQZOOTECHNICAL = (
+  (AQFATTEN, 'Engorda'),
+  (AQREPRODUCTIVE, 'Reproductores'),
+  (ORNAMENTAL, 'Ornamentales'),
+  )
+
+AQRUSTIC = 'RS'
+AQCEMENT = 'CM'
+AQGEOMEMBRANE = 'GM'
+AQFLOATINGCAGE = 'FC'
+AQOTHER = 'TH'
+
+POND = (
+  (AQRUSTIC, 'Rústico'),
+  (AQCEMENT, 'Cemento'),
+  (AQGEOMEMBRANE, 'Geomembrana'),
+  (AQFLOATINGCAGE, 'Jaula flotante'),
+  (AQOTHER, 'Otro'),
+  )
+
+AERATION = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+RECIRCULATION = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+TURBINE = 'TR'
+PROPELLER = 'PR'
+PALETTE = 'PL'
+VERTICAL = 'VR'
+AEREATOROTHER = 'TH'
+
+AEREATOR = (
+  (TURBINE, 'Turbina'),
+  (PROPELLER, 'Hélice'),
+  (PALETTE, 'Paleta'),
+  (VERTICAL, 'Flujo vertical'),
+  (AEREATOROTHER, 'Otro'),
+  )
+
+BOTTOM = 'BT'
+MIDDLE = 'MD'
+SURFACE = 'SR'
+
+COLUMNPOSITION = (
+  (BOTTOM, 'Fondo'),
+  (MIDDLE, 'Medio'),
+  (SURFACE, 'Superficie'),
+  )
+
+NORMAL = 'NR'
+LETHARGIC = 'LT'
+ERRATIC = 'RT'
+SPIRAL = 'SP'
+RUB = 'RB'
+
+FISHMOVEMENT = (
+  (NORMAL, 'Normal'),
+  (LETHARGIC, 'Letárgico'),
+  (ERRATIC, 'Errático'),
+  (SPIRAL, 'En espiral'),
+  (RUB, 'Se frotan con la superficie del estanque')
+  )
+
+FISHNORMAL = 'NR'
+FISHDARK = 'DR'
+
+FISHPOPULATIONCOLOR = (
+  (FISHNORMAL, 'Normal'),
+  (FISHDARK, 'Obscuro'),
+  )
+
+LACKAPPETITE = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+PELLET = 'PL'
+FLAKE = 'FL'
+LIVE = 'LV'
+FDOTHER = 'TH'
+
+FOODTYPE = (
+  (PELLET, 'Pellet'),
+  (FLAKE, 'Hojuela'),
+  (LIVE, 'Vivo'),
+  (FDOTHER, 'Otro'),
+  )
+
+FISHCOLOR = (
+  (FISHNORMAL, 'Normal'),
+  (FISHDARK, 'Obscuro'),
+  )
+
+BULGING_BELLY = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+EXOPHTALMIA = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+PETECHIA = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+# Aletas
+FIN = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+ULCERS = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+SORES = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+COTTON_STRUCTURE = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+NECROSIS = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
+
+EYE_OPACITY = (
+  (YES, 'Si'),
+  (NO, 'No'),
+  )
