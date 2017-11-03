@@ -14,7 +14,7 @@ from .forms import VacaForm, Login
 
 def index(request):
     if request.user.is_authenticated():
-        return redirect('home:user')
+        return redirect('home:usuario')
 
     message = None
     Login_form = Login(request.POST or None)
