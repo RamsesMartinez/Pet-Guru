@@ -2,6 +2,14 @@ from django import forms
 from django.forms import ModelForm 
 from .models import Question
 
+
+
+class Login(forms.Form):
+  username = forms.CharField(max_length=20)
+  password = forms.CharField(max_length=20, widget = forms.PasswordInput())
+
+
+
 class VacaForm(ModelForm):
     class Meta:
         model = Question
@@ -24,7 +32,3 @@ class VacaForm(ModelForm):
           'clinica',
           'image',
         )
-
-class Login(forms.Form):
-    username = forms.CharField(max_length=20)
-    password = forms.CharField(max_length=20, widget = forms.PasswordInput())

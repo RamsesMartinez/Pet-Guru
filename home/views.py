@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
 from django.http import JsonResponse, HttpResponse
@@ -13,20 +13,20 @@ from .forms import VacaForm, Login
 
 def index(request):
     message = ''
+    Login_form = Login(request.POST or None)
+    
 
     if request.method == 'POST':
-
         userLog = request.POST['username']
         passLog = request.POST['password']
         authuser = authenticate( username = userLog , password = passLog)
         if authuser is not None:
-            login_django(request, user)
+            login_django(request, authuser)
             return redirect('home:usuario')
         else:
             message = "Usuario o contraseña incorrectos."
 
 
-    Login_form = Login(request.POST or None)
     context = {
         'title': "PetGurú - Nosotros",
         'message' : message,
