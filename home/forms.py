@@ -1,7 +1,7 @@
 from django.forms import ModelForm 
 from .models import Question
 
-class AnimalesForm(ModelForm):
+class VacaForm(ModelForm):
     class Meta:
         model = Question
         # Acontinuacion colocamos los campos que quremos que use el form...

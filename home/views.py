@@ -8,7 +8,7 @@ from django.views.generic import CreateView
 
 from django.http import HttpResponse
 from .models import Question
-from .forms import AnimalesForm
+from .forms import VacaForm
 # Create your views here.
 
 def index(request):
@@ -76,6 +76,21 @@ def question(request):
 def logout(request):
     logout_django(request)
     return redirect('home:inicio')
+
+
+def user(request):
+    template = 'user.html'
+    my_form = VacaForm(request.POST or None)
+    if request.method == 'POST':
+        if my_form.is_valid():
+            my_form.save()
+            return redirect ('home:usuario')
+
+    context={       
+        'title': "PetGurú - Bienvenido",
+        'form': my_form,
+    }
+    return render(request, template, context)
 
 # No usada hasta el momento
 # class NuevaPregunta(CreateView):

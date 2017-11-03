@@ -9,6 +9,7 @@ app_name='home'
 urlpatterns = [
 
   url(r'^$', views.index, name='inicio'),    
+  url(r'^user/$', views.user, name='usuario'),    
   url(r'^nosotros/$', views.nosotros, name='nosotros'),
   url(r'^reglamento/$', views.reglamento, name='reglamento'),
   url(r'^pregunta/$', views.question, name='single-question'),
