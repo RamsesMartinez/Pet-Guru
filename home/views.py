@@ -8,43 +8,31 @@ from django.views.generic import CreateView
 
 from django.http import HttpResponse
 from .models import Question
-from .forms import VacaForm
+from .forms import VacaForm, Login
 # Create your views here.
 
 def index(request):
+    message = ''
+
     if request.method == 'POST':
 
-        email = json.loads(request.POST.get('email'))
-        password = json.loads(request.POST.get('password'))
-
-        user = authenticate(request, username='Rich', password=password)
-        if user is not None:
+        userLog = request.POST['username']
+        passLog = request.POST['password']
+        authuser = authenticate( username = userLog , password = passLog)
+        if authuser is not None:
             login_django(request, user)
-            # Redirect to a success page.
-            data = {
-                'check': "valido"
-            }
-            print("Valido")
-            return JsonResponse(data)
+            return redirect('home:usuario')
         else:
-            # Return an 'invalid login' error message.
-            print("No valido")
-            data = {
-                'check': "No valido"
-            }
-            return JsonResponse(data)
+            message = "Usuario o contraseña incorrectos."
 
-    template = 'index.html'
-    my_form = AnimalesForm(request.POST or None)
-    if request.method == 'POST':
-        if my_form.is_valid():
-            my_form.save()
-            return redirect ('home:inicio')
 
-    context={    	
-    	'title': "PetGurú - Inicio",
-        'form': my_form,
+    Login_form = Login(request.POST or None)
+    context = {
+        'title': "PetGurú - Nosotros",
+        'message' : message,
+        'form' : Login_form,
     }
+    template = 'index.html'
     return render(request, template, context)
 
 
