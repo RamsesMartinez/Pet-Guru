@@ -63,10 +63,10 @@
               <div class="logIn bcard bg-light mx-auto">
                 <div class="card-header unam-primary text-uppercase">Inicia Sesión</div>
                 <div class="card-body">
-                  <form method="post">
+                  <form id="loginForm" method="post">
                     {% csrf_token %}
                     {{form.as_p}}
-                    <input type="submit" name="" class="col s12 nav-link unam-primary text-white text-center" value="Ingresar">
+                    <input type="submit" class="btnSubmit btn col s12 nav-link unam-primary text-white text-center" value="Ingresar">
                   </form>
                   {% if message %}
                     <p>{{ message }}</p>

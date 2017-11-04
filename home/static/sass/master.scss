@@ -153,6 +153,12 @@ a.unam-dark:hover {
   justify-content: flex-end;
   align-items: center;
 }
+#loginForm input {
+  width: 80%;
+}
+#loginForm .btnSubmit {
+  width: initial;
+}
 .mainMenu {
   padding: 0;
 }
@@ -258,6 +264,11 @@ a.unam-dark:hover {
     color: $secondarycolor !important;
     border-bottom: 1px dotted $divider-color;
   }
+}
+#userQuestions,
+#userChats {
+  height: 150px;
+  overflow: scroll;
 }
 
 

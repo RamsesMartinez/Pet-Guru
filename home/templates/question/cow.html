@@ -9,7 +9,19 @@
     <div class="modal-body">
       <form action="" method="POST" name="vacaquest"  accept-charset="utf-8">
         {% csrf_token %}
-        {{ form.as_p }}
+        {# {{ form.as_p }} #}
+        {% for field in form %}
+          <div class="form-group">
+
+            {% if field.errors %}
+              {{field.errors}}
+            {% endif %}
+
+            <label for="{{field.name}}">{{ field.label }}</label>
+            {{ field }}
+
+          </div>
+        {% endfor %}
         <input type="submit" name="enviar" class="mailitbtn btn btn-success">
         <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
       </form>

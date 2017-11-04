@@ -11,24 +11,29 @@ class Login(forms.Form):
 
 
 class VacaForm(ModelForm):
-    class Meta:
-        model = Question
-        # Acontinuacion colocamos los campos que quremos que use el form...
-        fields = (
-          'especie',
-          'pregunta',
-          'informacion',
-          'edad',
-          'peso',
-          'sexo',
-          'fisiologico',
-          'motivo',
-          'cardiaco',
-          'respiratorio',
-          'temperatura',
-          'llenado',
-          'mucosas',
-          'linfonodos',
-          'clinica',
-          'image',
-        )
+  class Meta:
+    model = Question
+    # Acontinuacion colocamos los campos que quremos que use el form...
+    fields = (
+      'especie',
+      'pregunta',
+      'informacion',
+      'edad',
+      'peso',
+      'sexo',
+      'fisiologico',
+      'motivo',
+      'cardiaco',
+      'respiratorio',
+      'temperatura',
+      'llenado',
+      'mucosas',
+      'linfonodos',
+      'clinica',
+      'image',
+      )
+
+    def __init__(self, *args, **kwargs):
+      super(VacaForm, self).__init__(*args, **kwargs)
+      self.fields['id_pregunta'].widget.attrs.update({'class':'form-control'}) 
+      self.fields['id_informacion'].widget.attrs.update({'class':'form-control'})

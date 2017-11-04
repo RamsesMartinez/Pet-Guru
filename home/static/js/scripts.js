@@ -201,6 +201,10 @@ $(document).ready(function() {
             $(".newQuestion").css("display","inline");
         });
     });
+    // Add attr to form inputs
+    jQuery(document).ready(function(){ 
+        jQuery("input").addClass('form-control'); 
+    }); 
     // Sinlge Question gallery
     jQuery(document).ready(function(){ 
         jQuery("#gallery").unitegallery(); 
