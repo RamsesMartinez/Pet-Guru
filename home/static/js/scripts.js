@@ -202,9 +202,9 @@ $(document).ready(function() {
         });
     });
     // Add attr to form inputs
-    jQuery(document).ready(function(){ 
-        jQuery("input").addClass('form-control'); 
-    }); 
+    // jQuery(document).ready(function(){ 
+    //     jQuery("input").addClass('form-control'); 
+    // }); 
     // Sinlge Question gallery
     jQuery(document).ready(function(){ 
         jQuery("#gallery").unitegallery(); 
