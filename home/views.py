@@ -71,20 +71,24 @@ def logout(request):
 @login_required(login_url='home:inicio')
 def user(request):
     template = 'user.html'
-    User = None
+    User = None 
+
     if request.user.is_authenticated():
         User = request.user.username
+
     my_form = VacaForm(request.POST or None)
+
     if request.method == 'POST':
         if my_form.is_valid():
             my_form.save()
             return redirect ('home:usuario')
 
-    context={       
+    context = {       
         'title': "PetGurú - Bienvenido",
         'form': my_form,
         'user': User,
     }
+
     return render(request, template, context)
 
 # No usada hasta el momento

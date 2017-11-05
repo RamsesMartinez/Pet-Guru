@@ -7,24 +7,47 @@
       </button>
     </div>
     <div class="modal-body">
+
       <form action="" method="POST" name="vacaquest"  accept-charset="utf-8">
         {% csrf_token %}
-        {# {{ form.as_p }} #}
         {% for field in form %}
-          <div class="form-group">
+        <div class="form-group">
 
-            {% if field.errors %}
-              {{field.errors}}
-            {% endif %}
 
-            <label for="{{field.name}}">{{ field.label }}</label>
-            {{ field }}
+          {% if field.errors %}
+          {{field.errors}}
+          {% endif %}
 
-          </div>
+          <label for="{{field.name}}">{{ field.label }}</label>
+          {{ field }}
+
+        </div>
         {% endfor %}
-        <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-        <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-      </form>
+
+        <!-- Test 2 -->
+        {{ form.non_field_errors }}
+        <div class="form-group">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              {{ form.cardiaco.errors }}
+              <label for="{{ form.cardiaco.id_for_label }}">{{ form.cardiaco.label }}</label>
+              {{ form.cardiaco }}
+            </div>
+            <div class="form-group col-md-4">
+              {{ form.respiratorio.errors }}
+              <label for="{{ form.respiratorio.id_for_label }}">{{ form.respiratorio.label }}</label>
+              {{ form.respiratorio }}
+            </div>
+            <div class="form-group col-md-4">
+              {{ form.temperatura.errors }}
+              <label for="{{ form.temperatura.id_for_label }}">{{ form.temperatura.label }}</label>
+              {{ form.temperatura }}
+            </div>
+          </div>
+          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+        </form>
+
+      </div>
     </div>
-  </div>
-</div> 
+  </div> 
