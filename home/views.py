@@ -84,7 +84,7 @@ def user(request):
             return redirect ('home:usuario')
 
     context = {       
-        'title': "PetGurú - Bienvenido",
+        'title': "Bienvenido "+User,
         'form': my_form,
         'user': User,
     }
