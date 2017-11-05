@@ -20,8 +20,8 @@ def index(request):
     Login_form = Login(request.POST or None)
     
     if request.method == 'POST':
-        userLog = request.POST['username']
-        passLog = request.POST['password']
+        userLog = request.POST['usuario']
+        passLog = request.POST['contraseña']
         user = authenticate( username = userLog , password = passLog)
         if user is not None:
             login_django(request, user)
