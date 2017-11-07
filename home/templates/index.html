@@ -63,60 +63,14 @@
               <div class="logIn bcard bg-light mx-auto">
                 <div class="card-header unam-primary text-uppercase">Inicia Sesión</div>
                 <div class="card-body">
-                  <form method="post">
+                  <form id="loginForm" method="post">
                     {% csrf_token %}
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Usuario</label>
-                      <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Usuario">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Contraseña</label>
-                      <input type="Contraseña" class="form-control" id="password" name='password' placeholder="Contraseña">
-                    </div>
-                    <input id="LogInOut" type="submit" name="" class="col s12 nav-link unam-primary text-white text-center" value="Ingresar">                    
+                    {{form.as_p}}
+                    <input type="submit" class="btnSubmit btn col s12 nav-link unam-primary text-white text-center" value="Ingresar">
                   </form>
-                </div>
-              </div>
-              <a class="btn btn-primary newQuestion notLogged" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Realiza una pregunta
-              </a>
-            </div>
-          </div>
-          <hr class="my-4">
-          <div class="row d-flex justify-content-center">
-            <div class="collapse show" id="collapseExample">
-              <div class="card card-body speciesMenu">
-                <h5 class="text-center">Elige un espécimen</h5>
-                <div class="animals m-auto d-flex flex-row flex-wrap">
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Bovino">
-                    <a data-toggle="modal" data-target="#vacaModal"><img src="../static/images/animal/vaca.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Porcino">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#cerdoModal"><img src="../static/images/animal/cerdo.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Equino">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#caballoModal"><img src="../static/images/animal/caballo.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ovino">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#ovejaModal"><img src="../static/images/animal/oveja.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Gallus">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#galloModal"><img src="../static/images/animal/gallo.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Lepórido">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#conejoModal"><img src="../static/images/animal/conejo.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Aves">
-                   <a data-toggle="modal" data-dismiss="modal" data-target="#avesModal"><img src="../static/images/animal/pato.png" alt="animal icon"></a>
-                 </div>
-                 <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Canino">
-                  <a data-toggle="modal" data-dismiss="modal" data-target="#perroModal"><img src="../static/images/animal/perro.png" alt="animal icon"></a>
-                </div>
-                <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Felino">
-                  <a data-toggle="modal" data-dismiss="modal" data-target="#gatoModal"><img src="../static/images/animal/gato.png" alt="animal icon"></a>
-                </div>
-                <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Fauna silvestre">
-                  <a data-toggle="modal" data-dismiss="modal" data-target="#silvestreModal"><img src="../static/images/animal/fauna.png" alt="animal icon"></a>
+                  {% if message %}
+                    <p>{{ message }}</p>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -162,55 +116,5 @@
       </div>
     </main>
   </div>
-</div>
-
-
-<!-- Animal´s modals -->
-
-
-<!-- Podrias ahorrar codigo asi... -->
-{% block question %}
-  
-{% endblock question %}
-
-<!-- Vaca -->
-<div class="modal fade" id="vacaModal" tabindex="-1" role="dialog" aria-labelledby="vacaModal" aria-hidden="true">
-  {% include 'question/cow.html' %}
-</div>
-<!-- Caballo -->
-<div class="modal fade" id="caballoModal" tabindex="-1" role="dialog" aria-labelledby="caballoModal" aria-hidden="true">
-  {% include 'question/horse.html' %}  
-</div>
-<!-- Oveja -->
-<div class="modal fade" id="ovejaModal" tabindex="-1" role="dialog" aria-labelledby="ovejaModal" aria-hidden="true">
-  {% include 'question/sheep.html' %}  
-</div>
-<!-- Cerdo -->
-<div class="modal fade" id="cerdoModal" tabindex="-1" role="dialog" aria-labelledby="cerdoModal" aria-hidden="true">
-  {% include 'question/pig.html' %}  
-</div>
-<!-- Conejo -->
-<div class="modal fade" id="conejoModal" tabindex="-1" role="dialog" aria-labelledby="conejoModal" aria-hidden="true">
-  {% include 'question/rabbit.html' %}  
-</div>
-<!-- Gallo -->
-<div class="modal fade" id="galloModal" tabindex="-1" role="dialog" aria-labelledby="galloModal" aria-hidden="true">
-  {% include 'question/rooster.html' %}  
-</div>
-<!-- Aves -->
-<div class="modal fade" id="avesModal" tabindex="-1" role="dialog" aria-labelledby="avesModal" aria-hidden="true">
-  {% include 'question/bird.html' %}  
-</div>
-<!-- Perros -->
-<div class="modal fade" id="perroModal" tabindex="-1" role="dialog" aria-labelledby="perroModal" aria-hidden="true">
-  {% include 'question/dog.html' %}  
-</div>
-<!-- Gatos -->
-<div class="modal fade" id="gatoModal" tabindex="-1" role="dialog" aria-labelledby="gatoModal" aria-hidden="true">
-  {% include 'question/cat.html' %}  
-</div>
-<!-- Fauna Silvestre -->
-<div class="modal fade" id="silvestreModal" tabindex="-1" role="dialog" aria-labelledby="faunaModal" aria-hidden="true">
-  {% include 'question/wild.html' %}  
 </div>
 {% endblock %}

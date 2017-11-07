@@ -13,28 +13,6 @@ body {
   margin: 0 auto;
   background-color: #FFFFFF; }
 
-/*Input for Form on Index*/
-input.link {
-  color: #fefefe;
-  font-weight: 300;
-  transition: all .3s ease; }
-
-input.link:hover {
-  text-decoration: none;
-  color: #a0a0a0; }
-
-input.unam-primary:hover {
-  background-color: #FFFFFF !important;
-  color: #016FB9 !important;
-  border: 1px solid #016FB9 !important;
-  transition: all 0.7s ease-in-out; }
-
-input.unam-dark:hover {
-  background-color: #FFFFFF !important;
-  color: #064789 !important;
-  border: 1px solid #064789 !important;
-  transition: all 0.7s ease-in-out; }
-
 a.link {
   color: #fefefe;
   font-weight: 300;
@@ -156,6 +134,12 @@ a.unam-dark:hover {
   justify-content: flex-end;
   align-items: center; }
 
+#loginForm input {
+  width: 80%; }
+
+#loginForm .btnSubmit {
+  width: initial; }
+
 .mainMenu {
   padding: 0; }
 
@@ -247,6 +231,18 @@ a.unam-dark:hover {
   color: #CCD44D !important;
   border-bottom: 1px dotted #BDBDBD; }
 
+.Dashboard {
+  min-height: 400px; }
+
+.Dashboard h3 {
+  margin-top: 10px; }
+
+#userQuestions,
+#userChats,
+#userFilters {
+  height: 150px;
+  overflow-y: scroll; }
+
 @media screen and (min-width: 550px) {
   .logIn {
     max-width: 20rem; } }
@@ -257,7 +253,13 @@ a.unam-dark:hover {
   .welcome-buttons {
     flex-direction: row; }
     .welcome-buttons .newQuestion {
-      margin: 0; } }
+      margin: 0; }
+
+  .Dashboard {
+    min-height: 200px; }
+
+  .Dashboard h3 {
+    margin-top: initial; } }
 @media screen and (min-width: 1024px) {
   #mainLogo {
     width: auto;

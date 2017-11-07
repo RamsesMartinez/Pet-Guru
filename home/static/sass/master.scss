@@ -153,6 +153,12 @@ a.unam-dark:hover {
   justify-content: flex-end;
   align-items: center;
 }
+#loginForm input {
+  width: 80%;
+}
+#loginForm .btnSubmit {
+  width: initial;
+}
 .mainMenu {
   padding: 0;
 }
@@ -259,6 +265,18 @@ a.unam-dark:hover {
     border-bottom: 1px dotted $divider-color;
   }
 }
+.Dashboard {
+  min-height: 400px;
+}
+.Dashboard h3 {
+  margin-top: 10px;
+}
+#userQuestions,
+#userChats,
+#userFilters {
+  height: 150px;
+  overflow-y: scroll;
+}
 
 
 
@@ -278,7 +296,12 @@ a.unam-dark:hover {
       margin: 0;
     }
   }
-
+  .Dashboard {
+    min-height: 200px;
+  }
+  .Dashboard h3 {
+    margin-top: initial;
+  }
 }
 @media screen and (min-width:  1024px) {
   #mainLogo {
