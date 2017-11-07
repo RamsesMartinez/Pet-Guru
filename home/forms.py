@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question, Bovine
+from .models import Question, Bovine, Porcine
 
 
 class Login(forms.Form):
@@ -15,12 +15,10 @@ class BaseForm(forms.ModelForm):
    
     class Meta:
         model = Question
-
         fields = (
           'title',
           'description',
           )
-        
         labels = {
           'title': 'Título de la consulta: ',
           'description': 'Descripción de la consulta: ',
@@ -28,9 +26,9 @@ class BaseForm(forms.ModelForm):
 
 
 
-class VacaForm(forms.ModelForm):
+class CowForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-      super(VacaForm, self).__init__(*args, **kwargs)
+      super(CowForm, self).__init__(*args, **kwargs)
       self.fields['specie'].widget.attrs.update({'class':'form-control'})
       self.fields['race'].widget.attrs.update({'class':'form-control'})
       self.fields['age'].widget.attrs.update({'class':'form-control'})
@@ -44,10 +42,8 @@ class VacaForm(forms.ModelForm):
       self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control'})
       self.fields['ruminal'].widget.attrs.update({'class':'form-control'})
       self.fields['body_condition'].widget.attrs.update({'class':'form-control'})
-
     class Meta:
-        model = Bovine
-        
+        model = Bovine       
         fields = (
           'specie',
           'race',
@@ -63,7 +59,6 @@ class VacaForm(forms.ModelForm):
           'ruminal',
           'body_condition',
           )
-
         labels = {
           'specie': 'Especie: ',
           'race': 'Raza: ',
@@ -77,5 +72,58 @@ class VacaForm(forms.ModelForm):
           'mucosal_color': 'Color de mucosas: ',
           'lymph_nodes': 'Linfonodos: ',
           'ruminal': 'Movimientos ruminales: ',
+          'body_condition': 'Condición corporal: ',
+          }
+
+
+class PorcineForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(PorcineForm, self).__init__(*args, **kwargs)
+      self.fields['specie'].widget.attrs.update({'class':'form-control'})
+      self.fields['physiological_stage'].widget.attrs.update({'class':'form-control'})
+      self.fields['race'].widget.attrs.update({'class':'form-control'})
+      self.fields['age'].widget.attrs.update({'class':'form-control'})
+      self.fields['gender'].widget.attrs.update({'class':'form-control'})
+      self.fields['weight'].widget.attrs.update({'class':'form-control'})
+      self.fields['heart_rate'].widget.attrs.update({'class':'form-control'})
+      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control'})
+      self.fields['temperature'].widget.attrs.update({'class':'form-control'})
+      self.fields['production_system'].widget.attrs.update({'class':'form-control'})
+      self.fields['curse'].widget.attrs.update({'class':'form-control'})
+      self.fields['attitude'].widget.attrs.update({'class':'form-control'})
+      self.fields['color'].widget.attrs.update({'class':'form-control'})
+      self.fields['body_condition'].widget.attrs.update({'class':'form-control'})
+    class Meta:
+        model = Porcine       
+        fields = (
+          'specie',
+          'physiological_stage',
+          'race',
+          'age',
+          'gender',
+          'weight',
+          'heart_rate',
+          'respiratory_rate',
+          'temperature',
+          'production_system',
+          'curse',
+          'attitude',
+          'color',
+          'body_condition',
+          )
+        labels = {
+          'specie': 'Especie: ',
+          'physiological_stage': 'Etapa fisiológica: ',
+          'race': 'Raza: ',
+          'age': 'Edad: ',
+          'gender': 'Género: ',
+          'weight': 'Peso: ',
+          'heart_rate': 'Frecuencia cardiaca (lpm): ',
+          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+          'temperature': 'Temperatura (°C): ',
+          'production_system': 'Sistema de producción: ',
+          'curse': 'Curso del padecimiento en días: ',
+          'attitude': 'Actitud: ',
+          'color': 'Coloración de la piel y/o mucosas: ',
           'body_condition': 'Condición corporal: ',
           }

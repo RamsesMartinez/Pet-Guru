@@ -8,7 +8,7 @@ from django.views.generic import CreateView
 
 from django.http import HttpResponse
 from .models import Question
-from .forms import BaseForm, VacaForm, Login
+from .forms import Login, BaseForm, CowForm, PorcineForm
 # Create your views here.
 
 
@@ -76,8 +76,9 @@ def user(request):
     if request.user.is_authenticated():
         User = request.user.username
 
-    cow_form = VacaForm(request.POST or None)
     base_form = BaseForm(request.POST or None)
+    cow_form = CowForm(request.POST or None)
+    porcine_form = PorcineForm(request.POST or None)
 
     if request.method == 'POST':
         if base_form.is_valid() and cow_form.is_valid():
@@ -87,37 +88,10 @@ def user(request):
 
     context = {       
         'title': "Bienvenido "+User,
-        'form': cow_form,
         'baseForm': base_form,
+        'cow_form': cow_form,
+        'porcine_form': porcine_form,
         'user': User,
     }
 
     return render(request, template, context)
-
-# No usada hasta el momento
-# class NuevaPregunta(CreateView):
-#     model = Question
-#     fields = [
-#         'especie',
-#         'pregunta',
-#         'informacion',
-#         'edad',
-#         'peso',
-#         'sexo',
-#         'fisiologico',
-#         'motivo',
-#         'cardiaca',
-#         'respiratoria',
-#         'temperatura',
-#         'llenado',
-#         'mucosas',
-#         'linfonodos',
-#         'ruminales',
-#         'clinica',
-#         'imagen'
-#     ]
-#     template_name = 'question/cow.html'
-
-#     def form_valid(self, form):
-#         self.object = form.save()
-#         return redirect('home:reglamento')

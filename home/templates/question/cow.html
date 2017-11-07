@@ -1,104 +1,77 @@
-<div class="modal-dialog modal-lg" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Bovino)</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+
+
+{{ form.non_field_errors }}
+<hr>
+<h4>Reseña</h4>
+<div class="form-group">
+  {{ form.specie.errors }}
+  <label for="{{ form.specie.id_for_label }}">{{ form.specie.label }}</label>
+  {{ form.specie }}
+</div>
+<div class="form-group">
+  {{ form.race.errors }}
+  <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
+  {{ form.race }}
+</div>
+<div class="form-group">
+  {{ form.age.errors }}
+  <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
+  {{ form.age }}
+</div>
+<div class="form-group">
+  {{ form.weight.errors }}
+  <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
+  {{ form.weight }}
+</div>
+<div class="form-group">
+  {{ form.gender.errors }}
+  <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+  {{ form.gender }}
+</div>
+<hr>
+<div class="form-group">
+  <h4>Exámen físico general</h4>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      {{ form.heart_rate.errors }}
+      <label for="{{ form.heart_rate.id_for_label }}">{{ form.heart_rate.label }}</label>
+      {{ form.heart_rate }}
     </div>
-    <div class="modal-body">
-
-      <form action="" method="POST" name="vacaquest"  accept-charset="utf-8">
-        {% csrf_token %}
-
-        {% include 'question/base.html' with form=baseForm %}
-
-       <!--  {% for field in form %}
-        <div class="form-group">
-          {% if field.errors %}
-          {{field.errors}}
-          {% endif %}
-          <label for="{{field.name}}">{{ field.label }}</label>
-          {{ field }}
-        </div>
-        {% endfor %} -->
-
-        {{ form.non_field_errors }}
-        <hr>
-        <h4>Reseña</h4>
-        <div class="form-group">
-          {{ form.specie.errors }}
-          <label for="{{ form.specie.id_for_label }}">{{ form.specie.label }}</label>
-          {{ form.specie }}
-        </div>
-        <div class="form-group">
-          {{ form.race.errors }}
-          <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
-          {{ form.race }}
-        </div>
-        <div class="form-group">
-          {{ form.age.errors }}
-          <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
-          {{ form.age }}
-        </div>
-        <div class="form-group">
-          {{ form.weight.errors }}
-          <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
-          {{ form.weight }}
-        </div>
-        <div class="form-group">
-          {{ form.gender.errors }}
-          <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
-          {{ form.gender }}
-        </div>
-        <hr>
-        <div class="form-group">
-          <h4>Exámen físico general</h4>
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              {{ form.heart_rate.errors }}
-              <label for="{{ form.heart_rate.id_for_label }}">{{ form.heart_rate.label }}</label>
-              {{ form.heart_rate }}
-            </div>
-            <div class="form-group col-md-4">
-              {{ form.respiratory_rate.errors }}
-              <label for="{{ form.respiratory_rate.id_for_label }}">{{ form.respiratory_rate.label }}</label>
-              {{ form.respiratory_rate }}
-            </div>
-            <div class="form-group col-md-4">
-              {{ form.temperature.errors }}
-              <label for="{{ form.temperature.id_for_label }}">{{ form.temperature.label }}</label>
-              {{ form.temperature }}
-            </div>
-          </div>
-          <div class="form-group">
-            {{ form.capilar.errors }}
-            <label for="{{ form.capilar.id_for_label }}">{{ form.capilar.label }}</label>
-            {{ form.capilar }}
-            {{ form.mucosal_color.errors }}
-            <label for="{{ form.mucosal_color.id_for_label }}">{{ form.mucosal_color.label }}</label>
-            {{ form.mucosal_color }}
-            {{ form.lymph_nodes.errors }}
-            <label for="{{ form.lymph_nodes.id_for_label }}">{{ form.lymph_nodes.label }}</label>
-            {{ form.lymph_nodes }}
-          </div>
-          <div class="form-group">
-            {{ form.ruminal.errors }}
-            <label for="{{ form.ruminal.id_for_label }}">{{ form.ruminal.label }}</label>
-            {{ form.ruminal }}
-            {{ form.body_condition.errors }}
-            <label for="{{ form.body_condition.id_for_label }}">{{ form.body_condition.label }}</label>
-            {{ form.body_condition }}
-          </div>
-          <!--<div class="form-group">
-            <label for="images">Imagenes</label>
-            <input type="file" name="imgages[]" multiple>
-          </div>-->
-        </div>
-        <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-        <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-      </form>
-
+    <div class="form-group col-md-4">
+      {{ form.respiratory_rate.errors }}
+      <label for="{{ form.respiratory_rate.id_for_label }}">{{ form.respiratory_rate.label }}</label>
+      {{ form.respiratory_rate }}
+    </div>
+    <div class="form-group col-md-4">
+      {{ form.temperature.errors }}
+      <label for="{{ form.temperature.id_for_label }}">{{ form.temperature.label }}</label>
+      {{ form.temperature }}
     </div>
   </div>
-</div> 
+  <div class="form-group">
+    {{ form.capilar.errors }}
+    <label for="{{ form.capilar.id_for_label }}">{{ form.capilar.label }}</label>
+    {{ form.capilar }}
+  </div>
+  <div class="form-group">
+    {{ form.mucosal_color.errors }}
+    <label for="{{ form.mucosal_color.id_for_label }}">{{ form.mucosal_color.label }}</label>
+    {{ form.mucosal_color }}
+  </div>
+  <div class="form-group">
+    {{ form.lymph_nodes.errors }}
+    <label for="{{ form.lymph_nodes.id_for_label }}">{{ form.lymph_nodes.label }}</label>
+    {{ form.lymph_nodes }}
+  </div>
+  <div class="form-group">
+    {{ form.ruminal.errors }}
+    <label for="{{ form.ruminal.id_for_label }}">{{ form.ruminal.label }}</label>
+    {{ form.ruminal }}
+  </div>
+  <div class="form-group">
+    {{ form.body_condition.errors }}
+    <label for="{{ form.body_condition.id_for_label }}">{{ form.body_condition.label }}</label>
+    {{ form.body_condition }}
+  </div>
+</div>
+

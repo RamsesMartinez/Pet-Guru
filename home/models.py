@@ -1,5 +1,6 @@
 from django.db import models
 from decimal import Decimal, DecimalException
+from django.core.validators import MinValueValidator
 from . import options
 
 class Question(models.Model):
@@ -35,7 +36,7 @@ class Specie(models.Model):
       )
 
     race = models.CharField(max_length=3, null=False)
-    age = models.IntegerField(default=0)
+    age = models.IntegerField(default=0, validators=[MinValueValidator(Decimal('0'))])
     gender = models.CharField(max_length=3, choices=SEX, default=MALE)
     weight = models.DecimalField(max_digits=5, decimal_places=3)
 
@@ -84,7 +85,7 @@ class Bovine(Specie):
       )
 
 
-    specie = models.CharField(max_length=10,choices=SPECIES, default='BOVINO')
+    specie = models.CharField(max_length=10,choices=SPECIES)
     heart_rate = models.IntegerField(default=0)
     respiratory_rate = models.IntegerField(default=0)
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -172,9 +173,37 @@ class Dog(Specie):
 
 
 class Porcine(Specie):
+
+    BOVINO = 'BV'
+    PORCINO  = 'PR'
+    EQUINO  = 'EQ'
+    OVINO = 'OV'
+    CAPRINO = 'CP'
+    LEPORIDO = 'LP'
+    AVE = 'AV'
+    CANINO = 'CN'
+    FELINO = 'FL'
+    SILVESTRE = 'SL'
+    ABEJA = 'BJ'
+
+    SPECIES = (
+      (BOVINO, 'Bovino'),
+      (PORCINO, 'Porcino'),
+      (EQUINO, 'Equino'),
+      (OVINO, 'Ovino'),
+      (CAPRINO, 'Caprino'),
+      (LEPORIDO, 'Lepórido'),
+      (AVE, 'Ave'),
+      (CANINO, 'Canino'),
+      (FELINO, 'Felino'),
+      (SILVESTRE, 'Silvestre'),
+      (ABEJA, 'Abeja'),
+      )
+    specie = models.CharField(max_length=10,choices=SPECIES)
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
     curse = models.CharField(max_length=60, null=True)
+    heart_rate = models.IntegerField(default=0)
     respiratory_rate = models.IntegerField(default=0)
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     body_condition = models.TextField(null=True)
