@@ -8,7 +8,7 @@ from django.views.generic import CreateView
 
 from django.http import HttpResponse
 from .models import Question
-from .forms import VacaForm, Login
+from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm, RabbitForm
 # Create your views here.
 
 
@@ -76,45 +76,30 @@ def user(request):
     if request.user.is_authenticated():
         User = request.user.username
 
-    my_form = VacaForm(request.POST or None)
+    base_form = BaseForm(request.POST or None)
+    cow_form = CowForm(request.POST or None)
+    porcine_form = PorcineForm(request.POST or None)
+    horse_form = HorseForm(request.POST or None)
+    goat_form = GoatForm(request.POST or None)
+    ovine_form = OvineForm(request.POST or None)
+    rabbit_form = RabbitForm(request.POST or None)
 
     if request.method == 'POST':
-        if my_form.is_valid():
-            my_form.save()
+        if base_form.is_valid() and cow_form.is_valid():
+            base_form.save()
+            cow_form.save()
             return redirect ('home:usuario')
 
     context = {       
         'title': "Bienvenido "+User,
-        'form': my_form,
+        'baseForm': base_form,
+        'cow_form': cow_form,
+        'porcine_form': porcine_form,
+        'horse_form': horse_form,
+        'goat_form': goat_form,
+        'ovine_form': ovine_form,
+        'rabbit_form': rabbit_form,
         'user': User,
     }
 
     return render(request, template, context)
-
-# No usada hasta el momento
-# class NuevaPregunta(CreateView):
-#     model = Question
-#     fields = [
-#         'especie',
-#         'pregunta',
-#         'informacion',
-#         'edad',
-#         'peso',
-#         'sexo',
-#         'fisiologico',
-#         'motivo',
-#         'cardiaca',
-#         'respiratoria',
-#         'temperatura',
-#         'llenado',
-#         'mucosas',
-#         'linfonodos',
-#         'ruminales',
-#         'clinica',
-#         'imagen'
-#     ]
-#     template_name = 'question/cow.html'
-
-#     def form_valid(self, form):
-#         self.object = form.save()
-#         return redirect('home:reglamento')
