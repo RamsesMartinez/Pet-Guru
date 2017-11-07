@@ -37,9 +37,9 @@
   {{ form.production_system }}
 </div>
 <div class="form-group">
-  {{ form.curse.errors }}
-  <label for="{{ form.curse.id_for_label }}">{{ form.curse.label }}</label>
-  {{ form.curse }}
+  {{ form.zootechnical.errors }}
+  <label for="{{ form.zootechnical.id_for_label }}">{{ form.zootechnical.label }}</label>
+  {{ form.zootechnical }}
 </div>
 <hr>
 <div class="form-group">
@@ -60,14 +60,31 @@
       <label for="{{ form.temperature.id_for_label }}">{{ form.temperature.label }}</label>
       {{ form.temperature }}
     </div>
+    <div class="form-group col-md-4">
+      {{ form.capilar.errors }}
+      <label for="{{ form.capilar.id_for_label }}">{{ form.capilar.label }}</label>
+      {{ form.capilar }}
+    </div>
   </div>
   <div class="form-group">
-    {{ form.color.errors }}
-    <label for="{{ form.color.id_for_label }}">{{ form.color.label }}</label>
-    {{ form.color }}
-    {{ form.attitude.errors }}
-    <label for="{{ form.attitude.id_for_label }}">{{ form.attitude.label }}</label>
-    {{ form.attitude }}
+    {{ form.mucosal_color.errors }}
+    <label for="{{ form.mucosal_color.id_for_label }}">{{ form.mucosal_color.label }}</label>
+    {{ form.mucosal_color }}
+  </div>
+  <div class="form-group">
+    {{ form.lymph_nodes.errors }}
+    <label for="{{ form.lymph_nodes.id_for_label }}">{{ form.lymph_nodes.label }}</label>
+    {{ form.lymph_nodes }}
+  </div>
+  <div class="form-group">
+    {{ form.ruminal.errors }}
+    <label for="{{ form.ruminal.id_for_label }}">{{ form.ruminal.label }}</label>
+    {{ form.ruminal }}
+  </div>
+  <div class="form-group">
+    {{ form.cough.errors }}
+    <label for="{{ form.cough.id_for_label }}">{{ form.cough.label }}</label>
+    {{ form.cough }}
   </div>
   <div class="form-group">
     {{ form.body_condition.errors }}

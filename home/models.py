@@ -35,16 +35,6 @@ class Specie(models.Model):
       (FEMALE, 'Hembra'),
       )
 
-    race = models.CharField(max_length=3, null=False)
-    age = models.IntegerField(default=0, validators=[MinValueValidator(Decimal('0'))])
-    gender = models.CharField(max_length=3, choices=SEX, default=MALE)
-    weight = models.DecimalField(max_digits=5, decimal_places=3)
-
-    def __str__(self):
-        return '%s' % self.id
-
-
-class Bovine(Specie):
     BOVINO = 'BV'
     PORCINO  = 'PR'
     EQUINO  = 'EQ'
@@ -71,21 +61,17 @@ class Bovine(Specie):
       (ABEJA, 'Abeja'),
       )
 
-
-    LACTATING = 'LC'
-    PREGNANT = 'PG'
-    INCREASE = 'IC'
-    FATTEN = 'FT'
-
-    PRODUCTIVE = (
-      (LACTATING, 'Lactante'),
-      (PREGNANT, 'Gestante'),
-      (INCREASE, 'Crecimiento'),
-      (FATTEN, 'Engorda'),
-      )
-
-
     specie = models.CharField(max_length=10,choices=SPECIES)
+    race = models.CharField(max_length=3, null=False)
+    age = models.IntegerField(default=0, validators=[MinValueValidator(Decimal('0'))])
+    gender = models.CharField(max_length=3, choices=SEX, default=MALE)
+    weight = models.DecimalField(max_digits=5, decimal_places=3)
+
+    def __str__(self):
+        return '%s' % self.id
+
+
+class Bovine(Specie):
     heart_rate = models.IntegerField(default=0)
     respiratory_rate = models.IntegerField(default=0)
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -173,33 +159,6 @@ class Dog(Specie):
 
 
 class Porcine(Specie):
-
-    BOVINO = 'BV'
-    PORCINO  = 'PR'
-    EQUINO  = 'EQ'
-    OVINO = 'OV'
-    CAPRINO = 'CP'
-    LEPORIDO = 'LP'
-    AVE = 'AV'
-    CANINO = 'CN'
-    FELINO = 'FL'
-    SILVESTRE = 'SL'
-    ABEJA = 'BJ'
-
-    SPECIES = (
-      (BOVINO, 'Bovino'),
-      (PORCINO, 'Porcino'),
-      (EQUINO, 'Equino'),
-      (OVINO, 'Ovino'),
-      (CAPRINO, 'Caprino'),
-      (LEPORIDO, 'Lepórido'),
-      (AVE, 'Ave'),
-      (CANINO, 'Canino'),
-      (FELINO, 'Felino'),
-      (SILVESTRE, 'Silvestre'),
-      (ABEJA, 'Abeja'),
-      )
-    specie = models.CharField(max_length=10,choices=SPECIES)
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
     curse = models.CharField(max_length=60, null=True)
@@ -221,3 +180,16 @@ class Bee(models.Model):
 class Bird(models.Model):
     type_animal = models.CharField(max_length=60, null=True)
     zootechnical_purpose = models.CharField(max_length=30, null=True)
+
+
+class Horse(Specie):
+    heart_rate = models.IntegerField(default=0)
+    respiratory_rate = models.IntegerField(default=0)
+    temperature = models.DecimalField(max_digits=5, decimal_places=3)
+    capilar = models.IntegerField(default=0)
+    mucosal_color = models.CharField(max_length=30, null=True)
+    lymph_nodes = models.CharField(max_length=50, null=True)
+    body_condition = models.TextField(null=True)
+
+    def __str__(self):
+        return '%s' % self.id
