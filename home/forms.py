@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question
+from .models import Question, Bovine
 
 
 class Login(forms.Form):
@@ -7,45 +7,68 @@ class Login(forms.Form):
   contraseña = forms.CharField(max_length=20, widget = forms.PasswordInput())
 
 
+class BaseForm(object):
+    def __init__(self, *arg, **kwargs):
+        super(BaseForm, self).__init__()
+
+    class Meta:
+        model = Question
+
+        fields = (
+          'title',
+          'description',
+          )
+
+
+
 class VacaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
       super(VacaForm, self).__init__(*args, **kwargs)
-      self.fields['especie'].widget.attrs.update({'class':'form-control'})
-      self.fields['pregunta'].widget.attrs.update({'class':'form-control'})
-      self.fields['informacion'].widget.attrs.update({'class':'form-control'})
-      self.fields['edad'].widget.attrs.update({'class':'form-control'})
-      self.fields['peso'].widget.attrs.update({'class':'form-control'})
-      self.fields['sexo'].widget.attrs.update({'class':'form-control'})
-      self.fields['fisiologico'].widget.attrs.update({'class':'form-control'})
-      self.fields['motivo'].widget.attrs.update({'class':'form-control'})
-      self.fields['cardiaco'].widget.attrs.update({'class':'form-control'})
-      self.fields['respiratorio'].widget.attrs.update({'class':'form-control'})
-      self.fields['temperatura'].widget.attrs.update({'class':'form-control'})
-      self.fields['llenado'].widget.attrs.update({'class':'form-control'})
-      self.fields['mucosas'].widget.attrs.update({'class':'form-control'})
-      self.fields['linfonodos'].widget.attrs.update({'class':'form-control'})
-      self.fields['clinica'].widget.attrs.update({'class':'form-control'})
-      self.fields['image'].widget.attrs.update({'class':'form-control'})
-      
+      self.fields['specie'].widget.attrs.update({'class':'form-control'})
+      self.fields['race'].widget.attrs.update({'class':'form-control'})
+      self.fields['age'].widget.attrs.update({'class':'form-control'})
+      self.fields['gender'].widget.attrs.update({'class':'form-control'})
+      self.fields['weight'].widget.attrs.update({'class':'form-control'})
+      self.fields['heart_rate'].widget.attrs.update({'class':'form-control'})
+      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control'})
+      self.fields['temperature'].widget.attrs.update({'class':'form-control'})
+      self.fields['capilar'].widget.attrs.update({'class':'form-control'})
+      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control'})
+      self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control'})
+      self.fields['ruminal'].widget.attrs.update({'class':'form-control'})
+      self.fields['body_condition'].widget.attrs.update({'class':'form-control'})
+
     class Meta:
-        model = Question
+        model = Bovine
         
         fields = (
-          'especie',
-          'pregunta',
-          'informacion',
-          'edad',
-          'peso',
-          'sexo',
-          'fisiologico',
-          'motivo',
-          'cardiaco',
-          'respiratorio',
-          'temperatura',
-          'llenado',
-          'mucosas',
-          'linfonodos',
-          'clinica',
-          'image',
+          'specie',
+          'race',
+          'age',
+          'gender',
+          'weight',
+          'heart_rate',
+          'respiratory_rate',
+          'temperature',
+          'capilar',
+          'mucosal_color',
+          'lymph_nodes',
+          'ruminal',
+          'body_condition',
           )
 
+        labels = {
+          'specie': 'Especie: ',
+          'race': 'Raza: ',
+          'age': 'Edad: ',
+          'gender': 'Género: ',
+          'weight': 'Peso: ',
+          'heart_rate': 'Frecuencia cardiaca (lpm): ',
+          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+          'temperature': 'Temperatura (°C): ',
+          'capilar': 'Llenado capilar (segundos): ',
+          'mucosal_color': 'Color de mucosas: ',
+          'lymph_nodes': 'Linfonodos: ',
+          'ruminal': 'Movimientos ruminales: ',
+          'body_condition': 'Condición corporal: ',
+          }

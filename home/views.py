@@ -8,7 +8,7 @@ from django.views.generic import CreateView
 
 from django.http import HttpResponse
 from .models import Question
-from .forms import VacaForm, Login
+from .forms import BaseForm, VacaForm, Login
 # Create your views here.
 
 
@@ -76,16 +76,18 @@ def user(request):
     if request.user.is_authenticated():
         User = request.user.username
 
-    my_form = VacaForm(request.POST or None)
+    cow_form = VacaForm(request.POST or None)
+    base_form = BaseForm()
 
     if request.method == 'POST':
-        if my_form.is_valid():
-            my_form.save()
+        if cow_form.is_valid():
+            cow_form.save()
             return redirect ('home:usuario')
 
     context = {       
         'title': "Bienvenido "+User,
-        'form': my_form,
+        'form': cow_form,
+        'baseForm': base_form,
         'user': User,
     }
 
