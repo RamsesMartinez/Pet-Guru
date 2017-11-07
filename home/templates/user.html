@@ -70,8 +70,8 @@
                   <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ovino">
                     <a data-toggle="modal" data-dismiss="modal" data-target="#ovejaModal"><img src="../static/images/animal/oveja.png" alt="animal icon"></a>
                   </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Gallus">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#galloModal"><img src="../static/images/animal/gallo.png" alt="animal icon"></a>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Goat">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#cabraModal"><img src="../static/images/animal/cabra.png" alt="animal icon"></a>
                   </div>
                   <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Lepórido">
                     <a data-toggle="modal" data-dismiss="modal" data-target="#conejoModal"><img src="../static/images/animal/conejo.png" alt="animal icon"></a>
@@ -262,7 +262,7 @@
           {% csrf_token %}
 
           {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/rabbit.html' with form=cow_form %}
+          {% include 'question/rabbit.html' with form=rabbit_form %}
 
           <input type="submit" name="enviar" class="mailitbtn btn btn-success">
           <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
@@ -272,7 +272,7 @@
   </div>  
 </div>
 <!-- Caprinos -->
-<div class="modal fade" id="galloModal" tabindex="-1" role="dialog" aria-labelledby="galloModal" aria-hidden="true">
+<div class="modal fade" id="cabraModal" tabindex="-1" role="dialog" aria-labelledby="cabraModal" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">

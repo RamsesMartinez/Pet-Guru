@@ -8,7 +8,7 @@ from django.views.generic import CreateView
 
 from django.http import HttpResponse
 from .models import Question
-from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
+from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm, RabbitForm
 # Create your views here.
 
 
@@ -82,6 +82,7 @@ def user(request):
     horse_form = HorseForm(request.POST or None)
     goat_form = GoatForm(request.POST or None)
     ovine_form = OvineForm(request.POST or None)
+    rabbit_form = RabbitForm(request.POST or None)
 
     if request.method == 'POST':
         if base_form.is_valid() and cow_form.is_valid():
@@ -97,6 +98,7 @@ def user(request):
         'horse_form': horse_form,
         'goat_form': goat_form,
         'ovine_form': ovine_form,
+        'rabbit_form': rabbit_form,
         'user': User,
     }
 

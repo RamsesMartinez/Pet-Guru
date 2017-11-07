@@ -103,6 +103,19 @@ class Goat(Specie):
 
 
 class Rabbit(Specie):
+    LACTATING = 'LC'
+    PREGNANT = 'PG'
+    INCREASE = 'IC'
+    FATTEN = 'FT'
+
+    PRODUCTIVE = (
+      (LACTATING, 'Lactante'),
+      (PREGNANT, 'Gestante'),
+      (INCREASE, 'Crecimiento'),
+      (FATTEN, 'Engorda'),
+      )
+
+    productive_stage = models.CharField(max_length=10, choices=PRODUCTIVE, default=LACTATING)
     heart_rate = models.IntegerField(default=0)
     respiratory_rate = models.IntegerField(default=0)
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -110,7 +123,7 @@ class Rabbit(Specie):
     mucosal_color = models.CharField(max_length=30, null=True)
     lymph_nodes = models.CharField(max_length=50, null=True)
     body_condition = models.TextField(null=True)
-    dehydration = models.BooleanField()
+    dehydration = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return '%s' % self.id

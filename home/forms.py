@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question, Bovine, Porcine, Horse, Goat, Ovine
+from .models import Question, Bovine, Porcine, Horse, Goat, Ovine, Rabbit
 
 
 class Login(forms.Form):
@@ -283,6 +283,59 @@ class OvineForm(forms.ModelForm):
           'production_system': 'Sistema de producción: ',
           'zootechnical': 'Fin zootécnico: ',
           'lymph_nodes': 'Linfonodos: ',
+          'mucosal_color': 'Coloración de mucosas: ',
+          'body_condition': 'Condición corporal: ',
+          }
+
+
+class RabbitForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(RabbitForm, self).__init__(*args, **kwargs)
+      self.fields['specie'].widget.attrs.update({'class':'form-control'})
+      self.fields['productive_stage'].widget.attrs.update({'class':'form-control'})
+      self.fields['race'].widget.attrs.update({'class':'form-control'})
+      self.fields['age'].widget.attrs.update({'class':'form-control'})
+      self.fields['gender'].widget.attrs.update({'class':'form-control'})
+      self.fields['weight'].widget.attrs.update({'class':'form-control'})
+      self.fields['heart_rate'].widget.attrs.update({'class':'form-control'})
+      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control'})
+      self.fields['temperature'].widget.attrs.update({'class':'form-control'})
+      self.fields['capilar'].widget.attrs.update({'class':'form-control'})
+      self.fields['dehydration'].widget.attrs.update({'class':'form-control'})
+      self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control'})
+      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control'})
+      self.fields['body_condition'].widget.attrs.update({'class':'form-control'})
+    class Meta:
+        model = Rabbit       
+        fields = (
+          'specie',
+          'productive_stage',
+          'race',
+          'age',
+          'gender',
+          'weight',
+          'heart_rate',
+          'respiratory_rate',
+          'temperature',
+          'capilar',
+          'dehydration',
+          'lymph_nodes',
+          'mucosal_color',
+          'body_condition',
+          )
+        labels = {
+          'specie': 'Especie: ',
+          'productive_stage': 'Etapa productiva: ',
+          'race': 'Raza: ',
+          'age': 'Edad: ',
+          'gender': 'Género: ',
+          'weight': 'Peso: ',
+          'heart_rate': 'Frecuencia cardiaca (lpm): ',
+          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+          'temperature': 'Temperatura (°C): ',
+          'capilar': 'Tiempo de llenado capilar: ',
+          'dehydration': 'Deshidratación: ',
+          'lymph_nodes': 'Ganglios linfáticos: ',
           'mucosal_color': 'Coloración de mucosas: ',
           'body_condition': 'Condición corporal: ',
           }
