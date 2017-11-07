@@ -7,17 +7,21 @@ class Login(forms.Form):
   contraseña = forms.CharField(max_length=20, widget = forms.PasswordInput())
 
 
-class BaseForm(object):
-    def __init__(self, *arg, **kwargs):
-        super(BaseForm, self).__init__()
-
+class BaseForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(BaseForm, self).__init__(*args, **kwargs)
+      self.fields['title'].widget.attrs.update({'class':'form-control'})
+      self.fields['description'].widget.attrs.update({'class':'form-control'})
     class Meta:
         model = Question
-
         fields = (
           'title',
           'description',
           )
+        labels = {
+          'title': 'Título de la consulta: ',
+          'description': 'Descripción de la consulta: ',
+          }
 
 
 

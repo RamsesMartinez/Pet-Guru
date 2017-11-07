@@ -77,10 +77,10 @@ def user(request):
         User = request.user.username
 
     cow_form = VacaForm(request.POST or None)
-    base_form = BaseForm()
+    base_form = BaseForm(request.POST or None)
 
     if request.method == 'POST':
-        if cow_form.is_valid():
+        if cow_form.is_valid() & base_form.is_valid():
             cow_form.save()
             return redirect ('home:usuario')
 

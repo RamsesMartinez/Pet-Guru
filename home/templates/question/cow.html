@@ -11,6 +11,8 @@
       <form action="" method="POST" name="vacaquest"  accept-charset="utf-8">
         {% csrf_token %}
 
+        {% include 'question/base.html' with form=baseForm %}
+
         {% for field in form %}
         <div class="form-group">
 
