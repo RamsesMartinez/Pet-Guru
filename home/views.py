@@ -80,7 +80,8 @@ def user(request):
     base_form = BaseForm(request.POST or None)
 
     if request.method == 'POST':
-        if cow_form.is_valid() & base_form.is_valid():
+        if base_form.is_valid() and cow_form.is_valid():
+            base_form.save()
             cow_form.save()
             return redirect ('home:usuario')
 
