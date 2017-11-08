@@ -97,7 +97,7 @@ class Goat(Specie):
     lymph_nodes = models.CharField(max_length=50, null=True)
     ruminal = models.CharField(max_length=80, null=True)
     body_condition = models.TextField(null=True)
-    cough = models.BooleanField()
+    cough = models.CharField(max_length=80, null=True)
     def __str__(self):
         return '%s' % self.id
 
