@@ -8,18 +8,42 @@
 </div>
 <div class="form-group">
   {{ form.race.errors }}
-  <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
-  {{ form.race }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
+    </span>
+    {{ form.race }}
+    <span class="input-group-addon">
+      <input type="checkbox" aria-label="Checkbox for following text input">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <div class="form-group">
   {{ form.age.errors }}
-  <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
-  {{ form.age }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
+    </span>
+    {{ form.age }}
+    <span class="input-group-addon">
+      <input type="checkbox" aria-label="Checkbox for following text input">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <div class="form-group">
   {{ form.weight.errors }}
-  <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
-  {{ form.weight }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
+    </span>
+    {{ form.weight }}
+    <span class="input-group-addon">
+      <input type="checkbox" aria-label="Checkbox for following text input">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <div class="form-group">
   {{ form.gender.errors }}
@@ -28,18 +52,42 @@
 </div>
 <div class="form-group">
   {{ form.physiological_stage.errors }}
-  <label for="{{ form.physiological_stage.id_for_label }}">{{ form.physiological_stage.label }}</label>
-  {{ form.physiological_stage }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.physiological_stage.id_for_label }}">{{ form.physiological_stage.label }}</label>
+    </span>
+    {{ form.physiological_stage }}
+    <span class="input-group-addon">
+      <input type="checkbox" aria-label="Checkbox for following text input">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <div class="form-group">
   {{ form.production_system.errors }}
-  <label for="{{ form.production_system.id_for_label }}">{{ form.production_system.label }}</label>
-  {{ form.production_system }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.production_system.id_for_label }}">{{ form.production_system.label }}</label>
+    </span>
+    {{ form.production_system }}
+    <span class="input-group-addon">
+      <input type="checkbox" aria-label="Checkbox for following text input">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <div class="form-group">
   {{ form.curse.errors }}
-  <label for="{{ form.curse.id_for_label }}">{{ form.curse.label }}</label>
-  {{ form.curse }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.curse.id_for_label }}">{{ form.curse.label }}</label>
+    </span>
+    {{ form.curse }}
+    <span class="input-group-addon">
+      <input type="checkbox" aria-label="Checkbox for following text input">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <hr>
 <div class="form-group">
@@ -48,30 +96,68 @@
     <div class="form-group col-md-4">
       {{ form.heart_rate.errors }}
       <label for="{{ form.heart_rate.id_for_label }}">{{ form.heart_rate.label }}</label>
-      {{ form.heart_rate }}
+      <div class="input-group">
+        {{ form.heart_rate }}
+        <span class="input-group-addon">
+          <input type="checkbox" aria-label="Checkbox for following text input">
+        </span>
+        <span class="input-group-addon">S/D</span>
+      </div>
     </div>
     <div class="form-group col-md-4">
       {{ form.respiratory_rate.errors }}
       <label for="{{ form.respiratory_rate.id_for_label }}">{{ form.respiratory_rate.label }}</label>
-      {{ form.respiratory_rate }}
+      <div class="input-group">
+        {{ form.respiratory_rate }}
+        <span class="input-group-addon">
+          <input type="checkbox" aria-label="Checkbox for following text input">
+        </span>
+        <span class="input-group-addon">S/D</span>
+      </div>
     </div>
     <div class="form-group col-md-4">
       {{ form.temperature.errors }}
       <label for="{{ form.temperature.id_for_label }}">{{ form.temperature.label }}</label>
-      {{ form.temperature }}
+      <div class="input-group">
+        {{ form.temperature }}
+        <span class="input-group-addon">
+          <input type="checkbox" aria-label="Checkbox for following text input">
+        </span>
+        <span class="input-group-addon">S/D</span>
+      </div>
     </div>
   </div>
   <div class="form-group">
     {{ form.color.errors }}
     <label for="{{ form.color.id_for_label }}">{{ form.color.label }}</label>
-    {{ form.color }}
+    <div class="input-group">
+      {{ form.color }}
+      <span class="input-group-addon">
+        <input type="checkbox" aria-label="Checkbox for following text input">
+      </span>
+      <span class="input-group-addon">Sin datos</span>
+    </div>
+  </div>
+  <div class="form-group">
     {{ form.attitude.errors }}
     <label for="{{ form.attitude.id_for_label }}">{{ form.attitude.label }}</label>
-    {{ form.attitude }}
+    <div class="input-group">
+      {{ form.attitude }}
+      <span class="input-group-addon">
+        <input type="checkbox" aria-label="Checkbox for following text input">
+      </span>
+      <span class="input-group-addon">Sin datos</span>
+    </div>
   </div>
   <div class="form-group">
     {{ form.body_condition.errors }}
     <label for="{{ form.body_condition.id_for_label }}">{{ form.body_condition.label }}</label>
-    {{ form.body_condition }}
+    <div class="input-group">
+      {{ form.body_condition }}
+      <span class="input-group-addon">
+        <input type="checkbox" aria-label="Checkbox for following text input">
+      </span>
+      <span class="input-group-addon">Sin datos</span>
+    </div>
   </div>
 </div>
