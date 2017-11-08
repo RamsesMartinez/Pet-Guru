@@ -63,7 +63,7 @@ class Specie(models.Model):
 
     specie = models.CharField(max_length=10,choices=SPECIES)
     race = models.CharField(max_length=3, null=False)
-    age = models.IntegerField(default=0, validators=[MinValueValidator(Decimal('0'))])
+    age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
     gender = models.CharField(max_length=3, choices=SEX, default=MALE)
     weight = models.DecimalField(max_digits=5, decimal_places=3)
 
