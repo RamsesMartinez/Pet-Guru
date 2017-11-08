@@ -184,6 +184,7 @@ class GoatForm(forms.ModelForm):
       self.fields['race'].widget.attrs.update({'class':'form-control'})
       self.fields['age'].widget.attrs.update({'class':'form-control'})
       self.fields['gender'].widget.attrs.update({'class':'form-control'})
+      self.fields['ruminal'].widget.attrs.update({'class':'form-control'})
       self.fields['weight'].widget.attrs.update({'class':'form-control'})
       self.fields['heart_rate'].widget.attrs.update({'class':'form-control'})
       self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control'})
@@ -203,6 +204,7 @@ class GoatForm(forms.ModelForm):
           'race',
           'age',
           'gender',
+          'ruminal',
           'capilar',
           'cough',
           'weight',
@@ -223,6 +225,7 @@ class GoatForm(forms.ModelForm):
           'capilar': 'Tiempo de llenado capilar: ',
           'cough': 'Relfejo tusígeno: ',
           'gender': 'Género: ',
+          'ruminal': 'Movimientos ruminales: ',
           'weight': 'Peso: ',
           'heart_rate': 'Frecuencia cardiaca (lpm): ',
           'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
@@ -249,6 +252,7 @@ class OvineForm(forms.ModelForm):
       self.fields['temperature'].widget.attrs.update({'class':'form-control'})
       self.fields['production_system'].widget.attrs.update({'class':'form-control'})
       self.fields['zootechnical'].widget.attrs.update({'class':'form-control'})
+      self.fields['ruminal'].widget.attrs.update({'class':'form-control'})
       self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control'})
       self.fields['mucosal_color'].widget.attrs.update({'class':'form-control'})
       self.fields['body_condition'].widget.attrs.update({'class':'form-control'})
@@ -260,6 +264,7 @@ class OvineForm(forms.ModelForm):
           'race',
           'age',
           'gender',
+          'ruminal',
           'weight',
           'heart_rate',
           'respiratory_rate',
@@ -276,6 +281,7 @@ class OvineForm(forms.ModelForm):
           'race': 'Raza: ',
           'age': 'Edad: ',
           'gender': 'Género: ',
+          'ruminal': 'Movimientos ruminales: ',
           'weight': 'Peso: ',
           'heart_rate': 'Frecuencia cardiaca (lpm): ',
           'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
