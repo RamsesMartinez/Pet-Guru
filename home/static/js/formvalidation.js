@@ -91,23 +91,23 @@ function changecowlymph() {
   }
 }
 function changecowruminal() {
-  var cage = document.getElementById('cowruminal');
-  var cagecheck = document.getElementById('cowrumic');
-  if (cagecheck.checked) {
-    cage.value="Sin datos";
+  var crumnial = document.getElementById('cowruminal');
+  var crumnialcheck = document.getElementById('cowrumic');
+  if (crumnialcheck.checked) {
+    crumnial.value="Sin datos";
   }
   else {
-    cage.value="";
+    crumnial.value="";
   }
 }
 function changecowcondition() {
-  var cage = document.getElementById('cowcondition');
-  var cagecheck = document.getElementById('cowcondc');
-  if (cagecheck.checked) {
-    cage.value="Sin datos";
+  var ccond = document.getElementById('cowcondition');
+  var ccondcheck = document.getElementById('cowcondc');
+  if (ccondcheck.checked) {
+    ccond.value="Sin datos";
   }
   else {
-    cage.value="";
+    ccond.value="";
   }
 }
 
@@ -245,7 +245,7 @@ function changehorserace() {
     hrrace.value="Sin datos";
   }
   else {
-    crace.value="";
+    hrrace.value="";
   }
 }
 function changehorseage() {
