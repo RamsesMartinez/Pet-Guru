@@ -530,11 +530,47 @@ class WildForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
       super(WildForm, self).__init__(*args, **kwargs)
       self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['zootechnical'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['ambiental_condition'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['feeding'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['background'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['evolution_disease'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['heart_rate'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['temperature'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['capilar'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+      self.fields['ruminal'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
     class Meta:
         model = Wild       
         fields = (
           'specie',
+          'zootechnical',
+          'ambiental_condition',
+          'feeding',
+          'background',
+          'evolution_disease',
+          'heart_rate',
+          'respiratory_rate',
+          'temperature',
+          'capilar',
+          'mucosal_color',
+          'lymph_nodes',
+          'ruminal',
           )
         labels = {
           'specie': 'Especie: ',
+          'zootechnical':'Fin zootécnico: ',
+          'ambiental_condition':'Condiciones Medio-Ambientales: ',
+          'feeding':'Alimentación: ',
+          'background':'Antecedentes patológicos/hereditarios: ',
+          'evolution_disease':'Evolución de la enfermedad actual: ',
+          'heart_rate':'Frecuencia cardiaca (lpm): ',
+          'respiratory_rate':'Frecuencia respiratoria (rpm): ',
+          'temperature':'Temperatura: ',
+          'capilar':'Tiempo de llenado capilar: ',
+          'mucosal_color':'Coloracion de mucosas: ',
+          'lymph_nodes':'Linfonodos: ',
+          'ruminal':'Movimientos ruminales: ',
           }
