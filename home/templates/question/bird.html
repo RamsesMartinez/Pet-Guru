@@ -2,17 +2,25 @@
 <hr>
 <h4>Reseña</h4>
 <div class="form-group">
-  {{ form.specie.errors }}
-  <label for="{{ form.specie.id_for_label }}">{{ form.specie.label }}</label>
-  {{ form.specie }}
-</div>
-<div class="form-group">
-  {{ form.race.errors }}
+  {{ form.type_animal.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
+      <label for="{{ form.type_animal.id_for_label }}">{{ form.type_animal.label }}</label>
     </span>
-    {{ form.race }}
+    {{ form.type_animal }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.zootechnical_purpose.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.zootechnical_purpose.id_for_label }}">{{ form.zootechnical_purpose.label }}</label>
+    </span>
+    {{ form.zootechnical_purpose }}
     <span class="input-group-addon">
       <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
     </span>
@@ -21,11 +29,16 @@
 </div>
 <div class="form-group">
   {{ form.age.errors }}
+  <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
+  {{ form.age }}
+</div>
+<div class="form-group">
+  {{ form.age_week.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
+      <label for="{{ form.age_week.id_for_label }}">{{ form.age_week.label }}</label>
     </span>
-    {{ form.age }}
+    {{ form.age_week }}
     <span class="input-group-addon">
       <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
     </span>
@@ -33,12 +46,12 @@
   </div>
 </div>
 <div class="form-group">
-  {{ form.weight.errors }}
+  {{ form.age_month.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
+      <label for="{{ form.age_month.id_for_label }}">{{ form.age_month.label }}</label>
     </span>
-    {{ form.weight }}
+    {{ form.age_month }}
     <span class="input-group-addon">
       <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
     </span>
@@ -46,9 +59,56 @@
   </div>
 </div>
 <div class="form-group">
-  {{ form.gender.errors }}
-  <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
-  {{ form.gender }}
+  {{ form.place.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.place.id_for_label }}">{{ form.place.label }}</label>
+    </span>
+    {{ form.place }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.quantity.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.quantity.id_for_label }}">{{ form.quantity.label }}</label>
+    </span>
+    {{ form.quantity }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.coexistence.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.coexistence.id_for_label }}">{{ form.coexistence.label }}</label>
+    </span>
+    {{ form.coexistence }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.age_month.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.age_month.id_for_label }}">{{ form.age_month.label }}</label>
+    </span>
+    {{ form.age_month }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <div class="form-group">
   {{ form.physiological_stage.errors }}

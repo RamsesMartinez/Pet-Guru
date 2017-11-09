@@ -10,7 +10,7 @@ class Question(models.Model):
     status = models.CharField(max_length=3, null=True)
     user_question = models.ForeignKey(User, related_name='student_question', default='')
     user_response = models.ForeignKey(User, related_name='teacher_question', default='')
-    calification = models.IntegerField()
+    calification = models.IntegerField(default='1')
     date = models.DateTimeField(editable=False, auto_now=True, null=True)
 
     def __str__(self):
