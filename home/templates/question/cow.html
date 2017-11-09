@@ -29,7 +29,7 @@
     </span>
     {{ form.age }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="cowagec" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowage()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -42,7 +42,7 @@
     </span>
     {{ form.weight }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="cowweightc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowweight()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -62,7 +62,7 @@
       <div class="input-group">
         {{ form.heart_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="cowheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowheart()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -73,7 +73,7 @@
       <div class="input-group">
         {{ form.respiratory_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="cowrespc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowresp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -84,7 +84,7 @@
       <div class="input-group">
         {{ form.temperature }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="cowtempc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowtemp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -98,7 +98,7 @@
       </span>
       {{ form.capilar }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="cowcapc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowcap()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -111,7 +111,7 @@
       </span>
       {{ form.mucosal_color }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="cowmucoc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowmucos()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -124,7 +124,7 @@
       </span>
       {{ form.lymph_nodes }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="cowlymphc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowlymph()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -137,7 +137,7 @@
       </span>
       {{ form.ruminal }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="cowrumic" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowruminal()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -148,7 +148,7 @@
     <div class="input-group">
       {{ form.body_condition }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="cowcondc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecowcondition()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>

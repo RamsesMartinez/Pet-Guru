@@ -10,7 +10,7 @@ class Question(models.Model):
     status = models.CharField(max_length=3, null=True)
     #user_question =
     #user_response =
-    calification = models.IntegerField(default=0)
+    calification = models.IntegerField()
     date = models.DateTimeField(editable=False, auto_now=True, null=True)
 
     def __str__(self):
@@ -72,10 +72,10 @@ class Specie(models.Model):
 
 
 class Bovine(Specie):
-    heart_rate = models.IntegerField(default=0)
-    respiratory_rate = models.IntegerField(default=0)
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    capilar = models.IntegerField(default=0)
+    capilar = models.IntegerField()
     mucosal_color = models.CharField(max_length=30, null=True)
     lymph_nodes = models.CharField(max_length=50, null=True)
     ruminal = models.CharField(max_length=80, null=True)
@@ -89,10 +89,10 @@ class Goat(Specie):
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
-    heart_rate = models.IntegerField(default=0)
-    respiratory_rate = models.IntegerField(default=0)
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    capilar = models.IntegerField(default=0)
+    capilar = models.IntegerField()
     mucosal_color = models.CharField(max_length=30, null=True)
     lymph_nodes = models.CharField(max_length=50, null=True)
     ruminal = models.CharField(max_length=80, null=True)
@@ -116,10 +116,10 @@ class Rabbit(Specie):
       )
 
     productive_stage = models.CharField(max_length=10, choices=PRODUCTIVE, default=LACTATING)
-    heart_rate = models.IntegerField(default=0)
-    respiratory_rate = models.IntegerField(default=0)
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    capilar = models.IntegerField(default=0)
+    capilar = models.IntegerField()
     mucosal_color = models.CharField(max_length=30, null=True)
     lymph_nodes = models.CharField(max_length=50, null=True)
     body_condition = models.TextField(null=True)
@@ -130,13 +130,13 @@ class Rabbit(Specie):
 
 
 class Cat(Specie):
-    heart_rate = models.IntegerField(default=0)
-    respiratory_rate = models.IntegerField(default=0)
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    capilar = models.IntegerField(default=0)
+    capilar = models.IntegerField()
     mucosal_color = models.CharField(max_length=30, null=True)
     tusigno_reflex = models.CharField(max_length=30, null=True)
-    pulse = models.IntegerField(default=0)
+    pulse = models.IntegerField()
     injuries = models.CharField(max_length=30, null=True)
 
     def __str__(self):
@@ -147,8 +147,8 @@ class Ovine(Specie):
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
-    heart_rate = models.IntegerField(default=0)
-    respiratory_rate = models.IntegerField(default=0)
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     mucosal_color = models.CharField(max_length=30, null=True)
     lymph_nodes = models.CharField(max_length=50, null=True)
@@ -161,11 +161,11 @@ class Ovine(Specie):
 
 
 class Dog(Specie):
-    heart_rate = models.IntegerField(default=0)
-    respiratory_rate = models.IntegerField(default=0)
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     mucosal_color = models.CharField(max_length=30, null=True)
-    capilar = models.IntegerField(default=0)
+    capilar = models.IntegerField()
 
     def __str__(self):
         return '%s' % self.id
@@ -175,8 +175,8 @@ class Porcine(Specie):
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
     curse = models.CharField(max_length=60, null=True)
-    heart_rate = models.IntegerField(default=0)
-    respiratory_rate = models.IntegerField(default=0)
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     body_condition = models.TextField(null=True)
     attitude = models.TextField(null=True)
@@ -195,17 +195,17 @@ class Bee(models.Model):
     disease_signs = models.CharField(max_length=80)
     breeding = models.CharField(max_length=3)
     adult_bee = models.CharField(max_length=3)
-    backstage_bee = models.IntegerField(default=0)
+    backstage_bee = models.IntegerField()
     real_cell = models.CharField(max_length=50)
-    backstage_breeding = models.IntegerField(default=0)
+    backstage_breeding = models.IntegerField()
     eggs = models.BooleanField()
-    quantity_eggs = models.IntegerField(default=0)
+    quantity_eggs = models.IntegerField()
     observations = models.TextField()
     stool_spots = models.CharField(max_length=3)
     Piece_larvae = models.CharField(max_length=3)
     dead_bees = models.CharField(max_length=3)
     food_racks = models.CharField(max_length=3)
-    number_racks = models.IntegerField(default=0)
+    number_racks = models.IntegerField()
 
 
     def __str__(self):
@@ -303,10 +303,10 @@ class aquatic(models.Model):
 
 
 class Horse(Specie):
-    heart_rate = models.IntegerField(default=0)
-    respiratory_rate = models.IntegerField(default=0)
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    capilar = models.IntegerField(default=0)
+    capilar = models.IntegerField()
     mucosal_color = models.CharField(max_length=30, null=True)
     lymph_nodes = models.CharField(max_length=50, null=True)
     body_condition = models.TextField(null=True)
