@@ -740,3 +740,217 @@ function rabchangecond() {
     plymph.value="";
   }
 }
+
+
+
+// Birds  form validation
+function birdchangetype() {
+  var ptype = document.getElementById('birdtype');
+  var ptypecheck = document.getElementById('birdtypec');
+  if (ptypecheck.checked) {
+    ptype.value="Sin datos";
+  }
+  else {
+    ptype.value="";
+  }
+}
+function birdchangezoo() {
+  var pzoo = document.getElementById('birdzoo');
+  var pzoocheck = document.getElementById('birdzooc');
+  if (pzoocheck.checked) {
+    pzoo.value="Sin datos";
+  }
+  else {
+    pzoo.value="";
+  }
+}
+function birdchangeagew() {
+  var pagew = document.getElementById('birdagew');
+  var pagewcheck = document.getElementById('birdagewc');
+  if (pagewcheck.checked) {
+    pagew.value="0000";
+  }
+  else {
+    pagew.value="";
+  }
+}
+function birdchangeagem() {
+  var pagem = document.getElementById('birdagem');
+  var pagemcheck = document.getElementById('birdagemc');
+  if (pagemcheck.checked) {
+    pagem.value="0000";
+  }
+  else {
+    pagem.value="";
+  }
+}
+function birdchangeplace() {
+  var pplace = document.getElementById('birdplace');
+  var pplacecheck = document.getElementById('birdplacec');
+  if (pplacecheck.checked) {
+    pplace.value="Sin datos";
+  }
+  else {
+    pplace.value="";
+  }
+}
+function birdchangequant() {
+  var pquant = document.getElementById('birdquant');
+  var pquantcheck = document.getElementById('birdquantc');
+  if (pquantcheck.checked) {
+    pquant.value="0000";
+  }
+  else {
+    pquant.value="";
+  }
+}
+function birdchangeexist() {
+  var pexist = document.getElementById('birdexist');
+  var pexistcheck = document.getElementById('birdexistc');
+  if (pexistcheck.checked) {
+    pexist.value="Sin datos";
+  }
+  else {
+    pexist.value="";
+  }
+}
+function birdchangeorigin() {
+  var porigin = document.getElementById('birdorigin');
+  var porigincheck = document.getElementById('birdoriginc');
+  if (porigincheck.checked) {
+    porigin.value="Sin datos";
+  }
+  else {
+    porigin.value="";
+  }
+}
+function birdchangemorb() {
+  var pmorb = document.getElementById('birdmorb');
+  var pmorbcheck = document.getElementById('birdmorbc');
+  if (pmorbcheck.checked) {
+    pmorb.value="Sin datos";
+  }
+  else {
+    pmorb.value="";
+  }
+}
+function birdchangemort() {
+  var pmort = document.getElementById('birdmort');
+  var pmortcheck = document.getElementById('birdmortc');
+  if (pmortcheck.checked) {
+    pmort.value="Sin datos";
+  }
+  else {
+    pmort.value="";
+  }
+}
+function birdchangedate() {
+  var pdate = document.getElementById('birddate');
+  var pdatecheck = document.getElementById('birddatec');
+  if (pdatecheck.checked) {
+    pdate.value="0000";
+  }
+  else {
+    pdate.value="";
+  }
+}
+function birdchangewater() {
+  var pwater = document.getElementById('birdwater');
+  var pwatercheck = document.getElementById('birdwaterc');
+  if (pwatercheck.checked) {
+    pwater.value="Sin datos";
+  }
+  else {
+    pwater.value="";
+  }
+}
+function birdchangeeat() {
+  var peat = document.getElementById('birdeat');
+  var peatcheck = document.getElementById('birdeatc');
+  if (peatcheck.checked) {
+    peat.value="Sin datos";
+  }
+  else {
+    pwater.value="";
+  }
+}
+function birdchangevaccine() {
+  var pvaccine = document.getElementById('birdvaccine');
+  var pvaccinecheck = document.getElementById('birdvaccinec');
+  if (pvaccinecheck.checked) {
+    pvaccine.value="Sin datos";
+  }
+  else {
+    pvaccine.value="";
+  }
+}
+function birdchangedefec() {
+  var pdefec = document.getElementById('birddefec');
+  var pdefeccheck = document.getElementById('birddefecc');
+  if (pdefeccheck.checked) {
+    pdefec.value="Sin datos";
+  }
+  else {
+    pdefec.value="";
+  }
+}
+function birdchangecondition() {
+  var pcondition = document.getElementById('birdcondition');
+  var pconditioncheck = document.getElementById('birdconditionc');
+  if (pconditioncheck.checked) {
+    pcondition.value="Sin datos";
+  }
+  else {
+    pcondition.value="";
+  }
+}
+function birdchangeplumage() {
+  var pplumage = document.getElementById('birdplumage');
+  var pplumagecheck = document.getElementById('birdplumagec');
+  if (pplumagecheck.checked) {
+    pplumage.value="Sin datos";
+  }
+  else {
+    pplumage.value="";
+  }
+}
+function birdchangelegs() {
+  var plegs = document.getElementById('birdlegs');
+  var plegscheck = document.getElementById('birdlegsc');
+  if (plegscheck.checked) {
+    plegs.value="Sin datos";
+  }
+  else {
+    plegs.value="";
+  }
+}
+function birdchangebreath() {
+  var pbreath = document.getElementById('birdbreath');
+  var pbreathcheck = document.getElementById('birdbreathc');
+  if (pbreathcheck.checked) {
+    pbreath.value="0000";
+  }
+  else {
+    pbreath.value="";
+  }
+}
+function birdchangedehy() {
+  var pdehy = document.getElementById('birddehy');
+  var pdehycheck = document.getElementById('birddehyc');
+  if (pdehycheck.checked) {
+    pdehy.value="Sin datos";
+  }
+  else {
+    pdehy.value="";
+  }
+}
+function birdchangeatt() {
+  var patt = document.getElementById('birdatt');
+  var pattcheck = document.getElementById('birdattc');
+  if (pattcheck.checked) {
+    patt.value="Sin datos";
+  }
+  else {
+    patt.value="";
+  }
+}

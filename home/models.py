@@ -496,7 +496,7 @@ class Bird(models.Model):
     coexistence = models.CharField(max_length=30)
     origin_water = models.CharField(max_length=30)
     morbidity = models.CharField(max_length=30)
-    mortality = models.IntegerField()
+    mortality = models.CharField(max_length=30)
     date_signs = models.IntegerField()
     water = models.CharField(max_length=3)
     eat = models.CharField(max_length=3)
