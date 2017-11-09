@@ -14,7 +14,7 @@
     </span>
     {{ form.race }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="goatracec" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangerace()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -27,7 +27,7 @@
     </span>
     {{ form.age }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="goatagec" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangeage()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -40,7 +40,7 @@
     </span>
     {{ form.weight }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="goatweightc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangeweight()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -58,7 +58,7 @@
     </span>
     {{ form.physiological_stage }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="goatphysioc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangephysio()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -71,7 +71,7 @@
     </span>
     {{ form.production_system }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="goatprodc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangeprod()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -84,7 +84,7 @@
     </span>
     {{ form.zootechnical }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="goatzooc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangezoo()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -99,7 +99,7 @@
       <div class="input-group">
         {{ form.heart_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="goatheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangeheart()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -110,7 +110,7 @@
       <div class="input-group">
         {{ form.respiratory_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="goatrespc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangeresp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -121,7 +121,7 @@
       <div class="input-group">
         {{ form.temperature }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="goattempc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangetemp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -135,7 +135,7 @@
       </span>
       {{ form.capilar }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="goatcapilarc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangecapilar()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -148,7 +148,7 @@
       </span>
       {{ form.mucosal_color }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="goatmucosc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangemucos()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -161,7 +161,7 @@
       </span>
       {{ form.lymph_nodes }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="goatlymphc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangelymph()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -174,7 +174,7 @@
       </span>
       {{ form.ruminal }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="goatruminalc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangeruminal()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -187,7 +187,7 @@
       </span>
       {{ form.cough }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="goatcoughc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangecough()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -198,7 +198,7 @@
     <div class="input-group">
       {{ form.body_condition }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="goatcondc" type="checkbox" aria-label="Checkbox for following text input" onclick="goatchangecond()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>

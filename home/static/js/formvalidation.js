@@ -472,3 +472,157 @@ function ovichangecond() {
     plymph.value="";
   }
 }
+
+
+
+// Goat form validation
+function goatchangerace() {
+  var prace = document.getElementById('goatrace');
+  var pracecheck = document.getElementById('goatracec');
+  if (pracecheck.checked) {
+    prace.value="Sin datos";
+  }
+  else {
+    prace.value="";
+  }
+}
+function goatchangeage() {
+  var page = document.getElementById('goatage');
+  var pagecheck = document.getElementById('goatagec');
+  if (pagecheck.checked) {
+    page.value="0000";
+  }
+  else {
+    page.value="";
+  }
+}
+function goatchangeweight() {
+  var pweight = document.getElementById('goatweight');
+  var pweightcheck = document.getElementById('goatweightc');
+  if (pweightcheck.checked) {
+    pweight.value="0000";
+  }
+  else {
+    pweight.value="";
+  }
+}
+function goatchangephysio() {
+  var pheart = document.getElementById('goatphysio');
+  var pheartcheck = document.getElementById('goatphysioc');
+  if (pheartcheck.checked) {
+    pheart.value="Sin datos";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function goatchangeprod() {
+  var pheart = document.getElementById('goatprod');
+  var pheartcheck = document.getElementById('goatprodc');
+  if (pheartcheck.checked) {
+    pheart.value="Sin datos";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function goatchangezoo() {
+  var pheart = document.getElementById('goatzoo');
+  var pheartcheck = document.getElementById('goatzooc');
+  if (pheartcheck.checked) {
+    pheart.value="Sin datos";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function goatchangeheart() {
+  var pheart = document.getElementById('goatheart');
+  var pheartcheck = document.getElementById('goatheartc');
+  if (pheartcheck.checked) {
+    pheart.value="0000";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function goatchangeresp() {
+  var presp = document.getElementById('goatresp');
+  var prespcheck = document.getElementById('goatrespc');
+  if (prespcheck.checked) {
+    presp.value="0000";
+  }
+  else {
+    presp.value="";
+  }
+}
+function goatchangetemp() {
+  var ptemp = document.getElementById('goattemp');
+  var ptempcheck = document.getElementById('goattempc');
+  if (ptempcheck.checked) {
+    ptemp.value="0000";
+  }
+  else {
+    ptemp.value="";
+  }
+}
+function goatchangecapilar() {
+  var pcap = document.getElementById('goatcapilar');
+  var pcapcheck = document.getElementById('goatcapilarc');
+  if (pcapcheck.checked) {
+    pcap.value="0000";
+  }
+  else {
+    pcap.value="";
+  }
+}
+function goatchangemucos() {
+  var pcap = document.getElementById('goatmucos');
+  var pcapcheck = document.getElementById('goatmucosc');
+  if (pcapcheck.checked) {
+    pcap.value="Sin datos";
+  }
+  else {
+    pcap.value="";
+  }
+}
+function goatchangelymph() {
+  var pmucos = document.getElementById('goatlymph');
+  var pmucoscheck = document.getElementById('goatlymphc');
+  if (pmucoscheck.checked) {
+    pmucos.value="Sin datos";
+  }
+  else {
+    pmucos.value="";
+  }
+}
+function goatchangeruminal() {
+  var pmucos = document.getElementById('goatruminal');
+  var pmucoscheck = document.getElementById('goatruminalc');
+  if (pmucoscheck.checked) {
+    pmucos.value="Sin datos";
+  }
+  else {
+    pmucos.value="";
+  }
+}
+function goatchangecough() {
+  var pmucos = document.getElementById('goatcough');
+  var pmucoscheck = document.getElementById('goatcoughc');
+  if (pmucoscheck.checked) {
+    pmucos.value="Sin datos";
+  }
+  else {
+    pmucos.value="";
+  }
+}
+function goatchangecond() {
+  var plymph = document.getElementById('goatcondition');
+  var plymphcheck = document.getElementById('goatcondc');
+  if (plymphcheck.checked) {
+    plymph.value="Sin datos";
+  }
+  else {
+    plymph.value="";
+  }
+}
