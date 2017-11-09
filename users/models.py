@@ -4,7 +4,19 @@ from django.utils.translation import ugettext as _
 
 
 class User(AbstractUser):
-    rol = models.CharField(max_length=3)
+
+    TEACHER= 'TC'
+    STUDENT = 'ST'
+    ADMINISTRATOR = 'AD'
+
+    ROL = (
+        (TEACHER, 'Profesor'),
+        (STUDENT, 'Alumno'),
+        (ADMINISTRATOR, 'Administrador'),
+    )
+
+    rol = models.CharField(max_length=3, choices=ROL)
+    speciality = models.CharField(max_length=3)
 
 
     class Meta(AbstractUser.Meta):
