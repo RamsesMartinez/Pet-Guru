@@ -340,3 +340,135 @@ function changehorsecondition() {
 }
 
 
+
+// Ovine form validation
+function ovichangerace() {
+  var prace = document.getElementById('ovirace');
+  var pracecheck = document.getElementById('oviracec');
+  if (pracecheck.checked) {
+    prace.value="Sin datos";
+  }
+  else {
+    prace.value="";
+  }
+}
+function ovichangeage() {
+  var page = document.getElementById('oviage');
+  var pagecheck = document.getElementById('oviagec');
+  if (pagecheck.checked) {
+    page.value="0000";
+  }
+  else {
+    page.value="";
+  }
+}
+function ovichangeweight() {
+  var pweight = document.getElementById('oviweight');
+  var pweightcheck = document.getElementById('oviweightc');
+  if (pweightcheck.checked) {
+    pweight.value="0000";
+  }
+  else {
+    pweight.value="";
+  }
+}
+function ovichangephysio() {
+  var pheart = document.getElementById('oviphysio');
+  var pheartcheck = document.getElementById('oviphysioc');
+  if (pheartcheck.checked) {
+    pheart.value="Sin datos";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function ovichangeprod() {
+  var pheart = document.getElementById('oviprod');
+  var pheartcheck = document.getElementById('oviprodc');
+  if (pheartcheck.checked) {
+    pheart.value="Sin datos";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function ovichangezoo() {
+  var pheart = document.getElementById('ovizoo');
+  var pheartcheck = document.getElementById('ovizooc');
+  if (pheartcheck.checked) {
+    pheart.value="Sin datos";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function ovichangeheart() {
+  var pheart = document.getElementById('oviheart');
+  var pheartcheck = document.getElementById('oviheartc');
+  if (pheartcheck.checked) {
+    pheart.value="0000";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function ovichangeresp() {
+  var presp = document.getElementById('oviresp');
+  var prespcheck = document.getElementById('ovirespc');
+  if (prespcheck.checked) {
+    presp.value="0000";
+  }
+  else {
+    presp.value="";
+  }
+}
+function ovichangetemp() {
+  var ptemp = document.getElementById('ovitemp');
+  var ptempcheck = document.getElementById('ovitempc');
+  if (ptempcheck.checked) {
+    ptemp.value="0000";
+  }
+  else {
+    ptemp.value="";
+  }
+}
+function ovichangemucos() {
+  var pcap = document.getElementById('ovimucos');
+  var pcapcheck = document.getElementById('ovimucosc');
+  if (pcapcheck.checked) {
+    pcap.value="Sin datos";
+  }
+  else {
+    pcap.value="";
+  }
+}
+function ovichangelymph() {
+  var pmucos = document.getElementById('ovilymph');
+  var pmucoscheck = document.getElementById('ovilymphc');
+  if (pmucoscheck.checked) {
+    pmucos.value="Sin datos";
+  }
+  else {
+    pmucos.value="";
+  }
+}
+function ovichangeruminal() {
+  var pmucos = document.getElementById('oviruminal');
+  var pmucoscheck = document.getElementById('oviruminalc');
+  if (pmucoscheck.checked) {
+    pmucos.value="Sin datos";
+  }
+  else {
+    pmucos.value="";
+  }
+}
+function ovichangecond() {
+  var plymph = document.getElementById('ovicondition');
+  var plymphcheck = document.getElementById('ovicondc');
+  if (plymphcheck.checked) {
+    plymph.value="Sin datos";
+  }
+  else {
+    plymph.value="";
+  }
+}

@@ -14,7 +14,7 @@
     </span>
     {{ form.race }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="oviracec" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangerace()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -27,7 +27,7 @@
     </span>
     {{ form.age }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="oviagec" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangeage()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -40,7 +40,7 @@
     </span>
     {{ form.weight }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="oviweightc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangeweight()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -58,7 +58,7 @@
     </span>
     {{ form.physiological_stage }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="oviphysioc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangephysio()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -71,7 +71,7 @@
     </span>
     {{ form.production_system }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="oviprodc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangeprod()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -84,7 +84,7 @@
     </span>
     {{ form.zootechnical }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="ovizooc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangezoo()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -99,7 +99,7 @@
       <div class="input-group">
         {{ form.heart_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="oviheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangeheart()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -110,7 +110,7 @@
       <div class="input-group">
         {{ form.respiratory_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="ovirespc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangeresp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -121,7 +121,7 @@
       <div class="input-group">
         {{ form.temperature }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="ovitempc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangetemp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -135,7 +135,7 @@
       </span>
       {{ form.mucosal_color }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="ovimucosc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangemucos()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -148,7 +148,7 @@
       </span>
       {{ form.lymph_nodes }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="ovilymphc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangelymph()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -161,7 +161,7 @@
       </span>
       {{ form.ruminal }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="oviruminalc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangeruminal()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -172,7 +172,7 @@
     <div class="input-group">
       {{ form.body_condition }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="ovicondc" type="checkbox" aria-label="Checkbox for following text input" onclick="ovichangecond()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
