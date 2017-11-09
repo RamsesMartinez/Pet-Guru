@@ -29,19 +29,19 @@ class BaseForm(forms.ModelForm):
 class CowForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
       super(CowForm, self).__init__(*args, **kwargs)
-      self.fields['specie'].widget.attrs.update({'class':'form-control'})
-      self.fields['race'].widget.attrs.update({'class':'form-control'})
-      self.fields['age'].widget.attrs.update({'class':'form-control'})
-      self.fields['gender'].widget.attrs.update({'class':'form-control'})
-      self.fields['weight'].widget.attrs.update({'class':'form-control'})
-      self.fields['heart_rate'].widget.attrs.update({'class':'form-control'})
-      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control'})
-      self.fields['temperature'].widget.attrs.update({'class':'form-control'})
-      self.fields['capilar'].widget.attrs.update({'class':'form-control'})
-      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control'})
-      self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control'})
-      self.fields['ruminal'].widget.attrs.update({'class':'form-control'})
-      self.fields['body_condition'].widget.attrs.update({'class':'form-control'})
+      self.fields['specie'].widget.attrs.update({'class':'form-control','id':'cowspecie'})
+      self.fields['race'].widget.attrs.update({'class':'form-control cowrace','id':'cowrace'})
+      self.fields['age'].widget.attrs.update({'class':'form-control cowage','id':'cowage'})
+      self.fields['gender'].widget.attrs.update({'class':'form-control cowgender','id':'cowgender'})
+      self.fields['weight'].widget.attrs.update({'class':'form-control cowweight','id':'cowweight'})
+      self.fields['heart_rate'].widget.attrs.update({'class':'form-control cowheart','id':'cowheart'})
+      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control cowresp','id':'cowresp'})
+      self.fields['temperature'].widget.attrs.update({'class':'form-control cowtemp','id':'cowtemp'})
+      self.fields['capilar'].widget.attrs.update({'class':'form-control cowcapilar','id':'cowcapilar'})
+      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control cowmucosal','id':'cowmucosal'})
+      self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control cowlymph','id':'cowlymph'})
+      self.fields['ruminal'].widget.attrs.update({'class':'form-control cowruminal','id':'cowruminal'})
+      self.fields['body_condition'].widget.attrs.update({'class':'form-control cowcondition','id':'cowcondition'})
     class Meta:
         model = Bovine       
         fields = (
