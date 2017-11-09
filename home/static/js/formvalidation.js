@@ -626,3 +626,117 @@ function goatchangecond() {
     plymph.value="";
   }
 }
+
+
+
+// Rabbit form validation
+function rabchangerace() {
+  var prace = document.getElementById('rabrace');
+  var pracecheck = document.getElementById('rabracec');
+  if (pracecheck.checked) {
+    prace.value="Sin datos";
+  }
+  else {
+    prace.value="";
+  }
+}
+function rabchangeage() {
+  var page = document.getElementById('rabage');
+  var pagecheck = document.getElementById('rabagec');
+  if (pagecheck.checked) {
+    page.value="0000";
+  }
+  else {
+    page.value="";
+  }
+}
+function rabchangeweight() {
+  var pweight = document.getElementById('rabweight');
+  var pweightcheck = document.getElementById('rabweightc');
+  if (pweightcheck.checked) {
+    pweight.value="0000";
+  }
+  else {
+    pweight.value="";
+  }
+}
+function rabchangeheart() {
+  var pheart = document.getElementById('rabheart');
+  var pheartcheck = document.getElementById('rabheartc');
+  if (pheartcheck.checked) {
+    pheart.value="0000";
+  }
+  else {
+    pheart.value="";
+  }
+}
+function rabchangeresp() {
+  var presp = document.getElementById('rabresp');
+  var prespcheck = document.getElementById('rabrespc');
+  if (prespcheck.checked) {
+    presp.value="0000";
+  }
+  else {
+    presp.value="";
+  }
+}
+function rabchangetemp() {
+  var ptemp = document.getElementById('rabtemp');
+  var ptempcheck = document.getElementById('rabtempc');
+  if (ptempcheck.checked) {
+    ptemp.value="0000";
+  }
+  else {
+    ptemp.value="";
+  }
+}
+function rabchangecapilar() {
+  var pcap = document.getElementById('rabcapilar');
+  var pcapcheck = document.getElementById('rabcapilarc');
+  if (pcapcheck.checked) {
+    pcap.value="0000";
+  }
+  else {
+    pcap.value="";
+  }
+}
+function rabchangemucos() {
+  var pcap = document.getElementById('rabmucos');
+  var pcapcheck = document.getElementById('rabmucosc');
+  if (pcapcheck.checked) {
+    pcap.value="Sin datos";
+  }
+  else {
+    pcap.value="";
+  }
+}
+function rabchangelymph() {
+  var pmucos = document.getElementById('rablymph');
+  var pmucoscheck = document.getElementById('rablymphc');
+  if (pmucoscheck.checked) {
+    pmucos.value="Sin datos";
+  }
+  else {
+    pmucos.value="";
+  }
+}
+function rabchangedehy() {
+  var pmucos = document.getElementById('rabdehy');
+  var pmucoscheck = document.getElementById('rabdehyc');
+  if (pmucoscheck.checked) {
+    pmucos.value="Sin datos";
+  }
+  else {
+    pmucos.value="";
+  }
+}
+function rabchangecond() {
+  var plymph = document.getElementById('rabcondition');
+  var plymphcheck = document.getElementById('rabcondc');
+  if (plymphcheck.checked) {
+    plymph.value="Sin datos";
+  }
+  else {
+    plymph.value="";
+  }
+}

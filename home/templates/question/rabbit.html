@@ -14,7 +14,7 @@
     </span>
     {{ form.race }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -27,7 +27,7 @@
     </span>
     {{ form.age }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="rabagec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeage()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -40,7 +40,7 @@
     </span>
     {{ form.weight }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="rabweightc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeweight()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -65,7 +65,7 @@
       <div class="input-group">
         {{ form.heart_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="rabheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeheart()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -76,7 +76,7 @@
       <div class="input-group">
         {{ form.respiratory_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="rabrespc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeresp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -87,7 +87,7 @@
       <div class="input-group">
         {{ form.temperature }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="rabtempc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangetemp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -101,7 +101,7 @@
       </span>
       {{ form.capilar }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="rabcapilarc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangecapilar()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -114,7 +114,7 @@
       </span>
       {{ form.mucosal_color }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="rabmucosc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangemucos()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -127,7 +127,7 @@
       </span>
       {{ form.lymph_nodes }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="rablymphc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangelymph()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -140,7 +140,7 @@
       </span>
       {{ form.dehydration }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="rabdehyc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangedehy()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -151,7 +151,7 @@
     <div class="input-group">
       {{ form.body_condition }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="rabcondc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangecond()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
