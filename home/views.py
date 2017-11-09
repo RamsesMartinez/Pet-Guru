@@ -86,11 +86,15 @@ def user(request):
     rabbit_form = RabbitForm(request.POST or None)
     bird_form = BirdForm(request.POST or None)
 
+
     if request.method == 'POST':
-        if base_form.is_valid() and cow_form.is_valid():
+        if base_form.is_valid():
+            print(base_form)
             base_form.save()
-            cow_form.save()
-            return redirect ('home:usuario')
+            if cow_form.is_valid():
+                print(cow_form)
+                cow_form.save()
+                return redirect ('home:usuario')
 
     context = {       
         'title': "Bienvenido "+User,
