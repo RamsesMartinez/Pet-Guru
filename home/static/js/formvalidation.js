@@ -954,3 +954,335 @@ function birdchangeatt() {
     patt.value="";
   }
 }
+
+
+
+// Dog form validation
+function changehorserace() {
+  var hrrace = document.getElementById('horrace');
+  var hrracecheck = document.getElementById('horracec');
+  if (hrracecheck.checked) {
+    hrrace.value="Sin datos";
+  }
+  else {
+    hrrace.value="";
+  }
+}
+function changehorseage() {
+  var hrage = document.getElementById('horage');
+  var hragecheck = document.getElementById('horagec');
+  if (hragecheck.checked) {
+    hrage.value="0000";
+  }
+  else {
+    hrage.value="";
+  }
+}
+function changehorseweight() {
+  var hrweight = document.getElementById('horweight');
+  var hrweightcheck = document.getElementById('horweightc');
+  if (hrweightcheck.checked) {
+    hrweight.value="0000";
+  }
+  else {
+    hrweight.value="";
+  }
+}
+function changehorseheart() {
+  var hrheart = document.getElementById('horheart');
+  var hrheartcheck = document.getElementById('horheartc');
+  if (hrheartcheck.checked) {
+    hrheart.value="0000";
+  }
+  else {
+    hrheart.value="";
+  }
+}
+function changehorseresp() {
+  var hrresp = document.getElementById('horresp');
+  var hrrespcheck = document.getElementById('horrespc');
+  if (hrrespcheck.checked) {
+    hrresp.value="0000";
+  }
+  else {
+    hrresp.value="";
+  }
+}
+function changehorsetemp() {
+  var hrtemp = document.getElementById('hortemp');
+  var hrtempcheck = document.getElementById('hortempc');
+  if (hrtempcheck.checked) {
+    hrtemp.value="0000";
+  }
+  else {
+    hrtemp.value="";
+  }
+}
+function changehorsecap() {
+  var hrcap = document.getElementById('horcapilar');
+  var hrcapcheck = document.getElementById('horcapc');
+  if (hrcapcheck.checked) {
+    hrcap.value="0000";
+  }
+  else {
+    hrcap.value="";
+  }
+}
+function changehorsemucos() {
+  var hrmucos = document.getElementById('hormucosal');
+  var hrmucoscheck = document.getElementById('hormucoc');
+  if (hrmucoscheck.checked) {
+    hrmucos.value="Sin datos";
+  }
+  else {
+    hrmucos.value="";
+  }
+}
+function changehorselymph() {
+  var hrlymph = document.getElementById('horlymph');
+  var hrlymphcheck = document.getElementById('horlymphc');
+  if (hrlymphcheck.checked) {
+    hrlymph.value="Sin datos";
+  }
+  else {
+    hrlymph.value="";
+  }
+}
+function changehorsecondition() {
+  var hrage = document.getElementById('horcondition');
+  var hragecheck = document.getElementById('horcondc');
+  if (hragecheck.checked) {
+    hrage.value="Sin datos";
+  }
+  else {
+    hrage.value="";
+  }
+}
+
+
+
+// Dog form validation
+function changedograce() {
+  var hrrace = document.getElementById('dograce');
+  var hrracecheck = document.getElementById('dogracec');
+  if (hrracecheck.checked) {
+    hrrace.value="Sin datos";
+  }
+  else {
+    hrrace.value="";
+  }
+}
+function changedogage() {
+  var hrage = document.getElementById('dogage');
+  var hragecheck = document.getElementById('dogagec');
+  if (hragecheck.checked) {
+    hrage.value="0000";
+  }
+  else {
+    hrage.value="";
+  }
+}
+function changedogweight() {
+  var hrweight = document.getElementById('dogweight');
+  var hrweightcheck = document.getElementById('dogweightc');
+  if (hrweightcheck.checked) {
+    hrweight.value="0000";
+  }
+  else {
+    hrweight.value="";
+  }
+}
+function changedogheart() {
+  var hrheart = document.getElementById('dogheart');
+  var hrheartcheck = document.getElementById('dogheartc');
+  if (hrheartcheck.checked) {
+    hrheart.value="0000";
+  }
+  else {
+    hrheart.value="";
+  }
+}
+function changedogresp() {
+  var hrresp = document.getElementById('dogresp');
+  var hrrespcheck = document.getElementById('dogrespc');
+  if (hrrespcheck.checked) {
+    hrresp.value="0000";
+  }
+  else {
+    hrresp.value="";
+  }
+}
+function changedogtemp() {
+  var hrtemp = document.getElementById('dogtemp');
+  var hrtempcheck = document.getElementById('dogtempc');
+  if (hrtempcheck.checked) {
+    hrtemp.value="0000";
+  }
+  else {
+    hrtemp.value="";
+  }
+}
+function changedogcap() {
+  var hrcap = document.getElementById('dogcapilar');
+  var hrcapcheck = document.getElementById('dogcapc');
+  if (hrcapcheck.checked) {
+    hrcap.value="0000";
+  }
+  else {
+    hrcap.value="";
+  }
+}
+function changedogmucos() {
+  var hrmucos = document.getElementById('dogmucosal');
+  var hrmucoscheck = document.getElementById('dogmucoc');
+  if (hrmucoscheck.checked) {
+    hrmucos.value="Sin datos";
+  }
+  else {
+    hrmucos.value="";
+  }
+}
+function changedogcough() {
+  var hrcough = document.getElementById('dogcough');
+  var hrcoughcheck = document.getElementById('dogcoughc');
+  if (hrcoughcheck.checked) {
+    hrcough.value="Sin datos";
+  }
+  else {
+    hrcough.value="";
+  }
+}
+function changedogpulse() {
+  var hrage = document.getElementById('dogpulse');
+  var hragecheck = document.getElementById('dogpulsec');
+  if (hragecheck.checked) {
+    hrage.value="Sin datos";
+  }
+  else {
+    hrage.value="";
+  }
+}
+function changedogskin() {
+  var hrage = document.getElementById('dogskin');
+  var hragecheck = document.getElementById('dogskinc');
+  if (hragecheck.checked) {
+    hrage.value="Sin datos";
+  }
+  else {
+    hrage.value="";
+  }
+}
+
+
+
+// Cat form validation
+function changecatrace() {
+  var catrace = document.getElementById('catrace');
+  var catracecheck = document.getElementById('catracec');
+  if (catracecheck.checked) {
+    catrace.value="Sin datos";
+  }
+  else {
+    catrace.value="";
+  }
+}
+function changecatage() {
+  var catage = document.getElementById('catage');
+  var catagecheck = document.getElementById('catagec');
+  if (catagecheck.checked) {
+    catage.value="0000";
+  }
+  else {
+    catage.value="";
+  }
+}
+function changecatweight() {
+  var catweight = document.getElementById('catweight');
+  var catweightcheck = document.getElementById('catweightc');
+  if (catweightcheck.checked) {
+    catweight.value="0000";
+  }
+  else {
+    catweight.value="";
+  }
+}
+function changecatheart() {
+  var catheart = document.getElementById('catheart');
+  var catheartcheck = document.getElementById('catheartc');
+  if (catheartcheck.checked) {
+    catheart.value="0000";
+  }
+  else {
+    catheart.value="";
+  }
+}
+function changecatresp() {
+  var catresp = document.getElementById('catresp');
+  var catrespcheck = document.getElementById('catrespc');
+  if (catrespcheck.checked) {
+    catresp.value="0000";
+  }
+  else {
+    catresp.value="";
+  }
+}
+function changecattemp() {
+  var cattemp = document.getElementById('cattemp');
+  var cattempcheck = document.getElementById('cattempc');
+  if (cattempcheck.checked) {
+    cattemp.value="0000";
+  }
+  else {
+    cattemp.value="";
+  }
+}
+function changecatcap() {
+  var catcap = document.getElementById('catcapilar');
+  var catcapcheck = document.getElementById('catcapc');
+  if (catcapcheck.checked) {
+    catcap.value="0000";
+  }
+  else {
+    catcap.value="";
+  }
+}
+function changecatmucos() {
+  var catmucos = document.getElementById('catmucosal');
+  var catmucoscheck = document.getElementById('catmucoc');
+  if (catmucoscheck.checked) {
+    catmucos.value="Sin datos";
+  }
+  else {
+    catmucos.value="";
+  }
+}
+function changecatcough() {
+  var catcough = document.getElementById('catcough');
+  var catcoughcheck = document.getElementById('catcoughc');
+  if (catcoughcheck.checked) {
+    catcough.value="Sin datos";
+  }
+  else {
+    catcough.value="";
+  }
+}
+function changecatpulse() {
+  var catage = document.getElementById('catpulse');
+  var catagecheck = document.getElementById('catpulsec');
+  if (catagecheck.checked) {
+    catage.value="Sin datos";
+  }
+  else {
+    catage.value="";
+  }
+}
+function changecatskin() {
+  var catage = document.getElementById('catskin');
+  var catagecheck = document.getElementById('catskinc');
+  if (catagecheck.checked) {
+    catage.value="Sin datos";
+  }
+  else {
+    catage.value="";
+  }
+}

@@ -337,7 +337,7 @@
           {% csrf_token %}
 
           {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/dog.html' with form=cow_form %}
+          {% include 'question/dog.html' with form=dog_form %}
 
           <input type="submit" name="enviar" class="mailitbtn btn btn-success">
           <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
@@ -361,7 +361,7 @@
           {% csrf_token %}
 
           {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/cat.html' with form=cow_form %}
+          {% include 'question/cat.html' with form=cat_form %}
 
           <input type="submit" name="enviar" class="mailitbtn btn btn-success">
           <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />

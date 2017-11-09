@@ -1,6 +1,6 @@
 from django import forms
 from .models import Question, Bovine, Porcine, Horse, Goat, Ovine, Rabbit
-from .models import Bird
+from .models import Bird, Dog, Cat
 
 
 class Login(forms.Form):
@@ -422,4 +422,105 @@ class BirdForm(forms.ModelForm):
           'breathing_frequency': 'Frecuencia respiratoria: ',
           'dehydration': 'Deshidratación: ',
           'attitude': 'Actitud: ',
+          }
+
+
+class DogForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(DogForm, self).__init__(*args, **kwargs)
+      self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'dogspecie'})
+      self.fields['race'].widget.attrs.update({'class':'form-control', 'id':'dograce'})
+      self.fields['age'].widget.attrs.update({'class':'form-control', 'id':'dogage'})
+      self.fields['gender'].widget.attrs.update({'class':'form-control', 'id':'doggender'})
+      self.fields['weight'].widget.attrs.update({'class':'form-control', 'id':'dogweight'})
+      self.fields['heart_rate'].widget.attrs.update({'class':'form-control', 'id':'dogheart'})
+      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control', 'id':'dogresp'})
+      self.fields['temperature'].widget.attrs.update({'class':'form-control', 'id':'dogtemp'})
+      self.fields['capilar'].widget.attrs.update({'class':'form-control', 'id':'dogcapilar'})
+      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control', 'id':'dogmucosal'})
+      self.fields['cough'].widget.attrs.update({'class':'form-control', 'id':'dogcough'})
+      self.fields['pulse'].widget.attrs.update({'class':'form-control', 'id':'dogpulse'})
+      self.fields['skin'].widget.attrs.update({'class':'form-control', 'id':'dogskin'})
+    class Meta:
+        model = Dog       
+        fields = (
+          'specie',
+          'race',
+          'age',
+          'gender',
+          'weight',
+          'heart_rate',
+          'respiratory_rate',
+          'temperature',
+          'capilar',
+          'mucosal_color',
+          'cough',
+          'pulse',
+          'skin',
+          )
+        labels = {
+          'specie': 'Especie: ',
+          'race': 'Raza: ',
+          'age': 'Edad: ',
+          'gender': 'Género: ',
+          'weight': 'Peso: ',
+          'heart_rate': 'Frecuencia cardiaca (lpm): ',
+          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+          'temperature': 'Temperatura (°C): ',
+          'capilar': 'Llenado capilar (segundos): ',
+          'mucosal_color': 'Color de mucosas: ',
+          'cough': 'Relfejo tusígeno: ',
+          'pulse': 'Pulso correspondiente: ',
+          'skin': 'Lesiones en piel: ',
+          }
+
+
+
+class CatForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(CatForm, self).__init__(*args, **kwargs)
+      self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'catspecie'})
+      self.fields['race'].widget.attrs.update({'class':'form-control', 'id':'catrace'})
+      self.fields['age'].widget.attrs.update({'class':'form-control', 'id':'catage'})
+      self.fields['gender'].widget.attrs.update({'class':'form-control', 'id':'catgender'})
+      self.fields['weight'].widget.attrs.update({'class':'form-control', 'id':'catweight'})
+      self.fields['heart_rate'].widget.attrs.update({'class':'form-control', 'id':'catheart'})
+      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control', 'id':'catresp'})
+      self.fields['temperature'].widget.attrs.update({'class':'form-control', 'id':'cattemp'})
+      self.fields['capilar'].widget.attrs.update({'class':'form-control', 'id':'catcapilar'})
+      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control', 'id':'catmucosal'})
+      self.fields['cough'].widget.attrs.update({'class':'form-control', 'id':'catcough'})
+      self.fields['pulse'].widget.attrs.update({'class':'form-control', 'id':'catpulse'})
+      self.fields['skin'].widget.attrs.update({'class':'form-control', 'id':'catskin'})
+    class Meta:
+        model = Cat       
+        fields = (
+          'specie',
+          'race',
+          'age',
+          'gender',
+          'weight',
+          'heart_rate',
+          'respiratory_rate',
+          'temperature',
+          'capilar',
+          'mucosal_color',
+          'cough',
+          'pulse',
+          'skin',
+          )
+        labels = {
+          'specie': 'Especie: ',
+          'race': 'Raza: ',
+          'age': 'Edad: ',
+          'gender': 'Género: ',
+          'weight': 'Peso: ',
+          'heart_rate': 'Frecuencia cardiaca (lpm): ',
+          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+          'temperature': 'Temperatura (°C): ',
+          'capilar': 'Llenado capilar (segundos): ',
+          'mucosal_color': 'Color de mucosas: ',
+          'cough': 'Relfejo tusígeno: ',
+          'pulse': 'Pulso correspondiente: ',
+          'skin': 'Lesiones en piel: ',
           }
