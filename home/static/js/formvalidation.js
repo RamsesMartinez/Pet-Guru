@@ -1286,3 +1286,127 @@ function changecatskin() {
     catage.value="";
   }
 }
+
+
+
+// Wild life form validation
+function changewildzoo() {
+  var catzoo = document.getElementById('wildzoo');
+  var wildzoocheck = document.getElementById('wildzooc');
+  if (wildzoocheck.checked) {
+    wildzoo.value="Sin datos";
+  }
+  else {
+    wildzoo.value="";
+  }
+}
+function changewildambiental() {
+  var wildambiental = document.getElementById('wildambiental');
+  var wildambientalcheck = document.getElementById('wildambientalc');
+  if (wildambientalcheck.checked) {
+    wildambiental.value="Sin datos";
+  }
+  else {
+    wildambiental.value="";
+  }
+}
+function changewildfeed() {
+  var wildfeed = document.getElementById('wildfeed');
+  var wildfeedcheck = document.getElementById('wildfeedc');
+  if (wildfeedcheck.checked) {
+    wildfeed.value="Sin datos";
+  }
+  else {
+    wildfeed.value="";
+  }
+}
+function changewildback() {
+  var wildback = document.getElementById('wildback');
+  var wildbackcheck = document.getElementById('wildbackc');
+  if (wildbackcheck.checked) {
+    wildback.value="Sin datos";
+  }
+  else {
+    wildheart.value="";
+  }
+}
+function changewildevol() {
+  var wildevol = document.getElementById('wildevol');
+  var wildevolcheck = document.getElementById('wildevolc');
+  if (wildevolcheck.checked) {
+    wildevol.value="Sin datos";
+  }
+  else {
+    wildevol.value="";
+  }
+}
+function changewildheart() {
+  var wildheart = document.getElementById('wildheart');
+  var wildheartcheck = document.getElementById('wildheartc');
+  if (wildheartcheck.checked) {
+    wildheart.value="0000";
+  }
+  else {
+    wildheart.value="";
+  }
+}
+function changewildresp() {
+  var wildresp = document.getElementById('wildresp');
+  var wildrespcheck = document.getElementById('wildrespc');
+  if (wildrespcheck.checked) {
+    wildresp.value="0000";
+  }
+  else {
+    wildresp.value="";
+  }
+}
+function changewildtemp() {
+  var wildtemp = document.getElementById('wildtemp');
+  var wildtempcheck = document.getElementById('wildtempc');
+  if (wildtempcheck.checked) {
+    wildtemp.value="0000";
+  }
+  else {
+    wildtemp.value="";
+  }
+}
+function changewildcap() {
+  var wildcap = document.getElementById('wildcapilar');
+  var wildcapcheck = document.getElementById('wildcapc');
+  if (wildcapcheck.checked) {
+    wildcap.value="0000";
+  }
+  else {
+    wildcap.value="";
+  }
+}
+function changewildmucos() {
+  var wildmucos = document.getElementById('wildmucos');
+  var wildmucoscheck = document.getElementById('wildmucoc');
+  if (wildmucoscheck.checked) {
+    wildmucos.value="Sin datos";
+  }
+  else {
+    wildmucos.value="";
+  }
+}
+function changewildlymph() {
+  var wildlymph = document.getElementById('wildlymph');
+  var wildlymphcheck = document.getElementById('wildlymphc');
+  if (wildlymphcheck.checked) {
+    wildlymph.value="Sin datos";
+  }
+  else {
+    wildlymph.value="";
+  }
+}
+function changewildruminal() {
+  var wildage = document.getElementById('wildruminal');
+  var wildagecheck = document.getElementById('wildruminalc');
+  if (wildagecheck.checked) {
+    wildage.value="Sin datos";
+  }
+  else {
+    wildage.value="";
+  }
+}

@@ -409,7 +409,7 @@
           {% csrf_token %}
 
           {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/wild.html' with form=wild_form %}
+          {% include 'question/bee.html' with form=bee_form %}
 
           <input type="submit" name="enviar" class="mailitbtn btn btn-success">
           <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
@@ -433,7 +433,7 @@
           {% csrf_token %}
 
           {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/wild.html' with form=wild_form %}
+          {% include 'question/aquatic.html' with form=aquatic_form %}
 
           <input type="submit" name="enviar" class="mailitbtn btn btn-success">
           <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />

@@ -7,48 +7,69 @@
   {{ form.specie }}
 </div>
 <div class="form-group">
-  {{ form.race.errors }}
+  {{ form.zootechnical.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
+      <label for="{{ form.zootechnical.id_for_label }}">{{ form.zootechnical.label }}</label>
     </span>
-    {{ form.race }}
+    {{ form.zootechnical }}
     <span class="input-group-addon">
-      <input id="catracec" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatrace()">
+      <input id="wildzooc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildzoo()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
 </div>
 <div class="form-group">
-  {{ form.age.errors }}
+  {{ form.ambiental_condition.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
+      <label for="{{ form.ambiental_condition.id_for_label }}">{{ form.ambiental_condition.label }}</label>
     </span>
-    {{ form.age }}
+    {{ form.ambiental_condition }}
     <span class="input-group-addon">
-      <input id="catagec" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatage()">
+      <input id="wildambientalc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildambiental()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
 </div>
 <div class="form-group">
-  {{ form.weight.errors }}
+  {{ form.feeding.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
+      <label for="{{ form.feeding.id_for_label }}">{{ form.feeding.label }}</label>
     </span>
-    {{ form.weight }}
+    {{ form.feeding }}
     <span class="input-group-addon">
-      <input id="catweightc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatweight()">
+      <input id="wildfeedc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildfeed()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
 </div>
 <div class="form-group">
-  {{ form.gender.errors }}
-  <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
-  {{ form.gender }}
+  {{ form.background.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.background.id_for_label }}">{{ form.background.label }}</label>
+    </span>
+    {{ form.background }}
+    <span class="input-group-addon">
+      <input id="wildbackc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildback()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.evolution_disease.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.evolution_disease.id_for_label }}">{{ form.evolution_disease.label }}</label>
+    </span>
+    {{ form.evolution_disease }}
+    <span class="input-group-addon">
+      <input id="wildevolc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildevol()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <hr>
 <div class="form-group">
@@ -60,7 +81,7 @@
       <div class="input-group">
         {{ form.heart_rate }}
         <span class="input-group-addon">
-          <input id="catheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatheart()">
+          <input id="wildheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildheart()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -71,7 +92,7 @@
       <div class="input-group">
         {{ form.respiratory_rate }}
         <span class="input-group-addon">
-          <input id="catrespc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatresp()">
+          <input id="wildrespc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildresp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -82,7 +103,7 @@
       <div class="input-group">
         {{ form.temperature }}
         <span class="input-group-addon">
-          <input id="cattempc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecattemp()">
+          <input id="wildtempc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildtemp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -96,7 +117,7 @@
       </span>
       {{ form.capilar }}
       <span class="input-group-addon">
-        <input id="catcapc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatcap()">
+        <input id="wildcapc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildcap()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -109,42 +130,31 @@
       </span>
       {{ form.mucosal_color }}
       <span class="input-group-addon">
-        <input id="catmucoc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatmucos()">
+        <input id="wildmucoc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildmucos()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
   </div>
   <div class="form-group">
-    {{ form.cough.errors }}
+    {{ form.lymph_nodes.errors }}
     <div class="input-group">
       <span class="input-group-addon">
-        <label for="{{ form.cough.id_for_label }}">{{ form.cough.label }}</label>
+        <label for="{{ form.lymph_nodes.id_for_label }}">{{ form.lymph_nodes.label }}</label>
       </span>
-      {{ form.cough }}
+      {{ form.lymph_nodes }}
       <span class="input-group-addon">
-        <input id="catcoughc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatcough()">
-      </span>
-      <span class="input-group-addon">Sin datos</span>
-    </div>
-  </div>
-  <div class="form-group">
-    {{ form.pulse.errors }}
-    <label for="{{ form.pulse.id_for_label }}">{{ form.pulse.label }}</label>
-    <div class="input-group">
-      {{ form.pulse }}
-      <span class="input-group-addon">
-        <input id="catpulsec" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatpulse()">
+        <input id="wildlymphc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildlymph()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
   </div>
   <div class="form-group">
-    {{ form.skin.errors }}
-    <label for="{{ form.skin.id_for_label }}">{{ form.skin.label }}</label>
+    {{ form.ruminal.errors }}
+    <label for="{{ form.ruminal.id_for_label }}">{{ form.ruminal.label }}</label>
     <div class="input-group">
-      {{ form.skin }}
+      {{ form.ruminal }}
       <span class="input-group-addon">
-        <input id="catskinc" type="checkbox" aria-label="Checkbox for following text input" onclick="changecatskin()">
+        <input id="wildruminalc" type="checkbox" aria-label="Checkbox for following text input" onclick="changewildruminal()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
