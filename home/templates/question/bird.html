@@ -98,12 +98,12 @@
   </div>
 </div>
 <div class="form-group">
-  {{ form.age_month.errors }}
+  {{ form.origin_water.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.age_month.id_for_label }}">{{ form.age_month.label }}</label>
+      <label for="{{ form.origin_water.id_for_label }}">{{ form.origin_water.label }}</label>
     </span>
-    {{ form.age_month }}
+    {{ form.origin_water }}
     <span class="input-group-addon">
       <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
     </span>
@@ -111,12 +111,12 @@
   </div>
 </div>
 <div class="form-group">
-  {{ form.physiological_stage.errors }}
+  {{ form.morbidity.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.physiological_stage.id_for_label }}">{{ form.physiological_stage.label }}</label>
+      <label for="{{ form.morbidity.id_for_label }}">{{ form.morbidity.label }}</label>
     </span>
-    {{ form.physiological_stage }}
+    {{ form.morbidity }}
     <span class="input-group-addon">
       <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
     </span>
@@ -124,12 +124,12 @@
   </div>
 </div>
 <div class="form-group">
-  {{ form.production_system.errors }}
+  {{ form.mortality.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.production_system.id_for_label }}">{{ form.production_system.label }}</label>
+      <label for="{{ form.mortality.id_for_label }}">{{ form.mortality.label }}</label>
     </span>
-    {{ form.production_system }}
+    {{ form.mortality }}
     <span class="input-group-addon">
       <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
     </span>
@@ -137,12 +137,64 @@
   </div>
 </div>
 <div class="form-group">
-  {{ form.curse.errors }}
+  {{ form.date_signs.errors }}
   <div class="input-group">
     <span class="input-group-addon">
-      <label for="{{ form.curse.id_for_label }}">{{ form.curse.label }}</label>
+      <label for="{{ form.date_signs.id_for_label }}">{{ form.date_signs.label }}</label>
     </span>
-    {{ form.curse }}
+    {{ form.date_signs }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.water.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.water.id_for_label }}">{{ form.water.label }}</label>
+    </span>
+    {{ form.water }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.eat.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.eat.id_for_label }}">{{ form.eat.label }}</label>
+    </span>
+    {{ form.eat }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.vaccine.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.vaccine.id_for_label }}">{{ form.vaccine.label }}</label>
+    </span>
+    {{ form.vaccine }}
+    <span class="input-group-addon">
+      <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
+</div>
+<div class="form-group">
+  {{ form.defecation.errors }}
+  <div class="input-group">
+    <span class="input-group-addon">
+      <label for="{{ form.defecation.id_for_label }}">{{ form.defecation.label }}</label>
+    </span>
+    {{ form.defecation }}
     <span class="input-group-addon">
       <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
     </span>
@@ -154,10 +206,10 @@
   <h4>Exámen físico general</h4>
   <div class="form-row">
     <div class="form-group col-md-4">
-      {{ form.heart_rate.errors }}
-      <label for="{{ form.heart_rate.id_for_label }}">{{ form.heart_rate.label }}</label>
+      {{ form.condition_corporal.errors }}
+      <label for="{{ form.condition_corporal.id_for_label }}">{{ form.condition_corporal.label }}</label>
       <div class="input-group">
-        {{ form.heart_rate }}
+        {{ form.condition_corporal }}
         <span class="input-group-addon">
           <input id="rabheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeheart()">
         </span>
@@ -165,10 +217,32 @@
       </div>
     </div>
     <div class="form-group col-md-4">
-      {{ form.respiratory_rate.errors }}
-      <label for="{{ form.respiratory_rate.id_for_label }}">{{ form.respiratory_rate.label }}</label>
+      {{ form.plumage.errors }}
+      <label for="{{ form.plumage.id_for_label }}">{{ form.plumage.label }}</label>
       <div class="input-group">
-        {{ form.respiratory_rate }}
+        {{ form.plumage }}
+        <span class="input-group-addon">
+          <input id="rabheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeheart()">
+        </span>
+        <span class="input-group-addon">S/D</span>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      {{ form.condition_legs.errors }}
+      <label for="{{ form.condition_legs.id_for_label }}">{{ form.condition_legs.label }}</label>
+      <div class="input-group">
+        {{ form.condition_legs }}
+        <span class="input-group-addon">
+          <input id="rabheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeheart()">
+        </span>
+        <span class="input-group-addon">S/D</span>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      {{ form.breathing_frequency.errors }}
+      <label for="{{ form.breathing_frequency.id_for_label }}">{{ form.breathing_frequency.label }}</label>
+      <div class="input-group">
+        {{ form.breathing_frequency }}
         <span class="input-group-addon">
           <input id="rabrepsc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangereps()">
         </span>
@@ -176,54 +250,26 @@
       </div>
     </div>
     <div class="form-group col-md-4">
-      {{ form.temperature.errors }}
-      <label for="{{ form.temperature.id_for_label }}">{{ form.temperature.label }}</label>
+      {{ form.dehydration.errors }}
+      <label for="{{ form.dehydration.id_for_label }}">{{ form.dehydration.label }}</label>
       <div class="input-group">
-        {{ form.temperature }}
+        {{ form.dehydration }}
         <span class="input-group-addon">
           <input id="rabtempc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangetemp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
     </div>
-  </div>
-  <div class="form-group">
-    {{ form.color.errors }}
-    <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.color.id_for_label }}">{{ form.color.label }}</label>
-      </span>
-      {{ form.color }}
-      <span class="input-group-addon">
-        <input id="rabcapilarc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangecapilar()">
-      </span>
-      <span class="input-group-addon">Sin datos</span>
-    </div>
-  </div>
-  <div class="form-group">
-    {{ form.attitude.errors }}
-    <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.attitude.id_for_label }}">{{ form.attitude.label }}</label>
-      </span>
-      {{ form.attitude }}
-      <span class="input-group-addon">
-        <input id="rabcapilarc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangecapilar()">
-      </span>
-      <span class="input-group-addon">Sin datos</span>
-    </div>
-  </div>
-  <div class="form-group">
-    {{ form.body_condition.errors }}
-    <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.body_condition.id_for_label }}">{{ form.body_condition.label }}</label>
-      </span>
-      {{ form.body_condition }}
-      <span class="input-group-addon">
-        <input id="rabcapilarc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangecapilar()">
-      </span>
-      <span class="input-group-addon">Sin datos</span>
+    <div class="form-group col-md-4">
+      {{ form.attitude.errors }}
+      <label for="{{ form.attitude.id_for_label }}">{{ form.attitude.label }}</label>
+      <div class="input-group">
+        {{ form.attitude }}
+        <span class="input-group-addon">
+          <input id="rabcapilarc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangecapilar()">
+        </span>
+        <span class="input-group-addon">S/D</span>
+      </div>
     </div>
   </div>
 </div>
