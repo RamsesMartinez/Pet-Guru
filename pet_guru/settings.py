@@ -43,11 +43,14 @@ DJANGO_APPS = [
 THIRD_APPS = []
 
 USER_APPS = [
+    'users.apps.UsersConfig',
     'home.apps.HomeConfig',
     'analytics.apps.AnalyticsConfig',    
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + USER_APPS
+
+AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
