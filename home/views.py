@@ -8,8 +8,8 @@ from django.views.generic import CreateView
 
 from django.http import HttpResponse
 from .models import Question
-from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm, RabbitForm
-from .forms import BirdForm
+from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
+from .forms import RabbitForm, BirdForm
 # Create your views here.
 
 
