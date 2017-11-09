@@ -218,7 +218,7 @@ class Bird(models.Model):
     age = models.CharField(max_length=3)
     age_week = models.IntegerField()
     age_month = models.IntegerField()
-    place = models.CharField()
+    place = models.CharField(max_length=60)
     quantity = models.IntegerField()
     coexistence = models.BooleanField()
     origin_water = models.BooleanField()
@@ -248,7 +248,7 @@ class wild(models.Model):
     background = models.CharField(max_length=50)
     evolution_disease = models.CharField(max_length=50)
     respiratory_rate = models.IntegerField()
-    temperature = models.DecimalField()
+    temperature = models.DecimalField(max_digits=5, decimal_places=3)
     capilar = models.IntegerField()
     mucosal_color = models.CharField(max_length=30)
     lymph_nodes = models.CharField(max_length=50)
@@ -297,6 +297,19 @@ class aquatic(models.Model):
     Cotton_structures = models.BooleanField()
     Necrosis_epidermal_layer = models.BooleanField()
     Ocular_opacity = models.BooleanField()
+
+    def __str__(self):
+        return '%s' % self.id
+
+
+class Horse(Specie):
+    heart_rate = models.IntegerField(default=0)
+    respiratory_rate = models.IntegerField(default=0)
+    temperature = models.DecimalField(max_digits=5, decimal_places=3)
+    capilar = models.IntegerField(default=0)
+    mucosal_color = models.CharField(max_length=30, null=True)
+    lymph_nodes = models.CharField(max_length=50, null=True)
+    body_condition = models.TextField(null=True)
 
     def __str__(self):
         return '%s' % self.id
