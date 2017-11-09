@@ -515,7 +515,7 @@ class Bird(models.Model):
         return '%s' % self.id
 
 
-class wild(models.Model):
+class Wild(models.Model):
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     zootechnical = models.CharField(max_length=50)
@@ -523,6 +523,7 @@ class wild(models.Model):
     feeding = models.CharField(max_length=50)
     background = models.CharField(max_length=50)
     evolution_disease = models.CharField(max_length=50)
+    heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     capilar = models.IntegerField()
@@ -534,7 +535,7 @@ class wild(models.Model):
         return '%s' % self.id
 
 
-class aquatic(models.Model):
+class Aquatic(models.Model):
     question = models.OneToOneField(Question, default='')
     zootechnical = models.CharField(max_length=50)
     age = models.IntegerField()

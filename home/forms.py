@@ -1,6 +1,6 @@
 from django import forms
 from .models import Question, Bovine, Porcine, Horse, Goat, Ovine, Rabbit
-from .models import Bird, Dog, Cat
+from .models import Bird, Dog, Cat, Wild
 
 
 class Login(forms.Form):
@@ -523,4 +523,18 @@ class CatForm(forms.ModelForm):
           'cough': 'Relfejo tusígeno: ',
           'pulse': 'Pulso correspondiente: ',
           'skin': 'Lesiones en piel: ',
+          }
+
+
+class WildForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(WildForm, self).__init__(*args, **kwargs)
+      self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'wildspecie'})
+    class Meta:
+        model = Wild       
+        fields = (
+          'specie',
+          )
+        labels = {
+          'specie': 'Especie: ',
           }
