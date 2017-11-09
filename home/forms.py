@@ -1,5 +1,6 @@
 from django import forms
 from .models import Question, Bovine, Porcine, Horse, Goat, Ovine, Rabbit
+from .models import Bird
 
 
 class Login(forms.Form):
@@ -344,4 +345,81 @@ class RabbitForm(forms.ModelForm):
           'lymph_nodes': 'Ganglios linfáticos: ',
           'mucosal_color': 'Coloración de mucosas: ',
           'body_condition': 'Condición corporal: ',
+          }
+
+
+class BirdForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(BirdForm, self).__init__(*args, **kwargs)
+      self.fields['type_animal'].widget.attrs.update({'class':'form-control', 'id':'rabprod'})
+      self.fields['zootechnical_purpose'].widget.attrs.update({'class':'form-control', 'id':'rabdehy'})
+      self.fields['age'].widget.attrs.update({'class':'form-control', 'id':'rabage'})
+      self.fields['age_week'].widget.attrs.update({'class':'form-control', 'id':'rabage'})
+      self.fields['age_month'].widget.attrs.update({'class':'form-control', 'id':'rabage'})
+      self.fields['place'].widget.attrs.update({'class':'form-control', 'id':'rabheart'})
+      self.fields['quantity'].widget.attrs.update({'class':'form-control', 'id':'rabresp'})
+      self.fields['coexistence'].widget.attrs.update({'class':'form-control', 'id':'rabtemp'})
+      self.fields['origin_water'].widget.attrs.update({'class':'form-control', 'id':'rabcapilar'})
+      self.fields['morbidity'].widget.attrs.update({'class':'form-control', 'id':'rablymph'})
+      self.fields['mortality'].widget.attrs.update({'class':'form-control', 'id':'rabmucos'})
+      self.fields['date_signs'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['water'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['eat'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['vaccine'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['defecation'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['condition_corporal'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['plumage'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['condition_legs'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['breathing_frequency'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['dehydration'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+      self.fields['attitude'].widget.attrs.update({'class':'form-control', 'id':'rabcondition'})
+    class Meta:
+        model = Bird       
+        fields = (
+          'type_animal',
+          'age',
+          'age_week',
+          'age_month',
+          'place',
+          'quantity',
+          'coexistence',
+          'origin_water',
+          'zootechnical_purpose',
+          'morbidity',
+          'mortality',
+          'date_signs',
+          'water',
+          'eat',
+          'vaccine',
+          'defecation',
+          'condition_corporal',
+          'plumage',
+          'condition_legs',
+          'breathing_frequency',
+          'dehydration',
+          'attitude',
+          )
+        labels = {
+          'type_animal': 'Tipo de animal: ',
+          'age': 'Edad: ',
+          'age_week': 'Edad Semanas: ',
+          'age_month': 'Edad Meses: ',
+          'place': 'Lugar de encierro: ',
+          'quantity': 'Cantidad de animales: ',
+          'coexistence': 'Convivencia con otras aves: ',
+          'origin_water': 'Origen del agua: ',
+          'zootechnical_purpose': 'Fin zootécnico: ',
+          'morbidity': 'Morbilidad: ',
+          'mortality': 'Mortalidad: ',
+          'date_signs': 'Fecha de inicio de los signos: ',
+          'water': 'Consumo de agua: ',
+          'eat': 'Consumo de alimento: ',
+          'vaccine': 'Calendario de vacunaciones: ',
+          'defecation': 'Defecación: ',
+          'condition_corporal': 'Condición corporal: ',
+          'plumage': 'Condición del plumaje: ',
+          'condition_legs': 'Condición de las patas: ',
+          'breathing_frequency': 'Frecuencia respiratoria: ',
+          'dehydration': 'Deshidratación: ',
+          'attitude': 'Actitud: ',
           }
