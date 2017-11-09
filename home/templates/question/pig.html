@@ -14,7 +14,7 @@
     </span>
     {{ form.race }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="porracec" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangerace()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -27,7 +27,7 @@
     </span>
     {{ form.age }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="poragec" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangeage()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -40,7 +40,7 @@
     </span>
     {{ form.weight }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="porweightc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangeweight()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -58,7 +58,7 @@
     </span>
     {{ form.physiological_stage }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="porphysioc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangephysio()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -71,7 +71,7 @@
     </span>
     {{ form.production_system }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="porprodc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangeprod()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -84,7 +84,7 @@
     </span>
     {{ form.curse }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="porcursec" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangecurse()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -99,7 +99,7 @@
       <div class="input-group">
         {{ form.heart_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="porheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangeheart()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -110,7 +110,7 @@
       <div class="input-group">
         {{ form.respiratory_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="porrespc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangeresp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -121,7 +121,7 @@
       <div class="input-group">
         {{ form.temperature }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="portempc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangetemp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -135,7 +135,7 @@
       </span>
       {{ form.color }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="porcolorc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangecolor()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -146,7 +146,7 @@
     <div class="input-group">
       {{ form.attitude }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="porattc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangeatt()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -157,7 +157,7 @@
     <div class="input-group">
       {{ form.body_condition }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="porcondc" type="checkbox" aria-label="Checkbox for following text input" onclick="porchangecond()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
