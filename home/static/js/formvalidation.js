@@ -234,3 +234,109 @@ function porchangecond() {
     plymph.value="";
   }
 }
+
+
+
+// Horse form validation
+function changehorserace() {
+  var hrrace = document.getElementById('horrace');
+  var hrracecheck = document.getElementById('horracec');
+  if (hrracecheck.checked) {
+    hrrace.value="Sin datos";
+  }
+  else {
+    crace.value="";
+  }
+}
+function changehorseage() {
+  var hrage = document.getElementById('horage');
+  var hragecheck = document.getElementById('horagec');
+  if (hragecheck.checked) {
+    hrage.value="0000";
+  }
+  else {
+    hrage.value="";
+  }
+}
+function changehorseweight() {
+  var hrweight = document.getElementById('horweight');
+  var hrweightcheck = document.getElementById('horweightc');
+  if (hrweightcheck.checked) {
+    hrweight.value="0000";
+  }
+  else {
+    hrweight.value="";
+  }
+}
+function changehorseheart() {
+  var hrheart = document.getElementById('horheart');
+  var hrheartcheck = document.getElementById('horheartc');
+  if (hrheartcheck.checked) {
+    hrheart.value="0000";
+  }
+  else {
+    hrheart.value="";
+  }
+}
+function changehorseresp() {
+  var hrresp = document.getElementById('horresp');
+  var hrrespcheck = document.getElementById('horrespc');
+  if (hrrespcheck.checked) {
+    hrresp.value="0000";
+  }
+  else {
+    hrresp.value="";
+  }
+}
+function changehorsetemp() {
+  var hrtemp = document.getElementById('hortemp');
+  var hrtempcheck = document.getElementById('hortempc');
+  if (hrtempcheck.checked) {
+    hrtemp.value="0000";
+  }
+  else {
+    hrtemp.value="";
+  }
+}
+function changehorsecap() {
+  var hrcap = document.getElementById('horcapilar');
+  var hrcapcheck = document.getElementById('horcapc');
+  if (hrcapcheck.checked) {
+    hrcap.value="0000";
+  }
+  else {
+    hrcap.value="";
+  }
+}
+function changehorsemucos() {
+  var hrmucos = document.getElementById('hormucosal');
+  var hrmucoscheck = document.getElementById('hormucoc');
+  if (hrmucoscheck.checked) {
+    hrmucos.value="Sin datos";
+  }
+  else {
+    hrmucos.value="";
+  }
+}
+function changehorselymph() {
+  var hrlymph = document.getElementById('horlymph');
+  var hrlymphcheck = document.getElementById('horlymphc');
+  if (hrlymphcheck.checked) {
+    hrlymph.value="Sin datos";
+  }
+  else {
+    hrlymph.value="";
+  }
+}
+function changehorsecondition() {
+  var hrage = document.getElementById('horcondition');
+  var hragecheck = document.getElementById('horcondc');
+  if (hragecheck.checked) {
+    hrage.value="Sin datos";
+  }
+  else {
+    hrage.value="";
+  }
+}
+
+

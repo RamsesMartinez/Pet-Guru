@@ -132,18 +132,18 @@ class PorcineForm(forms.ModelForm):
 class HorseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
       super(HorseForm, self).__init__(*args, **kwargs)
-      self.fields['specie'].widget.attrs.update({'class':'form-control'})
-      self.fields['race'].widget.attrs.update({'class':'form-control'})
-      self.fields['age'].widget.attrs.update({'class':'form-control'})
-      self.fields['gender'].widget.attrs.update({'class':'form-control'})
-      self.fields['weight'].widget.attrs.update({'class':'form-control'})
-      self.fields['heart_rate'].widget.attrs.update({'class':'form-control'})
-      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control'})
-      self.fields['temperature'].widget.attrs.update({'class':'form-control'})
-      self.fields['capilar'].widget.attrs.update({'class':'form-control'})
-      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control'})
-      self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control'})
-      self.fields['body_condition'].widget.attrs.update({'class':'form-control'})
+      self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'horspecie'})
+      self.fields['race'].widget.attrs.update({'class':'form-control', 'id':'horrace'})
+      self.fields['age'].widget.attrs.update({'class':'form-control', 'id':'horage'})
+      self.fields['gender'].widget.attrs.update({'class':'form-control', 'id':'horgender'})
+      self.fields['weight'].widget.attrs.update({'class':'form-control', 'id':'horweight'})
+      self.fields['heart_rate'].widget.attrs.update({'class':'form-control', 'id':'horheart'})
+      self.fields['respiratory_rate'].widget.attrs.update({'class':'form-control', 'id':'horresp'})
+      self.fields['temperature'].widget.attrs.update({'class':'form-control', 'id':'hortemp'})
+      self.fields['capilar'].widget.attrs.update({'class':'form-control', 'id':'horcapilar'})
+      self.fields['mucosal_color'].widget.attrs.update({'class':'form-control', 'id':'hormucosal'})
+      self.fields['lymph_nodes'].widget.attrs.update({'class':'form-control', 'id':'horlymph'})
+      self.fields['body_condition'].widget.attrs.update({'class':'form-control', 'id':'horcondition'})
     class Meta:
         model = Horse       
         fields = (
