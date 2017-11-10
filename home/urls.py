@@ -2,8 +2,6 @@ from django.conf import settings
 from django.conf.urls import url, include
 from . import views
 
-# from .views import NuevaPregunta
-
 app_name='home'
 
 urlpatterns = [

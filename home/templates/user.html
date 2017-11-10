@@ -103,51 +103,19 @@
         <h1 class="h1">Muro de discusiones</h1>
         <hr class="my-4">
         <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
+          {% for article in articles %}
           <div class="card">
             <div class="card-body">
               <div class="card-title card-banner">
                 <img src="../static/images/questions/thumb3.jpg" class="img-fluid" alt="Question image">
               </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">Especie: bovino</h5>
-              <p class="card-text">Raza: Brahman</p>
-              <p class="card-text">Motivo de consulta: Agenesia Anal en Terneros...</p>
+              <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
+              <p class="card-text">{{ article.specie.race }}</p>
+              <p class="card-text">{{ article.description }}</p>
               <a href="single-question.html" class="card-link">Leer más</a>
             </div>
           </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title card-banner">
-                <img src="../static/images/questions/perro1.jpg" class="img-fluid" alt="Question image">
-              </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">Especie: canino</h5>
-              <p class="card-text">Raza: pastor belga</p>
-              <p class="card-text">Motivo de consulta: Sebastián es un pastor belga de 2 años y medio que vino con un problema de descarga nasal unilateral...</p>
-              <a href="single-perro.html" class="card-link">Leer más</a>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title card-banner">
-                <img src="../static/images/questions/metri1.jpg" class="img-fluid" alt="Question image">
-              </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">Especie: bovino</h5>
-              <p class="card-text">Raza: Holstein</p>
-              <p class="card-text">Motivo de consulta: vaca holstein de cinco años de edad, la cual presentó un cuadro de retención de membranas fetales con una...</p>
-              <a href="single-vaca.html" class="card-link">Leer más</a>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title card-banner">
-                <img src="../static/images/questions/oveja1.jpg" class="img-fluid" alt="Question image">
-              </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">Especie: ovino</h5>
-              <p class="card-text">Raza: ---</h5>
-                <p class="card-text">Motivo de consulta: Un caso clínico de sarna sarcóptica en el ganado ovino...</p>
-                <a href="single-cabra.html" class="card-link">Leer más</a>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </main>
     </div>

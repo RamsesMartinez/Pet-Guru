@@ -28,12 +28,13 @@
     </div>
     <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
       <div class="alert alert-success w-75" role="alert">
-        <h4 class="alert-heading">Datos clínicos.</h4>
-        <p>{{instance.specie}}</p>
-        <p>{{instance.race}}</p>
-        <p>{{instance.age}}</p>
-        <p>{{instance.gender}}</p>
+        <h3 class="alert-heading text-center">Datos clínicos.</h3>
+        <p>Especie: {{instance.specie.specie}}</p>
+        <p>Raza: {{instance.specie.race}}</p>
+        <p>Edad: {{instance.specie.age}}</p>
+        <p>Género: {{instance.specie.gender}}</p>
         <hr>
+        <h4 class="alert-heading text-center">Descripción de la consulta:</h4>
         <p class="mb-0">{{instance.description}}</p>
       </div>
       <p class="questionSingle">

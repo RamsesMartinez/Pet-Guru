@@ -7,7 +7,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.generic import CreateView
 
 from django.http import HttpResponse
-from .models import Question
+from .models import Question, Bovine
 from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
 from .forms import RabbitForm, BirdForm, DogForm, CatForm, WildForm, AquaticForm, BeeForm
 # Create your views here.
@@ -17,7 +17,10 @@ def index(request):
     if request.user.is_authenticated():
         return redirect('home:usuario')
 
+    template = 'index.html'
     message = None
+    articles = Question.objects.all()
+    print(articles)
     Login_form = Login(request.POST or None)
     
     if request.method == 'POST':
@@ -33,9 +36,21 @@ def index(request):
     context = {
         'title': "PetGurú - Inicio",
         'message' : message,
+        'articles':articles,
         'form' : Login_form,
     }
-    template = 'index.html'
+    return render(request, template, context)
+
+
+def pregunta(request):
+    template = 'question.html'
+    instance = get_object_or_404(Question,id='1')
+
+    context = {       
+        'titulo': instance.title,
+        'instance': instance,
+    }
+
     return render(request, template, context)
 
 
@@ -55,14 +70,6 @@ def reglamento(request):
     return render(request, template, context)
 
 
-def question(request):
-    template = 'single-question.html'
-    context = {
-        'title': "PetGurú - Pregúnta",
-    }
-    return render(request, template, context)
-
-
 @login_required(login_url='home:inicio')
 def logout(request):
     logout_django(request)
@@ -73,6 +80,7 @@ def logout(request):
 def user(request):
     template = 'user.html'
     User = None 
+    articles = Question.objects.all()
 
     if request.user.is_authenticated():
         User = request.user.username
@@ -103,6 +111,8 @@ def user(request):
 
     context = {       
         'title': "Bienvenido "+User,
+        'user': User,
+        'articles':articles,
         'baseForm': base_form,
         'cow_form': cow_form,
         'porcine_form': porcine_form,
@@ -116,7 +126,6 @@ def user(request):
         'wild_form': wild_form,
         'aquatic_form': aquatic_form,
         'bee_form': bee_form,
-        'user': User,
     }
 
     return render(request, template, context)
@@ -144,19 +153,6 @@ def profesor(request):
     context = {       
         'title': "Profesional "+User,
         'user': User,
-    }
-
-    return render(request, template, context)
-
-
-
-def pregunta(request):
-    template = 'question.html'
-    instance = get_object_or_404(Question,id='1')
-
-    context = {       
-        'titulo': instance.title,
-        'instance': instance,
     }
 
     return render(request, template, context)
