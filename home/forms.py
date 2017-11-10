@@ -1,6 +1,6 @@
 from django import forms
 from .models import Question, Bovine, Porcine, Horse, Goat, Ovine, Rabbit
-from .models import Bird, Dog, Cat, Wild
+from .models import Bird, Dog, Cat, Wild, Aquatic, Bee
 
 
 class Login(forms.Form):
@@ -574,3 +574,31 @@ class WildForm(forms.ModelForm):
           'lymph_nodes':'Linfonodos: ',
           'ruminal':'Movimientos ruminales: ',
           }
+
+
+# class AquaticForm(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#       super(AquaticForm, self).__init__(*args, **kwargs)
+#       self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'aqspecie'})
+#     class Meta:
+#         model = Aquatic       
+#         fields = (
+#           'specie',
+#           )
+#         labels = {
+#           'specie': 'Especie: ',
+#           }
+
+
+# class BeeForm(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#       super(BeeForm, self).__init__(*args, **kwargs)
+#       self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+#     class Meta:
+#         model = Bee       
+#         fields = (
+#           'specie',
+#           )
+#         labels = {
+#           'specie': 'Especie: ',
+#           }

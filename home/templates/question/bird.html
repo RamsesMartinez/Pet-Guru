@@ -3,10 +3,8 @@
 <h4>Reseña</h4>
 <div class="form-group">
   {{ form.type_animal.errors }}
+  <label for="{{ form.type_animal.id_for_label }}">{{ form.type_animal.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.type_animal.id_for_label }}">{{ form.type_animal.label }}</label>
-    </span>
     {{ form.type_animal }}
     <span class="input-group-addon">
       <input id="birdtypec" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangetype()">
@@ -16,10 +14,8 @@
 </div>
 <div class="form-group">
   {{ form.zootechnical_purpose.errors }}
+  <label for="{{ form.zootechnical_purpose.id_for_label }}">{{ form.zootechnical_purpose.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.zootechnical_purpose.id_for_label }}">{{ form.zootechnical_purpose.label }}</label>
-    </span>
     {{ form.zootechnical_purpose }}
     <span class="input-group-addon">
       <input id="birdzooc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangezoo()">
@@ -34,10 +30,8 @@
 </div>
 <div class="form-group">
   {{ form.age_week.errors }}
+  <label for="{{ form.age_week.id_for_label }}">{{ form.age_week.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.age_week.id_for_label }}">{{ form.age_week.label }}</label>
-    </span>
     {{ form.age_week }}
     <span class="input-group-addon">
       <input id="birdagewc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeagew()">
@@ -47,10 +41,8 @@
 </div>
 <div class="form-group">
   {{ form.age_month.errors }}
+  <label for="{{ form.age_month.id_for_label }}">{{ form.age_month.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.age_month.id_for_label }}">{{ form.age_month.label }}</label>
-    </span>
     {{ form.age_month }}
     <span class="input-group-addon">
       <input id="birdagemc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeagem()">
@@ -60,10 +52,8 @@
 </div>
 <div class="form-group">
   {{ form.place.errors }}
+  <label for="{{ form.place.id_for_label }}">{{ form.place.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.place.id_for_label }}">{{ form.place.label }}</label>
-    </span>
     {{ form.place }}
     <span class="input-group-addon">
       <input id="birdplacec" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeplace()">
@@ -73,10 +63,8 @@
 </div>
 <div class="form-group">
   {{ form.quantity.errors }}
+  <label for="{{ form.quantity.id_for_label }}">{{ form.quantity.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.quantity.id_for_label }}">{{ form.quantity.label }}</label>
-    </span>
     {{ form.quantity }}
     <span class="input-group-addon">
       <input id="birdquantc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangequant()">
@@ -86,10 +74,8 @@
 </div>
 <div class="form-group">
   {{ form.coexistence.errors }}
+  <label for="{{ form.coexistence.id_for_label }}">{{ form.coexistence.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.coexistence.id_for_label }}">{{ form.coexistence.label }}</label>
-    </span>
     {{ form.coexistence }}
     <span class="input-group-addon">
       <input id="birdexistc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeexist()">
@@ -99,10 +85,8 @@
 </div>
 <div class="form-group">
   {{ form.origin_water.errors }}
+  <label for="{{ form.origin_water.id_for_label }}">{{ form.origin_water.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.origin_water.id_for_label }}">{{ form.origin_water.label }}</label>
-    </span>
     {{ form.origin_water }}
     <span class="input-group-addon">
       <input id="birdoriginc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeorigin()">
@@ -112,10 +96,8 @@
 </div>
 <div class="form-group">
   {{ form.morbidity.errors }}
+  <label for="{{ form.morbidity.id_for_label }}">{{ form.morbidity.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.morbidity.id_for_label }}">{{ form.morbidity.label }}</label>
-    </span>
     {{ form.morbidity }}
     <span class="input-group-addon">
       <input id="birdmorbc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangemorb()">
@@ -125,10 +107,8 @@
 </div>
 <div class="form-group">
   {{ form.mortality.errors }}
+  <label for="{{ form.mortality.id_for_label }}">{{ form.mortality.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.mortality.id_for_label }}">{{ form.mortality.label }}</label>
-    </span>
     {{ form.mortality }}
     <span class="input-group-addon">
       <input id="birdmortc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangemort()">
@@ -138,10 +118,8 @@
 </div>
 <div class="form-group">
   {{ form.date_signs.errors }}
+  <label for="{{ form.date_signs.id_for_label }}">{{ form.date_signs.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.date_signs.id_for_label }}">{{ form.date_signs.label }}</label>
-    </span>
     {{ form.date_signs }}
     <span class="input-group-addon">
       <input id="birddatec" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangedate()">
@@ -151,10 +129,8 @@
 </div>
 <div class="form-group">
   {{ form.water.errors }}
+  <label for="{{ form.water.id_for_label }}">{{ form.water.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.water.id_for_label }}">{{ form.water.label }}</label>
-    </span>
     {{ form.water }}
     <span class="input-group-addon">
       <input id="birdwaterc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangewater()">
@@ -164,10 +140,8 @@
 </div>
 <div class="form-group">
   {{ form.eat.errors }}
+  <label for="{{ form.eat.id_for_label }}">{{ form.eat.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.eat.id_for_label }}">{{ form.eat.label }}</label>
-    </span>
     {{ form.eat }}
     <span class="input-group-addon">
       <input id="birdeatc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeeat()">
@@ -177,10 +151,8 @@
 </div>
 <div class="form-group">
   {{ form.vaccine.errors }}
+  <label for="{{ form.vaccine.id_for_label }}">{{ form.vaccine.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.vaccine.id_for_label }}">{{ form.vaccine.label }}</label>
-    </span>
     {{ form.vaccine }}
     <span class="input-group-addon">
       <input id="birdvaccinec" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangevaccine()">
@@ -190,10 +162,8 @@
 </div>
 <div class="form-group">
   {{ form.defecation.errors }}
+  <label for="{{ form.defecation.id_for_label }}">{{ form.defecation.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.defecation.id_for_label }}">{{ form.defecation.label }}</label>
-    </span>
     {{ form.defecation }}
     <span class="input-group-addon">
       <input id="birddefecc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangedefec()">

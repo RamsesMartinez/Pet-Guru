@@ -8,10 +8,8 @@
 </div>
 <div class="form-group">
   {{ form.race.errors }}
+  <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
-    </span>
     {{ form.race }}
     <span class="input-group-addon">
       <input id="rabracec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangerace()">
@@ -21,10 +19,8 @@
 </div>
 <div class="form-group">
   {{ form.age.errors }}
+  <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
-    </span>
     {{ form.age }}
     <span class="input-group-addon">
       <input id="rabagec" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeage()">
@@ -34,10 +30,8 @@
 </div>
 <div class="form-group">
   {{ form.weight.errors }}
+  <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
-    </span>
     {{ form.weight }}
     <span class="input-group-addon">
       <input id="rabweightc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangeweight()">
@@ -95,10 +89,8 @@
   </div>
   <div class="form-group">
     {{ form.capilar.errors }}
+    <label for="{{ form.capilar.id_for_label }}">{{ form.capilar.label }}</label>
     <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.capilar.id_for_label }}">{{ form.capilar.label }}</label>
-      </span>
       {{ form.capilar }}
       <span class="input-group-addon">
         <input id="rabcapilarc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangecapilar()">
@@ -108,10 +100,8 @@
   </div>
   <div class="form-group">
     {{ form.mucosal_color.errors }}
+    <label for="{{ form.mucosal_color.id_for_label }}">{{ form.mucosal_color.label }}</label>
     <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.mucosal_color.id_for_label }}">{{ form.mucosal_color.label }}</label>
-      </span>
       {{ form.mucosal_color }}
       <span class="input-group-addon">
         <input id="rabmucosc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangemucos()">
@@ -121,10 +111,8 @@
   </div>
   <div class="form-group">
     {{ form.lymph_nodes.errors }}
+    <label for="{{ form.lymph_nodes.id_for_label }}">{{ form.lymph_nodes.label }}</label>
     <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.lymph_nodes.id_for_label }}">{{ form.lymph_nodes.label }}</label>
-      </span>
       {{ form.lymph_nodes }}
       <span class="input-group-addon">
         <input id="rablymphc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangelymph()">
@@ -134,10 +122,8 @@
   </div>
   <div class="form-group">
     {{ form.dehydration.errors }}
+    <label for="{{ form.dehydration.id_for_label }}">{{ form.dehydration.label }}</label>
     <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.dehydration.id_for_label }}">{{ form.dehydration.label }}</label>
-      </span>
       {{ form.dehydration }}
       <span class="input-group-addon">
         <input id="rabdehyc" type="checkbox" aria-label="Checkbox for following text input" onclick="rabchangedehy()">
