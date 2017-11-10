@@ -80,6 +80,7 @@ def logout(request):
 def user(request):
     template = 'user.html'
     User = None 
+    Mineposts = Question.objects.filter(user_question=User)
     articles = Question.objects.all()
 
     if request.user.is_authenticated():
@@ -112,6 +113,7 @@ def user(request):
     context = {       
         'title': "Bienvenido "+User,
         'user': User,
+        'mineposts': Mineposts,
         'articles':articles,
         'baseForm': base_form,
         'cow_form': cow_form,

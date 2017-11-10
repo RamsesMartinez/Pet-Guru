@@ -22,10 +22,11 @@
               <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
                 <h3 class=" mb-3">Mís preguntas:</h3>
                 <div id="userQuestions" class="col questContainer">
-                  <p><a href="single-question.html">Agenesia anal en terneros</a></p>
-                  <p><a href="single-cabra.html">Sarna en ganado ovino</a></p>
-                  <p><a href="single-perro.html">Sangrado nasal</a></p>
-                  <p><a href="single-vaca.html">Metritis en bovino</a></p>
+
+                  {% for mine in mineposts %}
+                    <p><a href="{{ mineposts.get_absolute_url }}">{{ mineposts.title }}</a></p>
+                  {% endfor %}
+
                 </div>
               </div>
               <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
@@ -102,7 +103,7 @@
         <h1 class="h1">Muro de discusiones</h1>
         <hr class="my-4">
         <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
-          
+
           {% for article in articles %}
           <div class="card">
             <div class="card-body">
