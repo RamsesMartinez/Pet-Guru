@@ -1584,3 +1584,86 @@ function aqchangestr() {
     aqstr.value="";
   }
 }
+
+
+// Bee form validation
+function beechangespecie() {
+  var hrspecie = document.getElementById('beespecie');
+  var hrspeciecheck = document.getElementById('beespeciec');
+  if (hrspeciecheck.checked) {
+    hrspecie.value="Sin datos";
+  }
+  else {
+    hrspecie.value="";
+  }
+}
+function beechangeback() {
+  var hrback = document.getElementById('beeback');
+  var hrbackcheck = document.getElementById('beebackc');
+  if (hrbackcheck.checked) {
+    hrback.value="0000";
+  }
+  else {
+    hrback.value="";
+  }
+}
+function beechangecell() {
+  var hrcell = document.getElementById('beecell');
+  var hrcellcheck = document.getElementById('beecellc');
+  if (hrcellcheck.checked) {
+    hrcell.value="Sin datos";
+  }
+  else {
+    hrcell.value="";
+  }
+}
+function beechangebckbreed() {
+  var hrbckbreed = document.getElementById('beebckbreed');
+  var hrbckbreedcheck = document.getElementById('beebckbreedc');
+  if (hrbckbreedcheck.checked) {
+    hrbckbreed.value="0000";
+  }
+  else {
+    hrbckbreed.value="";
+  }
+}
+function beechangeegg() {
+  var hregg = document.getElementById('beeegg');
+  var hreggcheck = document.getElementById('beeeggc');
+  if (hreggcheck.checked) {
+    hregg.value="0000";
+  }
+  else {
+    hregg.value="";
+  }
+}
+function beechangequant() {
+  var hrquant = document.getElementById('beequant');
+  var hrquantcheck = document.getElementById('beequantc');
+  if (hrquantcheck.checked) {
+    hrquant.value="0000";
+  }
+  else {
+    hrquant.value="";
+  }
+}
+function beechangeobs() {
+  var hrobs = document.getElementById('beeobs');
+  var hrobscheck = document.getElementById('beeobsc');
+  if (hrobscheck.checked) {
+    hrobs.value="Sin datos";
+  }
+  else {
+    hrobs.value="";
+  }
+}
+function beechangerack() {
+  var hrrack = document.getElementById('beerack');
+  var hrrackcheck = document.getElementById('beerackc');
+  if (hrrackcheck.checked) {
+    hrrack.value="0000";
+  }
+  else {
+    hrrack.value="";
+  }
+}
