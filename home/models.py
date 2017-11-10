@@ -1,6 +1,7 @@
 from django.db import models
 from decimal import Decimal, DecimalException
 from django.core.validators import MinValueValidator
+from django.core.urlresolvers import reverse
 from . import options
 from users.models import User
 
@@ -16,6 +17,9 @@ class Question(models.Model):
 
     def __str__(self):
         return '%s' % self.title
+
+    def get_absolute_url(self):
+        return reverse("home:pregunta", kwargs={'id':self.id})
 
 
 class ImageQuestion(models.Model):

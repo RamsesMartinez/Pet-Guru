@@ -113,11 +113,11 @@
               <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
               <p class="card-text">{{ article.specie.race }}</p>
               <p class="card-text">{{ article.description }}</p>
-              <a href="single-question.html" class="card-link">Leer más</a>
+              <a href="{{ article.get_absolute_url }}" class="card-link">Leer más</a>
             </div>
           </div>
           {% endfor %}
-          
+
         </div>
       </main>
     </div>
