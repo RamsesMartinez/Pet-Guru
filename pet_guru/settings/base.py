@@ -26,6 +26,8 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
+    'chat',
 ]
 
 THIRD_APPS = []
@@ -45,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'pet_guru.urls'
@@ -104,10 +107,28 @@ USE_TZ = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, '../staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+        "ROUTING": "chat.routing.channel_routing",
+    },
+}
