@@ -576,18 +576,18 @@ class WildForm(forms.ModelForm):
           }
 
 
-# class AquaticForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#       super(AquaticForm, self).__init__(*args, **kwargs)
-#       self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'aqspecie'})
-#     class Meta:
-#         model = Aquatic       
-#         fields = (
-#           'specie',
-#           )
-#         labels = {
-#           'specie': 'Especie: ',
-#           }
+class AquaticForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(AquaticForm, self).__init__(*args, **kwargs)
+      self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'aqspecie'})
+    class Meta:
+        model = Aquatic       
+        fields = (
+          'specie',
+          )
+        labels = {
+          'specie': 'Especie: ',
+          }
 
 
 # class BeeForm(forms.ModelForm):
