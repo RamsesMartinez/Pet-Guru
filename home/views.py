@@ -120,3 +120,30 @@ def user(request):
     }
 
     return render(request, template, context)
+
+
+
+@login_required(login_url='home:inicio')
+def profesor(request):
+    template = 'prof.html'
+    User = None 
+
+    if request.user.is_authenticated():
+        User = request.user.username
+
+
+    if request.method == 'POST':
+        if base_form.is_valid():
+            print(base_form)
+            base_form.save()
+            if cow_form.is_valid():
+                print(cow_form)
+                cow_form.save()
+                return redirect ('home:usuario')
+
+    context = {       
+        'title': "Profesional "+User,
+        'user': User,
+    }
+
+    return render(request, template, context)
