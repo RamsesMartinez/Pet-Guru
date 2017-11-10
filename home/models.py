@@ -130,20 +130,6 @@ class Rabbit(Specie):
         return '%s' % self.id
 
 
-class Cat(Specie):
-    heart_rate = models.IntegerField()
-    respiratory_rate = models.IntegerField()
-    temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    capilar = models.IntegerField()
-    mucosal_color = models.CharField(max_length=30, null=True)
-    tusigno_reflex = models.CharField(max_length=30, null=True)
-    pulse = models.IntegerField()
-    injuries = models.CharField(max_length=30, null=True)
-
-    def __str__(self):
-        return '%s' % self.id
-
-
 class Ovine(Specie):
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
@@ -155,7 +141,6 @@ class Ovine(Specie):
     lymph_nodes = models.CharField(max_length=50, null=True)
     ruminal = models.CharField(max_length=80, null=True)
     body_condition = models.TextField(null=True)
-    cough = models.BooleanField()
 
     def __str__(self):
         return '%s' % self.id
@@ -167,8 +152,25 @@ class Dog(Specie):
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     mucosal_color = models.CharField(max_length=30, null=True)
     capilar = models.IntegerField()
+    cough = models.CharField(max_length=80, null=True)
+    pulse = models.CharField(max_length=80, null=True)
+    skin = models.CharField(max_length=80, null=True)
 
-    def __str__(self):
+    def __str__(self): 
+        return '%s' % self.id
+
+
+class Cat(Specie):
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
+    temperature = models.DecimalField(max_digits=5, decimal_places=3)
+    mucosal_color = models.CharField(max_length=30, null=True)
+    capilar = models.IntegerField()
+    cough = models.CharField(max_length=80, null=True)
+    pulse = models.CharField(max_length=80, null=True)
+    skin = models.CharField(max_length=80, null=True)
+
+    def __str__(self): 
         return '%s' % self.id
 
 
@@ -468,14 +470,16 @@ class Aquatic(models.Model):
         (NO, 'No'),
     )
     question = models.OneToOneField(Question, default='')
+    genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
     age = models.IntegerField()
     weight = models.IntegerField()
     pond = models.CharField(max_length=3, choices=POND)
     density = models.IntegerField()
     biomass = models.IntegerField()
-    aeration = models.CharField(max_length=3, choices=AEREATOR)
+    aeration = models.CharField(max_length=3, choices=BOOLEAN)
     recirculation_water = models.CharField(max_length=3, choices=BOOLEAN)
+    aeration_type = models.CharField(max_length=3, choices=AEREATOR)
     change_water = models.PositiveIntegerField()
     date_sowing = models.CharField(max_length=50)
     temperature_6am = models.IntegerField()

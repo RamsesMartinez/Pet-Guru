@@ -8,39 +8,33 @@
 </div>
 <div class="form-group">
   {{ form.race.errors }}
+  <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.race.id_for_label }}">{{ form.race.label }}</label>
-    </span>
     {{ form.race }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="horracec" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorserace()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
 </div>
 <div class="form-group">
   {{ form.age.errors }}
+  <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
-    </span>
     {{ form.age }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="horagec" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorseage()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
 </div>
 <div class="form-group">
   {{ form.weight.errors }}
+  <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
   <div class="input-group">
-    <span class="input-group-addon">
-      <label for="{{ form.weight.id_for_label }}">{{ form.weight.label }}</label>
-    </span>
     {{ form.weight }}
     <span class="input-group-addon">
-      <input type="checkbox" aria-label="Checkbox for following text input">
+      <input id="horweightc" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorseweight()">
     </span>
     <span class="input-group-addon">Sin datos</span>
   </div>
@@ -60,7 +54,7 @@
       <div class="input-group">
         {{ form.heart_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="horheartc" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorseheart()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -71,7 +65,7 @@
       <div class="input-group">
         {{ form.respiratory_rate }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="horrespc" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorseresp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -82,7 +76,7 @@
       <div class="input-group">
         {{ form.temperature }}
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="Checkbox for following text input">
+          <input id="hortempc" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorsetemp()">
         </span>
         <span class="input-group-addon">S/D</span>
       </div>
@@ -90,39 +84,33 @@
   </div>
   <div class="form-group">
     {{ form.capilar.errors }}
+    <label for="{{ form.capilar.id_for_label }}">{{ form.capilar.label }}</label>
     <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.capilar.id_for_label }}">{{ form.capilar.label }}</label>
-      </span>
       {{ form.capilar }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="horcapc" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorsecap()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
   </div>
   <div class="form-group">
     {{ form.mucosal_color.errors }}
+    <label for="{{ form.mucosal_color.id_for_label }}">{{ form.mucosal_color.label }}</label>
     <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.mucosal_color.id_for_label }}">{{ form.mucosal_color.label }}</label>
-      </span>
       {{ form.mucosal_color }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="hormucoc" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorsemucos()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
   </div>
   <div class="form-group">
     {{ form.lymph_nodes.errors }}
+    <label for="{{ form.lymph_nodes.id_for_label }}">{{ form.lymph_nodes.label }}</label>
     <div class="input-group">
-      <span class="input-group-addon">
-        <label for="{{ form.lymph_nodes.id_for_label }}">{{ form.lymph_nodes.label }}</label>
-      </span>
       {{ form.lymph_nodes }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="horlymphc" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorselymph()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
@@ -133,7 +121,7 @@
     <div class="input-group">
       {{ form.body_condition }}
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="Checkbox for following text input">
+        <input id="horcondc" type="checkbox" aria-label="Checkbox for following text input" onclick="changehorsecondition()">
       </span>
       <span class="input-group-addon">Sin datos</span>
     </div>
