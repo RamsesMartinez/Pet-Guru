@@ -258,7 +258,7 @@ class Bee(models.Model):
     quantity_eggs = models.IntegerField()
     observations = models.TextField()
     stool_spots = models.CharField(max_length=3, choices=PRESENT_T)
-    Piece_larvae = models.CharField(max_length=3, choices=PRESENT_T)
+    piece_larvae = models.CharField(max_length=3, choices=PRESENT_T)
     dead_bees = models.CharField(max_length=3, choices=PRESENT_T)
     food_racks = models.CharField(max_length=3, choices=PRESENT_T)
     number_racks = models.IntegerField()
@@ -363,7 +363,7 @@ class Bird(models.Model):
         return '%s' % self.id
 
 
-class wild(models.Model):
+class Wild(models.Model):
 
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
@@ -372,6 +372,7 @@ class wild(models.Model):
     feeding = models.CharField(max_length=50)
     background = models.CharField(max_length=50)
     evolution_disease = models.CharField(max_length=50)
+    heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     capilar = models.IntegerField()
@@ -501,15 +502,15 @@ class Aquatic(models.Model):
     type_eat = models.CharField(max_length=3, choices=FOODTYPE)
     eat_for_day = models.CharField(max_length=80)
     coloration = models.CharField(max_length=3, choices=FISHCOLOR)
-    Bulging_belly = models.CharField(max_length=3, choices=BOOLEAN)
-    Exophthalmia = models.CharField(max_length=3, choices=BOOLEAN)
-    Petechia = models.CharField(max_length=3, choices=BOOLEAN)
-    Dilated = models.CharField(max_length=3, choices=BOOLEAN)
-    Ulcers = models.CharField(max_length=3, choices=BOOLEAN)
-    Skin_sores = models.CharField(max_length=3, choices=BOOLEAN)
-    Cotton_structures = models.CharField(max_length=3, choices=BOOLEAN)
-    Necrosis_epidermal_layer = models.CharField(max_length=3, choices=BOOLEAN)
-    Ocular_opacity = models.CharField(max_length=3, choices=BOOLEAN)
+    bulging_belly = models.CharField(max_length=3, choices=BOOLEAN)
+    exophthalmia = models.CharField(max_length=3, choices=BOOLEAN)
+    petechia = models.CharField(max_length=3, choices=BOOLEAN)
+    dilated = models.CharField(max_length=3, choices=BOOLEAN)
+    ulcers = models.CharField(max_length=3, choices=BOOLEAN)
+    skin_sores = models.CharField(max_length=3, choices=BOOLEAN)
+    cotton_structures = models.CharField(max_length=3, choices=BOOLEAN)
+    necrosis_epidermal_layer = models.CharField(max_length=3, choices=BOOLEAN)
+    ocular_opacity = models.CharField(max_length=3, choices=BOOLEAN)
 
     def __str__(self):
         return '%s' % self.id
