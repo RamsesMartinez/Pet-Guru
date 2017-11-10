@@ -579,14 +579,131 @@ class WildForm(forms.ModelForm):
 class AquaticForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
       super(AquaticForm, self).__init__(*args, **kwargs)
-      self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'aqspecie'})
+      self.fields['genetic'].widget.attrs.update({'class':'form-control', 'id':'aqgenetic'})
+      self.fields['zootechnical'].widget.attrs.update({'class':'form-control', 'id':'aqzoo'})
+      self.fields['age'].widget.attrs.update({'class':'form-control', 'id':'aqage'})
+      self.fields['weight'].widget.attrs.update({'class':'form-control', 'id':'aqweight'})
+      self.fields['pond'].widget.attrs.update({'class':'form-control', 'id':'aqpond'})
+      self.fields['density'].widget.attrs.update({'class':'form-control', 'id':'aqdensity'})
+      self.fields['biomass'].widget.attrs.update({'class':'form-control', 'id':'aqbiomass'})
+      self.fields['aeration'].widget.attrs.update({'class':'form-control', 'id':'aqaeration'})
+      self.fields['aeration_type'].widget.attrs.update({'class':'form-control', 'id':'aqaeratp'})
+      self.fields['recirculation_water'].widget.attrs.update({'class':'form-control', 'id':'aqrecir'})
+      self.fields['change_water'].widget.attrs.update({'class':'form-control', 'id':'aqchange'})
+      self.fields['date_sowing'].widget.attrs.update({'class':'form-control', 'id':'aqsowing'})
+      self.fields['temperature_6am'].widget.attrs.update({'class':'form-control', 'id':'aq6am'})
+      self.fields['temperature_3pm'].widget.attrs.update({'class':'form-control', 'id':'aq3pm'})
+      self.fields['oxygen_6am'].widget.attrs.update({'class':'form-control', 'id':'aqox6'})
+      self.fields['oxygen_3pm'].widget.attrs.update({'class':'form-control', 'id':'aqox3'})
+      self.fields['ph_6am'].widget.attrs.update({'class':'form-control', 'id':'aqph6'})
+      self.fields['ph_3pm'].widget.attrs.update({'class':'form-control', 'id':'aqph3'})
+      self.fields['no2'].widget.attrs.update({'class':'form-control', 'id':'aqno2'})
+      self.fields['nh4'].widget.attrs.update({'class':'form-control', 'id':'aqnh4'})
+      self.fields['nh3'].widget.attrs.update({'class':'form-control', 'id':'aqnh3'})
+      self.fields['transparency'].widget.attrs.update({'class':'form-control', 'id':'aqtransp'})
+      self.fields['mortality'].widget.attrs.update({'class':'form-control', 'id':'aqmort'})
+      self.fields['start_mortality'].widget.attrs.update({'class':'form-control', 'id':'aqstr'})
+      self.fields['position'].widget.attrs.update({'class':'form-control', 'id':'aqpos'})
+      self.fields['body_color'].widget.attrs.update({'class':'form-control', 'id':'aqbdcl'})
+      self.fields['moves'].widget.attrs.update({'class':'form-control', 'id':'aqmove'})
+      self.fields['lack_of_appetite'].widget.attrs.update({'class':'form-control', 'id':'aqlck'})
+      self.fields['type_eat'].widget.attrs.update({'class':'form-control', 'id':'aqtpeat'})
+      self.fields['eat_for_day'].widget.attrs.update({'class':'form-control', 'id':'aqeatday'})
+      self.fields['coloration'].widget.attrs.update({'class':'form-control', 'id':'aqcol'})
+      self.fields['bulging_belly'].widget.attrs.update({'class':'form-control', 'id':'aqbulging'})
+      self.fields['exophthalmia'].widget.attrs.update({'class':'form-control', 'id':'aqexoph'})
+      self.fields['petechia'].widget.attrs.update({'class':'form-control', 'id':'aqpetech'})
+      self.fields['dilated'].widget.attrs.update({'class':'form-control', 'id':'aqdilated'})
+      self.fields['ulcers'].widget.attrs.update({'class':'form-control', 'id':'aqulcer'})
+      self.fields['skin_sores'].widget.attrs.update({'class':'form-control', 'id':'aqsore'})
+      self.fields['cotton_structures'].widget.attrs.update({'class':'form-control', 'id':'aqcott'})
+      self.fields['necrosis_epidermal_layer'].widget.attrs.update({'class':'form-control', 'id':'aqnecr'})
+      self.fields['ocular_opacity'].widget.attrs.update({'class':'form-control', 'id':'aqopac'})
     class Meta:
         model = Aquatic       
         fields = (
-          'specie',
+          'genetic',
+          'zootechnical',
+          'age',
+          'weight',
+          'pond',
+          'density',
+          'biomass',
+          'aeration',
+          'aeration_type',
+          'recirculation_water',
+          'change_water',
+          'date_sowing',
+          'temperature_6am',
+          'temperature_3pm',
+          'oxygen_6am',
+          'oxygen_3pm',
+          'ph_6am',
+          'ph_3pm',
+          'no2',
+          'nh4',
+          'nh3',
+          'transparency',
+          'mortality',
+          'start_mortality',
+          'position',
+          'body_color',
+          'moves',
+          'lack_of_appetite',
+          'type_eat',
+          'eat_for_day',
+          'coloration',
+          'bulging_belly',
+          'exophthalmia',
+          'petechia',
+          'dilated',
+          'ulcers',
+          'skin_sores',
+          'cotton_structures',
+          'necrosis_epidermal_layer',
+          'ocular_opacity',
           )
         labels = {
-          'specie': 'Especie: ',
+          'genetic': 'Grupo genético: ',
+          'zootechnical': 'Fin zootécnico: ',
+          'age': 'Edad: ',
+          'weight': 'Peso promedio de la población: ',
+          'pond': 'Tipo de estanque: ',
+          'density': 'densidad: ',
+          'biomass': 'Biomasa: ',
+          'aeration': 'Presencia de sistema de aireación: ',
+          'aeration_type': 'Tipo de aireador: ',
+          'recirculation_water': 'Presencia de sistema de recirculación de agua: ',
+          'change_water': 'Recambio diario de agua: ',
+          'date_sowing': 'Fecha de siembra: ',
+          'temperature_6am': 'Temperatura (6 am): ',
+          'temperature_3pm': 'Temperatura (3 pm): ',
+          'oxygen_6am': 'Oxígeno disuelto en agua (6 am): ',
+          'oxygen_3pm': 'Oxígeno disuelto en agua (3 pm): ',
+          'ph_6am': 'pH (6 am): ',
+          'ph_3pm': 'pH (3 pm): ',
+          'no2': 'Nitritos (NO2): ',
+          'nh4': 'Amonio (NH4: ',
+          'nh3': 'Amoniaco (NH3): ',
+          'transparency': 'Transparencia: ',
+          'mortality': 'Mortalidad acumulada: ',
+          'start_mortality': 'Inicio de la mortandad: ',
+          'position': 'Posición de los peces en la columna de agua: ',
+          'body_color': 'Coloración del cuerpo de los peces: ',
+          'moves': 'Tipo de movimiento de los peces en el agua: ',
+          'lack_of_appetite': 'Inapetencia: ',
+          'type_eat': 'Tipo de alimentación: ',
+          'eat_for_day': 'Cantidad de alimento administrado por día: ',
+          'coloration': 'Coloración: ',
+          'bulging_belly': 'Vientre abultado: ',
+          'exophthalmia': 'Exoftalmia: ',
+          'petechia': 'Petequias en base de aletas: ',
+          'dilated': 'Aletas desilachadas: ',
+          'ulcers': 'Úlceras: ',
+          'skin_sores': 'Llagas en piel: ',
+          'cotton_structures': 'Estructuras algodonosas: ',
+          'necrosis_epidermal_layer': 'Necrosis en capa epidérmica: ',
+          'ocular_opacity': 'Opacidad ocular: ',
           }
 
 

@@ -537,6 +537,7 @@ class Wild(models.Model):
 
 class Aquatic(models.Model):
     question = models.OneToOneField(Question, default='')
+    genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
     age = models.IntegerField()
     weight = models.IntegerField()
@@ -544,6 +545,7 @@ class Aquatic(models.Model):
     density = models.IntegerField()
     biomass = models.IntegerField()
     aeration = models.CharField(max_length=3)
+    aeration_type = models.CharField(max_length=3)
     recirculation_water = models.BooleanField()
     change_water = models.PositiveIntegerField()
     date_sowing = models.CharField(max_length=50)
@@ -566,15 +568,15 @@ class Aquatic(models.Model):
     type_eat = models.CharField(max_length=3)
     eat_for_day = models.CharField(max_length=80)
     coloration = models.CharField(max_length=3)
-    Bulging_belly = models.BooleanField()
-    Exophthalmia = models.BooleanField()
-    Petechia = models.BooleanField()
-    Dilated = models.BooleanField()
-    Ulcers = models.BooleanField()
-    Skin_sores = models.BooleanField()
-    Cotton_structures = models.BooleanField()
-    Necrosis_epidermal_layer = models.BooleanField()
-    Ocular_opacity = models.BooleanField()
+    bulging_belly = models.BooleanField()
+    exophthalmia = models.BooleanField()
+    petechia = models.BooleanField()
+    dilated = models.BooleanField()
+    ulcers = models.BooleanField()
+    skin_sores = models.BooleanField()
+    cotton_structures = models.BooleanField()
+    necrosis_epidermal_layer = models.BooleanField()
+    ocular_opacity = models.BooleanField()
 
     def __str__(self):
         return '%s' % self.id
