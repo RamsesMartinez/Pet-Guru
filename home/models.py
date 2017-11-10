@@ -10,7 +10,7 @@ class Question(models.Model):
     status = models.CharField(max_length=3, null=True)
     user_question = models.ForeignKey(User, related_name='student_question', default='')
     user_response = models.ForeignKey(User, related_name='teacher_question', default='')
-    calification = models.IntegerField()
+    calification = models.IntegerField(default='1')
     date = models.DateTimeField(editable=False, auto_now=True, null=True)
 
     def __str__(self):
@@ -129,20 +129,6 @@ class Rabbit(Specie):
         return '%s' % self.id
 
 
-class Cat(Specie):
-    heart_rate = models.IntegerField()
-    respiratory_rate = models.IntegerField()
-    temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    capilar = models.IntegerField()
-    mucosal_color = models.CharField(max_length=30, null=True)
-    tusigno_reflex = models.CharField(max_length=30, null=True)
-    pulse = models.IntegerField()
-    injuries = models.CharField(max_length=30, null=True)
-
-    def __str__(self):
-        return '%s' % self.id
-
-
 class Ovine(Specie):
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
@@ -154,7 +140,6 @@ class Ovine(Specie):
     lymph_nodes = models.CharField(max_length=50, null=True)
     ruminal = models.CharField(max_length=80, null=True)
     body_condition = models.TextField(null=True)
-    cough = models.BooleanField()
 
     def __str__(self):
         return '%s' % self.id
@@ -166,8 +151,25 @@ class Dog(Specie):
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     mucosal_color = models.CharField(max_length=30, null=True)
     capilar = models.IntegerField()
+    cough = models.CharField(max_length=80, null=True)
+    pulse = models.CharField(max_length=80, null=True)
+    skin = models.CharField(max_length=80, null=True)
 
-    def __str__(self):
+    def __str__(self): 
+        return '%s' % self.id
+
+
+class Cat(Specie):
+    heart_rate = models.IntegerField()
+    respiratory_rate = models.IntegerField()
+    temperature = models.DecimalField(max_digits=5, decimal_places=3)
+    mucosal_color = models.CharField(max_length=30, null=True)
+    capilar = models.IntegerField()
+    cough = models.CharField(max_length=80, null=True)
+    pulse = models.CharField(max_length=80, null=True)
+    skin = models.CharField(max_length=80, null=True)
+
+    def __str__(self): 
         return '%s' % self.id
 
 
@@ -273,7 +275,7 @@ class Bee(models.Model):
     quantity_eggs = models.IntegerField()
     observations = models.TextField()
     stool_spots = models.CharField(max_length=3)
-    Piece_larvae = models.CharField(max_length=3)
+    piece_larvae = models.CharField(max_length=3)
     dead_bees = models.CharField(max_length=3)
     food_racks = models.CharField(max_length=3)
     number_racks = models.IntegerField()
@@ -493,27 +495,27 @@ class Bird(models.Model):
     age_month = models.IntegerField()
     place = models.CharField(max_length=60)
     quantity = models.IntegerField()
-    coexistence = models.BooleanField()
-    origin_water = models.BooleanField()
-    morbidity = models.IntegerField()
-    mortality = models.IntegerField()
+    coexistence = models.CharField(max_length=30)
+    origin_water = models.CharField(max_length=30)
+    morbidity = models.CharField(max_length=30)
+    mortality = models.CharField(max_length=30)
     date_signs = models.IntegerField()
-    water = models.BooleanField()
-    eat = models.BooleanField()
+    water = models.CharField(max_length=3)
+    eat = models.CharField(max_length=3)
     vaccine = models.CharField(max_length=30)
     defecation = models.CharField(max_length=3)
     condition_corporal = models.CharField(max_length=30)
     plumage = models.CharField(max_length=50)
     condition_legs = models.CharField(max_length=3)
     breathing_frequency = models.IntegerField()
-    dehydration = models.BooleanField()
+    dehydration = models.CharField(max_length=3)
     attitude = models.CharField(max_length=80)
 
     def __str__(self):
         return '%s' % self.id
 
 
-class wild(models.Model):
+class Wild(models.Model):
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     zootechnical = models.CharField(max_length=50)
@@ -521,6 +523,7 @@ class wild(models.Model):
     feeding = models.CharField(max_length=50)
     background = models.CharField(max_length=50)
     evolution_disease = models.CharField(max_length=50)
+    heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
     capilar = models.IntegerField()
@@ -532,8 +535,9 @@ class wild(models.Model):
         return '%s' % self.id
 
 
-class aquatic(models.Model):
+class Aquatic(models.Model):
     question = models.OneToOneField(Question, default='')
+    genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
     age = models.IntegerField()
     weight = models.IntegerField()
@@ -541,6 +545,7 @@ class aquatic(models.Model):
     density = models.IntegerField()
     biomass = models.IntegerField()
     aeration = models.CharField(max_length=3)
+    aeration_type = models.CharField(max_length=3)
     recirculation_water = models.BooleanField()
     change_water = models.PositiveIntegerField()
     date_sowing = models.CharField(max_length=50)
@@ -563,15 +568,15 @@ class aquatic(models.Model):
     type_eat = models.CharField(max_length=3)
     eat_for_day = models.CharField(max_length=80)
     coloration = models.CharField(max_length=3)
-    Bulging_belly = models.BooleanField()
-    Exophthalmia = models.BooleanField()
-    Petechia = models.BooleanField()
-    Dilated = models.BooleanField()
-    Ulcers = models.BooleanField()
-    Skin_sores = models.BooleanField()
-    Cotton_structures = models.BooleanField()
-    Necrosis_epidermal_layer = models.BooleanField()
-    Ocular_opacity = models.BooleanField()
+    bulging_belly = models.BooleanField()
+    exophthalmia = models.BooleanField()
+    petechia = models.BooleanField()
+    dilated = models.BooleanField()
+    ulcers = models.BooleanField()
+    skin_sores = models.BooleanField()
+    cotton_structures = models.BooleanField()
+    necrosis_epidermal_layer = models.BooleanField()
+    ocular_opacity = models.BooleanField()
 
     def __str__(self):
         return '%s' % self.id
