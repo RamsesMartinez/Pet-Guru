@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
@@ -144,6 +144,19 @@ def profesor(request):
     context = {       
         'title': "Profesional "+User,
         'user': User,
+    }
+
+    return render(request, template, context)
+
+
+
+def pregunta(request):
+    template = 'question.html'
+    instance = get_object_or_404(Question,id='1')
+
+    context = {       
+        'titulo': instance.title,
+        'instance': instance,
     }
 
     return render(request, template, context)
