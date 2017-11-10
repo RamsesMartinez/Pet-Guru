@@ -707,15 +707,66 @@ class AquaticForm(forms.ModelForm):
           }
 
 
-# class BeeForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#       super(BeeForm, self).__init__(*args, **kwargs)
-#       self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
-#     class Meta:
-#         model = Bee       
-#         fields = (
-#           'specie',
-#           )
-#         labels = {
-#           'specie': 'Especie: ',
-#           }
+class BeeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+      super(BeeForm, self).__init__(*args, **kwargs)
+      self.fields['specie'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['colony_type'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['hive_review'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['queen_presence'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['disease_signs'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['breeding'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['adult_bee'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['backstage_bee'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['real_cell'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['backstage_breeding'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['eggs'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['quantity_eggs'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['observations'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['stool_spots'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['piece_larvae'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['dead_bees'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['food_racks'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+      self.fields['number_racks'].widget.attrs.update({'class':'form-control', 'id':'beespecie'})
+    class Meta:
+        model = Bee       
+        fields = (
+          'specie',
+          'colony_type',
+          'hive_review',
+          'queen_presence',
+          'disease_signs',
+          'breeding',
+          'adult_bee',
+          'backstage_bee',
+          'real_cell',
+          'backstage_breeding',
+          'eggs',
+          'quantity_eggs',
+          'observations',
+          'stool_spots',
+          'piece_larvae',
+          'dead_bees',
+          'food_racks',
+          'number_racks',
+          )
+        labels = {
+          'specie': 'Especie: ',
+          'colony_type': 'Tipo de colonia: ',
+          'hive_review': 'Revisión de colmena: ',
+          'queen_presence': 'Presencia de la reina: ',
+          'disease_signs': 'Signos de enfermedad: ',
+          'breeding': 'Cría: ',
+          'adult_bee': 'Abeja adulta: ',
+          'backstage_bee': 'Número de bastidores cubiertos por abejas en la cámara de cría y en las alzas: ',
+          'real_cell': 'Presencia de celdas reales: ',
+          'backstage_breeding': 'Número de bastidores cubiertos por cría: ',
+          'eggs': 'Presencia de huevos: ',
+          'quantity_eggs': 'Cantidad de huevos por celda: ',
+          'observations': 'Observación de características anormales en la entrada de la colmena: ',
+          'stool_spots': 'Manchas de heces: ',
+          'piece_larvae': 'Pedazos de larvas o larvas completas: ',
+          'dead_bees': 'sencia de abejas muertas al frente de la piquera: ',
+          'food_racks': 'Presencia de alimento en bastidores: ',
+          'number_racks': 'Número de bastidores con miel, polen o néctar: ',
+          }

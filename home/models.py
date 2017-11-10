@@ -275,7 +275,7 @@ class Bee(models.Model):
     quantity_eggs = models.IntegerField()
     observations = models.TextField()
     stool_spots = models.CharField(max_length=3)
-    Piece_larvae = models.CharField(max_length=3)
+    piece_larvae = models.CharField(max_length=3)
     dead_bees = models.CharField(max_length=3)
     food_racks = models.CharField(max_length=3)
     number_racks = models.IntegerField()
