@@ -344,7 +344,7 @@ class Bird(models.Model):
     place = models.CharField(max_length=3, choices=CONFINEMENT)
     quantity = models.IntegerField()
     coexistence = models.CharField(max_length=3, choices=BOOLEAN)
-    origin_water = models.CharField(max_length=3, choices=DRINK)
+    origin_water = models.CharField(max_length=30)
     morbidity = models.IntegerField()
     mortality = models.IntegerField()
     date_signs = models.IntegerField()

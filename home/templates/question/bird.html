@@ -53,13 +53,7 @@
 <div class="form-group">
   {{ form.place.errors }}
   <label for="{{ form.place.id_for_label }}">{{ form.place.label }}</label>
-  <div class="input-group">
-    {{ form.place }}
-    <span class="input-group-addon">
-      <input id="birdplacec" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeplace()">
-    </span>
-    <span class="input-group-addon">Sin datos</span>
-  </div>
+  {{ form.place }}
 </div>
 <div class="form-group">
   {{ form.quantity.errors }}
@@ -75,13 +69,7 @@
 <div class="form-group">
   {{ form.coexistence.errors }}
   <label for="{{ form.coexistence.id_for_label }}">{{ form.coexistence.label }}</label>
-  <div class="input-group">
-    {{ form.coexistence }}
-    <span class="input-group-addon">
-      <input id="birdexistc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeexist()">
-    </span>
-    <span class="input-group-addon">Sin datos</span>
-  </div>
+  {{ form.coexistence }}
 </div>
 <div class="form-group">
   {{ form.origin_water.errors }}
@@ -130,24 +118,12 @@
 <div class="form-group">
   {{ form.water.errors }}
   <label for="{{ form.water.id_for_label }}">{{ form.water.label }}</label>
-  <div class="input-group">
-    {{ form.water }}
-    <span class="input-group-addon">
-      <input id="birdwaterc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangewater()">
-    </span>
-    <span class="input-group-addon">Sin datos</span>
-  </div>
+  {{ form.water }}
 </div>
 <div class="form-group">
   {{ form.eat.errors }}
   <label for="{{ form.eat.id_for_label }}">{{ form.eat.label }}</label>
-  <div class="input-group">
-    {{ form.eat }}
-    <span class="input-group-addon">
-      <input id="birdeatc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangeeat()">
-    </span>
-    <span class="input-group-addon">Sin datos</span>
-  </div>
+  {{ form.eat }}
 </div>
 <div class="form-group">
   {{ form.vaccine.errors }}
@@ -163,13 +139,7 @@
 <div class="form-group">
   {{ form.defecation.errors }}
   <label for="{{ form.defecation.id_for_label }}">{{ form.defecation.label }}</label>
-  <div class="input-group">
-    {{ form.defecation }}
-    <span class="input-group-addon">
-      <input id="birddefecc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangedefec()">
-    </span>
-    <span class="input-group-addon">Sin datos</span>
-  </div>
+  {{ form.defecation }}
 </div>
 <hr>
 <div class="form-group">
@@ -200,13 +170,7 @@
     <div class="form-group col-md-4">
       {{ form.condition_legs.errors }}
       <label for="{{ form.condition_legs.id_for_label }}">{{ form.condition_legs.label }}</label>
-      <div class="input-group">
-        {{ form.condition_legs }}
-        <span class="input-group-addon">
-          <input id="birdlegsc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangelegs()">
-        </span>
-        <span class="input-group-addon">S/D</span>
-      </div>
+      {{ form.condition_legs }}
     </div>
     <div class="form-group col-md-4">
       {{ form.breathing_frequency.errors }}
@@ -222,13 +186,7 @@
     <div class="form-group col-md-4">
       {{ form.dehydration.errors }}
       <label for="{{ form.dehydration.id_for_label }}">{{ form.dehydration.label }}</label>
-      <div class="input-group">
-        {{ form.dehydration }}
-        <span class="input-group-addon">
-          <input id="birddehyc" type="checkbox" aria-label="Checkbox for following text input" onclick="birdchangedehy()">
-        </span>
-        <span class="input-group-addon">S/D</span>
-      </div>
+      {{ form.dehydration }}
     </div>
     <div class="form-group col-md-4">
       {{ form.attitude.errors }}
