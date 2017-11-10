@@ -4,12 +4,13 @@ from django.core.validators import MinValueValidator
 from . import options
 from users.models import User
 
+
 class Question(models.Model):
     title = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True)
     status = models.CharField(max_length=3, null=True)
-    user_question = models.ForeignKey(User, related_name='student_question', default='')
-    user_response = models.ForeignKey(User, related_name='teacher_question', default='')
+    user_question = models.ForeignKey(User, related_name='student_question', default=User.DEFAULT_USER)
+    user_response = models.ForeignKey(User, related_name='teacher_question', default=User.DEFAULT_USER)
     calification = models.IntegerField()
     date = models.DateTimeField(editable=False, auto_now=True, null=True)
 
@@ -204,12 +205,6 @@ class Bee(models.Model):
     NOTPRESENT = 'NT'
     NOTVERIFIED = 'NV'
 
-    QUEEN = (
-        (PRESENT, 'Presente'),
-        (NOTPRESENT, 'No Presente'),
-        (NOTVERIFIED, 'No Verificado'),
-    )
-
     LARVACOLOR = 'BC'
     PERFORATED = 'PR'
     FATTY = 'FT'
@@ -240,19 +235,7 @@ class Bee(models.Model):
         (NOTVERIFIED, 'No Verificado'),
     )
 
-    EXCREMENT = (
-        (PRESENT, 'Presente'),
-        (NOTPRESENT, 'No Presente'),
-        (NOTVERIFIED, 'NO Verificado'),
-    )
-
-    LARVA = (
-        (PRESENT, 'Presente'),
-        (NOTPRESENT, 'No Presente'),
-        (NOTVERIFIED, 'NO Verificado'),
-    )
-
-    DEADBEES = (
+    PRESENT_T = (
         (PRESENT, 'Presente'),
         (NOTPRESENT, 'No Presente'),
         (NOTVERIFIED, 'NO Verificado'),
@@ -260,22 +243,22 @@ class Bee(models.Model):
 
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
-    colony_type = models.CharField(max_length=3)
-    hive_review = models.CharField(max_length=3)
-    queen_presence = models.CharField(max_length=3)
+    colony_type = models.CharField(max_length=3, choices=COLONY)
+    hive_review = models.CharField(max_length=80)
+    queen_presence = models.CharField(max_length=3, choices=PRESENT_T)
     disease_signs = models.CharField(max_length=80)
-    breeding = models.CharField(max_length=3)
-    adult_bee = models.CharField(max_length=3)
+    breeding = models.CharField(max_length=3,choices=LARVA)
+    adult_bee = models.CharField(max_length=3, choices=ADULTBEES)
     backstage_bee = models.IntegerField()
     real_cell = models.CharField(max_length=50)
     backstage_breeding = models.IntegerField()
     eggs = models.BooleanField()
     quantity_eggs = models.IntegerField()
     observations = models.TextField()
-    stool_spots = models.CharField(max_length=3)
-    Piece_larvae = models.CharField(max_length=3)
-    dead_bees = models.CharField(max_length=3)
-    food_racks = models.CharField(max_length=3)
+    stool_spots = models.CharField(max_length=3, choices=PRESENT_T)
+    Piece_larvae = models.CharField(max_length=3, choices=PRESENT_T)
+    dead_bees = models.CharField(max_length=3, choices=PRESENT_T)
+    food_racks = models.CharField(max_length=3, choices=PRESENT_T)
     number_racks = models.IntegerField()
 
 
@@ -286,8 +269,6 @@ class Bee(models.Model):
 class Bird(models.Model):
     YOUNG = 'YN'
     ADULT = 'SL'
-
-    # Add int fiel to put age in number
     AGE = (
         (YOUNG, 'Joven'),
         (ADULT, 'Adulto'),
@@ -348,6 +329,60 @@ class Bird(models.Model):
         (ORNAMENTAL, 'Ornamentales'),
     )
 
+    BOOLEAN = (
+        (YES, 'Si'),
+        (NO, 'No'),
+    )
+    question = models.OneToOneField(Question, default='')
+    type_animal = models.CharField(max_length=60)
+    zootechnical_purpose = models.CharField(max_length=30)
+    age = models.CharField(max_length=3, choices=AGE)
+    age_week = models.IntegerField()
+    age_month = models.IntegerField()
+    place = models.CharField(max_length=3, choices=CONFINEMENT)
+    quantity = models.IntegerField()
+    coexistence = models.CharField(max_length=3, choices=BOOLEAN)
+    origin_water = models.CharField(max_length=3, choices=DRINK)
+    morbidity = models.IntegerField()
+    mortality = models.IntegerField()
+    date_signs = models.IntegerField()
+    water = models.CharField(max_length=3, choices=DRINK)
+    eat = models.CharField(max_length=3, choices=FOOD)
+    vaccine = models.CharField(max_length=30)
+    defecation = models.CharField(max_length=3, choices=DEFECATION)
+    condition_corporal = models.CharField(max_length=30)
+    plumage = models.CharField(max_length=50)
+    condition_legs = models.CharField(max_length=3, choices=DEFECATION)
+    breathing_frequency = models.IntegerField()
+    dehydration = models.CharField(max_length=3, choices=BOOLEAN)
+    attitude = models.CharField(max_length=80)
+
+    def __str__(self):
+        return '%s' % self.id
+
+
+class wild(models.Model):
+
+    question = models.OneToOneField(Question, default='')
+    specie = models.CharField(max_length=30)
+    zootechnical = models.CharField(max_length=50)
+    ambiental_condition = models.CharField(max_length=80)
+    feeding = models.CharField(max_length=50)
+    background = models.CharField(max_length=50)
+    evolution_disease = models.CharField(max_length=50)
+    respiratory_rate = models.IntegerField()
+    temperature = models.DecimalField(max_digits=5, decimal_places=3)
+    capilar = models.IntegerField()
+    mucosal_color = models.CharField(max_length=30)
+    lymph_nodes = models.CharField(max_length=50)
+    ruminal = models.CharField(max_length=80)
+
+    def __str__(self):
+        return '%s' % self.id
+
+
+class Aquatic(models.Model):
+
     AQRUSTIC = 'RS'
     AQCEMENT = 'CM'
     AQGEOMEMBRANE = 'GM'
@@ -360,16 +395,6 @@ class Bird(models.Model):
         (AQGEOMEMBRANE, 'Geomembrana'),
         (AQFLOATINGCAGE, 'Jaula flotante'),
         (AQOTHER, 'Otro'),
-    )
-
-    AERATION = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
-    RECIRCULATION = (
-        (YES, 'Si'),
-        (NO, 'No'),
     )
 
     TURBINE = 'TR'
@@ -418,11 +443,6 @@ class Bird(models.Model):
         (FISHDARK, 'Obscuro'),
     )
 
-    LACKAPPETITE = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
     PELLET = 'PL'
     FLAKE = 'FL'
     LIVE = 'LV'
@@ -440,108 +460,22 @@ class Bird(models.Model):
         (FISHDARK, 'Obscuro'),
     )
 
-    BULGING_BELLY = (
+    YES = 'YS'
+    NO = 'NO'
+
+    BOOLEAN = (
         (YES, 'Si'),
         (NO, 'No'),
     )
-
-    EXOPHTALMIA = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
-    PETECHIA = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
-    # Aletas
-    FIN = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
-    ULCERS = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
-    SORES = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
-    COTTON_STRUCTURE = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
-    NECROSIS = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-
-    EYE_OPACITY = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
-    question = models.OneToOneField(Question, default='')
-    type_animal = models.CharField(max_length=60)
-    zootechnical_purpose = models.CharField(max_length=30)
-    age = models.CharField(max_length=3)
-    age_week = models.IntegerField()
-    age_month = models.IntegerField()
-    place = models.CharField(max_length=60)
-    quantity = models.IntegerField()
-    coexistence = models.BooleanField()
-    origin_water = models.BooleanField()
-    morbidity = models.IntegerField()
-    mortality = models.IntegerField()
-    date_signs = models.IntegerField()
-    water = models.BooleanField()
-    eat = models.BooleanField()
-    vaccine = models.CharField(max_length=30)
-    defecation = models.CharField(max_length=3)
-    condition_corporal = models.CharField(max_length=30)
-    plumage = models.CharField(max_length=50)
-    condition_legs = models.CharField(max_length=3)
-    breathing_frequency = models.IntegerField()
-    dehydration = models.BooleanField()
-    attitude = models.CharField(max_length=80)
-
-    def __str__(self):
-        return '%s' % self.id
-
-
-class wild(models.Model):
-    question = models.OneToOneField(Question, default='')
-    specie = models.CharField(max_length=30)
-    zootechnical = models.CharField(max_length=50)
-    ambiental_condition = models.CharField(max_length=80)
-    feeding = models.CharField(max_length=50)
-    background = models.CharField(max_length=50)
-    evolution_disease = models.CharField(max_length=50)
-    respiratory_rate = models.IntegerField()
-    temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    capilar = models.IntegerField()
-    mucosal_color = models.CharField(max_length=30)
-    lymph_nodes = models.CharField(max_length=50)
-    ruminal = models.CharField(max_length=80)
-
-    def __str__(self):
-        return '%s' % self.id
-
-
-class aquatic(models.Model):
     question = models.OneToOneField(Question, default='')
     zootechnical = models.CharField(max_length=50)
     age = models.IntegerField()
     weight = models.IntegerField()
-    pond = models.CharField(max_length=3)
+    pond = models.CharField(max_length=3, choices=POND)
     density = models.IntegerField()
     biomass = models.IntegerField()
-    aeration = models.CharField(max_length=3)
-    recirculation_water = models.BooleanField()
+    aeration = models.CharField(max_length=3, choices=AEREATOR)
+    recirculation_water = models.CharField(max_length=3, choices=BOOLEAN)
     change_water = models.PositiveIntegerField()
     date_sowing = models.CharField(max_length=50)
     temperature_6am = models.IntegerField()
@@ -556,22 +490,22 @@ class aquatic(models.Model):
     transparency = models.IntegerField()
     mortality = models.IntegerField()
     start_mortality = models.DateField()
-    position = models.CharField(max_length=3)
-    body_color = models.CharField(max_length=3)
-    moves = models.CharField(max_length=3)
+    position = models.CharField(max_length=3, choices=COLUMNPOSITION)
+    body_color = models.CharField(max_length=3, choices=FISHPOPULATIONCOLOR)
+    moves = models.CharField(max_length=3, choices=FISHMOVEMENT)
     lack_of_appetite = models.BooleanField()
-    type_eat = models.CharField(max_length=3)
+    type_eat = models.CharField(max_length=3, choices=FOODTYPE)
     eat_for_day = models.CharField(max_length=80)
-    coloration = models.CharField(max_length=3)
-    Bulging_belly = models.BooleanField()
-    Exophthalmia = models.BooleanField()
-    Petechia = models.BooleanField()
-    Dilated = models.BooleanField()
-    Ulcers = models.BooleanField()
-    Skin_sores = models.BooleanField()
-    Cotton_structures = models.BooleanField()
-    Necrosis_epidermal_layer = models.BooleanField()
-    Ocular_opacity = models.BooleanField()
+    coloration = models.CharField(max_length=3, choices=FISHCOLOR)
+    Bulging_belly = models.CharField(max_length=3, choices=BOOLEAN)
+    Exophthalmia = models.CharField(max_length=3, choices=BOOLEAN)
+    Petechia = models.CharField(max_length=3, choices=BOOLEAN)
+    Dilated = models.CharField(max_length=3, choices=BOOLEAN)
+    Ulcers = models.CharField(max_length=3, choices=BOOLEAN)
+    Skin_sores = models.CharField(max_length=3, choices=BOOLEAN)
+    Cotton_structures = models.CharField(max_length=3, choices=BOOLEAN)
+    Necrosis_epidermal_layer = models.CharField(max_length=3, choices=BOOLEAN)
+    Ocular_opacity = models.CharField(max_length=3, choices=BOOLEAN)
 
     def __str__(self):
         return '%s' % self.id

@@ -4,8 +4,10 @@ from django.utils.translation import ugettext as _
 
 
 class User(AbstractUser):
+    DEFAULT_USER = 1
 
-    TEACHER= 'TC'
+
+    TEACHER = 'TC'
     STUDENT = 'ST'
     ADMINISTRATOR = 'AD'
 
