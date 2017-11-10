@@ -42,9 +42,9 @@ def index(request):
     return render(request, template, context)
 
 
-def pregunta(request):
+def pregunta(request, id=None):
     template = 'question.html'
-    instance = get_object_or_404(Question,id='1')
+    instance = get_object_or_404(Question,id=id)
 
     context = {       
         'titulo': instance.title,
