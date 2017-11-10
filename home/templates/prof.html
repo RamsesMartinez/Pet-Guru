@@ -17,11 +17,11 @@
     <div class="row foroContainer">
       <main id="foroMain" class="col-12 pt-3">
         <div class="jumbotron">
-          <h3 class="text-center text-uppercase pb-4">Información de: {{ user }}</h3>
+          <h3 class="text-center text-uppercase pb-4">Bienvenido {{ user }}</h3>
           <div class="row container-fluid m-auto p-0">
             <div class="Dashboard col d-flex flex-wrap">
               <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
-                <h3 class=" mb-3">Mís preguntas:</h3>
+                <h3 class=" mb-3">Resueltas:</h3>
                 <div id="userQuestions" class="col questContainer">
                   <p><a href="single-question.html">Agenesia anal en terneros</a></p>
                   <p><a href="single-cabra.html">Sarna en ganado ovino</a></p>
@@ -30,69 +30,15 @@
                 </div>
               </div>
               <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
-                <h3 class=" mb-3">Mís chats:</h3>
+                <h3 class=" mb-3">Chats:</h3>
                 <div id="userChats" class="col questContainer">
                   <p class="question">Chat No. #</p>
                 </div>
               </div>
               <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
-                <h3 class="mb-2">Búsqueda</h3>
-                <div id="userFilters" class="col questContainer">
-                  <p class="question">Filtros...</p>
-                  <p class="question">Filtros...</p>
-                  <p class="question">Filtros...</p>
-                  <p class="question">Filtros...</p>
-                  <p class="question">Filtros...</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr class="my-4">
-          <div class="row d-flex justify-content-center">
-            <div class="col-12 text-center">
-              <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Realiza una pregunta
-              </a>
-            </div>
-            <div class="collapse" id="collapseExample">
-              <div class="card card-body speciesMenu">
-                <h5 class="text-center">Elige un espécimen</h5>
-                <div class="animals m-auto d-flex flex-row flex-wrap">
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Bovino">
-                    <a data-toggle="modal" data-target="#vacaModal"><img src="../static/images/animal/vaca.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Porcino">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#cerdoModal"><img src="../static/images/animal/cerdo.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Equino">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#caballoModal"><img src="../static/images/animal/caballo.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ovino">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#ovejaModal"><img src="../static/images/animal/oveja.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Goat">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#cabraModal"><img src="../static/images/animal/cabra.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Lepórido">
-                    <a data-toggle="modal" data-dismiss="modal" data-target="#conejoModal"><img src="../static/images/animal/conejo.png" alt="animal icon"></a>
-                  </div>
-                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Aves">
-                   <a data-toggle="modal" data-dismiss="modal" data-target="#avesModal"><img src="../static/images/animal/pato.png" alt="animal icon"></a>
-                 </div>
-                 <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Canino">
-                  <a data-toggle="modal" data-dismiss="modal" data-target="#perroModal"><img src="../static/images/animal/perro.png" alt="animal icon"></a>
-                </div>
-                <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Felino">
-                  <a data-toggle="modal" data-dismiss="modal" data-target="#gatoModal"><img src="../static/images/animal/gato.png" alt="animal icon"></a>
-                </div>
-                <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Fauna silvestre">
-                  <a data-toggle="modal" data-dismiss="modal" data-target="#silvestreModal"><img src="../static/images/animal/fauna.png" alt="animal icon"></a>
-                </div>
-                <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Organismos acuaticos">
-                  <a data-toggle="modal" data-dismiss="modal" data-target="#acuaticModal"><img src="../static/images/animal/pez.png" alt="animal icon"></a>
-                </div>
-                <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Abejas">
-                  <a data-toggle="modal" data-dismiss="modal" data-target="#abejaModal"><img src="../static/images/animal/abeja.png" alt="animal icon"></a>
+                <h3 class="mb-2">Calificación</h3>
+                <div id="califContainer" class="col d-flex flex-column justify-content-center">
+                  <p class="calif">4.7</p>
                 </div>
               </div>
             </div>

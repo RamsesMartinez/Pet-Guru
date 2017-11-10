@@ -243,6 +243,10 @@ a.unam-dark:hover {
   height: 150px;
   overflow-y: scroll; }
 
+p.calif {
+  font-size: 40px;
+  font-weight: bold; }
+
 @media screen and (min-width: 550px) {
   .logIn {
     max-width: 20rem; } }
