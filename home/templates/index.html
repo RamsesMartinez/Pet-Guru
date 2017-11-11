@@ -10,7 +10,7 @@
   </header>
   <div class="container-fuid">
     <div id="mainBanner" class="d-flex justify-content-around align-items-center">
-      <img src="../static/images/logo.png" alt="Pet Gurú">
+      <img src="{% static 'images/logo.png' %}" alt="Pet Gurú">
       <p class="bannerText lead mx-2 text-center">Sistéma de apoyo para los alumnos de la Facultad de Medicina Veterinaria y Zootecnia.</p>
     </div>
     <div class="row foroContainer">
@@ -85,7 +85,7 @@
           <div class="card">
             <div class="card-body">
               <div class="card-title card-banner">
-                <img src="../static/images/questions/thumb3.jpg" class="img-fluid" alt="Question image">
+                <img src="{% static 'images/questions/thumb3.jpg' %}" class="img-fluid" alt="Question image">
               </div>
               <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
               <p class="card-text">{{ article.specie.race }}</p>
