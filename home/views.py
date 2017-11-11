@@ -7,7 +7,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.generic import CreateView
 
 from django.http import HttpResponse
-from .models import Question, Bovine
+from .models import Question, ImageQuestion
 from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
 from .forms import RabbitForm, BirdForm, DogForm, CatForm, WildForm, AquaticForm, BeeForm
 # Create your views here.
@@ -45,8 +45,9 @@ def index(request):
 def pregunta(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
-
-    context = {       
+    image = ImageQuestion.objects.filter(id_question=instance.id)
+    context = {
+        'images': image,
         'titulo': instance.title,
         'instance': instance,
     }
@@ -151,3 +152,5 @@ def user(request):
         }
 
         return render(request, template, context)
+    elif request.user.rol == 'AD':
+        return redirect('admin:login')
