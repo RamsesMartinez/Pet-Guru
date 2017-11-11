@@ -42,6 +42,9 @@
       <p class="questionSingle">
         Las clínicas veterinarias más completas ofrecen a sus clientes la posibilidad de hacer análisis de sangre, más que nada cuando ya son ancianos, porque de esta manera se pueden detectar enfermedades del riñón y del hígado. La diabetes y problemas de tiroides también son diagnosticados mediante análisis de sangre.
       </p>
+        {% if  request.user.rol == 'TC' and instance.status == 'OP' %}
+        <button type="button" class="btn btn-primary">Responder</button>
+        {% endif %}
     </div>
   </div>
   {% endblock %}

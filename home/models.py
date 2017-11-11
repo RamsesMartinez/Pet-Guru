@@ -7,9 +7,18 @@ from users.models import User
 
 
 class Question(models.Model):
+    OPEN = 'OP'
+    CLOSE = 'CL'
+    RESPONDING = 'RP'
+
+    STATUS = (
+        (OPEN, 'Abierta'),
+        (CLOSE, 'Cerrada'),
+        (RESPONDING, 'Respondiendo'),
+    )
     title = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True)
-    status = models.CharField(max_length=3, null=True)
+    status = models.CharField(max_length=2, null=True, choices=STATUS, default='OP')
     user_question = models.ForeignKey(User, related_name='student_question', default=User.DEFAULT_USER)
     user_response = models.ForeignKey(User, related_name='teacher_question', default=User.DEFAULT_USER)
     calification = models.PositiveSmallIntegerField(default=0)

@@ -44,7 +44,7 @@ def index(request):
 
 def pregunta(request, id=None):
     template = 'question.html'
-    instance = get_object_or_404(Question,id=id)
+    instance = get_object_or_404(Question, id=id)
 
     context = {       
         'titulo': instance.title,
@@ -78,83 +78,76 @@ def logout(request):
 
 @login_required(login_url='home:inicio')
 def user(request):
-    template = 'user.html'
-    User = None 
-    Mineposts = Question.objects.filter(user_question=User)
-    articles = Question.objects.all()
+    if request.user.rol == 'ST':
+        template = 'user.html'
+        User = None
+        Mineposts = Question.objects.filter(user_question=request.user.pk)
+        articles = Question.objects.all()
 
-    if request.user.is_authenticated():
-        User = request.user.username
+        if request.user.is_authenticated():
+            User = request.user.username
 
-    base_form = BaseForm(request.POST or None)
-    cow_form = CowForm(request.POST or None)
-    porcine_form = PorcineForm(request.POST or None)
-    horse_form = HorseForm(request.POST or None)
-    goat_form = GoatForm(request.POST or None)
-    ovine_form = OvineForm(request.POST or None)
-    rabbit_form = RabbitForm(request.POST or None)
-    bird_form = BirdForm(request.POST or None)
-    dog_form = DogForm(request.POST or None)
-    cat_form = CatForm(request.POST or None)
-    wild_form = WildForm(request.POST or None)
-    aquatic_form = AquaticForm(request.POST or None)
-    bee_form = BeeForm(request.POST or None)
-
-
-    if request.method == 'POST':
-        if base_form.is_valid():
-            print(base_form)
-            base_form.save()
-            if cow_form.is_valid():
-                print(cow_form)
-                cow_form.save()
-                return redirect ('home:usuario')
-
-    context = {       
-        'title': "Bienvenido "+User,
-        'user': User,
-        'mineposts': Mineposts,
-        'articles':articles,
-        'baseForm': base_form,
-        'cow_form': cow_form,
-        'porcine_form': porcine_form,
-        'horse_form': horse_form,
-        'goat_form': goat_form,
-        'ovine_form': ovine_form,
-        'rabbit_form': rabbit_form,
-        'bird_form': bird_form,
-        'dog_form': dog_form,
-        'cat_form': cat_form,
-        'wild_form': wild_form,
-        'aquatic_form': aquatic_form,
-        'bee_form': bee_form,
-    }
-
-    return render(request, template, context)
+        base_form = BaseForm(request.POST or None)
+        cow_form = CowForm(request.POST or None)
+        porcine_form = PorcineForm(request.POST or None)
+        horse_form = HorseForm(request.POST or None)
+        goat_form = GoatForm(request.POST or None)
+        ovine_form = OvineForm(request.POST or None)
+        rabbit_form = RabbitForm(request.POST or None)
+        bird_form = BirdForm(request.POST or None)
+        dog_form = DogForm(request.POST or None)
+        cat_form = CatForm(request.POST or None)
+        wild_form = WildForm(request.POST or None)
+        aquatic_form = AquaticForm(request.POST or None)
+        bee_form = BeeForm(request.POST or None)
 
 
+        if request.method == 'POST':
+            if base_form.is_valid():
+                print(base_form)
+                base_form.save()
+                if cow_form.is_valid():
+                    print(cow_form)
+                    cow_form.save()
+                    return redirect ('home:usuario')
 
-@login_required(login_url='home:inicio')
-def profesor(request):
-    template = 'prof.html'
-    User = None 
+        context = {
+            'title': "Bienvenido "+User,
+            'user': User,
+            'mineposts': Mineposts,
+            'articles':articles,
+            'baseForm': base_form,
+            'cow_form': cow_form,
+            'porcine_form': porcine_form,
+            'horse_form': horse_form,
+            'goat_form': goat_form,
+            'ovine_form': ovine_form,
+            'rabbit_form': rabbit_form,
+            'bird_form': bird_form,
+            'dog_form': dog_form,
+            'cat_form': cat_form,
+            'wild_form': wild_form,
+            'aquatic_form': aquatic_form,
+            'bee_form': bee_form,
+        }
 
-    if request.user.is_authenticated():
-        User = request.user.username
+        return render(request, template, context)
+    elif request.user.rol == 'TC':
+        template = 'prof.html'
+        if request.method == 'POST':
+            if base_form.is_valid():
+                print(base_form)
+                base_form.save()
+                if cow_form.is_valid():
+                    print(cow_form)
+                    cow_form.save()
+                    return redirect('home:usuario')
+        solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
+        article = Question.objects.filter(status='OP')
+        context = {
+            'title': "Profesional " + request.user.username,
+            'solveds': solved,
+            'articles': article,
+        }
 
-
-    if request.method == 'POST':
-        if base_form.is_valid():
-            print(base_form)
-            base_form.save()
-            if cow_form.is_valid():
-                print(cow_form)
-                cow_form.save()
-                return redirect ('home:usuario')
-
-    context = {       
-        'title': "Profesional "+User,
-        'user': User,
-    }
-
-    return render(request, template, context)
+        return render(request, template, context)

@@ -24,7 +24,7 @@
                 <div id="userQuestions" class="col questContainer">
 
                   {% for mine in mineposts %}
-                    <p><a href="{{ mineposts.get_absolute_url }}">{{ mineposts.title }}</a></p>
+                    <p><a href="{{ mine.get_absolute_url }}">{{ mine.title }}</a></p>
                   {% endfor %}
 
                 </div>
