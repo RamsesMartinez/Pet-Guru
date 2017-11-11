@@ -19,7 +19,12 @@ class User(AbstractUser):
 
     rol = models.CharField(max_length=3, choices=ROL)
     speciality = models.CharField(max_length=3)
+    avg = models.PositiveSmallIntegerField(default=5)
 
+
+    def get_avg(self):
+        all_califications = Question.objects.filter(user_response=self.pk)
+        return 0
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
