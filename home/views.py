@@ -45,7 +45,6 @@ def index(request):
 def pregunta(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
-
     context = {       
         'titulo': instance.title,
         'instance': instance,
