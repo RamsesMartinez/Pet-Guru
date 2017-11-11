@@ -133,8 +133,10 @@ users/migrations/*
 # Django settings
 staticfiles/
 #Database
+questions/
 media/
 # Databases
 *.sqlite3
 .Rproj.user
 .Rhistory
+
