@@ -1,6 +1,4 @@
 {% extends 'base/base.html' %}
-
-
 {% block content %}
 <div class="pageContainer">
   <header class="unam-primary sticky-top">
@@ -69,7 +67,7 @@
                     <input type="submit" class="btnSubmit btn col s12 nav-link unam-primary text-white text-center" value="Ingresar">
                   </form>
                   {% if message %}
-                    <p>{{ message }}</p>
+                  <p>{{ message }}</p>
                   {% endif %}
                 </div>
               </div>
@@ -82,36 +80,21 @@
         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae earum molestiae quae, ratione est ducimus.</p>
         <hr class="my-4">
         <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
+          
+          {% for article in articles %}
           <div class="card">
             <div class="card-body">
               <div class="card-title card-banner">
-                <img src="../static/images/banner.jpg" class="img-fluid" alt="Question image">
+                <img src="../static/images/questions/thumb3.jpg" class="img-fluid" alt="Question image">
               </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">Pregunta corta</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis odio illo dolores fugiat ipsa odit explicabo impedit, eaque temporibus minima.</p>
-              <a href="{% url 'home:single-question' %}" class="card-link">Leer más</a>
+              <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
+              <p class="card-text">{{ article.specie.race }}</p>
+              <p class="card-text">{{ article.description }}</p>
+              <a href="{{ article.get_absolute_url }}" class="card-link">Leer más</a>
             </div>
           </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title card-banner">
-                <img src="../static/images/banner.jpg" class="img-fluid" alt="Question image">
-              </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">Pregunta corta</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis odio illo dolores fugiat ipsa odit explicabo impedit, eaque temporibus minima.</p>
-              <a href="{% url 'home:single-question' %}" class="card-link">Leer más</a>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title card-banner">
-                <img src="../static/images/banner.jpg" class="img-fluid" alt="Question image">
-              </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">Pregunta corta</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis odio illo dolores fugiat ipsa odit explicabo impedit, eaque temporibus minima.</p>
-              <a href="{% url 'home:single-question' %}" class="card-link">Leer más</a>
-            </div>
-          </div>
+          {% endfor %}
+
         </div>
       </div>
     </main>

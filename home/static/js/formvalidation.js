@@ -1410,3 +1410,260 @@ function changewildruminal() {
     wildage.value="";
   }
 }
+
+
+
+// Aquatic organism form validation
+function aqchangegene() {
+  var aqgene = document.getElementById('aqgenetic');
+  var aqgenecheck = document.getElementById('aqgenec');
+  if (aqgenecheck.checked) {
+    aqgene.value="Sin datos";
+  }
+  else {
+    aqgene.value="";
+  }
+}
+function aqchangezoo() {
+  var catzoo = document.getElementById('aqzoo');
+  var aqzoocheck = document.getElementById('aqzooc');
+  if (aqzoocheck.checked) {
+    aqzoo.value="Sin datos";
+  }
+  else {
+    aqzoo.value="";
+  }
+}
+function aqchangeage() {
+  var aqage = document.getElementById('aqage');
+  var aqagecheck = document.getElementById('aqagec');
+  if (aqagecheck.checked) {
+    aqage.value="0000";
+  }
+  else {
+    aqage.value="";
+  }
+}
+function aqchangeweight() {
+  var aqweight = document.getElementById('aqweight');
+  var aqweightcheck = document.getElementById('aqweightc');
+  if (aqweightcheck.checked) {
+    aqweight.value="0000";
+  }
+  else {
+    aqweight.value="";
+  }
+}
+function aqchangedensity() {
+  var aqdensity = document.getElementById('aqdensity');
+  var aqdensitycheck = document.getElementById('aqdensityc');
+  if (aqdensitycheck.checked) {
+    aqdensity.value="0000";
+  }
+  else {
+    aqdensity.value="";
+  }
+}
+function aqchangebiomass() {
+  var aqbiomass = document.getElementById('aqbiomass');
+  var aqbiomasscheck = document.getElementById('aqbiomassc');
+  if (aqbiomasscheck.checked) {
+    aqbiomass.value="0000";
+  }
+  else {
+    aqbiomass.value="";
+  }
+}
+function aqchangechange() {
+  var aqchange = document.getElementById('aqchange');
+  var aqchangecheck = document.getElementById('aqchangec');
+  if (aqchangecheck.checked) {
+    aqchange.value="0000";
+  }
+  else {
+    aqchange.value="";
+  }
+}
+function aqchangesowing() {
+  var aqsowing = document.getElementById('aqsowing');
+  var aqsowingcheck = document.getElementById('aqsowingc');
+  if (aqsowingcheck.checked) {
+    aqsowing.value="Sin datos";
+  }
+  else {
+    aqsowing.value="";
+  }
+}
+function aqchangetemp6() {
+  var aqtemp6 = document.getElementById('aq6am');
+  var aqtemp6check = document.getElementById('aqtemp6c');
+  if (aqtemp6check.checked) {
+    aqtemp6.value="0000";
+  }
+  else {
+    aqtemp6.value="";
+  }
+}
+function aqchangetemp3() {
+  var aqtemp3 = document.getElementById('aq3pm');
+  var aqtemp3check = document.getElementById('aqtemp3c');
+  if (aqtemp3check.checked) {
+    aqtemp3.value="0000";
+  }
+  else {
+    aqtemp3.value="";
+  }
+}
+function aqchangeox6() {
+  var aqox6 = document.getElementById('aqox6');
+  var aqox6check = document.getElementById('aqox6c');
+  if (aqox6check.checked) {
+    aqox6.value="0000";
+  }
+  else {
+    aqox6.value="";
+  }
+}
+function aqchangeox3() {
+  var aqox3 = document.getElementById('aqox3');
+  var aqox3check = document.getElementById('aqox3c');
+  if (aqox3check.checked) {
+    aqox3.value="0000";
+  }
+  else {
+    aqox3.value="";
+  }
+}
+function aqchangeph6() {
+  var aqph6 = document.getElementById('aqph6');
+  var aqph6check = document.getElementById('aqph6c');
+  if (aqph6check.checked) {
+    aqph6.value="0000";
+  }
+  else {
+    aqph6.value="";
+  }
+}
+function aqchangeph3() {
+  var aqph3 = document.getElementById('aqph3');
+  var aqph3check = document.getElementById('aqph3c');
+  if (aqph3check.checked) {
+    aqph3.value="0000";
+  }
+  else {
+    aqph3.value="";
+  }
+}
+function aqchangetransp() {
+  var aqtransp = document.getElementById('aqtransp');
+  var aqtranspcheck = document.getElementById('aqtranspc');
+  if (aqtranspcheck.checked) {
+    aqtransp.value="0000";
+  }
+  else {
+    aqtransp.value="";
+  }
+}
+function aqchangemort() {
+  var aqmort = document.getElementById('aqmort');
+  var aqmortcheck = document.getElementById('aqmortc');
+  if (aqmortcheck.checked) {
+    aqmort.value="0000";
+  }
+  else {
+    aqmort.value="";
+  }
+}
+function aqchangestr() {
+  var aqstr = document.getElementById('aqstr');
+  var aqstrcheck = document.getElementById('aqstrc');
+  if (aqstrcheck.checked) {
+    aqstr.value="0000";
+  }
+  else {
+    aqstr.value="";
+  }
+}
+
+
+// Bee form validation
+function beechangespecie() {
+  var hrspecie = document.getElementById('beespecie');
+  var hrspeciecheck = document.getElementById('beespeciec');
+  if (hrspeciecheck.checked) {
+    hrspecie.value="Sin datos";
+  }
+  else {
+    hrspecie.value="";
+  }
+}
+function beechangeback() {
+  var hrback = document.getElementById('beeback');
+  var hrbackcheck = document.getElementById('beebackc');
+  if (hrbackcheck.checked) {
+    hrback.value="0000";
+  }
+  else {
+    hrback.value="";
+  }
+}
+function beechangecell() {
+  var hrcell = document.getElementById('beecell');
+  var hrcellcheck = document.getElementById('beecellc');
+  if (hrcellcheck.checked) {
+    hrcell.value="Sin datos";
+  }
+  else {
+    hrcell.value="";
+  }
+}
+function beechangebckbreed() {
+  var hrbckbreed = document.getElementById('beebckbreed');
+  var hrbckbreedcheck = document.getElementById('beebckbreedc');
+  if (hrbckbreedcheck.checked) {
+    hrbckbreed.value="0000";
+  }
+  else {
+    hrbckbreed.value="";
+  }
+}
+function beechangeegg() {
+  var hregg = document.getElementById('beeegg');
+  var hreggcheck = document.getElementById('beeeggc');
+  if (hreggcheck.checked) {
+    hregg.value="0000";
+  }
+  else {
+    hregg.value="";
+  }
+}
+function beechangequant() {
+  var hrquant = document.getElementById('beequant');
+  var hrquantcheck = document.getElementById('beequantc');
+  if (hrquantcheck.checked) {
+    hrquant.value="0000";
+  }
+  else {
+    hrquant.value="";
+  }
+}
+function beechangeobs() {
+  var hrobs = document.getElementById('beeobs');
+  var hrobscheck = document.getElementById('beeobsc');
+  if (hrobscheck.checked) {
+    hrobs.value="Sin datos";
+  }
+  else {
+    hrobs.value="";
+  }
+}
+function beechangerack() {
+  var hrrack = document.getElementById('beerack');
+  var hrrackcheck = document.getElementById('beerackc');
+  if (hrrackcheck.checked) {
+    hrrack.value="0000";
+  }
+  else {
+    hrrack.value="";
+  }
+}

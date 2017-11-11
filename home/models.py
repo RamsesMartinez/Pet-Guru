@@ -1,6 +1,7 @@
 from django.db import models
 from decimal import Decimal, DecimalException
 from django.core.validators import MinValueValidator
+from django.core.urlresolvers import reverse
 from . import options
 from users.models import User
 
@@ -16,6 +17,9 @@ class Question(models.Model):
 
     def __str__(self):
         return '%s' % self.title
+
+    def get_absolute_url(self):
+        return reverse("home:pregunta", kwargs={'id':self.id})
 
 
 class ImageQuestion(models.Model):
@@ -344,7 +348,7 @@ class Bird(models.Model):
     place = models.CharField(max_length=3, choices=CONFINEMENT)
     quantity = models.IntegerField()
     coexistence = models.CharField(max_length=3, choices=BOOLEAN)
-    origin_water = models.CharField(max_length=3, choices=DRINK)
+    origin_water = models.CharField(max_length=30)
     morbidity = models.IntegerField()
     mortality = models.IntegerField()
     date_signs = models.IntegerField()
