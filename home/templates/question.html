@@ -1,6 +1,5 @@
 {% extends 'base/base.html' %}
 {% load static %}
-
 {% block content %}
 <div class="pageContainer">
   <header class="unam-primary sticky-top">
@@ -14,17 +13,17 @@
     <h2 class="py-3 text-center">{{ titulo }}</h2>
     <div id="galleryContainer">
       <div id="gallery" style="display:none;">
-        <img alt="Image 1 Title" src="../static/images/questions/thumb1.jpg"
-        data-image="../static/images/questions/thumb1.jpg"
+        <img alt="Image 1 Title" src="{% static 'images/questions/thumb1.jpg' %}"
+        data-image="{% static 'images/questions/thumb1.jpg' %}"
         data-description="Image 1 Description">
-        <img alt="Image 2 Title" src="../static/images/questions/thumb2.jpg"
-        data-image="../static/images/questions/thumb2.jpg"
+        <img alt="Image 2 Title" src="{% static 'images/questions/thumb2.jpg' %}"
+        data-image="{% static 'images/questions/thumb2.jpg' %}"
         data-description="Image 2 Description">
-        <img alt="Image 3 Title" src="../static/images/questions/thumb3.jpg"
-        data-image="../static/images/questions/thumb3.jpg"
+        <img alt="Image 3 Title" src="{% static 'images/questions/thumb3.jpg' %}"
+        data-image="{% static 'images/questions/thumb3.jpg' %}"
         data-description="Image 3 Description">
-        <img alt="Image 4 Title" src="../static/images/questions/thumb4.jpg"
-        data-image="../static/images/questions/thumb4.jpg"
+        <img alt="Image 4 Title" src="{% static 'images/questions/thumb4.jpg' %}"
+        data-image="{% static 'images/questions/thumb4.jpg' %}"
         data-description="Image 4 Description">
       </div>
     </div>
