@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 
+
 class User(AbstractUser):
     DEFAULT_USER = 1
 
@@ -17,14 +18,10 @@ class User(AbstractUser):
         (ADMINISTRATOR, 'Administrador'),
     )
 
-    rol = models.CharField(max_length=3, choices=ROL)
+    rol = models.CharField(max_length=3, choices=ROL, default='ST')
     speciality = models.CharField(max_length=3)
-    avg = models.PositiveSmallIntegerField(default=5)
+    #avg = models.PositiveSmallIntegerField(default=5)
 
-
-    def get_avg(self):
-        all_califications = Question.objects.filter(user_response=self.pk)
-        return 0
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'

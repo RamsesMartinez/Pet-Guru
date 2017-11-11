@@ -13,16 +13,19 @@ class BaseForm(forms.ModelForm):
       super(BaseForm, self).__init__(*args, **kwargs)
       self.fields['title'].widget.attrs.update({'class':'form-control'})
       self.fields['description'].widget.attrs.update({'class':'form-control'})
-   
+      self.fields['user_question'].widget.attrs.update({'class':'hidden'})
+
     class Meta:
         model = Question
         fields = (
           'title',
           'description',
+          'user_question',
           )
         labels = {
           'title': 'Título de la consulta: ',
           'description': 'Descripción de la consulta: ',
+          'user_question':'Usuario',
           }
 
 

@@ -1,8 +1,9 @@
 from home.models import Question
 
-class userHelper(object):
+
+class UserHelper(object):
     def __init__(self):
-        super(userHelper, self).__init__()
+        super(UserHelper, self).__init__()
         self.__all_questions = None
         self.__avg = None
 
@@ -10,6 +11,7 @@ class userHelper(object):
         if self.__all_questions is None:
             self.set_all_questions(pk_user)
         return self.__all_questions
+
     def set_all_questions(self, pk_user):
         self.__all_questions = Question.objects.filter(user_response=pk_user)
 
@@ -17,6 +19,7 @@ class userHelper(object):
         if self.__avg is None:
             self.set_avg(pk_user)
         return self.__avg
+
     def set_avg(self, pk_user):
         questions = self.get_all_questions(pk_user)
         califications = []
