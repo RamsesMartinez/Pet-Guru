@@ -81,12 +81,8 @@ def logout(request):
 def user(request):
     if request.user.rol == 'ST':
         template = 'user.html'
-        User = None
         Mineposts = Question.objects.filter(user_question=request.user.pk)
         articles = Question.objects.all()
-
-        if request.user.is_authenticated():
-            User = request.user.username
 
         base_form = BaseForm(request.POST or None)
         cow_form = CowForm(request.POST or None)
@@ -113,8 +109,7 @@ def user(request):
                     return redirect ('home:usuario')
 
         context = {
-            'title': "Bienvenido "+User,
-            'user': User,
+            'title': "Bienvenido "+request.user.username,
             'mineposts': Mineposts,
             'articles':articles,
             'baseForm': base_form,
