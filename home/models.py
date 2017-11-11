@@ -267,7 +267,7 @@ class Bee(models.Model):
     backstage_bee = models.IntegerField()
     real_cell = models.CharField(max_length=50)
     backstage_breeding = models.IntegerField()
-    eggs = models.BooleanField()
+    eggs = models.NullBooleanField(null=True)
     quantity_eggs = models.IntegerField()
     observations = models.TextField()
     stool_spots = models.CharField(max_length=3, choices=PRESENT_T)
