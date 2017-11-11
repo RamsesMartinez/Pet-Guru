@@ -511,7 +511,7 @@ class Aquatic(models.Model):
     position = models.CharField(max_length=3, choices=COLUMNPOSITION)
     body_color = models.CharField(max_length=3, choices=FISHPOPULATIONCOLOR)
     moves = models.CharField(max_length=3, choices=FISHMOVEMENT)
-    lack_of_appetite = models.BooleanField()
+    lack_of_appetite = models.NullBooleanField(null=True)
     type_eat = models.CharField(max_length=3, choices=FOODTYPE)
     eat_for_day = models.CharField(max_length=80)
     coloration = models.CharField(max_length=3, choices=FISHCOLOR)
