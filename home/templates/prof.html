@@ -38,21 +38,7 @@
                   {% for solved in solveds %}
                   <p>
                     <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
-                    {% if request.solved.status == 'OP' %}
-                    <button type="button" class="btn btn-primary">
-                      <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
-                    </button>
-                    {% endif %}
-                    {% if request.solved.status == 'RP' %}
-                    <button type="button" class="btn btn-danger" disabled>
-                      <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
-                    </button>
-                    {% endif %}
-                    {% if request.solved.status == 'CL' %}
-                    <button type="button" class="btn btn-success">
-                      <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
-                    </button>
-                    {% endif %}
+                    <!-- Agregar botones -->
                   </p>
                   {% endfor %}
 
