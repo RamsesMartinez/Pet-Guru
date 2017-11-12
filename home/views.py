@@ -12,9 +12,12 @@ from django.views.generic import CreateView
 from .forms import *
 
 from .models import Question
+from .models import Specie
 from .models import ImageQuestion
 
 from users.models import User
+
+import django_filters
 
 
 def index(request):
@@ -149,3 +152,10 @@ class RegisterUser(CreateView):
     template_name = "user_register.html"
     form_class = RegisterForm
     success_url = reverse_lazy('home:usuario') 
+
+
+class filter(django_filters.FilterSet):
+    class Meta():
+        model = Specie
+        fields = ['specie']
+            

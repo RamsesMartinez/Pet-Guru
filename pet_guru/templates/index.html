@@ -22,10 +22,10 @@
               <h3>Búsqueda</h3>
 
               {% for article in articles %}
-              <a href=""><button type="button" class="btn btn-primary">
+              <button type="button" class="btn btn-primary" onclick="filter()">
                 {{ article.specie }} <span class="badge badge-light">9</span>
                 <span class="sr-only">Especies</span>
-              </button></a>
+              </button>
               {% endfor %}
 
             </div>
@@ -52,23 +52,7 @@
         <h1 class="h1">Artículos recientes</h1>
         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae earum molestiae quae, ratione est ducimus.</p>
         <hr class="my-4">
-        <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
-
-          {% for article in articles %}
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title card-banner">
-                <img src="{% static 'images/questions/thumb3.jpg' %}" class="img-fluid" alt="Question image">
-              </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
-              <p class="card-text">{{ article.specie.race }}</p>
-              <p class="card-text">{{ article.description }}</p>
-              <a href="{{ article.get_absolute_url }}" class="card-link">Leer más</a>
-            </div>
-          </div>
-          {% endfor %}
-
-        </div>
+        {% include 'article.html' %}
       </div>
     </main>
   </div>
