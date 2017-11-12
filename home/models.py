@@ -61,6 +61,7 @@ class Specie(models.Model):
     SILVESTRE = 'SL'
     ABEJA = 'BJ'
 
+
     SPECIES = (
       (BOVINO, 'Bovino'),
       (PORCINO, 'Porcino'),
@@ -74,6 +75,21 @@ class Specie(models.Model):
       (SILVESTRE, 'Silvestre'),
       (ABEJA, 'Abeja'),
       )
+
+    SPECIES_NUM = {
+        BOVINO: 'Bovino',
+        PORCINO: 'Porcino',
+        EQUINO: 'Equino',
+        OVINO: 'Ovino',
+        CAPRINO: 'Caprino',
+        LEPORIDO: 'Lepórido',
+        AVE: 'Ave',
+        CANINO: 'Canino',
+        FELINO: 'Felino',
+        SILVESTRE: 'Silvestre',
+        ABEJA: 'Abeja',
+    }
+
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=10,choices=SPECIES)
     race = models.CharField(max_length=20, null=False)
@@ -82,7 +98,7 @@ class Specie(models.Model):
     weight = models.DecimalField(max_digits=5, decimal_places=3)
 
     def __str__(self):
-        return '%s' % self.id
+        return '%s' % self.SPECIES_NUM[self.specie]
 
 
 class Bovine(Specie):

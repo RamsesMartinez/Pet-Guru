@@ -19,8 +19,7 @@ class User(AbstractUser):
     )
 
     rol = models.CharField(max_length=3, choices=ROL, default='ST')
-    speciality = models.CharField(max_length=3)
-    #avg = models.PositiveSmallIntegerField(default=5)
+    speciality = models.CharField(max_length=15)
 
 
     class Meta(AbstractUser.Meta):

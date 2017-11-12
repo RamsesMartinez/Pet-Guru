@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from .models import Question, ImageQuestion
 from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
 from .forms import RabbitForm, BirdForm, DogForm, CatForm, WildForm, AquaticForm, BeeForm
+from .forms import Register
 # Create your views here.
 
 
@@ -81,7 +82,7 @@ def logout(request):
 def user(request):
     if request.user.rol == 'ST':
         template = 'user.html'
-        Mineposts = Question.objects.filter(user_question=request.user.pk)
+        solved = Question.objects.filter(user_response=request.user.pk)
         articles = Question.objects.all()
 
         base_form = BaseForm(request.POST or None)
@@ -110,7 +111,7 @@ def user(request):
 
         context = {
             'title': "Bienvenido "+request.user.username,
-            'mineposts': Mineposts,
+            'solveds': solved,
             'articles':articles,
             'baseForm': base_form,
             'cow_form': cow_form,
@@ -149,3 +150,15 @@ def user(request):
         return render(request, template, context)
     elif request.user.rol == 'AD':
         return redirect('admin:login')
+
+
+def register(request):
+    template = 'user_register.html'
+    register_form = Register(request.POST or None)
+    
+    context = {
+    'title': 'Registro de usuarios',
+    'form': register_form,
+    }
+
+    return render(request, template, context)
