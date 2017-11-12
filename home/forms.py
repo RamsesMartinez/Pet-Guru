@@ -6,13 +6,12 @@ from .models import *
 from users.models import User
 
 
-class LoginForm(forms.Form):
-    usuario = forms.CharField(max_length=20)
-    contraseña = forms.CharField(max_length=20, widget = forms.PasswordInput())
+class LogInForm(forms.Form):
+    user = forms.CharField(max_length=20)
+    password = forms.CharField(max_length=20, widget=forms.PasswordInput())
 
 
 class RegisterForm(UserCreationForm):
-
     class Meta:
         model = User
         fields = (

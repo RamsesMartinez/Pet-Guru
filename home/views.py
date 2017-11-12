@@ -25,7 +25,7 @@ def index(request):
     message = None
     articles = Question.objects.all()
 
-    login_form = LoginForm(request.POST or None)
+    login_form = LogInForm(request.POST or None)
 
     if request.method == 'POST':
         user_log = request.POST['usuario']
