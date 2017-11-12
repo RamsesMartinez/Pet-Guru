@@ -149,3 +149,14 @@ def user(request):
         return render(request, template, context)
     elif request.user.rol == 'AD':
         return redirect('admin:login')
+
+
+def register(request):
+    template = 'user_register.html'
+    context = {
+        'images': image,
+        'titulo': instance.title,
+        'instance': instance,
+    }
+
+    return render(request, template, context)
