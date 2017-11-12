@@ -1,17 +1,16 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
-from django.http import JsonResponse, HttpResponse
-from django.views.generic import CreateView
 
-from django.http import HttpResponse
-from .models import Question, ImageQuestion
-from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
-from .forms import RabbitForm, BirdForm, DogForm, CatForm, WildForm, AquaticForm, BeeForm
-from .forms import Register
-# Create your views here.
+from django.shortcuts import render
+from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
+
+from .forms import *
+
+from .models import Question
+from .models import ImageQuestion
 
 
 def index(request):
@@ -21,24 +20,24 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
-    print(articles)
-    Login_form = Login(request.POST or None)
+    login_form = Login(request.POST or None)
     
     if request.method == 'POST':
-        userLog = request.POST['usuario']
-        passLog = request.POST['contraseña']
-        user = authenticate( username = userLog , password = passLog)
-        if user is not None:
-            login_django(request, user)
+        user_log = request.POST['usuario']
+        pass_log = request.POST['contraseña']
+        user_auth = authenticate(username=user_log, password=pass_log)
+
+        if user_auth is not None:
+            login_django(request, user_auth)
             return redirect('home:usuario')
         else:
             message = "Usuario o contraseña incorrectos."
 
     context = {
         'title': "PetGurú - Inicio",
-        'message' : message,
-        'articles':articles,
-        'form' : Login_form,
+        'message': message,
+        'articles': articles,
+        'form': login_form,
     }
     return render(request, template, context)
 
@@ -84,7 +83,6 @@ def user(request):
         template = 'user.html'
         Mineposts = Question.objects.filter(user_question=request.user.pk)
         articles = Question.objects.all()
-
         base_form = BaseForm(request.POST or None)
         cow_form = CowForm(request.POST or None)
         porcine_form = PorcineForm(request.POST or None)
@@ -99,13 +97,10 @@ def user(request):
         aquatic_form = AquaticForm(request.POST or None)
         bee_form = BeeForm(request.POST or None)
 
-
         if request.method == 'POST':
             if base_form.is_valid():
-                print(base_form)
                 base_form.save()
                 if cow_form.is_valid():
-                    print(cow_form)
                     cow_form.save()
                     return redirect ('home:usuario')
 
@@ -127,18 +122,10 @@ def user(request):
             'aquatic_form': aquatic_form,
             'bee_form': bee_form,
         }
-
         return render(request, template, context)
+
     elif request.user.rol == 'TC':
         template = 'prof.html'
-        if request.method == 'POST':
-            if base_form.is_valid():
-                print(base_form)
-                base_form.save()
-                if cow_form.is_valid():
-                    print(cow_form)
-                    cow_form.save()
-                    return redirect('home:usuario')
         solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
         article = Question.objects.filter(status='OP')
         context = {
@@ -146,8 +133,8 @@ def user(request):
             'solveds': solved,
             'articles': article,
         }
-
         return render(request, template, context)
+
     elif request.user.rol == 'AD':
         return redirect('admin:login')
 
@@ -157,8 +144,8 @@ def register(request):
     register_form = Register(request.POST or None)
     
     context = {
-    'title': 'Registro de usuarios',
-    'form': register_form,
+        'title': 'Registro de usuarios',
+        'form': register_form,
     }
 
     return render(request, template, context)
