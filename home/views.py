@@ -82,7 +82,7 @@ def logout(request):
 def user(request):
     if request.user.rol == 'ST':
         template = 'user.html'
-        Mineposts = Question.objects.filter(user_question=request.user.pk)
+        solved = Question.objects.filter(user_response=request.user.pk)
         articles = Question.objects.all()
 
         base_form = BaseForm(request.POST or None)
@@ -111,7 +111,7 @@ def user(request):
 
         context = {
             'title': "Bienvenido "+request.user.username,
-            'mineposts': Mineposts,
+            'solveds': solved,
             'articles':articles,
             'baseForm': base_form,
             'cow_form': cow_form,
