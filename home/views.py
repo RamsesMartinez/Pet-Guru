@@ -27,6 +27,9 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
+    # if request.method == 'GET':
+        # specie_filter = SpecieFilter(request.GET, queryset=articles)
+        # return render(request, 'article.html', {'filter': specie_filter})
 
     login_form = LogInForm(request.POST or None)
 
@@ -154,7 +157,7 @@ class RegisterUser(CreateView):
     success_url = reverse_lazy('home:usuario') 
 
 
-class filter(django_filters.FilterSet):
+class SpecieFilter(django_filters.FilterSet):
     class Meta():
         model = Specie
         fields = ['specie']
