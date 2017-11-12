@@ -97,8 +97,17 @@ class Specie(models.Model):
     gender = models.CharField(max_length=3, choices=SEX, default=MALE)
     weight = models.DecimalField(max_digits=5, decimal_places=3)
 
-    def __str__(self):
-        return '%s' % self.SPECIES_NUM[self.specie]
+    # def __str__(self):
+    #     return '%s' % self.SPECIES_NUM[self.specie]
+    def __iter__(self):
+        return [ 
+            self.question, 
+            self.specie, 
+            self.race, 
+            self.age, 
+            self.gender, 
+            self.weight, 
+        ]
 
 
 class Bovine(Specie):

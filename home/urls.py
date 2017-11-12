@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^pregunta/(?P<id>\d+)/$', views.question, name='pregunta'),
     url(r'^registro/$', RegisterUser.as_view(), name='register'),
     url(r'^logout/$', views.logout, name='logout'),
+    url(r'^buscar/$', views.search, name='buscar'),
 ]

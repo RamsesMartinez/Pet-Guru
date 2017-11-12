@@ -27,9 +27,7 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
-    # if request.method == 'GET':
-        # specie_filter = SpecieFilter(request.GET, queryset=articles)
-        # return render(request, 'article.html', {'filter': specie_filter})
+    f = SpecieFilter(request.GET, queryset=articles)
 
     login_form = LogInForm(request.POST or None)
 
@@ -49,6 +47,7 @@ def index(request):
         'message': message,
         'articles': articles,
         'form': login_form,
+        'filter': f,
     }
     return render(request, template, context)
 
@@ -161,4 +160,14 @@ class SpecieFilter(django_filters.FilterSet):
     class Meta():
         model = Specie
         fields = ['specie']
+        labels = {'specie': 'Especie',}
+
+
+def search(request):
+    articles = Question.objects.all()
+    f = SpecieFilter(request.GET, queryset=articles)
+    context = {
+    'filter_form': f,
+    }
+    return render(request, 'article.html', context)
             

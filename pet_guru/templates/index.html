@@ -22,9 +22,8 @@
               <h3>Búsqueda</h3>
 
               <form action="" method="get" accept-charset="utf-8">
-                <div class="form-group d-flex flex-column-reverse">
-                  <label for="{{ filter.form.specie.id_for_label }}">{{ filter.form.specie.label }}</label>
-                  {{ filter.form.specie.errors }}
+                <div class="form-group d-flex flex-column">
+                  <label for="{{ filter.form.specie.id_for_label }}"> Especie </label>
                   {{ filter.form.specie }}
                 </div>
                 <button type="submit" class="btn btn-primary">
@@ -57,7 +56,6 @@
         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae earum molestiae quae, ratione est ducimus.</p>
         <hr class="my-4">
         <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
-          {% if filter.qs %}  
           {% for article in articles %}
           <div class="card">
             <div class="card-body">
@@ -71,7 +69,6 @@
             </div>
           </div>
           {% endfor %}
-          {% endif %}
 
         </div>
       </div>
