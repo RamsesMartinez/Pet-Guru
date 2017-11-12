@@ -151,4 +151,4 @@ class RegisterUser(CreateView):
     model = User
     template_name = "user_register.html"
     form_class = RegisterForm
-    success_url = reverse_lazy('home:usuario')
+    success_url = reverse_lazy('home:usuario') 
