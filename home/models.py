@@ -360,10 +360,6 @@ class Bird(models.Model):
         (ORNAMENTAL, 'Ornamentales'),
     )
 
-    BOOLEAN = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
     question = models.OneToOneField(Question, default='')
     type_animal = models.CharField(max_length=60)
     zootechnical_purpose = models.CharField(max_length=30)
@@ -372,7 +368,7 @@ class Bird(models.Model):
     age_month = models.IntegerField()
     place = models.CharField(max_length=3, choices=CONFINEMENT)
     quantity = models.IntegerField()
-    coexistence = models.CharField(max_length=3, choices=BOOLEAN)
+    coexistence = models.NullBooleanField(null=True)
     origin_water = models.CharField(max_length=30)
     morbidity = models.IntegerField()
     mortality = models.IntegerField()
@@ -385,7 +381,7 @@ class Bird(models.Model):
     plumage = models.CharField(max_length=50)
     condition_legs = models.CharField(max_length=3, choices=DEFECATION)
     breathing_frequency = models.IntegerField()
-    dehydration = models.CharField(max_length=3, choices=BOOLEAN)
+    dehydration = models.NullBooleanField(null=True)
     attitude = models.CharField(max_length=80)
 
     def __str__(self):
@@ -495,10 +491,6 @@ class Aquatic(models.Model):
     YES = 'YS'
     NO = 'NO'
 
-    BOOLEAN = (
-        (YES, 'Si'),
-        (NO, 'No'),
-    )
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
@@ -507,8 +499,8 @@ class Aquatic(models.Model):
     pond = models.CharField(max_length=3, choices=POND)
     density = models.IntegerField()
     biomass = models.IntegerField()
-    aeration = models.CharField(max_length=3, choices=BOOLEAN)
-    recirculation_water = models.CharField(max_length=3, choices=BOOLEAN)
+    aeration = models.NullBooleanField(null=True)
+    recirculation_water = models.NullBooleanField(null=True)
     aeration_type = models.CharField(max_length=3, choices=AEREATOR)
     change_water = models.PositiveIntegerField()
     date_sowing = models.CharField(max_length=50)
@@ -531,15 +523,15 @@ class Aquatic(models.Model):
     type_eat = models.CharField(max_length=3, choices=FOODTYPE)
     eat_for_day = models.CharField(max_length=80)
     coloration = models.CharField(max_length=3, choices=FISHCOLOR)
-    bulging_belly = models.CharField(max_length=3, choices=BOOLEAN)
-    exophthalmia = models.CharField(max_length=3, choices=BOOLEAN)
-    petechia = models.CharField(max_length=3, choices=BOOLEAN)
-    dilated = models.CharField(max_length=3, choices=BOOLEAN)
-    ulcers = models.CharField(max_length=3, choices=BOOLEAN)
-    skin_sores = models.CharField(max_length=3, choices=BOOLEAN)
-    cotton_structures = models.CharField(max_length=3, choices=BOOLEAN)
-    necrosis_epidermal_layer = models.CharField(max_length=3, choices=BOOLEAN)
-    ocular_opacity = models.CharField(max_length=3, choices=BOOLEAN)
+    bulging_belly = models.NullBooleanField(null=True)
+    exophthalmia = models.NullBooleanField(null=True)
+    petechia = models.NullBooleanField(null=True)
+    dilated = models.NullBooleanField(null=True)
+    ulcers = models.NullBooleanField(null=True)
+    skin_sores = models.NullBooleanField(null=True)
+    cotton_structures = models.NullBooleanField(null=True)
+    necrosis_epidermal_layer = models.NullBooleanField(null=True)
+    ocular_opacity = models.NullBooleanField(null=True)
 
     def __str__(self):
         return '%s' % self.id

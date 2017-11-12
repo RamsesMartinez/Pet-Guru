@@ -5,12 +5,14 @@ from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import CreateView
+from django.core.urlresolvers import reverse_lazy
 
 from django.http import HttpResponse
+from users.models import User
 from .models import Question, ImageQuestion
 from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
 from .forms import RabbitForm, BirdForm, DogForm, CatForm, WildForm, AquaticForm, BeeForm
-from .forms import Register
+from .forms import RegisterForm
 # Create your views here.
 
 
@@ -22,7 +24,7 @@ def index(request):
     message = None
     articles = Question.objects.all()
     Login_form = Login(request.POST or None)
-    
+
     if request.method == 'POST':
         userLog = request.POST['usuario']
         passLog = request.POST['contraseña']
@@ -130,14 +132,6 @@ def user(request):
         return render(request, template, context)
     elif request.user.rol == 'TC':
         template = 'prof.html'
-        if request.method == 'POST':
-            if base_form.is_valid():
-                print(base_form)
-                base_form.save()
-                if cow_form.is_valid():
-                    print(cow_form)
-                    cow_form.save()
-                    return redirect('home:usuario')
         solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
         mine = Question.objects.filter(user_response=request.user.pk)
         article = Question.objects.filter(status='OP')
@@ -153,15 +147,8 @@ def user(request):
         return redirect('admin:login')
 
 
-def register(request):
-    template = 'user_register.html'
-    message = None
-    register_form = Register(request.POST or None)
-    
-    context = {
-    'title': 'Registro de usuarios',
-    'form': register_form,
-    'message': 'Verifique los campos ingresados',
-    }
-
-    return render(request, template, context)
+class RegisterUser(CreateView):
+    model = User
+    template_name = "user_register.html"
+    form_class = RegisterForm
+    success_url = reverse_lazy('home:usuario')

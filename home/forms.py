@@ -2,6 +2,7 @@ from django import forms
 from .models import Question, Bovine, Porcine, Horse, Goat, Ovine, Rabbit
 from .models import Bird, Dog, Cat, Wild, Aquatic, Bee
 from users.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
 class Login(forms.Form):
@@ -9,12 +10,22 @@ class Login(forms.Form):
   contraseña = forms.CharField(max_length=20, widget = forms.PasswordInput())
 
 
-class Register(forms.Form):
-  username = forms.CharField(max_length=20, label='Usuario')
-  password = forms.CharField(max_length=20, label='Contraseña', widget = forms.PasswordInput())
-  passwordConfirm = forms.CharField(max_length=20, label='Confirmar contraseña', widget = forms.PasswordInput())
-  rol = forms.CharField(max_length=20, label='Tipo de usuario')
-  speciality = forms.CharField(max_length=20, label='Especialidad')
+class RegisterForm(UserCreationForm):
+
+  class Meta:
+    model = User
+    fields = (
+      'username',
+      'email',
+      'rol',
+      'speciality',
+    )
+    labels = {
+      'username': 'Nombre de usuario',
+      'email': 'Correo electronico',
+      'rol': 'rol',
+      'speciality': 'especialidad',
+    }
 
 
 class BaseForm(forms.ModelForm):
