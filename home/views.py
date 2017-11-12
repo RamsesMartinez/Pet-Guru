@@ -6,6 +6,7 @@ from django.contrib.auth import logout as logout_django
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import CreateView
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import Q
 
 from django.http import HttpResponse
 from users.models import User
@@ -132,15 +133,15 @@ def user(request):
         return render(request, template, context)
     elif request.user.rol == 'TC':
         template = 'prof.html'
-        solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
-        mine = Question.objects.filter(user_response=request.user.pk)
-        article = Question.objects.filter(status='OP')
+        solved = Question.objects.filter(user_response=request.user.pk).filter(Q(status='OP') | Q(status='RP'))
+        article = Question.objects.filter(status='CL')
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
-            'mine': mine,
             'articles': article,
+            'species': species,
         }
+
 
         return render(request, template, context)
     elif request.user.rol == 'AD':
