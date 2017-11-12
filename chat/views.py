@@ -2,6 +2,7 @@ from django.shortcuts import render
 from chat.models import Room
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def chat_room(request):
     """
