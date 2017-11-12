@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import Question, Bovine, Porcine, Horse, Ovine, Goat, Rabbit
+
+from .models import Question
+from .models import Bovine
+from .models import Porcine
+from .models import Horse
+from .models import Ovine
+from .models import Goat
+from .models import Rabbit
 
 
 @admin.register(Question)
@@ -36,4 +43,3 @@ class BovineAdmin(admin.ModelAdmin):
 @admin.register(Rabbit)
 class BovineAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
-

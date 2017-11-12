@@ -1,19 +1,20 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
-from django.http import JsonResponse, HttpResponse
-from django.views.generic import CreateView
-from django.core.urlresolvers import reverse_lazy
 
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
+from django.views.generic import CreateView
+
+from .forms import *
+
+from .models import Question
+from .models import ImageQuestion
+
 from users.models import User
-from .models import Question, ImageQuestion
-from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
-from .forms import RabbitForm, BirdForm, DogForm, CatForm, WildForm, AquaticForm, BeeForm
-from .forms import RegisterForm
-# Create your views here.
 
 
 def index(request):
@@ -23,30 +24,32 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
-    Login_form = Login(request.POST or None)
+
+    login_form = LogInForm(request.POST or None)
 
     if request.method == 'POST':
-        userLog = request.POST['usuario']
-        passLog = request.POST['contraseña']
-        user = authenticate( username = userLog , password = passLog)
-        if user is not None:
-            login_django(request, user)
+        user_log = request.POST['usuario']
+        pass_log = request.POST['contraseña']
+        user_auth = authenticate(username=user_log, password=pass_log)
+
+        if user_auth is not None:
+            login_django(request, user_auth)
             return redirect('home:usuario')
         else:
             message = "Usuario o contraseña incorrectos."
 
     context = {
         'title': "PetGurú - Inicio",
-        'message' : message,
-        'articles':articles,
-        'form' : Login_form,
+        'message': message,
+        'articles': articles,
+        'form': login_form,
     }
     return render(request, template, context)
 
 
-def pregunta(request, id=None):
+def question(request, pk=None):
     template = 'question.html'
-    instance = get_object_or_404(Question, id=id)
+    instance = get_object_or_404(Question, id=pk)
     image = ImageQuestion.objects.filter(id_question=instance.id)
     context = {
         'images': image,
@@ -57,7 +60,7 @@ def pregunta(request, id=None):
     return render(request, template, context)
 
 
-def nosotros(request):
+def us(request):
     template = 'nosotros.html'
     context = {
         'title': "PetGurú - Nosotros",
@@ -65,7 +68,7 @@ def nosotros(request):
     return render(request, template, context)
 
 
-def reglamento(request):
+def rules(request):
     template = 'reglamento.html'
     context = {
         'title': "PetGurú - Reglamento",
@@ -85,7 +88,6 @@ def user(request):
         template = 'user.html'
         solved = Question.objects.filter(user_response=request.user.pk)
         articles = Question.objects.all()
-
         base_form = BaseForm(request.POST or None)
         cow_form = CowForm(request.POST or None)
         porcine_form = PorcineForm(request.POST or None)
@@ -100,13 +102,10 @@ def user(request):
         aquatic_form = AquaticForm(request.POST or None)
         bee_form = BeeForm(request.POST or None)
 
-
         if request.method == 'POST':
             if base_form.is_valid():
-                print(base_form)
                 base_form.save()
                 if cow_form.is_valid():
-                    print(cow_form)
                     cow_form.save()
                     return redirect ('home:usuario')
 
@@ -128,8 +127,8 @@ def user(request):
             'aquatic_form': aquatic_form,
             'bee_form': bee_form,
         }
-
         return render(request, template, context)
+
     elif request.user.rol == 'TC':
         template = 'prof.html'
         solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
@@ -139,8 +138,8 @@ def user(request):
             'solveds': solved,
             'articles': article,
         }
-
         return render(request, template, context)
+
     elif request.user.rol == 'AD':
         return redirect('admin:login')
 

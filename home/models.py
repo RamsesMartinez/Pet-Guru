@@ -45,9 +45,9 @@ class Specie(models.Model):
     FEMALE = 'FM'
 
     SEX = (
-      (MALE, 'Macho'),
-      (FEMALE, 'Hembra'),
-      )
+        (MALE, 'Macho'),
+        (FEMALE, 'Hembra'),
+    )
 
     BOVINO = 'BV'
     PORCINO  = 'PR'
@@ -63,18 +63,18 @@ class Specie(models.Model):
 
 
     SPECIES = (
-      (BOVINO, 'Bovino'),
-      (PORCINO, 'Porcino'),
-      (EQUINO, 'Equino'),
-      (OVINO, 'Ovino'),
-      (CAPRINO, 'Caprino'),
-      (LEPORIDO, 'Lepórido'),
-      (AVE, 'Ave'),
-      (CANINO, 'Canino'),
-      (FELINO, 'Felino'),
-      (SILVESTRE, 'Silvestre'),
-      (ABEJA, 'Abeja'),
-      )
+        (BOVINO, 'Bovino'),
+        (PORCINO, 'Porcino'),
+        (EQUINO, 'Equino'),
+        (OVINO, 'Ovino'),
+        (CAPRINO, 'Caprino'),
+        (LEPORIDO, 'Lepórido'),
+        (AVE, 'Ave'),
+        (CANINO, 'Canino'),
+        (FELINO, 'Felino'),
+        (SILVESTRE, 'Silvestre'),
+        (ABEJA, 'Abeja'),
+    )
 
     SPECIES_NUM = {
         BOVINO: 'Bovino',
@@ -139,11 +139,11 @@ class Rabbit(Specie):
     FATTEN = 'FT'
 
     PRODUCTIVE = (
-      (LACTATING, 'Lactante'),
-      (PREGNANT, 'Gestante'),
-      (INCREASE, 'Crecimiento'),
-      (FATTEN, 'Engorda'),
-      )
+        (LACTATING, 'Lactante'),
+        (PREGNANT, 'Gestante'),
+        (INCREASE, 'Crecimiento'),
+        (FATTEN, 'Engorda'),
+    )
 
     productive_stage = models.CharField(max_length=10, choices=PRODUCTIVE, default=LACTATING)
     heart_rate = models.IntegerField()
@@ -185,7 +185,7 @@ class Dog(Specie):
     pulse = models.CharField(max_length=80, null=True)
     skin = models.CharField(max_length=80, null=True)
 
-    def __str__(self): 
+    def __str__(self):
         return '%s' % self.id
 
 
@@ -199,7 +199,7 @@ class Cat(Specie):
     pulse = models.CharField(max_length=80, null=True)
     skin = models.CharField(max_length=80, null=True)
 
-    def __str__(self): 
+    def __str__(self):
         return '%s' % self.id
 
 
@@ -218,7 +218,6 @@ class Porcine(Specie):
         return '%s' % self.id
 
 
-
 class Bee(models.Model):
     RUSTIC = 'RS'
     WILD = 'WL'
@@ -232,22 +231,18 @@ class Bee(models.Model):
         (JUMBO, 'Tecnificada jumbo'),
     )
 
-    PRESENT = 'PS'
-    NOTPRESENT = 'NT'
-    NOTVERIFIED = 'NV'
-
     LARVACOLOR = 'BC'
     PERFORATED = 'PR'
     FATTY = 'FT'
     APRICOTS = 'APR'
-    NOTVERIFIED = 'NV'
+    NOT_VERIFIED = 'NV'
 
     LARVA = (
         (LARVACOLOR, 'Larvas de color anormal'),
         (PERFORATED, 'Perforadas'),
         (FATTY, 'Aspecto grasoso'),
         (APRICOTS, 'Opérculos raídos'),
-        (NOTVERIFIED, 'No Verificado'),
+        (NOT_VERIFIED, 'No Verificado'),
     )
 
     STOMACH = 'ST'
@@ -255,7 +250,7 @@ class Bee(models.Model):
     CHOP = 'CH'
     ALOPECIA = 'LP'
     SHINY = 'SH'
-    NOTVERIFIED = 'NV'
+    NOT_VERIFIED = 'NV'
 
     ADULTBEES = (
         (STOMACH, 'Abdomen distendido'),
@@ -263,13 +258,17 @@ class Bee(models.Model):
         (CHOP, 'Pérdida del instinto de picar'),
         (ALOPECIA, 'Alopécicas'),
         (SHINY, 'Brillosas'),
-        (NOTVERIFIED, 'No Verificado'),
+        (NOT_VERIFIED, 'No Verificado'),
     )
+
+    PRESENT = 'PS'
+    NOTPRESENT = 'NT'
+    NOT_VERIFIED = 'NV'
 
     PRESENT_T = (
         (PRESENT, 'Presente'),
         (NOTPRESENT, 'No Presente'),
-        (NOTVERIFIED, 'NO Verificado'),
+        (NOT_VERIFIED, 'NO Verificado'),
     )
 
     question = models.OneToOneField(Question, default='')
@@ -291,7 +290,6 @@ class Bee(models.Model):
     dead_bees = models.CharField(max_length=3, choices=PRESENT_T)
     food_racks = models.CharField(max_length=3, choices=PRESENT_T)
     number_racks = models.IntegerField()
-
 
     def __str__(self):
         return '%s' % self.id
@@ -389,7 +387,6 @@ class Bird(models.Model):
 
 
 class Wild(models.Model):
-
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     zootechnical = models.CharField(max_length=50)
@@ -410,7 +407,6 @@ class Wild(models.Model):
 
 
 class Aquatic(models.Model):
-
     AQRUSTIC = 'RS'
     AQCEMENT = 'CM'
     AQGEOMEMBRANE = 'GM'
