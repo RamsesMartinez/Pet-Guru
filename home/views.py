@@ -47,9 +47,9 @@ def index(request):
     return render(request, template, context)
 
 
-def question(request, pk=None):
+def question(request, id=None):
     template = 'question.html'
-    instance = get_object_or_404(Question, id=pk)
+    instance = get_object_or_404(Question, id=id)
     image = ImageQuestion.objects.filter(id_question=instance.id)
     context = {
         'images': image,
@@ -132,12 +132,10 @@ def user(request):
     elif request.user.rol == 'TC':
         template = 'prof.html'
         solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
-        mine = Question.objects.filter(user_response=request.user.pk)
-        article = Question.objects.filter(status='OP')
+        article = Question.objects.filter(status='CL')
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
-            'mine': mine,
             'articles': article,
         }
         return render(request, template, context)
@@ -150,4 +148,4 @@ class RegisterUser(CreateView):
     model = User
     template_name = "user_register.html"
     form_class = RegisterForm
-    success_url = reverse_lazy('home:usuario')
+    success_url = reverse_lazy('home:usuario') 

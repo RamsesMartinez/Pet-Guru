@@ -30,10 +30,36 @@
     <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
       <div class="alert alert-success w-75" role="alert">
         <h3 class="alert-heading text-center">Datos clínicos.</h3>
-        <p>Especie: {{instance.specie.specie}}</p>
+        {% if instance.specie.specie  == 'EQ' %}
+        <p>Especie: Equino</p>
+        {% elif instance.specie.specie  == 'BV' %}    
+        <p>Especie: Bovino</p>         
+        {% elif instance.specie.specie == 'PR' %}
+        <p>Especie: Porcino</p>      
+        {% elif instance.specie.specie == 'OV' %}
+        <p>Especie: Ovino</p>      
+        {% elif instance.specie.specie == 'CP' %}
+        <p>Especie: Caprino</p>      
+        {% elif instance.specie.specie == 'LP' %}
+        <p>Especie: Lepórido</p>      
+        {% elif instance.specie.specie == 'AV' %}
+        <p>Especie: Ave</p>      
+        {% elif instance.specie.specie == 'CN' %}
+        <p>Especie: Canino</p>      
+        {% elif instance.specie.specie == 'FL' %}
+        <p>Especie: Felino</p>      
+        {% elif instance.specie.specie == 'SL' %}
+        <p>Especie: Silvestre</p>    
+        {% elif instance.specie.specie == 'BJ' %}
+        <p>Especie: Abeja</p>
+        {% endif %}
         <p>Raza: {{instance.specie.race}}</p>
         <p>Edad: {{instance.specie.age}}</p>
-        <p>Género: {{instance.specie.gender}}</p>
+        {% if instance.specie.gender == 'ML' %}
+        <p>Género: macho</p>
+        {% elif instance.specie.gender == 'ML' %}
+        <p>Género: hembra</p>
+        {% endif %}
         <hr>
         <h4 class="alert-heading text-center">Descripción de la consulta:</h4>
         <p class="mb-0">{{instance.description}}</p>
@@ -41,9 +67,9 @@
       <p class="questionSingle">
         Las clínicas veterinarias más completas ofrecen a sus clientes la posibilidad de hacer análisis de sangre, más que nada cuando ya son ancianos, porque de esta manera se pueden detectar enfermedades del riñón y del hígado. La diabetes y problemas de tiroides también son diagnosticados mediante análisis de sangre.
       </p>
-        {% if  request.user.rol == 'TC' and instance.status == 'OP' %}
-        <button type="button" class="btn btn-primary">Responder</button>
-        {% endif %}
+      {% if  request.user.rol == 'TC' and instance.status == 'OP' %}
+      <button type="button" class="btn btn-primary">Responder</button>
+      {% endif %}
     </div>
   </div>
   {% endblock %}
