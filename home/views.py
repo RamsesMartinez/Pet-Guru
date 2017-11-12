@@ -47,9 +47,9 @@ def index(request):
     return render(request, template, context)
 
 
-def question(request, pk=None):
+def question(request, id=None):
     template = 'question.html'
-    instance = get_object_or_404(Question, id=pk)
+    instance = get_object_or_404(Question, id=id)
     image = ImageQuestion.objects.filter(id_question=instance.id)
     context = {
         'images': image,
