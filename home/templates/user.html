@@ -23,10 +23,6 @@
               <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
                 <img src="{% static 'images/user.png' %}" alt="User image" class="mb-2 img-thumbnail rounded-circle mx-auto d-block userimg">
                 <p>Usuario: {{ user }}</p>
-                {% if request.user.rol == 'TC' %}
-                <p>Tipo de usuario: profesor</p> 
-                <p>{{ use.speciality }}</p>               
-                {% endif %}
                 {% if request.user.rol == 'ST' %}
                 <p>Tipo de usuario: estudiante</p> 
                 <p>{{ use.speciality }}</p>               

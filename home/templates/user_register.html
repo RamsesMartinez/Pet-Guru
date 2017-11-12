@@ -21,20 +21,18 @@
             <div class="col-12 d-flex  mx-auto p-0 align-items-center flex-column justify-content-around">
               <form action="POST">
                 {% for field in form %}
-                <div class="form-group">
-
-
+                <div class="form-group d-flex justify-content-between">
                  {% if field.errors %}
                  {{field.errors}}
                  {% endif %}
-
                  <label for="{{field.name}}">{{ field.label }}</label>
                  {{ field }}
-
                </div>
                {% endfor %}
-               <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-               <input type="reset" class="btn btn-danger"> 
+               <div class="form-group d-flex justify-content-between">
+                 <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+                 <input type="reset" class="btn btn-danger"> 
+               </div>
              </form> 
            </div>
          </div>
