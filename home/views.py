@@ -139,9 +139,7 @@ def user(request):
             'title': "Profesional " + request.user.username,
             'solveds': solved,
             'articles': article,
-            'species': species,
         }
-
 
         return render(request, template, context)
     elif request.user.rol == 'AD':
