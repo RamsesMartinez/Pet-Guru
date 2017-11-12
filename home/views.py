@@ -28,8 +28,8 @@ def index(request):
     login_form = LogInForm(request.POST or None)
 
     if request.method == 'POST':
-        user_log = request.POST['usuario']
-        pass_log = request.POST['contraseña']
+        user_log = request.POST['Usuario']
+        pass_log = request.POST['Contraseña']
         user_auth = authenticate(username=user_log, password=pass_log)
 
         if user_auth is not None:
