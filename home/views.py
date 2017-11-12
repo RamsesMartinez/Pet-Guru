@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from .models import Question, ImageQuestion
 from .forms import Login, BaseForm, CowForm, PorcineForm, HorseForm, GoatForm, OvineForm
 from .forms import RabbitForm, BirdForm, DogForm, CatForm, WildForm, AquaticForm, BeeForm
+from .forms import Register
 # Create your views here.
 
 
@@ -153,10 +154,11 @@ def user(request):
 
 def register(request):
     template = 'user_register.html'
+    register_form = Register(request.POST or None)
+    
     context = {
-        'images': image,
-        'titulo': instance.title,
-        'instance': instance,
+    'title': 'Registro de usuarios',
+    'form': register_form,
     }
 
     return render(request, template, context)
