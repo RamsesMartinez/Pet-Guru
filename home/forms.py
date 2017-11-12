@@ -1,17 +1,32 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+
+
 from .models import *
+from users.models import User
 
 
-class Login(forms.Form):
+class LoginForm(forms.Form):
     usuario = forms.CharField(max_length=20)
     contraseña = forms.CharField(max_length=20, widget = forms.PasswordInput())
 
 
-class Register(forms.Form):
-    username = forms.CharField(max_length=20, label='Usuario')
-    password = forms.CharField(max_length=20, label='Contraseña')
-    rol = forms.CharField(max_length=20, label='Tipo de usuario')
-    speciality = forms.CharField(max_length=20, label='Especialidad')
+class RegisterForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'email',
+            'rol',
+            'speciality',
+        )
+        labels = {
+            'username': 'Nombre de usuario',
+            'email': 'Correo electronico',
+            'rol': 'rol',
+            'speciality': 'especialidad',
+        }
 
 
 class BaseForm(forms.ModelForm):
@@ -24,15 +39,15 @@ class BaseForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = (
-          'title',
-          'description',
-          'user_question',
-          )
+            'title',
+            'description',
+            'user_question',
+        )
         labels = {
-          'title': 'Título de la consulta: ',
-          'description': 'Descripción de la consulta: ',
-          'user_question': 'Usuario',
-          }
+            'title': 'Título de la consulta: ',
+            'description': 'Descripción de la consulta: ',
+            'user_question': 'Usuario',
+        }
 
 
 class CowForm(forms.ModelForm):
@@ -53,7 +68,7 @@ class CowForm(forms.ModelForm):
         self.fields['body_condition'].widget.attrs.update({'class': 'form-control', 'id': 'cowcondition'})
 
     class Meta:
-        model = Bovine       
+        model = Bovine
         fields = (
             'specie',
             'race',
@@ -105,7 +120,7 @@ class PorcineForm(forms.ModelForm):
         self.fields['body_condition'].widget.attrs.update({'class': 'form-control', 'id': 'porcondition'})
 
     class Meta:
-        model = Porcine       
+        model = Porcine
         fields = (
             'specie',
             'physiological_stage',
@@ -121,7 +136,7 @@ class PorcineForm(forms.ModelForm):
             'attitude',
             'color',
             'body_condition',
-          )
+        )
         labels = {
             'specie': 'Especie: ',
             'physiological_stage': 'Etapa fisiológica: ',
@@ -157,7 +172,7 @@ class HorseForm(forms.ModelForm):
         self.fields['body_condition'].widget.attrs.update({'class': 'form-control', 'id': 'horcondition'})
 
     class Meta:
-        model = Horse       
+        model = Horse
         fields = (
             'specie',
             'race',
@@ -185,7 +200,7 @@ class HorseForm(forms.ModelForm):
             'mucosal_color': 'Color de mucosas: ',
             'lymph_nodes': 'Linfonodos: ',
             'body_condition': 'Condición corporal: ',
-          }
+        }
 
 
 class GoatForm(forms.ModelForm):
@@ -210,45 +225,45 @@ class GoatForm(forms.ModelForm):
         self.fields['body_condition'].widget.attrs.update({'class': 'form-control', 'id': 'goatcondition'})
 
     class Meta:
-        model = Goat       
+        model = Goat
         fields = (
-          'specie',
-          'physiological_stage',
-          'race',
-          'age',
-          'gender',
-          'ruminal',
-          'capilar',
-          'cough',
-          'weight',
-          'heart_rate',
-          'respiratory_rate',
-          'temperature',
-          'production_system',
-          'zootechnical',
-          'lymph_nodes',
-          'mucosal_color',
-          'body_condition',
-          )
+            'specie',
+            'physiological_stage',
+            'race',
+            'age',
+            'gender',
+            'ruminal',
+            'capilar',
+            'cough',
+            'weight',
+            'heart_rate',
+            'respiratory_rate',
+            'temperature',
+            'production_system',
+            'zootechnical',
+            'lymph_nodes',
+            'mucosal_color',
+            'body_condition',
+        )
         labels = {
-          'specie': 'Especie: ',
-          'physiological_stage': 'Etapa fisiológica: ',
-          'race': 'Raza: ',
-          'age': 'Edad: ',
-          'capilar': 'Tiempo de llenado capilar: ',
-          'cough': 'Relfejo tusígeno: ',
-          'gender': 'Género: ',
-          'ruminal': 'Movimientos ruminales: ',
-          'weight': 'Peso: ',
-          'heart_rate': 'Frecuencia cardiaca (lpm): ',
-          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
-          'temperature': 'Temperatura (°C): ',
-          'production_system': 'Sistema de producción: ',
-          'zootechnical': 'Fin zootécnico: ',
-          'lymph_nodes': 'Linfonodos: ',
-          'mucosal_color': 'Coloración de mucosas: ',
-          'body_condition': 'Condición corporal: ',
-          }
+            'specie': 'Especie: ',
+            'physiological_stage': 'Etapa fisiológica: ',
+            'race': 'Raza: ',
+            'age': 'Edad: ',
+            'capilar': 'Tiempo de llenado capilar: ',
+            'cough': 'Relfejo tusígeno: ',
+            'gender': 'Género: ',
+            'ruminal': 'Movimientos ruminales: ',
+            'weight': 'Peso: ',
+            'heart_rate': 'Frecuencia cardiaca (lpm): ',
+            'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+            'temperature': 'Temperatura (°C): ',
+            'production_system': 'Sistema de producción: ',
+            'zootechnical': 'Fin zootécnico: ',
+            'lymph_nodes': 'Linfonodos: ',
+            'mucosal_color': 'Coloración de mucosas: ',
+            'body_condition': 'Condición corporal: ',
+        }
 
 
 class OvineForm(forms.ModelForm):
@@ -271,41 +286,41 @@ class OvineForm(forms.ModelForm):
         self.fields['body_condition'].widget.attrs.update({'class': 'form-control', 'id': 'ovicondition'})
 
     class Meta:
-        model = Ovine       
+        model = Ovine
         fields = (
-          'specie',
-          'physiological_stage',
-          'race',
-          'age',
-          'gender',
-          'ruminal',
-          'weight',
-          'heart_rate',
-          'respiratory_rate',
-          'temperature',
-          'production_system',
-          'zootechnical',
-          'lymph_nodes',
-          'mucosal_color',
-          'body_condition',
-          )
+            'specie',
+            'physiological_stage',
+            'race',
+            'age',
+            'gender',
+            'ruminal',
+            'weight',
+            'heart_rate',
+            'respiratory_rate',
+            'temperature',
+            'production_system',
+            'zootechnical',
+            'lymph_nodes',
+            'mucosal_color',
+            'body_condition',
+        )
         labels = {
-          'specie': 'Especie: ',
-          'physiological_stage': 'Etapa fisiológica: ',
-          'race': 'Raza: ',
-          'age': 'Edad: ',
-          'gender': 'Género: ',
-          'ruminal': 'Movimientos ruminales: ',
-          'weight': 'Peso: ',
-          'heart_rate': 'Frecuencia cardiaca (lpm): ',
-          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
-          'temperature': 'Temperatura (°C): ',
-          'production_system': 'Sistema de producción: ',
-          'zootechnical': 'Fin zootécnico: ',
-          'lymph_nodes': 'Linfonodos: ',
-          'mucosal_color': 'Coloración de mucosas: ',
-          'body_condition': 'Condición corporal: ',
-          }
+            'specie': 'Especie: ',
+            'physiological_stage': 'Etapa fisiológica: ',
+            'race': 'Raza: ',
+            'age': 'Edad: ',
+            'gender': 'Género: ',
+            'ruminal': 'Movimientos ruminales: ',
+            'weight': 'Peso: ',
+            'heart_rate': 'Frecuencia cardiaca (lpm): ',
+            'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+            'temperature': 'Temperatura (°C): ',
+            'production_system': 'Sistema de producción: ',
+            'zootechnical': 'Fin zootécnico: ',
+            'lymph_nodes': 'Linfonodos: ',
+            'mucosal_color': 'Coloración de mucosas: ',
+            'body_condition': 'Condición corporal: ',
+        }
 
 
 class RabbitForm(forms.ModelForm):
@@ -327,39 +342,39 @@ class RabbitForm(forms.ModelForm):
         self.fields['body_condition'].widget.attrs.update({'class': 'form-control', 'id': 'rabcondition'})
 
     class Meta:
-        model = Rabbit       
+        model = Rabbit
         fields = (
-          'specie',
-          'productive_stage',
-          'race',
-          'age',
-          'gender',
-          'weight',
-          'heart_rate',
-          'respiratory_rate',
-          'temperature',
-          'capilar',
-          'dehydration',
-          'lymph_nodes',
-          'mucosal_color',
-          'body_condition',
-          )
+            'specie',
+            'productive_stage',
+            'race',
+            'age',
+            'gender',
+            'weight',
+            'heart_rate',
+            'respiratory_rate',
+            'temperature',
+            'capilar',
+            'dehydration',
+            'lymph_nodes',
+            'mucosal_color',
+            'body_condition',
+        )
         labels = {
-          'specie': 'Especie: ',
-          'productive_stage': 'Etapa productiva: ',
-          'race': 'Raza: ',
-          'age': 'Edad: ',
-          'gender': 'Género: ',
-          'weight': 'Peso: ',
-          'heart_rate': 'Frecuencia cardiaca (lpm): ',
-          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
-          'temperature': 'Temperatura (°C): ',
-          'capilar': 'Tiempo de llenado capilar: ',
-          'dehydration': 'Deshidratación: ',
-          'lymph_nodes': 'Ganglios linfáticos: ',
-          'mucosal_color': 'Coloración de mucosas: ',
-          'body_condition': 'Condición corporal: ',
-          }
+            'specie': 'Especie: ',
+            'productive_stage': 'Etapa productiva: ',
+            'race': 'Raza: ',
+            'age': 'Edad: ',
+            'gender': 'Género: ',
+            'weight': 'Peso: ',
+            'heart_rate': 'Frecuencia cardiaca (lpm): ',
+            'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+            'temperature': 'Temperatura (°C): ',
+            'capilar': 'Tiempo de llenado capilar: ',
+            'dehydration': 'Deshidratación: ',
+            'lymph_nodes': 'Ganglios linfáticos: ',
+            'mucosal_color': 'Coloración de mucosas: ',
+            'body_condition': 'Condición corporal: ',
+        }
 
 
 class BirdForm(forms.ModelForm):
@@ -389,55 +404,55 @@ class BirdForm(forms.ModelForm):
         self.fields['attitude'].widget.attrs.update({'class': 'form-control', 'id': 'birdatt'})
 
     class Meta:
-        model = Bird       
+        model = Bird
         fields = (
-          'type_animal',
-          'age',
-          'age_week',
-          'age_month',
-          'place',
-          'quantity',
-          'coexistence',
-          'origin_water',
-          'zootechnical_purpose',
-          'morbidity',
-          'mortality',
-          'date_signs',
-          'water',
-          'eat',
-          'vaccine',
-          'defecation',
-          'condition_corporal',
-          'plumage',
-          'condition_legs',
-          'breathing_frequency',
-          'dehydration',
-          'attitude',
-          )
+            'type_animal',
+            'age',
+            'age_week',
+            'age_month',
+            'place',
+            'quantity',
+            'coexistence',
+            'origin_water',
+            'zootechnical_purpose',
+            'morbidity',
+            'mortality',
+            'date_signs',
+            'water',
+            'eat',
+            'vaccine',
+            'defecation',
+            'condition_corporal',
+            'plumage',
+            'condition_legs',
+            'breathing_frequency',
+            'dehydration',
+            'attitude',
+        )
         labels = {
-          'type_animal': 'Tipo de animal: ',
-          'age': 'Edad: ',
-          'age_week': 'Edad Semanas: ',
-          'age_month': 'Edad Meses: ',
-          'place': 'Lugar de encierro: ',
-          'quantity': 'Cantidad de animales: ',
-          'coexistence': 'Convivencia con otras aves: ',
-          'origin_water': 'Origen del agua: ',
-          'zootechnical_purpose': 'Fin zootécnico: ',
-          'morbidity': 'Morbilidad: ',
-          'mortality': 'Mortalidad: ',
-          'date_signs': 'Fecha de inicio de los signos: ',
-          'water': 'Consumo de agua: ',
-          'eat': 'Consumo de alimento: ',
-          'vaccine': 'Calendario de vacunaciones: ',
-          'defecation': 'Defecación: ',
-          'condition_corporal': 'Condición corporal: ',
-          'plumage': 'Condición del plumaje: ',
-          'condition_legs': 'Condición de las patas: ',
-          'breathing_frequency': 'Frecuencia respiratoria: ',
-          'dehydration': 'Deshidratación: ',
-          'attitude': 'Actitud: ',
-          }
+            'type_animal': 'Tipo de animal: ',
+            'age': 'Edad: ',
+            'age_week': 'Edad Semanas: ',
+            'age_month': 'Edad Meses: ',
+            'place': 'Lugar de encierro: ',
+            'quantity': 'Cantidad de animales: ',
+            'coexistence': 'Convivencia con otras aves: ',
+            'origin_water': 'Origen del agua: ',
+            'zootechnical_purpose': 'Fin zootécnico: ',
+            'morbidity': 'Morbilidad: ',
+            'mortality': 'Mortalidad: ',
+            'date_signs': 'Fecha de inicio de los signos: ',
+            'water': 'Consumo de agua: ',
+            'eat': 'Consumo de alimento: ',
+            'vaccine': 'Calendario de vacunaciones: ',
+            'defecation': 'Defecación: ',
+            'condition_corporal': 'Condición corporal: ',
+            'plumage': 'Condición del plumaje: ',
+            'condition_legs': 'Condición de las patas: ',
+            'breathing_frequency': 'Frecuencia respiratoria: ',
+            'dehydration': 'Deshidratación: ',
+            'attitude': 'Actitud: ',
+        }
 
 
 class DogForm(forms.ModelForm):
@@ -458,37 +473,37 @@ class DogForm(forms.ModelForm):
         self.fields['skin'].widget.attrs.update({'class': 'form-control', 'id': 'dogskin'})
 
     class Meta:
-        model = Dog       
+        model = Dog
         fields = (
-          'specie',
-          'race',
-          'age',
-          'gender',
-          'weight',
-          'heart_rate',
-          'respiratory_rate',
-          'temperature',
-          'capilar',
-          'mucosal_color',
-          'cough',
-          'pulse',
-          'skin',
-          )
+            'specie',
+            'race',
+            'age',
+            'gender',
+            'weight',
+            'heart_rate',
+            'respiratory_rate',
+            'temperature',
+            'capilar',
+            'mucosal_color',
+            'cough',
+            'pulse',
+            'skin',
+        )
         labels = {
-          'specie': 'Especie: ',
-          'race': 'Raza: ',
-          'age': 'Edad: ',
-          'gender': 'Género: ',
-          'weight': 'Peso: ',
-          'heart_rate': 'Frecuencia cardiaca (lpm): ',
-          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
-          'temperature': 'Temperatura (°C): ',
-          'capilar': 'Llenado capilar (segundos): ',
-          'mucosal_color': 'Color de mucosas: ',
-          'cough': 'Relfejo tusígeno: ',
-          'pulse': 'Pulso correspondiente: ',
-          'skin': 'Lesiones en piel: ',
-          }
+            'specie': 'Especie: ',
+            'race': 'Raza: ',
+            'age': 'Edad: ',
+            'gender': 'Género: ',
+            'weight': 'Peso: ',
+            'heart_rate': 'Frecuencia cardiaca (lpm): ',
+            'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+            'temperature': 'Temperatura (°C): ',
+            'capilar': 'Llenado capilar (segundos): ',
+            'mucosal_color': 'Color de mucosas: ',
+            'cough': 'Relfejo tusígeno: ',
+            'pulse': 'Pulso correspondiente: ',
+            'skin': 'Lesiones en piel: ',
+        }
 
 
 class CatForm(forms.ModelForm):
@@ -509,37 +524,37 @@ class CatForm(forms.ModelForm):
         self.fields['skin'].widget.attrs.update({'class': 'form-control', 'id': 'catskin'})
 
     class Meta:
-        model = Cat       
+        model = Cat
         fields = (
-          'specie',
-          'race',
-          'age',
-          'gender',
-          'weight',
-          'heart_rate',
-          'respiratory_rate',
-          'temperature',
-          'capilar',
-          'mucosal_color',
-          'cough',
-          'pulse',
-          'skin',
-          )
+            'specie',
+            'race',
+            'age',
+            'gender',
+            'weight',
+            'heart_rate',
+            'respiratory_rate',
+            'temperature',
+            'capilar',
+            'mucosal_color',
+            'cough',
+            'pulse',
+            'skin',
+        )
         labels = {
-          'specie': 'Especie: ',
-          'race': 'Raza: ',
-          'age': 'Edad: ',
-          'gender': 'Género: ',
-          'weight': 'Peso: ',
-          'heart_rate': 'Frecuencia cardiaca (lpm): ',
-          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
-          'temperature': 'Temperatura (°C): ',
-          'capilar': 'Llenado capilar (segundos): ',
-          'mucosal_color': 'Color de mucosas: ',
-          'cough': 'Relfejo tusígeno: ',
-          'pulse': 'Pulso correspondiente: ',
-          'skin': 'Lesiones en piel: ',
-          }
+            'specie': 'Especie: ',
+            'race': 'Raza: ',
+            'age': 'Edad: ',
+            'gender': 'Género: ',
+            'weight': 'Peso: ',
+            'heart_rate': 'Frecuencia cardiaca (lpm): ',
+            'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+            'temperature': 'Temperatura (°C): ',
+            'capilar': 'Llenado capilar (segundos): ',
+            'mucosal_color': 'Color de mucosas: ',
+            'cough': 'Relfejo tusígeno: ',
+            'pulse': 'Pulso correspondiente: ',
+            'skin': 'Lesiones en piel: ',
+        }
 
 
 class WildForm(forms.ModelForm):
@@ -560,37 +575,37 @@ class WildForm(forms.ModelForm):
         self.fields['ruminal'].widget.attrs.update({'class': 'form-control', 'id': 'wildruminal'})
 
     class Meta:
-        model = Wild       
+        model = Wild
         fields = (
-          'specie',
-          'zootechnical',
-          'ambiental_condition',
-          'feeding',
-          'background',
-          'evolution_disease',
-          'heart_rate',
-          'respiratory_rate',
-          'temperature',
-          'capilar',
-          'mucosal_color',
-          'lymph_nodes',
-          'ruminal',
-          )
+            'specie',
+            'zootechnical',
+            'ambiental_condition',
+            'feeding',
+            'background',
+            'evolution_disease',
+            'heart_rate',
+            'respiratory_rate',
+            'temperature',
+            'capilar',
+            'mucosal_color',
+            'lymph_nodes',
+            'ruminal',
+        )
         labels = {
-          'specie': 'Especie: ',
-          'zootechnical': 'Fin zootécnico: ',
-          'ambiental_condition': 'Condiciones Medio-Ambientales: ',
-          'feeding': 'Alimentación: ',
-          'background': 'Antecedentes patológicos/hereditarios: ',
-          'evolution_disease': 'Evolución de la enfermedad actual: ',
-          'heart_rate': 'Frecuencia cardiaca (lpm): ',
-          'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
-          'temperature': 'Temperatura: ',
-          'capilar': 'Tiempo de llenado capilar: ',
-          'mucosal_color': 'Coloracion de mucosas: ',
-          'lymph_nodes': 'Linfonodos: ',
-          'ruminal': 'Movimientos ruminales: ',
-          }
+            'specie': 'Especie: ',
+            'zootechnical': 'Fin zootécnico: ',
+            'ambiental_condition': 'Condiciones Medio-Ambientales: ',
+            'feeding': 'Alimentación: ',
+            'background': 'Antecedentes patológicos/hereditarios: ',
+            'evolution_disease': 'Evolución de la enfermedad actual: ',
+            'heart_rate': 'Frecuencia cardiaca (lpm): ',
+            'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
+            'temperature': 'Temperatura: ',
+            'capilar': 'Tiempo de llenado capilar: ',
+            'mucosal_color': 'Coloracion de mucosas: ',
+            'lymph_nodes': 'Linfonodos: ',
+            'ruminal': 'Movimientos ruminales: ',
+        }
 
 
 class AquaticForm(forms.ModelForm):
@@ -638,91 +653,91 @@ class AquaticForm(forms.ModelForm):
         self.fields['ocular_opacity'].widget.attrs.update({'class': 'form-control', 'id': 'aqopac'})
 
     class Meta:
-        model = Aquatic       
+        model = Aquatic
         fields = (
-          'genetic',
-          'zootechnical',
-          'age',
-          'weight',
-          'pond',
-          'density',
-          'biomass',
-          'aeration',
-          'aeration_type',
-          'recirculation_water',
-          'change_water',
-          'date_sowing',
-          'temperature_6am',
-          'temperature_3pm',
-          'oxygen_6am',
-          'oxygen_3pm',
-          'ph_6am',
-          'ph_3pm',
-          'no2',
-          'nh4',
-          'nh3',
-          'transparency',
-          'mortality',
-          'start_mortality',
-          'position',
-          'body_color',
-          'moves',
-          'lack_of_appetite',
-          'type_eat',
-          'eat_for_day',
-          'coloration',
-          'bulging_belly',
-          'exophthalmia',
-          'petechia',
-          'dilated',
-          'ulcers',
-          'skin_sores',
-          'cotton_structures',
-          'necrosis_epidermal_layer',
-          'ocular_opacity',
-          )
+            'genetic',
+            'zootechnical',
+            'age',
+            'weight',
+            'pond',
+            'density',
+            'biomass',
+            'aeration',
+            'aeration_type',
+            'recirculation_water',
+            'change_water',
+            'date_sowing',
+            'temperature_6am',
+            'temperature_3pm',
+            'oxygen_6am',
+            'oxygen_3pm',
+            'ph_6am',
+            'ph_3pm',
+            'no2',
+            'nh4',
+            'nh3',
+            'transparency',
+            'mortality',
+            'start_mortality',
+            'position',
+            'body_color',
+            'moves',
+            'lack_of_appetite',
+            'type_eat',
+            'eat_for_day',
+            'coloration',
+            'bulging_belly',
+            'exophthalmia',
+            'petechia',
+            'dilated',
+            'ulcers',
+            'skin_sores',
+            'cotton_structures',
+            'necrosis_epidermal_layer',
+            'ocular_opacity',
+        )
         labels = {
-          'genetic': 'Grupo genético: ',
-          'zootechnical': 'Fin zootécnico: ',
-          'age': 'Edad: ',
-          'weight': 'Peso promedio de la población: ',
-          'pond': 'Tipo de estanque: ',
-          'density': 'densidad: ',
-          'biomass': 'Biomasa: ',
-          'aeration': 'Presencia de sistema de aireación: ',
-          'aeration_type': 'Tipo de aireador: ',
-          'recirculation_water': 'Presencia de sistema de recirculación de agua: ',
-          'change_water': 'Recambio diario de agua: ',
-          'date_sowing': 'Fecha de siembra: ',
-          'temperature_6am': 'Temperatura (6 am): ',
-          'temperature_3pm': 'Temperatura (3 pm): ',
-          'oxygen_6am': 'Oxígeno disuelto en agua (6 am): ',
-          'oxygen_3pm': 'Oxígeno disuelto en agua (3 pm): ',
-          'ph_6am': 'pH (6 am): ',
-          'ph_3pm': 'pH (3 pm): ',
-          'no2': 'Nitritos (NO2): ',
-          'nh4': 'Amonio (NH4: ',
-          'nh3': 'Amoniaco (NH3): ',
-          'transparency': 'Transparencia: ',
-          'mortality': 'Mortalidad acumulada: ',
-          'start_mortality': 'Inicio de la mortandad: ',
-          'position': 'Posición de los peces en la columna de agua: ',
-          'body_color': 'Coloración del cuerpo de los peces: ',
-          'moves': 'Tipo de movimiento de los peces en el agua: ',
-          'lack_of_appetite': 'Inapetencia: ',
-          'type_eat': 'Tipo de alimentación: ',
-          'eat_for_day': 'Cantidad de alimento administrado por día: ',
-          'coloration': 'Coloración: ',
-          'bulging_belly': 'Vientre abultado: ',
-          'exophthalmia': 'Exoftalmia: ',
-          'petechia': 'Petequias en base de aletas: ',
-          'dilated': 'Aletas desilachadas: ',
-          'ulcers': 'Úlceras: ',
-          'skin_sores': 'Llagas en piel: ',
-          'cotton_structures': 'Estructuras algodonosas: ',
-          'necrosis_epidermal_layer': 'Necrosis en capa epidérmica: ',
-          'ocular_opacity': 'Opacidad ocular: ',
-          }
+            'genetic': 'Grupo genético: ',
+            'zootechnical': 'Fin zootécnico: ',
+            'age': 'Edad: ',
+            'weight': 'Peso promedio de la población: ',
+            'pond': 'Tipo de estanque: ',
+            'density': 'densidad: ',
+            'biomass': 'Biomasa: ',
+            'aeration': 'Presencia de sistema de aireación: ',
+            'aeration_type': 'Tipo de aireador: ',
+            'recirculation_water': 'Presencia de sistema de recirculación de agua: ',
+            'change_water': 'Recambio diario de agua: ',
+            'date_sowing': 'Fecha de siembra: ',
+            'temperature_6am': 'Temperatura (6 am): ',
+            'temperature_3pm': 'Temperatura (3 pm): ',
+            'oxygen_6am': 'Oxígeno disuelto en agua (6 am): ',
+            'oxygen_3pm': 'Oxígeno disuelto en agua (3 pm): ',
+            'ph_6am': 'pH (6 am): ',
+            'ph_3pm': 'pH (3 pm): ',
+            'no2': 'Nitritos (NO2): ',
+            'nh4': 'Amonio (NH4: ',
+            'nh3': 'Amoniaco (NH3): ',
+            'transparency': 'Transparencia: ',
+            'mortality': 'Mortalidad acumulada: ',
+            'start_mortality': 'Inicio de la mortandad: ',
+            'position': 'Posición de los peces en la columna de agua: ',
+            'body_color': 'Coloración del cuerpo de los peces: ',
+            'moves': 'Tipo de movimiento de los peces en el agua: ',
+            'lack_of_appetite': 'Inapetencia: ',
+            'type_eat': 'Tipo de alimentación: ',
+            'eat_for_day': 'Cantidad de alimento administrado por día: ',
+            'coloration': 'Coloración: ',
+            'bulging_belly': 'Vientre abultado: ',
+            'exophthalmia': 'Exoftalmia: ',
+            'petechia': 'Petequias en base de aletas: ',
+            'dilated': 'Aletas desilachadas: ',
+            'ulcers': 'Úlceras: ',
+            'skin_sores': 'Llagas en piel: ',
+            'cotton_structures': 'Estructuras algodonosas: ',
+            'necrosis_epidermal_layer': 'Necrosis en capa epidérmica: ',
+            'ocular_opacity': 'Opacidad ocular: ',
+        }
 
 
 class BeeForm(forms.ModelForm):
@@ -748,44 +763,44 @@ class BeeForm(forms.ModelForm):
         self.fields['number_racks'].widget.attrs.update({'class': 'form-control', 'id': 'beerack'})
 
     class Meta:
-        model = Bee       
+        model = Bee
         fields = (
-          'specie',
-          'colony_type',
-          'hive_review',
-          'queen_presence',
-          'disease_signs',
-          'breeding',
-          'adult_bee',
-          'backstage_bee',
-          'real_cell',
-          'backstage_breeding',
-          'eggs',
-          'quantity_eggs',
-          'observations',
-          'stool_spots',
-          'piece_larvae',
-          'dead_bees',
-          'food_racks',
-          'number_racks',
-          )
+            'specie',
+            'colony_type',
+            'hive_review',
+            'queen_presence',
+            'disease_signs',
+            'breeding',
+            'adult_bee',
+            'backstage_bee',
+            'real_cell',
+            'backstage_breeding',
+            'eggs',
+            'quantity_eggs',
+            'observations',
+            'stool_spots',
+            'piece_larvae',
+            'dead_bees',
+            'food_racks',
+            'number_racks',
+        )
         labels = {
-          'specie': 'Especie: ',
-          'colony_type': 'Tipo de colonia: ',
-          'hive_review': 'Revisión de colmena: ',
-          'queen_presence': 'Presencia de la reina: ',
-          'disease_signs': 'Signos de enfermedad: ',
-          'breeding': 'Cría: ',
-          'adult_bee': 'Abeja adulta: ',
-          'backstage_bee': 'Número de bastidores cubiertos por abejas en la cámara de cría y en las alzas: ',
-          'real_cell': 'Presencia de celdas reales: ',
-          'backstage_breeding': 'Número de bastidores cubiertos por cría: ',
-          'eggs': 'Presencia de huevos: ',
-          'quantity_eggs': 'Cantidad de huevos por celda: ',
-          'observations': 'Observación de características anormales en la entrada de la colmena: ',
-          'stool_spots': 'Manchas de heces: ',
-          'piece_larvae': 'Pedazos de larvas o larvas completas: ',
-          'dead_bees': 'sencia de abejas muertas al frente de la piquera: ',
-          'food_racks': 'Presencia de alimento en bastidores: ',
-          'number_racks': 'Número de bastidores con miel, polen o néctar: ',
-          }
+            'specie': 'Especie: ',
+            'colony_type': 'Tipo de colonia: ',
+            'hive_review': 'Revisión de colmena: ',
+            'queen_presence': 'Presencia de la reina: ',
+            'disease_signs': 'Signos de enfermedad: ',
+            'breeding': 'Cría: ',
+            'adult_bee': 'Abeja adulta: ',
+            'backstage_bee': 'Número de bastidores cubiertos por abejas en la cámara de cría y en las alzas: ',
+            'real_cell': 'Presencia de celdas reales: ',
+            'backstage_breeding': 'Número de bastidores cubiertos por cría: ',
+            'eggs': 'Presencia de huevos: ',
+            'quantity_eggs': 'Cantidad de huevos por celda: ',
+            'observations': 'Observación de características anormales en la entrada de la colmena: ',
+            'stool_spots': 'Manchas de heces: ',
+            'piece_larvae': 'Pedazos de larvas o larvas completas: ',
+            'dead_bees': 'sencia de abejas muertas al frente de la piquera: ',
+            'food_racks': 'Presencia de alimento en bastidores: ',
+            'number_racks': 'Número de bastidores con miel, polen o néctar: ',
+        }

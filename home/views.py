@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
@@ -6,11 +7,14 @@ from django.contrib.auth import logout as logout_django
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
+from django.views.generic import CreateView
 
 from .forms import *
 
 from .models import Question
 from .models import ImageQuestion
+
+from users.models import User
 
 
 def index(request):
@@ -20,8 +24,9 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
-    login_form = Login(request.POST or None)
-    
+
+    login_form = LoginForm(request.POST or None)
+
     if request.method == 'POST':
         user_log = request.POST['usuario']
         pass_log = request.POST['contraseña']
@@ -42,9 +47,9 @@ def index(request):
     return render(request, template, context)
 
 
-def pregunta(request, id=None):
+def question(request, pk=None):
     template = 'question.html'
-    instance = get_object_or_404(Question, id=id)
+    instance = get_object_or_404(Question, id=pk)
     image = ImageQuestion.objects.filter(id_question=instance.id)
     context = {
         'images': image,
@@ -55,7 +60,7 @@ def pregunta(request, id=None):
     return render(request, template, context)
 
 
-def nosotros(request):
+def us(request):
     template = 'nosotros.html'
     context = {
         'title': "PetGurú - Nosotros",
@@ -63,7 +68,7 @@ def nosotros(request):
     return render(request, template, context)
 
 
-def reglamento(request):
+def rules(request):
     template = 'reglamento.html'
     context = {
         'title': "PetGurú - Reglamento",
@@ -81,7 +86,7 @@ def logout(request):
 def user(request):
     if request.user.rol == 'ST':
         template = 'user.html'
-        Mineposts = Question.objects.filter(user_question=request.user.pk)
+        solved = Question.objects.filter(user_response=request.user.pk)
         articles = Question.objects.all()
         base_form = BaseForm(request.POST or None)
         cow_form = CowForm(request.POST or None)
@@ -106,7 +111,7 @@ def user(request):
 
         context = {
             'title': "Bienvenido "+request.user.username,
-            'mineposts': Mineposts,
+            'solveds': solved,
             'articles':articles,
             'baseForm': base_form,
             'cow_form': cow_form,
@@ -127,10 +132,12 @@ def user(request):
     elif request.user.rol == 'TC':
         template = 'prof.html'
         solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
+        mine = Question.objects.filter(user_response=request.user.pk)
         article = Question.objects.filter(status='OP')
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
+            'mine': mine,
             'articles': article,
         }
         return render(request, template, context)
@@ -139,13 +146,8 @@ def user(request):
         return redirect('admin:login')
 
 
-def register(request):
-    template = 'user_register.html'
-    register_form = Register(request.POST or None)
-    
-    context = {
-        'title': 'Registro de usuarios',
-        'form': register_form,
-    }
-
-    return render(request, template, context)
+class RegisterUser(CreateView):
+    model = User
+    template_name = "user_register.html"
+    form_class = RegisterForm
+    success_url = reverse_lazy('home:usuario')

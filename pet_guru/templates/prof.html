@@ -21,25 +21,27 @@
           <div class="row container-fluid m-auto p-0">
             <div class="Dashboard col d-flex flex-wrap">
               <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
-                <h3 class=" mb-3">Resueltas:</h3>
+                <img src="{% static 'images/user.png' %}" alt="User image" class="mb-2 img-thumbnail rounded-circle mx-auto d-block userimg">
+                <p>Usuario: {{ user }}</p>
+                {% if request.user.rol == 'TC' %}
+                <p>Tipo de usuario: profesor</p> 
+                <p>Especialidad: {{ user.speciality }}</p>
+                {% endif %}
+                {% if request.user.rol == 'AD' %}
+                <p>Tipo de usuario: administrador</p>              
+                {% endif %}
+              </div>
+              <div class="col-sm-12 col-md-8 d-flex p-0 text-center flex-column justify-content-around">
+                <h3 class=" mb-3">Mís preguntas:</h3>
                 <div id="userQuestions" class="col questContainer">
 
-                {% for solved in solveds %}
-                    <p><a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a></p>
-                 {% endfor %}
+                  {% for solved in solveds %}
+                  <p>
+                    <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
+                    <!-- Agregar botones -->
+                  </p>
+                  {% endfor %}
 
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
-                <h3 class=" mb-3">Chats:</h3>
-                <div id="userChats" class="col questContainer">
-                  <p class="question">Chat No. #</p>
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-4 d-flex p-0 text-center flex-column justify-content-around">
-                <h3 class="mb-2">Calificación</h3>
-                <div id="califContainer" class="col d-flex flex-column justify-content-center">
-                  <p class="calif">4.7</p>
                 </div>
               </div>
             </div>
@@ -47,8 +49,6 @@
         </div>
       </div>
       <div class="jumbotron infoText">
-        <h1 class="h1">Muro de discusiones</h1>
-        <hr class="my-4">
         <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
           {% for article in articles %}
           <div class="card">
