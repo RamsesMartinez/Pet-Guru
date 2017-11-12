@@ -135,10 +135,15 @@ def user(request):
         template = 'prof.html'
         solved = Question.objects.filter(user_response=request.user.pk).filter(Q(status='OP') | Q(status='RP'))
         article = Question.objects.filter(status='CL')
+        qualifications = []
+        for qualification in article:
+            qualifications.append(qualification.calification)
+        avg = sum(qualifications) / len(qualifications)
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
             'articles': article,
+            'avg': avg,
         }
         return render(request, template, context)
 
