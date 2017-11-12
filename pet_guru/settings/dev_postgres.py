@@ -1,4 +1,4 @@
-from pet_guru.settings.dev import *
+from pet_guru.settings.devp import *
 
 # Database
 DATABASES = {
