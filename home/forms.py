@@ -11,7 +11,8 @@ class Login(forms.Form):
 
 class Register(forms.Form):
   username = forms.CharField(max_length=20, label='Usuario')
-  password = forms.CharField(max_length=20, label='Contraseña')
+  password = forms.CharField(max_length=20, label='Contraseña', widget = forms.PasswordInput())
+  passwordConfirm = forms.CharField(max_length=20, label='Confirmar contraseña', widget = forms.PasswordInput())
   rol = forms.CharField(max_length=20, label='Tipo de usuario')
   speciality = forms.CharField(max_length=20, label='Especialidad')
 

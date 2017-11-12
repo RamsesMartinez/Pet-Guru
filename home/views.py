@@ -21,7 +21,6 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
-    print(articles)
     Login_form = Login(request.POST or None)
     
     if request.method == 'POST':
@@ -140,10 +139,12 @@ def user(request):
                     cow_form.save()
                     return redirect('home:usuario')
         solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
+        mine = Question.objects.filter(user_response=request.user.pk)
         article = Question.objects.filter(status='OP')
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
+            'mine': mine,
             'articles': article,
         }
 
@@ -154,11 +155,13 @@ def user(request):
 
 def register(request):
     template = 'user_register.html'
+    message = None
     register_form = Register(request.POST or None)
     
     context = {
     'title': 'Registro de usuarios',
     'form': register_form,
+    'message': 'Verifique los campos ingresados',
     }
 
     return render(request, template, context)
