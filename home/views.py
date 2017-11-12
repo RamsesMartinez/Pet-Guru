@@ -133,12 +133,10 @@ def user(request):
     elif request.user.rol == 'TC':
         template = 'prof.html'
         solved = Question.objects.filter(user_response=request.user.pk).filter(status='CL')
-        mine = Question.objects.filter(user_response=request.user.pk)
-        article = Question.objects.filter(status='OP')
+        article = Question.objects.filter(status='CL')
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
-            'mine': mine,
             'articles': article,
         }
 
