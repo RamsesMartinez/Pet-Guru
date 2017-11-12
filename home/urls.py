@@ -11,5 +11,6 @@ urlpatterns = [
   url(r'^nosotros/$', views.nosotros, name='nosotros'),
   url(r'^reglamento/$', views.reglamento, name='reglamento'),
   url(r'^pregunta/(?P<id>[0-9]+)/$', views.pregunta, name='pregunta'),
+  url(r'^registro/$', views.register, name='register'),
   url(r'^logout/$', views.logout, name='logout'),
 ]
