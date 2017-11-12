@@ -1,11 +1,19 @@
 from django import forms
 from .models import Question, Bovine, Porcine, Horse, Goat, Ovine, Rabbit
 from .models import Bird, Dog, Cat, Wild, Aquatic, Bee
+from users.models import User
 
 
 class Login(forms.Form):
   usuario = forms.CharField(max_length=20)
   contraseña = forms.CharField(max_length=20, widget = forms.PasswordInput())
+
+
+class Register(forms.Form):
+  username = forms.CharField(max_length=20, label='Usuario')
+  password = forms.CharField(max_length=20, label='Contraseña')
+  rol = forms.CharField(max_length=20, label='Tipo de usuario')
+  speciality = forms.CharField(max_length=20, label='Especialidad')
 
 
 class BaseForm(forms.ModelForm):
