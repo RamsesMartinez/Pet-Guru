@@ -172,5 +172,9 @@ class SpecieFilter(django_filters.FilterSet):
 def search(request):
     articles = Specie.objects.filter()
     f = SpecieFilter(request.GET, queryset=articles)
-    return render(request, 'article.html', {'filt': f})
+    context = {
+        'filt': f,
+        'articles': articles
+    }
+    return render(request, 'article.html', context)
             
