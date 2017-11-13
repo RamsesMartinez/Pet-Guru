@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
+from django.core.paginator import Paginator
 
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -31,6 +32,15 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(articles, 6)
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+        
     f = SpecieFilter(request.GET, queryset=articles)
 
     login_form = LogInForm(request.POST or None)
