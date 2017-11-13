@@ -91,7 +91,7 @@ class Specie(models.Model):
     }
 
     question = models.OneToOneField(Question, default='')
-    specie = models.CharField(max_length=10,choices=SPECIES)
+    specie = models.CharField(max_length=10, choices=SPECIES)
     race = models.CharField(max_length=20, null=False)
     age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
     gender = models.CharField(max_length=3, choices=SEX, default=MALE)
