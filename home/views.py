@@ -113,18 +113,22 @@ def user(request):
         bee_form = BeeForm(request.POST or None)
 
         if request.method == 'POST':
-            subject = 'Se ha creado una pregunta'
-            from_email = settings.EMAIL_HOST_USER
-            to_email = ['itzli2000@msn.com']
-            message = 'Mensaje prueba'
-            send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=message,
-                      fail_silently=False)
-            if base_form.is_valid():
-                base_form.save()
-                if cow_form.is_valid():
-                    cow_form.save()
+            # subject = 'Se ha creado una pregunta'
+            # from_email = settings.EMAIL_HOST_USER
+            # to_email = ['itzli2000@msn.com']
+            # message = 'Mensaje prueba'
+            # send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=message,
+            #           fail_silently=False)
+            if base_form.is_valid() and cow_form.is_valid():
+                base = base_form.save(commit=False)
+                cow = cow_form.save(commit=False)
+                base.user_question = request.user
+                base.Specie = 'Bovino'
+                cow.question_id = base.id
+                base.save()
+                cow.save()
 
-                    return redirect ('home:usuario')
+                return redirect ('home:usuario')
 
         context = {
             'title': "Bienvenido "+request.user.username,
