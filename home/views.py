@@ -59,6 +59,7 @@ def question(request, id=None):
     instance = get_object_or_404(Question, id=id)
     image = ImageQuestion.objects.filter(id_question=instance.id)
     context = {
+        'CN': "listo esto funciona",
         'images': image,
         'titulo': instance.title,
         'instance': instance,

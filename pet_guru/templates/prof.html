@@ -27,9 +27,7 @@
                 <p>Tipo de usuario: profesor</p> 
                 <p>Especialidad: {{ user.speciality }}</p>
                 {% endif %}
-                {% if request.user.rol == 'AD' %}
-                <p>Tipo de usuario: administrador</p>              
-                {% endif %}
+                <p>Tipo de usuario: request.user.get_rol_display</p>
                 <p>Calificacion: {{ avg }}</p>
               </div>
               <div class="col-sm-12 col-md-8 d-flex p-0 text-center flex-column justify-content-around">

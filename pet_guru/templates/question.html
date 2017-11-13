@@ -30,36 +30,7 @@
     <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
       <div class="alert alert-success w-75" role="alert">
         <h3 class="alert-heading text-center">Datos clínicos.</h3>
-        {% if instance.specie.specie  == 'EQ' %}
-        <p>Especie: Equino</p>
-        {% elif instance.specie.specie  == 'BV' %}    
-        <p>Especie: Bovino</p>         
-        {% elif instance.specie.specie == 'PR' %}
-        <p>Especie: Porcino</p>      
-        {% elif instance.specie.specie == 'OV' %}
-        <p>Especie: Ovino</p>      
-        {% elif instance.specie.specie == 'CP' %}
-        <p>Especie: Caprino</p>      
-        {% elif instance.specie.specie == 'LP' %}
-        <p>Especie: Lepórido</p>      
-        {% elif instance.specie.specie == 'AV' %}
-        <p>Especie: Ave</p>      
-        {% elif instance.specie.specie == 'CN' %}
-        <p>Especie: Canino</p>      
-        {% elif instance.specie.specie == 'FL' %}
-        <p>Especie: Felino</p>      
-        {% elif instance.specie.specie == 'SL' %}
-        <p>Especie: Silvestre</p>    
-        {% elif instance.specie.specie == 'BJ' %}
-        <p>Especie: Abeja</p>
-        {% endif %}
-        <p>Raza: {{instance.specie.race}}</p>
-        <p>Edad: {{instance.specie.age}}</p>
-        {% if instance.specie.gender == 'ML' %}
-        <p>Género: macho</p>
-        {% elif instance.specie.gender == 'ML' %}
-        <p>Género: hembra</p>
-        {% endif %}
+        <p>Especie: {{ instance.specie.get_specie_display }}</p>
         <hr>
         <h4 class="alert-heading text-center">Descripción de la consulta:</h4>
         <p class="mb-0">{{instance.description}}</p>
