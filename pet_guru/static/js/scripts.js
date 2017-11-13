@@ -211,6 +211,16 @@ $(document).ready(function() {
             $('[data-toggle="popover"]').popover();   
         }
     });
+    // Register form password validation
+    (function($) {
+      $('#id_password1, #id_password2').keyup(function() {
+        if ($('#id_password1').val() == $('#id_password2').val()) {
+          $('#messagepass').html('Las contraseñas coinciden').css('color', 'green');
+          $('#regisbtn').prop("disabled", false);
+        } else 
+        $('#messagepass').html('Las contraseñas no coinciden').css('color', 'red');
+      });
+    })(jQuery);
 
 
 
