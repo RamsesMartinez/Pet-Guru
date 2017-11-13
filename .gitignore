@@ -4,6 +4,7 @@
 
 ## File-based project format:
 *.iws
+*.rdb
 
 ## Plugin-specific files:
 

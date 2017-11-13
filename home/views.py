@@ -160,14 +160,10 @@ class SpecieFilter(django_filters.FilterSet):
     class Meta():
         model = Specie
         fields = ['specie']
-        labels = {'specie': 'Especie',}
 
 
 def search(request):
-    articles = Question.objects.all()
+    articles = Specie.objects.filter()
     f = SpecieFilter(request.GET, queryset=articles)
-    context = {
-    'filter_form': f,
-    }
-    return render(request, 'article.html', context)
+    return render(request, 'article.html', {'filt': f})
             
