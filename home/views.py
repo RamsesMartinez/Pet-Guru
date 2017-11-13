@@ -106,8 +106,8 @@ def logout(request):
 def user(request):
     if request.user.rol == 'ST':
         template = 'user.html'
-        solved = Question.objects.filter(user_response=request.user.pk)
-        articles = Question.objects.all()
+        solved = Question.objects.filter(user_response=request.user.pk).order_by('-id')
+        articles = Question.objects.all().order_by('-id')
         base_form = BaseForm(request.POST or None)
         cow_form = CowForm(request.POST or None)
         porcine_form = PorcineForm(request.POST or None)
@@ -258,8 +258,8 @@ def user(request):
 
     elif request.user.rol == 'TC':
         template = 'prof.html'
-        solved = Question.objects.filter(user_response=request.user.pk).filter(Q(status='OP') | Q(status='RP'))
-        article = Question.objects.filter(status='CL')
+        solved = Question.objects.filter(user_response=request.user.pk).filter(Q(status='OP') | Q(status='RP')).order_by('-id')
+        article = Question.objects.filter(status='CL').order_by('-id')
         avg = 0
 
         page = request.GET.get('page', 1)
