@@ -8,13 +8,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-EMAIL_HOST = 'localhost'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
-FROM_EMAIL = 'PetGuru <petguru.com>'
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('PET_GURU_SECRET_KEY')
 
