@@ -256,19 +256,38 @@ def user(request):
         return redirect('admin:login')
 
 
+# def register(request):
+#     template = "user_register.html"
+#     form_class = RegisterForm(request.POST or None)
+#     context = {
+#         'title': 'Registro de usuarios',
+#         'form': form_class,
+#     }
+#     if request.method == 'POST':
+#         if form_class.is_valid():
+#             form = form_class.save(commit=False)
+#             form.setpassword(form.password1)
+#             form.save()
+#     return render(request, template, context)
+
+
 def register(request):
     template = "user_register.html"
-    form_class = RegisterForm(request.POST or None)
+    f = RegisterForm()
+    messages = None
     context = {
         'title': 'Registro de usuarios',
-        'form': form_class,
+        'form': f,
     }
     if request.method == 'POST':
-        if form_class.is_valid():
-            form = form_class.save(commit=False)
-            form.setpassword(form.password1)
-            form.save()
+        f = RegisterForm(request.POST)
+        if f.is_valid():
+            f.save()
+            messages='Usuario creado correctamente'
+            return redirect('home:register')
+
     return render(request, template, context)
+
 
 
 class SpecieFilter(django_filters.FilterSet):
