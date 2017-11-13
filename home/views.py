@@ -40,7 +40,7 @@ def index(request):
         articles = paginator.page(1)
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
-        
+
     f = SpecieFilter(request.GET, queryset=articles)
 
     login_form = LogInForm(request.POST or None)
@@ -121,6 +121,16 @@ def user(request):
         wild_form = WildForm(request.POST or None)
         aquatic_form = AquaticForm(request.POST or None)
         bee_form = BeeForm(request.POST or None)
+
+
+        page = request.GET.get('page', 1)
+        paginator = Paginator(articles, 6)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
 
         if request.method == 'POST':
             # subject = 'Se ha creado una pregunta'
@@ -250,10 +260,24 @@ def user(request):
         template = 'prof.html'
         solved = Question.objects.filter(user_response=request.user.pk).filter(Q(status='OP') | Q(status='RP'))
         article = Question.objects.filter(status='CL')
+        avg = 0
+
+        page = request.GET.get('page', 1)
+        paginator = Paginator(solved, 6)
+        try:
+            solved = paginator.page(page)
+        except PageNotAnInteger:
+            solved = paginator.page(1)
+        except EmptyPage:
+            solved = paginator.page(paginator.num_pages)
+
         qualifications = []
         for qualification in article:
             qualifications.append(qualification.calification)
-        avg = sum(qualifications) / len(qualifications)
+            if qualifications != 0:
+                avg = 0
+            else:
+                avg = sum(qualifications) / len(qualifications)
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
