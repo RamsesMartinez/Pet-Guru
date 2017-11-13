@@ -8,7 +8,7 @@
       {% include 'base/nav.html' %}
       {% endblock %}
     </div>
-  </header>  
+  </header>
   <div class="container-fuid">
     <div id="mainBanner" class="d-flex justify-content-around align-items-center">
       <img src="{% static 'images/logo.png' %}" alt="Pet Gurú">
@@ -24,27 +24,34 @@
                 <img src="{% static 'images/user.png' %}" alt="User image" class="mb-2 img-thumbnail rounded-circle mx-auto d-block userimg">
                 <p>Usuario: {{ user }}</p>
                 {% if request.user.rol == 'TC' %}
-                <p>Tipo de usuario: profesor</p> 
+                <p>Tipo de usuario: profesor</p>
                 <p>Especialidad: {{ user.speciality }}</p>
                 {% endif %}
                 {% if request.user.rol == 'AD' %}
-                <p>Tipo de usuario: administrador</p>              
+                <p>Tipo de usuario: administrador</p>
                 {% endif %}
                 <p>Calificacion: {{ avg }}</p>
+                <div class="row text-center d-flex justify-content-center profStar">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
               </div>
               <div class="col-sm-12 col-md-8 d-flex p-0 text-center flex-column justify-content-around">
                 <h3 class=" mb-3">Mís preguntas:</h3>
                 <div id="userQuestions" class="col questContainer">
 
                   {% for solved in solveds %}
-                  <p>
+                  <div class="row d-flex justify-content-around align-items-center py-1">
                     <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
                     {% if solved.status == 'OP' %}
-                    <button>abierto</button>
+                    <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">abierto</button> </a>
                     {% else %}
-                    <button>contestando</button>
+                    <button class="btn btn-danger" style="cursor: default" disabled>contestando</button>
                     {% endif %}
-                  </p>
+                  </div>
                   {% endfor %}
 
                 </div>
@@ -52,22 +59,22 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="jumbotron infoText">
-        <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
-          {% for article in articles %}
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title card-banner">
-                <img src="{% static 'images/questions/thumb3.jpg' %}" class="img-fluid" alt="Question image">
+        <div class="jumbotron infoText">
+          <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
+            {% for article in articles %}
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title card-banner">
+                  <img src="{% static 'images/questions/thumb3.jpg' %}" class="img-fluid" alt="Question image">
+                </div>
+                <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
+                <p class="card-text">{{ article.specie.race }}</p>
+                <p class="card-text">{{ article.description }}</p>
+                <a href="{{ article.get_absolute_url }}" class="card-link">Leer más</a>
               </div>
-              <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
-              <p class="card-text">{{ article.specie.race }}</p>
-              <p class="card-text">{{ article.description }}</p>
-              <a href="{{ article.get_absolute_url }}" class="card-link">Leer más</a>
             </div>
+            {% endfor %}
           </div>
-          {% endfor %}
         </div>
       </main>
     </div>

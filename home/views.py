@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import authenticate
@@ -18,6 +19,7 @@ from .models import Specie
 from .models import ImageQuestion
 
 from users.models import User
+from django.core.mail import send_mail
 
 import django_filters
 
@@ -110,10 +112,17 @@ def user(request):
         bee_form = BeeForm(request.POST or None)
 
         if request.method == 'POST':
+            subject = 'Se ha creado una pregunta'
+            from_email = settings.EMAIL_HOST_USER
+            to_email = ['itzli2000@msn.com']
+            message = 'Mensaje prueba'
+            send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=message,
+                      fail_silently=False)
             if base_form.is_valid():
                 base_form.save()
                 if cow_form.is_valid():
                     cow_form.save()
+
                     return redirect ('home:usuario')
 
         context = {
@@ -160,7 +169,7 @@ class RegisterUser(CreateView):
     model = User
     template_name = "user_register.html"
     form_class = RegisterForm
-    success_url = reverse_lazy('home:usuario') 
+    success_url = reverse_lazy('home:usuario')
 
 
 class SpecieFilter(django_filters.FilterSet):
@@ -172,5 +181,8 @@ class SpecieFilter(django_filters.FilterSet):
 def search(request):
     articles = Specie.objects.filter()
     f = SpecieFilter(request.GET, queryset=articles)
-    return render(request, 'article.html', {'filt': f})
-            
+    context = {
+        'filt': f,
+        'articles': articles
+    }
+    return render(request, 'article.html', context)

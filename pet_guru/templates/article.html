@@ -27,6 +27,12 @@
                   {{ filt.form.specie.errors }}
                   {{ filt.form.specie }}
                 </div>
+                {% for article in articles %}
+                <a href=""><button type="button" class="btn btn-primary">
+                  {{ article.specie }} <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                {% endfor %}
                 <button type="submit" class="btn btn-primary">
                   Filtrar
                 </button>
