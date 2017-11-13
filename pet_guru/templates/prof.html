@@ -31,20 +31,27 @@
                 <p>Tipo de usuario: administrador</p>              
                 {% endif %}
                 <p>Calificacion: {{ avg }}</p>
+                <div class="row text-center d-flex justify-content-center profStar">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
               </div>
               <div class="col-sm-12 col-md-8 d-flex p-0 text-center flex-column justify-content-around">
                 <h3 class=" mb-3">Mís preguntas:</h3>
                 <div id="userQuestions" class="col questContainer">
 
                   {% for solved in solveds %}
-                  <p>
+                  <div class="row d-flex justify-content-around align-items-center">
                     <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
                     {% if solved.status == 'OP' %}
-                    <button>abierto</button>
+                   <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">abierto</button> </a>
                     {% else %}
-                    <button>contestando</button>
+                    <button class="btn btn-danger" disabled>contestando</button>
                     {% endif %}
-                  </p>
+                  </div>
                   {% endfor %}
 
                 </div>

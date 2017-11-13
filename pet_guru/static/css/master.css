@@ -251,6 +251,10 @@ p.calif {
   font-size: 40px;
   font-weight: bold; }
 
+.profStar > * {
+  font-size: 25px;
+  margin-right: 5px; }
+
 @media screen and (min-width: 550px) {
   .logIn {
     max-width: 20rem; } }
