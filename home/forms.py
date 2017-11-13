@@ -27,7 +27,7 @@ class RegisterForm(UserCreationForm):
             'username': 'Nombre de usuario',
             'email': 'Correo electronico',
             'rol': 'Tipo de usuario',
-            'speciality': 'especialidad',
+            'speciality': 'Especialidad',
             'password1': 'Contraseña',
             'password2': 'Confirmar contraseña',
         }
