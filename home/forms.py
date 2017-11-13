@@ -7,8 +7,8 @@ from users.models import User
 
 
 class LogInForm(forms.Form):
-    user = forms.CharField(max_length=20)
-    password = forms.CharField(max_length=20, widget=forms.PasswordInput())
+    Usuario = forms.CharField(max_length=20)
+    Contraseña = forms.CharField(max_length=20, widget=forms.PasswordInput())
 
 
 class RegisterForm(UserCreationForm):
@@ -25,7 +25,7 @@ class RegisterForm(UserCreationForm):
         labels = {
             'username': 'Nombre de usuario',
             'email': 'Correo electronico',
-            'rol': 'rol',
+            'rol': 'Tipo de usuario',
             'speciality': 'especialidad',
             'password1': 'Contraseña',
             'password2': 'Confirmar contraseña',

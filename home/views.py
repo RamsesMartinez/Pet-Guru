@@ -14,9 +14,12 @@ from django.db.models import Q
 from .forms import *
 
 from .models import Question
+from .models import Specie
 from .models import ImageQuestion
 
 from users.models import User
+
+import django_filters
 
 
 def index(request):
@@ -26,12 +29,13 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
+    f = SpecieFilter(request.GET, queryset=articles)
 
     login_form = LogInForm(request.POST or None)
 
     if request.method == 'POST':
-        user_log = request.POST['usuario']
-        pass_log = request.POST['contraseña']
+        user_log = request.POST['Usuario']
+        pass_log = request.POST['Contraseña']
         user_auth = authenticate(username=user_log, password=pass_log)
 
         if user_auth is not None:
@@ -45,6 +49,7 @@ def index(request):
         'message': message,
         'articles': articles,
         'form': login_form,
+        'filter': f,
     }
     return render(request, template, context)
 
@@ -156,3 +161,16 @@ class RegisterUser(CreateView):
     template_name = "user_register.html"
     form_class = RegisterForm
     success_url = reverse_lazy('home:usuario') 
+
+
+class SpecieFilter(django_filters.FilterSet):
+    class Meta():
+        model = Specie
+        fields = ['specie']
+
+
+def search(request):
+    articles = Specie.objects.filter()
+    f = SpecieFilter(request.GET, queryset=articles)
+    return render(request, 'article.html', {'filt': f})
+            
