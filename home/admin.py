@@ -7,6 +7,8 @@ from .models import Horse
 from .models import Ovine
 from .models import Goat
 from .models import Rabbit
+from .models import Bee
+from .models import Bird
 
 
 @admin.register(Question)
@@ -41,5 +43,15 @@ class BovineAdmin(admin.ModelAdmin):
 
 
 @admin.register(Rabbit)
+class BovineAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question')
+
+
+@admin.register(Bee)
+class BovineAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question')
+
+
+@admin.register(Bird)
 class BovineAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')

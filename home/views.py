@@ -113,18 +113,98 @@ def user(request):
         bee_form = BeeForm(request.POST or None)
 
         if request.method == 'POST':
-            subject = 'Se ha creado una pregunta'
-            from_email = settings.EMAIL_HOST_USER
-            to_email = ['itzli2000@msn.com']
-            message = 'Mensaje prueba'
-            send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=message,
-                      fail_silently=False)
-            if base_form.is_valid():
-                base_form.save()
-                if cow_form.is_valid():
-                    cow_form.save()
+            # subject = 'Se ha creado una pregunta'
+            # from_email = settings.EMAIL_HOST_USER
+            # to_email = ['itzli2000@msn.com']
+            # message = 'Mensaje prueba'
+            # send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=message,
+            #           fail_silently=False)
+            if base_form.is_valid() and cow_form.is_valid():
+                base = base_form.save(commit=False)
+                cow = cow_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                cow.question = base
+                cow.save()
+            elif base_form.is_valid() and porcine_form.is_valid():
+                base = base_form.save(commit=False)
+                pig = porcine_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                pig.question = base
+                pig.save()
+            elif base_form.is_valid() and horse_form.is_valid():
+                base = base_form.save(commit=False)
+                horse = horse_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                horse.question = base
+                horse.save()
+            elif base_form.is_valid() and ovine_form.is_valid():
+                base = base_form.save(commit=False)
+                ovine = ovine_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                ovine.question = base
+                ovine.save()
+            elif base_form.is_valid() and goat_form.is_valid():
+                base = base_form.save(commit=False)
+                goat = goat_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                goat.question = base
+                goat.save()
+            elif base_form.is_valid() and rabbit_form.is_valid():
+                base = base_form.save(commit=False)
+                rab = rabbit_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                rab.question = base
+                rab.save()
+            elif base_form.is_valid() and bird_form.is_valid():
+                base = base_form.save(commit=False)
+                bird = bird_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                bird.question = base
+                bird.save()
+            elif base_form.is_valid() and dog_form.is_valid():
+                base = base_form.save(commit=False)
+                dog = dog_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                dog.question = base
+                dog.save()
+            elif base_form.is_valid() and cat_form.is_valid():
+                base = base_form.save(commit=False)
+                cat = cat_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                cat.question = base
+                cat.save()
+            elif base_form.is_valid() and wild_form.is_valid():
+                base = base_form.save(commit=False)
+                wild = wild_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                wild.question = base
+                wild.save()
+            elif base_form.is_valid() and aquatic_form.is_valid():
+                base = base_form.save(commit=False)
+                dog = aquatic_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                dog.question = base
+                dog.save()
+            elif base_form.is_valid() and bee_form.is_valid():
+                base = base_form.save(commit=False)
+                dog = bee_form.save(commit=False)
+                base.user_question = request.user
+                base.save()
+                dog.question = base
+                dog.save()
 
-                    return redirect ('home:usuario')
+                return redirect ('home:usuario')
 
         context = {
             'title': "Bienvenido "+request.user.username,
