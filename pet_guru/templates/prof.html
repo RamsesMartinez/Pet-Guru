@@ -42,7 +42,6 @@
               <div class="col-sm-12 col-md-8 d-flex p-0 text-center flex-column justify-content-around">
                 <h3 class=" mb-3">Mís preguntas:</h3>
                 <div id="userQuestions" class="col questContainer">
-
                   {% for solved in solveds %}
                   <div class="row d-flex justify-content-around align-items-center py-1">
                     <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
@@ -53,15 +52,15 @@
                     {% endif %}
                   </div>
                   {% endfor %}
-
                 </div>
+
               </div>
             </div>
           </div>
         </div>
         <div class="jumbotron infoText">
           <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
-            {% for article in articles %}
+            {% for article in solveds %}
             <div class="card">
               <div class="card-body">
                 <div class="card-title card-banner">
@@ -74,6 +73,31 @@
               </div>
             </div>
             {% endfor %}
+          </div>
+          <div class="row d-flex justify-content-center pt-5">
+            {% if solveds.has_other_pages %}
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                {% if solveds.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ solveds.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+                {% for i in solveds.paginator.page_range %}
+                {% if solveds.number == i %}
+                <li class="active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if solveds.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ solveds.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                {% endif %}
+              </ul>
+            </nav>
+            {% endif %}
           </div>
         </div>
       </main>

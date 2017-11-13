@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
+from django.core.paginator import Paginator
 
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -31,6 +32,15 @@ def index(request):
     template = 'index.html'
     message = None
     articles = Question.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(articles, 6)
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+
     f = SpecieFilter(request.GET, queryset=articles)
 
     login_form = LogInForm(request.POST or None)
@@ -112,6 +122,16 @@ def user(request):
         aquatic_form = AquaticForm(request.POST or None)
         bee_form = BeeForm(request.POST or None)
 
+
+        page = request.GET.get('page', 1)
+        paginator = Paginator(articles, 6)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
         if request.method == 'POST':
             # subject = 'Se ha creado una pregunta'
             # from_email = settings.EMAIL_HOST_USER
@@ -126,6 +146,7 @@ def user(request):
                 base.save()
                 cow.question = base
                 cow.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and porcine_form.is_valid():
                 base = base_form.save(commit=False)
                 pig = porcine_form.save(commit=False)
@@ -133,6 +154,7 @@ def user(request):
                 base.save()
                 pig.question = base
                 pig.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and horse_form.is_valid():
                 base = base_form.save(commit=False)
                 horse = horse_form.save(commit=False)
@@ -140,6 +162,7 @@ def user(request):
                 base.save()
                 horse.question = base
                 horse.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and ovine_form.is_valid():
                 base = base_form.save(commit=False)
                 ovine = ovine_form.save(commit=False)
@@ -147,6 +170,7 @@ def user(request):
                 base.save()
                 ovine.question = base
                 ovine.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and goat_form.is_valid():
                 base = base_form.save(commit=False)
                 goat = goat_form.save(commit=False)
@@ -154,6 +178,7 @@ def user(request):
                 base.save()
                 goat.question = base
                 goat.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and rabbit_form.is_valid():
                 base = base_form.save(commit=False)
                 rab = rabbit_form.save(commit=False)
@@ -161,6 +186,7 @@ def user(request):
                 base.save()
                 rab.question = base
                 rab.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and bird_form.is_valid():
                 base = base_form.save(commit=False)
                 bird = bird_form.save(commit=False)
@@ -168,6 +194,7 @@ def user(request):
                 base.save()
                 bird.question = base
                 bird.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and dog_form.is_valid():
                 base = base_form.save(commit=False)
                 dog = dog_form.save(commit=False)
@@ -175,6 +202,7 @@ def user(request):
                 base.save()
                 dog.question = base
                 dog.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and cat_form.is_valid():
                 base = base_form.save(commit=False)
                 cat = cat_form.save(commit=False)
@@ -182,6 +210,7 @@ def user(request):
                 base.save()
                 cat.question = base
                 cat.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and wild_form.is_valid():
                 base = base_form.save(commit=False)
                 wild = wild_form.save(commit=False)
@@ -189,21 +218,22 @@ def user(request):
                 base.save()
                 wild.question = base
                 wild.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and aquatic_form.is_valid():
                 base = base_form.save(commit=False)
-                dog = aquatic_form.save(commit=False)
+                aq = aquatic_form.save(commit=False)
                 base.user_question = request.user
                 base.save()
-                dog.question = base
-                dog.save()
+                aq.question = base
+                aq.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and bee_form.is_valid():
                 base = base_form.save(commit=False)
-                dog = bee_form.save(commit=False)
+                bee = bee_form.save(commit=False)
                 base.user_question = request.user
                 base.save()
-                dog.question = base
-                dog.save()
-
+                bee.question = base
+                bee.save()
                 return redirect ('home:usuario')
 
         context = {
@@ -230,10 +260,24 @@ def user(request):
         template = 'prof.html'
         solved = Question.objects.filter(user_response=request.user.pk).filter(Q(status='OP') | Q(status='RP'))
         article = Question.objects.filter(status='CL')
+        avg = 0
+
+        page = request.GET.get('page', 1)
+        paginator = Paginator(solved, 6)
+        try:
+            solved = paginator.page(page)
+        except PageNotAnInteger:
+            solved = paginator.page(1)
+        except EmptyPage:
+            solved = paginator.page(paginator.num_pages)
+
         qualifications = []
         for qualification in article:
             qualifications.append(qualification.calification)
-        avg = sum(qualifications) / len(qualifications)
+            if qualifications != 0:
+                avg = sum(qualifications) / len(qualifications)
+            else:
+                avg = 0
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
@@ -243,14 +287,26 @@ def user(request):
         return render(request, template, context)
 
     elif request.user.rol == 'AD':
-        return redirect('admin:login')
+        return redirect('home:register')
 
 
-class RegisterUser(CreateView):
-    model = User
-    template_name = "user_register.html"
-    form_class = RegisterForm
-    success_url = reverse_lazy('home:usuario')
+def register(request):
+    template = "user_register.html"
+    f = RegisterForm()
+    messages = None
+    context = {
+        'title': 'Registro de usuarios',
+        'form': f,
+    }
+    if request.method == 'POST':
+        f = RegisterForm(request.POST)
+        if f.is_valid():
+            f.save()
+            messages='Usuario creado correctamente'
+            return redirect('home:register')
+
+    return render(request, template, context)
+
 
 
 class SpecieFilter(django_filters.FilterSet):
