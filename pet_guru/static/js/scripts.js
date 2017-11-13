@@ -214,9 +214,13 @@ $(document).ready(function() {
     // Register form password validation
     (function($) {
       $('#id_password1, #id_password2').keyup(function() {
-        if ($('#id_password1').val() == $('#id_password2').val()) {
+        var pass1 = $('#id_password1').val();
+        var pass2 = $('#id_password2').val();
+        if ( pass1 == pass2) {
           $('#messagepass').html('Las contraseñas coinciden').css('color', 'green');
-          $('#regisbtn').prop("disabled", false);
+          if (pass1.length  > '7') {
+            $('#regisbtn').prop("disabled", false);
+          }
         } else 
         $('#messagepass').html('Las contraseñas no coinciden').css('color', 'red');
       });
