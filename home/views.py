@@ -133,19 +133,20 @@ def user(request):
             articles = paginator.page(paginator.num_pages)
 
         if request.method == 'POST':
-            # subject = 'Se ha creado una pregunta'
-            # from_email = settings.EMAIL_HOST_USER
-            # to_email = ['itzli2000@msn.com']
-            # message = 'Mensaje prueba'
-            # send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=message,
-            #           fail_silently=False)
             if base_form.is_valid() and cow_form.is_valid():
+                # subject = 'Se ha creado una pregunta'
+                # from_email = settings.EMAIL_HOST_USER
+                # to_email = ['itzli2000@msn.com']
+                # message = 'Mensaje prueba'
+                # send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=message,
+                #           fail_silently=False)
                 base = base_form.save(commit=False)
                 cow = cow_form.save(commit=False)
                 base.user_question = request.user
                 base.save()
                 cow.question = base
                 cow.save()
+                # profesor_bovino = User.objects.filter(Q(speciality='BV')|Q(rol='TC'))
                 return redirect ('home:usuario')
             elif base_form.is_valid() and porcine_form.is_valid():
                 base = base_form.save(commit=False)

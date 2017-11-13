@@ -511,7 +511,7 @@ class Aquatic(models.Model):
     nh3 = models.IntegerField()
     transparency = models.IntegerField()
     mortality = models.IntegerField()
-    start_mortality = models.DateField()
+    start_mortality = models.CharField(max_length=30)
     position = models.CharField(max_length=3, choices=COLUMNPOSITION)
     body_color = models.CharField(max_length=3, choices=FISHPOPULATIONCOLOR)
     moves = models.CharField(max_length=3, choices=FISHMOVEMENT)
