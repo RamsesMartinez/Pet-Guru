@@ -47,6 +47,9 @@
                 <label for="{{ form.speciality.id_for_label }}">{{ form.speciality.label }}</label>
                 {{ form.speciality }}
               </div>
+              <div class="form-group">
+                <span class="font-weight-bold">Las contraseñas deben tener al menos 8 caracteres!!</span>
+              </div>
               <div class="form-group d-flex flex-column-reverse">
                 {{ form.password1.errors }}
                 <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
@@ -57,9 +60,12 @@
                 <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
                 {{ form.password2 }}
               </div>
+              <div class="form-group">
+                <span id='messagepass'></span>
+              </div>
               <div class="form-group d-flex justify-content-around">
-                <button type="submit" class="btn btn-success">Crear</button>
-                <button type="reset" class="btn btn-danger">Limpiar</button>
+                <button id="regisbtn" type="submit" class="btn btn-lg btn-success" disabled>Crear</button>
+                <button type="reset" class="btn btn-lg btn-danger">Limpiar</button>
               </div>
             </form> 
           </div>

@@ -290,20 +290,24 @@ def user(request):
         return redirect('home:register')
 
 
+@login_required(login_url='home:inicio')
 def register(request):
-    template = "user_register.html"
-    f = RegisterForm()
-    messages = None
-    context = {
-        'title': 'Registro de usuarios',
-        'form': f,
-    }
-    if request.method == 'POST':
-        f = RegisterForm(request.POST)
-        if f.is_valid():
-            f.save()
-            messages='Usuario creado correctamente'
-            return redirect('home:register')
+    if request.user.rol == 'AD':
+        template = "user_register.html"
+        f = RegisterForm()
+        messages = None
+        context = {
+            'title': 'Registro de usuarios',
+            'form': f,
+        }
+        if request.method == 'POST':
+            f = RegisterForm(request.POST)
+            if f.is_valid():
+                f.save()
+                messages='Usuario creado correctamente'
+                return redirect('home:register')
+    else:
+        return redirect('home:inicio')
 
     return render(request, template, context)
 
