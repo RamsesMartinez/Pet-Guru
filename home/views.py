@@ -275,9 +275,9 @@ def user(request):
         for qualification in article:
             qualifications.append(qualification.calification)
             if qualifications != 0:
-                avg = 0
-            else:
                 avg = sum(qualifications) / len(qualifications)
+            else:
+                avg = 0
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
