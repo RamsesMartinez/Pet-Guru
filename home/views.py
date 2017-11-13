@@ -126,6 +126,7 @@ def user(request):
                 base.save()
                 cow.question = base
                 cow.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and porcine_form.is_valid():
                 base = base_form.save(commit=False)
                 pig = porcine_form.save(commit=False)
@@ -133,6 +134,7 @@ def user(request):
                 base.save()
                 pig.question = base
                 pig.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and horse_form.is_valid():
                 base = base_form.save(commit=False)
                 horse = horse_form.save(commit=False)
@@ -140,6 +142,7 @@ def user(request):
                 base.save()
                 horse.question = base
                 horse.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and ovine_form.is_valid():
                 base = base_form.save(commit=False)
                 ovine = ovine_form.save(commit=False)
@@ -147,6 +150,7 @@ def user(request):
                 base.save()
                 ovine.question = base
                 ovine.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and goat_form.is_valid():
                 base = base_form.save(commit=False)
                 goat = goat_form.save(commit=False)
@@ -154,6 +158,7 @@ def user(request):
                 base.save()
                 goat.question = base
                 goat.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and rabbit_form.is_valid():
                 base = base_form.save(commit=False)
                 rab = rabbit_form.save(commit=False)
@@ -161,6 +166,7 @@ def user(request):
                 base.save()
                 rab.question = base
                 rab.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and bird_form.is_valid():
                 base = base_form.save(commit=False)
                 bird = bird_form.save(commit=False)
@@ -168,6 +174,7 @@ def user(request):
                 base.save()
                 bird.question = base
                 bird.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and dog_form.is_valid():
                 base = base_form.save(commit=False)
                 dog = dog_form.save(commit=False)
@@ -175,6 +182,7 @@ def user(request):
                 base.save()
                 dog.question = base
                 dog.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and cat_form.is_valid():
                 base = base_form.save(commit=False)
                 cat = cat_form.save(commit=False)
@@ -182,6 +190,7 @@ def user(request):
                 base.save()
                 cat.question = base
                 cat.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and wild_form.is_valid():
                 base = base_form.save(commit=False)
                 wild = wild_form.save(commit=False)
@@ -189,21 +198,22 @@ def user(request):
                 base.save()
                 wild.question = base
                 wild.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and aquatic_form.is_valid():
                 base = base_form.save(commit=False)
-                dog = aquatic_form.save(commit=False)
+                aq = aquatic_form.save(commit=False)
                 base.user_question = request.user
                 base.save()
-                dog.question = base
-                dog.save()
+                aq.question = base
+                aq.save()
+                return redirect ('home:usuario')
             elif base_form.is_valid() and bee_form.is_valid():
                 base = base_form.save(commit=False)
-                dog = bee_form.save(commit=False)
+                bee = bee_form.save(commit=False)
                 base.user_question = request.user
                 base.save()
-                dog.question = base
-                dog.save()
-
+                bee.question = base
+                bee.save()
                 return redirect ('home:usuario')
 
         context = {
@@ -246,11 +256,19 @@ def user(request):
         return redirect('admin:login')
 
 
-class RegisterUser(CreateView):
-    model = User
-    template_name = "user_register.html"
-    form_class = RegisterForm
-    success_url = reverse_lazy('home:usuario')
+def register(request):
+    template = "user_register.html"
+    form_class = RegisterForm(request.POST or None)
+    context = {
+        'title': 'Registro de usuarios',
+        'form': form_class,
+    }
+    if request.method == 'POST':
+        if form_class.is_valid():
+            form = form_class.save(commit=False)
+            form.setpassword(form.password1)
+            form.save()
+    return render(request, template, context)
 
 
 class SpecieFilter(django_filters.FilterSet):
