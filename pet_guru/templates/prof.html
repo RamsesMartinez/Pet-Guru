@@ -49,7 +49,7 @@
                     {% if solved.status == 'OP' %}
                     <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">abierto</button> </a>
                     {% else %}
-                    <button class="btn btn-danger" disabled>contestando</button>
+                    <button class="btn btn-danger" style="cursor: default" disabled>contestando</button>
                     {% endif %}
                   </div>
                   {% endfor %}
