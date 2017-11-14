@@ -186,7 +186,6 @@ def user(request):
                             ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
                             '\n Condición corporal: '+pig.body_condition
                     pig.save()
-
                     save_images(base)
 
                     try:
@@ -212,6 +211,12 @@ def user(request):
                     horse.save()
                     horsemail(request, message)
                     save_images(base)
+
+                    try:
+                        cowmail(request, message)
+                    except Exception as e:
+                        print('ERROR: ' + e.args)
+
                     return redirect('home:usuario')
 
                 elif ovine_form.is_valid():
