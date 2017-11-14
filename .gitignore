@@ -135,7 +135,7 @@ users/migrations/*
 staticfiles/
 #Database
 questions/
-media/
+pet_guru/media/
 # Databases
 *.sqlite3
 .Rproj.user
