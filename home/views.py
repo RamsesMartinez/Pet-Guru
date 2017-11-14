@@ -215,13 +215,13 @@ def user(request):
                 base.save()
                 goat.question = base
                 message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
-                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
-                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
-                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
-                        '\n Curso del padecimiento en días: '+pig.curse+\
-                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
-                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
-                        '\n Condición corporal: '+pig.body_condition
+                        '\n\n\n Especie: '+goat.get_specie_display()+'\n Raza: '+goat.race+\
+                        '\n Edad: '+str(goat.age)+'\n Género: '+str(goat.gender)+'\n Peso: '+str(goat.weight)+\
+                        '\n Etapa fisiológica: '+goat.physiological_stage+'\n Sistema de producción: '+goat.production_system+\
+                        '\n Fin zootécnico: '+goat.zootechnical+'\n Tiempo de llenado capilar'+goat.capilar+\
+                        '\n Frecuencia cardiaca: '+str(goat.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(goat.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(goat.temperature)+' °C'+'\n Color de mucosas: '+goat.mucosal_color+'\n Movimientos ruminales: '+goat.ruminal+\
+                        '\n Linfonodos: '+goat.lymph_nodes+'\n Reflejo tusígeno: '+goat.cough+'\n Condición corporal: '+goat.body_condition
                 goat.save()
                 goatmail(request, message)
                 return redirect ('home:usuario')
@@ -232,13 +232,11 @@ def user(request):
                 base.save()
                 rab.question = base
                 message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
-                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
-                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
-                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
-                        '\n Curso del padecimiento en días: '+pig.curse+\
-                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
-                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
-                        '\n Condición corporal: '+pig.body_condition
+                        '\n\n\n Especie: '+rab.get_specie_display()+'\n Raza: '+rab.race+\
+                        '\n Edad: '+str(rab.age)+'\n Género: '+str(rab.gender)+'\n Peso: '+str(rab.weight)+\
+                        '\n Etapa productiva: '+rab.productive_stage+'\n Frecuencia cardiaca: '+str(rab.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(rab.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(rab.temperature)+' °C'+'\n Color de mucosas: '+rab.color+'\n Ganglios linfáticos: '+rab.lymph_nodes+\
+                        '\n Tiempo de llenado capilar: '+rab.capilar+'\n Deshidratación: '+rab.dehydration+'\n Condición corporal: '+rab.body_condition
                 rab.save()
                 rabbitmail(request, message)
                 return redirect ('home:usuario')
@@ -249,13 +247,14 @@ def user(request):
                 base.save()
                 bird.question = base
                 message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
-                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
-                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
-                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
-                        '\n Curso del padecimiento en días: '+pig.curse+\
-                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
-                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
-                        '\n Condición corporal: '+pig.body_condition
+                        '\n\n\n Tipo de animal: '+bird.type_animal+'\n Fin zootécnico: '+bird.zootechnical_purpose+\
+                        '\n Edad: '+bird.age+'\n Edad en semanas: '+str(bird.age_week)+'\n Edad en meses: '+str(bird.age_month)+\
+                        '\n Lugar de encierro: '+bird.place+'\n Cantidad de animales: '+str(bird.quantity)+\
+                        '\n Origen del agua: '+bird.origin_water+'\n Morbilidad: '+str(bird.morbidity)+'\n Mortalidad: '+str(bird.mortality)+'\n Fecha de inicio de los signos: '+str(bird.date_signs)+\
+                        '\n Consumo de agua: '+bird.water+'\n Consumo de alimento: '+bird.eat+'\n Calendario de vacunaciones: '+bird.vaccine+\
+                        '\n Defecación: '+bird.defecation+'\n Condición corporal: '+bird.condition_corporal+'\n Condición del plumaje: '+bird.plumage+\
+                        '\n Condición de las patas: '+bird.condition_legs+'\n Frecuencia respiratoria: '+str(bird.breathing_frequency)+\
+                        '\n Actitud: '+bird.attitude
                 bird.save()
                 birdmail(request, message)
                 return redirect ('home:usuario')
@@ -266,13 +265,11 @@ def user(request):
                 base.save()
                 dog.question = base
                 message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
-                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
-                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
-                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
-                        '\n Curso del padecimiento en días: '+pig.curse+\
-                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
-                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
-                        '\n Condición corporal: '+pig.body_condition
+                        '\n\n\n Especie: '+dog.get_specie_display()+'\n Raza: '+dog.race+\
+                        '\n Edad: '+str(dog.age)+'\n Género: '+str(dog.gender)+'\n Peso: '+str(dog.weight)+\
+                        '\n Frecuencia cardiaca: '+str(dog.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(dog.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(dog.temperature)+' °C'+'\n Tiempo de llenado capilar: '+str(dog.capilar)+'\n Color de mucosas: '+dog.mucosal_color+'\n Reflejo tusígeno: '+dog.cough+\
+                        '\n Pulso correspondiente: '+dog.pulse+'\n Lesiones en piel: '+dog.skin
                 dog.save()
                 dogmail(request, message)
                 return redirect ('home:usuario')
@@ -283,13 +280,11 @@ def user(request):
                 base.save()
                 cat.question = base
                 message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
-                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
-                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
-                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
-                        '\n Curso del padecimiento en días: '+pig.curse+\
-                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
-                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
-                        '\n Condición corporal: '+pig.body_condition
+                        '\n\n\n Especie: '+cat.get_specie_display()+'\n Raza: '+cat.race+\
+                        '\n Edad: '+str(cat.age)+'\n Género: '+str(cat.gender)+'\n Peso: '+str(cat.weight)+\
+                        '\n Frecuencia cardiaca: '+str(cat.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(cat.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(cat.temperature)+' °C'+'\n Tiempo de llenado capilar: '+str(cat.capilar)+'\n Color de mucosas: '+cat.mucosal_color+'\n Reflejo tusígeno: '+cat.cough+\
+                        '\n Pulso correspondiente: '+cat.pulse+'\n Lesiones en piel: '+cat.skin
                 cat.save()
                 catmail(request, message)
                 return redirect ('home:usuario')
@@ -300,13 +295,11 @@ def user(request):
                 base.save()
                 wild.question = base
                 message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
-                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
-                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
-                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
-                        '\n Curso del padecimiento en días: '+pig.curse+\
-                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
-                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
-                        '\n Condición corporal: '+pig.body_condition
+                        '\n\n\n Especie: '+wild.specie+'\n Fin zootécnico: '+wild.zootechnical+\
+                        '\n Condiciones Medio-Ambientales: '+wild.ambiental_condition+'\n Alimentación: '+wild.feeding+'\n Antecedentes patológicos/hereditarios: '+wild.background+\
+                        '\n Evolución de la enfermedad actual: '+wild.evolution_disease+'\n Frecuencia cardiaca: '+str(wild.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(wild.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(wild.temperature)+' °C'+'\n Tiempo de llenado capilar: '+str(wild.capilar)+'\n Coloración de mucosas: '+wild.mucosal_color+'\n Linfonodos: '+wild.lymph_nodes+\
+                        '\n Movimientos ruminales: '+wild.ruminal
                 wild.save()
                 wildmail(request, message)
                 return redirect ('home:usuario')
@@ -317,13 +310,18 @@ def user(request):
                 base.save()
                 aq.question = base
                 message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
-                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
-                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
-                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
-                        '\n Curso del padecimiento en días: '+pig.curse+\
-                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
-                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
-                        '\n Condición corporal: '+pig.body_condition
+                        '\n\n\n Grupo genético: '+aq.genetic+'\n Fin zootécnico: '+aq.zootechnical+\
+                        '\n Edad: '+str(aq.age)+'\n Peso promedio de la polacion: '+str(aq.weight)+'\n Tipo de estanque: '+aq.pond+\
+                        '\n Densidad: '+str(aq.density)
+                        # '\n Biomasa: '+str(aq.biomass)+'\n Presencia de sistema de aireación: '+aq.aeration+\
+                        # '\n Tipo de aireador: '+aq.recirculation_water+'\n Presencia de sistema de recirculación de agua: '+str(aq.recirculation_water)+\
+                        # '\n Recambio diario de agua: '+str(aq.change_water)+'\n Fecha de siembra: '+aq.date_sowing+'\n Temperatura (6 am): '+str(aq.temperature_6am)+\
+                        # '\n Temperatura 3 pm): '+str(aq.temperature_3pm)+'\n Oxígeno disuelto en agua (6 am): '+str(aq.oxygen_6am)+'\n Oxígeno disuelto en agua (3 pm): '+str(aq.oxygen_3pm)+\
+                        # '\n pH (6 am): '+str(aq.ph_6am)+'\n pH (3 pm): '+str(aq.ph_3pm)+'\n Nitritos (NO2): '+str(aq.no2)+'\n Amonio (NH4): '+str(aq.nh4)+'\n Amoniaco (NH3): '+str(aq.nh3)+\
+                        # '\n Transparencia: '+str(aq.transparency)+'\n Mortalidad acumulada: '+str(aq.mortality)+'\n Inicio de la mortandad: '+aq.start_mortality+'\n Posición de los peces en la columna de agua: '+aq.position+'\n Coloración del cuerpo de los peces: '+aq.body_color+\
+                        # '\n Tipo de movimiento de los peces en el agua: '+aq.moves+'\n Inapetencia: '+aq.lack_of_appetite+'\n Tipo de alimentación: '+aq.type_eat+'\n Cantidad de alimento administrado por día: '+aq.eat_for_day+'\n Coloración: '+aq.coloration+\
+                        # '\n Vientre abultado: '+aq.bulging_belly+'\n Exoftalmia: '+aq.exophthalmia+'\n Petequias en base de aletas: '+aq.petechia+'\n Aletas desilachadas: '+aq.dilated+'\n Úlceras: '+aq.ulcers+\
+                        # '\n Llagas en piel: '+aq.skin_sores+'\n Estructuras algodonosas: '+aq.cotton_structures+'\n Necrosis en capa epidérmica: '+aq.necrosis_epidermal_layer+'\n Opacidad ocular: '+aq.ocular_opacity
                 aq.save()
                 fishmail(request, message)
                 return redirect ('home:usuario')
@@ -334,13 +332,14 @@ def user(request):
                 base.save()
                 bee.question = base
                 message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
-                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
-                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
-                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
-                        '\n Curso del padecimiento en días: '+pig.curse+\
-                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
-                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
-                        '\n Condición corporal: '+pig.body_condition
+                        '\n\n\n Especie: '+bee.specie+'\n Tipo de colonia: '+bee.colony_type+\
+                        '\n Revisión de colmena: '+bee.hive_review+'\n Presencia de la reina: '+bee.queen_presence+'\n Cría: '+bee.breeding+\
+                        '\n Abeja adulta: '+bee.adult_bee+'\n Número de bastidores cubiertos por abejas en la cámara de cría y en las alzas: '+str(bee.backstage_bee)+'\n Presencia de celdas reales: '+bee.real_cell+\
+                        '\n Número de bastidores cubiertos por cría: '+str(bee.backstage_breeding)+\
+                        '\n Cantidad de huevos por celda: '+str(bee.quantity_eggs)+'\n Observación de características anormales en la entrada de la colmena: '+bee.observations+\
+                        '\n Manchas de heces: '+bee.stool_spots+'\n Pedazos de larvas o larvas completas: '+bee.piece_larvae+\
+                        '\n Presencia de abejas muertas al frente de la piquera: '+bee.dead_bees+'\n Presencia de alimento en bastidores: '+bee.food_racks+'\nNúmero de bastidores con miel, polen o néctar: '+str(bee.number_racks)
+                        # '\n Presencia de huevos: '+bee.eggs+\
                 bee.save()
                 beemail(request, message)
                 return redirect ('home:usuario')
