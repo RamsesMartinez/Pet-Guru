@@ -1,8 +1,10 @@
+from decimal import Decimal
+
 from django.db import models
-from decimal import Decimal, DecimalException
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
-from . import options
+from django.utils.text import slugify
+
 from users.models import User
 
 
@@ -16,6 +18,7 @@ class Question(models.Model):
         (CLOSE, 'Cerrada'),
         (RESPONDING, 'Respondiendo'),
     )
+
     title = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True)
     status = models.CharField(max_length=2, null=True, choices=STATUS, default='OP')
@@ -31,9 +34,16 @@ class Question(models.Model):
         return reverse("home:pregunta", kwargs={'id':self.id})
 
 
+def get_image_filename(instance, filename):
+    title = instance.question.title
+    slug = slugify(title)
+
+    return "question_images/%s-%s" % (slug, filename)
+
+
 class ImageQuestion(models.Model):
-    image = models.ImageField(upload_to='questions')
-    id_question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, default=None)
+    image = models.ImageField(upload_to=get_image_filename, verbose_name='images')
 
     def __str__(self):
         return '%s' % self.id
