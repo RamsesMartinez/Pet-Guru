@@ -21,8 +21,17 @@ from .models import ImageQuestion
 
 from users.models import User
 from django.core.mail import send_mail
+# Django static files
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 import django_filters
+# Email libraries
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+
 
 
 def index(request):
@@ -134,19 +143,20 @@ def user(request):
 
         if request.method == 'POST':
             if base_form.is_valid() and cow_form.is_valid():
-                # subject = 'Se ha creado una pregunta'
-                # from_email = settings.EMAIL_HOST_USER
-                # to_email = ['itzli2000@msn.com']
-                # message = 'Mensaje prueba'
-                # send_mail(subject=subject, from_email=from_email, recipient_list=to_email, message=message,
-                #           fail_silently=False)
                 base = base_form.save(commit=False)
                 cow = cow_form.save(commit=False)
                 base.user_question = request.user
                 base.save()
                 cow.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+cow.get_specie_display()+'\n Raza: '+cow.race+\
+                        '\n Edad: '+str(cow.age)+'\n Género: '+str(cow.gender)+'\n Peso: '+str(cow.weight)+\
+                        '\n Frecuencia cardiaca: '+str(cow.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(cow.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(cow.temperature)+' °C'+'\n Tiempo de llenado capilar: '+str(cow.capilar)+' segundos'+\
+                        '\n Color de mucosas: '+cow.mucosal_color+'\n Linfonodos: '+cow.lymph_nodes+'\n Movimientos ruminales: '+cow.ruminal+\
+                        '\n Condición corporal: '+cow.body_condition
                 cow.save()
-                # profesor_bovino = User.objects.filter(Q(speciality='BV')|Q(rol='TC'))
+                cowmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and porcine_form.is_valid():
                 base = base_form.save(commit=False)
@@ -154,7 +164,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 pig.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 pig.save()
+                pigmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and horse_form.is_valid():
                 base = base_form.save(commit=False)
@@ -162,7 +181,15 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 horse.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+horse.get_specie_display()+'\n Raza: '+horse.race+\
+                        '\n Edad: '+str(horse.age)+'\n Género: '+str(horse.gender)+'\n Peso: '+str(horse.weight)+\
+                        '\n Frecuencia cardiaca: '+str(horse.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(horse.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(horse.temperature)+' °C'+'\n Tiempo de llenado capilar: '+str(horse.capilar)+' segundos'+\
+                        '\n Color de mucosas: '+horse.mucosal_color+'\n Linfonodos: '+horse.lymph_nodes+\
+                        '\n Condición corporal: '+horse.body_condition
                 horse.save()
+                horsemail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and ovine_form.is_valid():
                 base = base_form.save(commit=False)
@@ -170,7 +197,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 ovine.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+ovine.get_specie_display()+'\n Raza: '+ovine.race+\
+                        '\n Edad: '+str(ovine.age)+'\n Género: '+str(ovine.gender)+'\n Peso: '+str(ovine.weight)+\
+                        '\n Etapa fisiológica: '+ovine.physiological_stage+'\n Sistema de producción: '+ovine.production_system+\
+                        '\n Fin zootécnico: '+ovine.zootechnical+\
+                        '\n Frecuencia cardiaca: '+str(ovine.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(ovine.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(ovine.temperature)+' °C'+'\n Color de mucosas: '+ovine.mucosal_color+'\n Movimientos ruminales: '+ovine.ruminal+\
+                        '\n Condición corporal: '+ovine.body_condition
                 ovine.save()
+                ovinemail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and goat_form.is_valid():
                 base = base_form.save(commit=False)
@@ -178,7 +214,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 goat.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 goat.save()
+                goatmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and rabbit_form.is_valid():
                 base = base_form.save(commit=False)
@@ -186,7 +231,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 rab.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 rab.save()
+                rabbitmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and bird_form.is_valid():
                 base = base_form.save(commit=False)
@@ -194,7 +248,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 bird.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 bird.save()
+                birdmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and dog_form.is_valid():
                 base = base_form.save(commit=False)
@@ -202,7 +265,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 dog.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 dog.save()
+                dogmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and cat_form.is_valid():
                 base = base_form.save(commit=False)
@@ -210,7 +282,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 cat.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 cat.save()
+                catmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and wild_form.is_valid():
                 base = base_form.save(commit=False)
@@ -218,7 +299,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 wild.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 wild.save()
+                wildmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and aquatic_form.is_valid():
                 base = base_form.save(commit=False)
@@ -226,7 +316,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 aq.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 aq.save()
+                fishmail(request, message)
                 return redirect ('home:usuario')
             elif base_form.is_valid() and bee_form.is_valid():
                 base = base_form.save(commit=False)
@@ -234,7 +333,16 @@ def user(request):
                 base.user_question = request.user
                 base.save()
                 bee.question = base
+                message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
+                        '\n\n\n Especie: '+pig.get_specie_display()+'\n Raza: '+pig.race+\
+                        '\n Edad: '+str(pig.age)+'\n Género: '+str(pig.gender)+'\n Peso: '+str(pig.weight)+\
+                        '\n Etapa fisiológica: '+pig.physiological_stage+'\n Sistema de producción: '+pig.production_system+\
+                        '\n Curso del padecimiento en días: '+pig.curse+\
+                        '\n Frecuencia cardiaca: '+str(pig.heart_rate)+' lpm'+'\n Frecuencia respiratoria: '+str(pig.respiratory_rate)+\
+                        ' rpm'+'\n Temperatura: '+str(pig.temperature)+' °C'+'\n Color de mucosas: '+pig.color+'\n Actitud: '+pig.attitude+\
+                        '\n Condición corporal: '+pig.body_condition
                 bee.save()
+                beemail(request, message)
                 return redirect ('home:usuario')
 
         context = {
@@ -328,3 +436,375 @@ def search(request):
         'articles': articles
     }
     return render(request, 'article.html', context)
+
+
+def cowmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def pigmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "jonathanbasilio24@outlook.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def horsemail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def ovinemail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def goatmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def rabbitmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def birdmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def dogmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def catmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def wildmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def fishmail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
+
+
+def beemail (request, message):
+    fromaddr = "itzli2000@gmail.com"
+    toaddr = "itzli2000@msn.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Se ha creado una nueva pregunta"
+
+    body = message
+    msg.attach(MIMEText(body, 'plain'))
+ 
+    # filename = "main.jpg"
+    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+
+    # part = MIMEBase('application', 'octet-stream')
+    # part.set_payload((attachment).read())
+    # encoders.encode_base64(part)
+    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+     
+    # msg.attach(part)
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "molinona&9")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
+    return None
