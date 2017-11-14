@@ -427,12 +427,52 @@ class SpecieFilter(django_filters.FilterSet):
         fields = ['specie']
 
 
-def search(request):
-    articles = Specie.objects.filter()
-    f = SpecieFilter(request.GET, queryset=articles)
+def search(request, id):
+    id = int(id)
+    message = None
+    if id == 1:
+        articles = Bovine.objects.all()
+    elif id == 2:
+        articles = Goat.objects.all()
+    elif id == 3:
+        articles = Rabbit.objects.all()
+    elif id == 4:
+        articles = Horse.objects.all()
+    elif id == 5:
+        articles = Dog.objects.all()
+    elif id == 6:
+        articles = Cat.objects.all()
+    elif id == 7:
+        articles = Porcine.objects.all()
+    elif id == 8:
+        articles = Bee.objects.all()
+    elif id == 9:
+        articles = Bird.objects.all()
+    elif id == 10:
+        articles = Wild.objects.all()
+    elif id == 11:
+        articles = Aquatic.objects.all()
+    else:
+        redirect('home:inicio')
+
+    login_form = LogInForm(request.POST or None)
+
+    if request.method == 'POST':
+        user_log = request.POST['Usuario']
+        pass_log = request.POST['Contraseña']
+        user_auth = authenticate(username=user_log, password=pass_log)
+
+        if user_auth is not None:
+            login_django(request, user_auth)
+            return redirect('home:usuario')
+        else:
+            message = "Usuario o contraseña incorrectos."
+
     context = {
-        'filt': f,
-        'articles': articles
+        'title': "PetGurú - Inicio",
+        'message': message,
+        'articles': articles,
+        'form': login_form,
     }
     return render(request, 'article.html', context)
 
