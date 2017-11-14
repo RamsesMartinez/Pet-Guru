@@ -13,9 +13,7 @@
   <div id="cuestionContainer">
     <h2 class="py-3 text-center">{{ titulo }}</h2>
     <div class="container">
-      {% if  request.user.rol == 'TC' and instance.status == 'OP' %}
-      <a class="btn btn-primary" href="{% url 'chat:chat_room' titulo %}" role="button">Chat en Vivo</a>
-      {% endif %}   
+      <a class="btn btn-primary" href="{% url 'chat:chat_room' titulo %}" role="button">Chat en Vivo</a>   
       <br><br>
     </div>
     <div id="galleryContainer">
