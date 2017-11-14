@@ -9,6 +9,9 @@ from users.models import User
 
 
 class Question(models.Model):
+
+    DEFAULT_QUESTION = 1
+
     OPEN = 'OP'
     CLOSE = 'CL'
     RESPONDING = 'RP'
