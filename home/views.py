@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -443,7 +443,7 @@ def cowmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -474,7 +474,7 @@ def pigmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -505,7 +505,7 @@ def horsemail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -536,7 +536,7 @@ def ovinemail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -567,7 +567,7 @@ def goatmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -598,7 +598,7 @@ def rabbitmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -629,7 +629,7 @@ def birdmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -660,7 +660,7 @@ def dogmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -691,7 +691,7 @@ def catmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -722,7 +722,7 @@ def wildmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -753,7 +753,7 @@ def fishmail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
@@ -784,7 +784,7 @@ def beemail (request, message):
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Se ha creado una nueva pregunta"
+    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
     body = message
     msg.attach(MIMEText(body, 'plain'))
