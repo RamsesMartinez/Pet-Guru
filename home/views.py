@@ -400,7 +400,7 @@ def user(request):
 
 @login_required(login_url='home:inicio')
 def register(request):
-    if request.user.rol == 'AD':
+    # if request.user.rol == 'AD':
         template = "user_register.html"
         f = RegisterForm()
         messages = None
@@ -414,10 +414,10 @@ def register(request):
                 f.save()
                 messages='Usuario creado correctamente'
                 return redirect('home:register')
-    else:
-        return redirect('home:inicio')
+    # else:
+    #     return redirect('home:inicio')
 
-    return render(request, template, context)
+        return render(request, template, context)
 
 
 
