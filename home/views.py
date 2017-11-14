@@ -1,6 +1,4 @@
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
@@ -9,8 +7,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-from django.views.generic import CreateView
-from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
 
 from .forms import *
@@ -19,19 +15,11 @@ from .models import Question
 from .models import Specie
 from .models import ImageQuestion
 
-from users.models import User
-from django.core.mail import send_mail
-# Django static files
-from django.contrib.staticfiles.templatetags.staticfiles import static
-
-import django_filters
-# Email libraries
-import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 
+import django_filters
+import smtplib
 
 
 def index(request):
@@ -43,15 +31,17 @@ def index(request):
     articles = Question.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(articles, 6)
+
     try:
         articles = paginator.page(page)
+
     except PageNotAnInteger:
         articles = paginator.page(1)
+
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
 
-    f = SpecieFilter(request.GET, queryset=articles)
-
+    filter = SpecieFilter(request.GET, queryset=articles)
     login_form = LogInForm(request.POST or None)
 
     if request.method == 'POST':
@@ -62,6 +52,7 @@ def index(request):
         if user_auth is not None:
             login_django(request, user_auth)
             return redirect('home:usuario')
+
         else:
             message = "Usuario o contraseña incorrectos."
 
@@ -70,8 +61,9 @@ def index(request):
         'message': message,
         'articles': articles,
         'form': login_form,
-        'filter': f,
+        'filter': filter,
     }
+
     return render(request, template, context)
 
 
