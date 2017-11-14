@@ -1,34 +1,42 @@
 
-
+{% extends 'base/base.html' %}
 {% block content %}
-  {% load staticfiles %}
-  <h1>{{ room.label }}</h1>  
-  <p>
-    <label for="handle">Bienvenido</label>
-    <label id="handle"> {{ request.user.username }} </label>
-  </p>
-  <form id="chatform">
-    <table id="chat">
-      <tbody>
-        {% for message in messages %}
-          <tr>
-            <td>{{ message.formatted_timestamp }}</td>
-            <td>{{ message.handle }}</td>
-            <td>{{ message.message }}</td>
-          </tr> 
-        {% endfor %}
-      </tbody>
-      <tfoot>
-      <tr>
-        <td>Say something:</td>
-        <td colspan=2>
-          <input id="message" type="text" placeholder="message">
-          <button type="submit" id="go">Say it</button>
-        </td>
-      </tfoot>
-    </table>
-  </form>
+{% include 'base/nav.html' %}
+{% load staticfiles %}
+
+{% block link %}
+	<link rel="stylesheet" href="{% static 'css/chat.css' %} "/>
+{% endblock link %}
+
+  <div class="container">
+	  <h1>{{ room.label }}</h1>  
+	  <p>
+	    <label for="handle">Bienvenido</label>
+	    <label id="handle"> {{ request.user.username }} </label>
+	  </p>
+	  <form id="chatform">
+	    <table class="table" id="chat">
+	      <tbody>
+	        {% for message in messages %}
+	          <tr>
+	            <td>{{ message.formatted_timestamp }}</td>
+	            <td>{{ message.handle }}</td>
+	            <td>{{ message.message }}</td>
+	          </tr> 
+	        {% endfor %}
+	      </tbody>	      
+	    </table>
+		<div class="container">
+		    <input id="message" type="text">
+		    <button type="submit" id="go">Enviar</button>			
+		</div>	    	
+	  </form>  	
+  </div>
+
 {% endblock content %}
+{% block footer %} 
+    {% include 'base/footer.html' %}
+  {% endblock footer %}
 {% block javascript%}
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js'></script>
 <script type="text/javascript" src='{% static "js/reconnecting-websocket.min.js" %}'></script>

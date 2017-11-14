@@ -2,10 +2,11 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils import timezone
+from users.models import User
 
 class Room(models.Model):
     name = models.TextField()
-    label = models.SlugField(unique=True)
+    label = models.SlugField(unique=True)    
 
     def __unicode__(self):
         return self.label

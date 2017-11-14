@@ -33,6 +33,8 @@
   <link rel='stylesheet' href='{% static "js/unitegallery/themes/default/ug-theme-default.css" %} ' type='text/css' /> 
   <!-- Inner styles -->
   <link rel="stylesheet" href="{% static 'css/master.css' %} "/>
+  {% block link %}    
+  {% endblock link %}
 </head>
 <body>
   {% block content %}
