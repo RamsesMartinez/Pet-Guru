@@ -21,14 +21,65 @@
             <div class="col-sm-12 col-md-8 d-flex  mx-auto p-0 align-items-center flex-column justify-content-around">
               <h3>Búsqueda</h3>
 
-              <form action="" method="get" accept-charset="utf-8">
+              <form method="get" accept-charset="utf-8">
                 <div class="form-group d-flex flex-column">
-                  <label for="{{ filter.form.specie.id_for_label }}"> Especie </label>
-                  {{ filter.form.specie }}
+                  <label>Especie</label>
                 </div>
-                <button type="submit" class="btn btn-primary">
-                  Filtrar
-                </button>
+                <div class="row d-felx justify-content-around">
+                <a href="/buscar/1/"><button type="button" class="btn btn-primary">
+                  Bovinos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                <a href="/buscar/2/"><button type="button" class="btn btn-primary">
+                  Caprinos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                <a href="/buscar/3/"><button type="button" class="btn btn-primary">
+                  Leporidos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                <a href="/buscar/4/"><button type="button" class="btn btn-primary">
+                  Equinos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                </div>
+                <br>
+                <div class="row d-felx justify-content-around">
+                <a href="/buscar/5/"><button type="button" class="btn btn-primary">
+                  Caninos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                <a href="/buscar/6/"><button type="button" class="btn btn-primary">
+                  Felinos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                <a href="/buscar/7/"><button type="button" class="btn btn-primary">
+                  Porcinos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                <a href="/buscar/8/"><button type="button" class="btn btn-primary">
+                  Abejas <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                </div>
+                <br>
+                <div class="row d-felx justify-content-around col-12">
+                <a href="/buscar/9/"><button type="button" class="btn btn-primary">
+                  Aves <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span></button></a>
+                <a href="/buscar/10/"><button type="button" class="btn btn-primary">
+                  F. silvestre <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                <a href="/buscar/11/"><button type="button" class="btn btn-primary">
+                  Acuaticos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                <a href="{% url 'home:inicio' %}"><button type="button" class="btn btn-primary">
+                  Todos <span class="badge badge-light">9</span>
+                  <span class="sr-only">Especies</span>
+                </button></a>
+                </div>
               </form>
 
             </div>
