@@ -28,7 +28,7 @@ def index(request):
 
     template = 'index.html'
     message = None
-    articles = Question.objects.all()
+    articles = Question.objects.filter(status='CL').order_by('-id')
     page = request.GET.get('page', 1)
     paginator = Paginator(articles, 6)
 
@@ -461,7 +461,7 @@ def user(request):
     elif request.user.rol == 'TC':
         template = 'prof.html'
         solved = Question.objects.filter(user_response=request.user.pk).filter(Q(status='OP') | Q(status='RP')).order_by('-id')
-        article = Question.objects.filter(status='CL').order_by('-id')
+        article = Question.objects.filter(status='OP').order_by('-id')
         avg = 0
 
         page = request.GET.get('page', 1)
