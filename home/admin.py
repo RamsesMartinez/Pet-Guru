@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .models import Question
+from .models import ImageQuestion
 from .models import Bovine
 from .models import Porcine
 from .models import Horse
@@ -11,10 +12,17 @@ from .models import Bee
 from .models import Bird
 
 
+class ImageQuestionInline(admin.TabularInline):
+    model = ImageQuestion
+
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'description', 'date',)
     list_editable = ('description',)
+    inlines = [
+        ImageQuestionInline,
+    ]
 
 
 @admin.register(Bovine)
