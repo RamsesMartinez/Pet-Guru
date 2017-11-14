@@ -54,6 +54,14 @@ class BaseForm(forms.ModelForm):
         }
 
 
+class ImageQuestionForm(forms.ModelForm):
+    image = forms.ImageField(label='Imagen')
+
+    class Meta:
+        model = ImageQuestion
+        fields = ('image', )
+
+
 class CowForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CowForm, self).__init__(*args, **kwargs)

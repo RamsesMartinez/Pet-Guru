@@ -18,18 +18,11 @@
     </div>
     <div id="galleryContainer">
       <div id="gallery" style="display:none;">
-        <img alt="Image 1 Title" src="{% static 'images/questions/thumb1.jpg' %}"
-        data-image="{% static 'images/questions/thumb1.jpg' %}"
+        {% for image in images %}
+        <img alt="Image 1 Title" src="{{image.image.url}}"
+        data-image="{{image.image.url}}"
         data-description="Image 1 Description">
-        <img alt="Image 2 Title" src="{% static 'images/questions/thumb2.jpg' %}"
-        data-image="{% static 'images/questions/thumb2.jpg' %}"
-        data-description="Image 2 Description">
-        <img alt="Image 3 Title" src="{% static 'images/questions/thumb3.jpg' %}"
-        data-image="{% static 'images/questions/thumb3.jpg' %}"
-        data-description="Image 3 Description">
-        <img alt="Image 4 Title" src="{% static 'images/questions/thumb4.jpg' %}"
-        data-image="{% static 'images/questions/thumb4.jpg' %}"
-        data-description="Image 4 Description">
+        {% endfor %}
       </div>
     </div>
     <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
