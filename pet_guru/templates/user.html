@@ -148,11 +148,15 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8">
+        <form action="" method="POST" name="vacaquest" enctype="multipart/form-data" accept-charset="utf-8">
           {% csrf_token %}
 
           {% include 'question/base.html' with form=baseForm %}
           {% include 'question/cow.html' with form=cow_form %}
+          {{ formset.management_form }}
+          {% for form in formset %}
+            {{ form }}
+          {% endfor %}
 
           <input type="submit" name="enviar" class="mailitbtn btn btn-success">
           <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
