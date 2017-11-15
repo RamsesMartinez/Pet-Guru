@@ -12,8 +12,8 @@
 
   <div id="cuestionContainer">
     <h2 class="py-3 text-center">{{ titulo }}</h2>
-    <div class="container">
-      <a class="btn btn-primary" href="{% url 'chat:chat_room' titulo %}" role="button">Chat en Vivo</a>   
+    <div class="container">      
+      <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
       <br><br>
     </div>
     <div id="galleryContainer">
