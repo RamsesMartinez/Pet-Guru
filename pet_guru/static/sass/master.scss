@@ -294,7 +294,29 @@ p.calif {
   // background-color: #f3c94b;
   // color: #FFF;
 }
-
+// Chat styles
+#chatContainer {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+#chatform {
+  height: inherit;
+  overflow-y: scroll;
+}
+#chatmessages {
+  min-height: 80%;
+  overflow-y: scroll;
+  position: relative;
+  margin-bottom: 100px;
+}
+.sendChat {
+  bottom: 0;
+  position: absolute !important;
+  height: 70px !important;
+  background-color: #fff;
+}
 
 
 

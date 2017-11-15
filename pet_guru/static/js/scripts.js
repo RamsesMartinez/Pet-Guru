@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     // Forms handlers
     // $(".mailitbtn").on("click", function(e) {
     //   e.preventDefault();
@@ -225,6 +226,14 @@ $(document).ready(function() {
         $('#messagepass').html('Las contraseñas no coinciden').css('color', 'red');
       });
     })(jQuery);
+
+    // Reload chat
+    $('#go').click(function() {
+      setTimeout(location.reload.bind(location), 1000);
+    });
+    // Scroll to bottom of conversation
+    $("form#chatform").animate({ scrollTop:$('#bodymessages').offset().top+$('#bodymessages')[0].scrollHeight}, 1000);
+
 
 
 
