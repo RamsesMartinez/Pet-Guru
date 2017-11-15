@@ -1,0 +1,82 @@
+
+{% extends 'base/base.html' %}
+{% block content %}
+{% include 'base/nav.html' %}
+{% load staticfiles %}
+
+{% block link %}
+	<link rel="stylesheet" href="{% static 'css/chat.css' %} "/>
+{% endblock link %}
+
+  <div class="container">
+	  <h1>{{ room.label }}</h1>  
+	  <p>
+	    <label for="handle">Bienvenido</label>
+	    <label id="handle"> {{ request.user.username }} </label>
+	  </p>
+	  <form id="chatform">
+	    <table class="table" id="chat">
+	      <tbody>
+	        {% for message in messages %}
+	          <tr>
+	            <td>{{ message.formatted_timestamp }}</td>
+	            <td>{{ message.handle }}</td>
+	            <td>{{ message.message }}</td>
+	          </tr> 
+	        {% endfor %}
+	      </tbody>	      
+	    </table>
+		<div class="container">
+		    <input id="message" type="text">
+		    <button type="submit" id="go">Enviar</button>			
+		</div>	    	
+	  </form>  	
+  </div>
+
+{% endblock content %}
+{% block footer %} 
+    {% include 'base/footer.html' %}
+  {% endblock footer %}
+{% block javascript%}
+<script type="text/javascript" src='{% static "js/reconnecting-websocket.min.js" %}'></script>
+<script type="text/javascript">
+$(function() {
+    // When we're using HTTPS, use WSS too.
+    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    var chatsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "" + window.location.pathname);
+    
+    chatsock.onmessage = function(message) {
+        var data = JSON.parse(message.data);
+        var chat = $("#chat")
+        var ele = $('<tr></tr>')
+
+        ele.append(
+            $("<td></td>").text(data.timestamp)
+        )
+        ele.append(
+            $("<td></td>").text(data.handle)
+        )
+        ele.append(
+            $("<td></td>").text(data.message)
+        )
+        
+        chat.append(ele)
+    };
+
+    $("#chatform").on("submit", function(event) {
+        var message = {
+            handle: $('#handle').html(),
+            message: $('#message').val(),
+        }
+        chatsock.send(JSON.stringify(message));
+        $("#message").val('').focus();
+        return false;
+    });
+});
+</script>
+
+
+{% endblock javascript%}
+  
+
+
