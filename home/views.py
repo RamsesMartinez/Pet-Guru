@@ -527,10 +527,10 @@ def user(request):
                 avg = 0
 
         images_url = []
-        for obj_article in article:
-            image = ImageQuestion.objects.filter(question=obj_article.id)[:]
-            images_url.append(image.image.url)
-            print(images_url)
+        # for obj_article in article:
+        #     image = ImageQuestion.objects.filter(question=obj_article.id)[:]
+        #     images_url.append(image.image.url)
+        #     print(images_url)
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
