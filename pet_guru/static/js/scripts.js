@@ -232,7 +232,7 @@ $(document).ready(function() {
       setTimeout(location.reload.bind(location), 1000);
     });
     // Scroll to bottom of conversation
-    $("form#chatform").animate({ scrollTop:$('#bodymessages').offset().top+$('#bodymessages')[0].scrollHeight}, 1000);
+    $("form#chatform").animate({ scrollTop:$('#bodymessages').offset().top+$('#bodymessages')[0].scrollHeight}, 0);
 
 
 
