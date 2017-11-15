@@ -227,13 +227,6 @@ $(document).ready(function() {
       });
     })(jQuery);
 
-    // Reload chat
-    $('#go').click(function() {
-      setTimeout(location.reload.bind(location), 1000);
-    });
-    // Scroll to bottom of conversation
-    $("form#chatform").animate({ scrollTop:$('#bodymessages').offset().top+$('#bodymessages')[0].scrollHeight}, 0);
-
 
 
 
