@@ -46,13 +46,14 @@ def index(request):
 
     if request.method == 'POST':
         user_log = request.POST['Usuario']
-        pass_log = request.POST['Contraseña']
-        user_auth = authenticate(username=user_log, password=pass_log)
+        pass_log = request.POST['Contraseña']        
+        print(user_log)
+        print(pass_log)
+        user_auth = authenticate(request,username=user_log, password=pass_log)
 
-        if user_auth is not None:
+        if user_auth is not None:            
             login_django(request, user_auth)
             return redirect('home:usuario')
-
         else:
             message = "Usuario o contraseña incorrectos."
 
