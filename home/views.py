@@ -107,7 +107,7 @@ def logout(request):
 def user(request):
     if request.user.rol == 'ST':
         template = 'user.html'
-        solved = Question.objects.filter(user_response=request.user.pk).order_by('-id')
+        solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
         articles = Question.objects.all().order_by('-id')
 
         ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=3)
