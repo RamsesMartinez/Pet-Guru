@@ -12,9 +12,15 @@
 
   <div id="cuestionContainer">
     <h2 class="py-3 text-center">{{ titulo }}</h2>
-    <div class="container">      
+    <div class="container">
+        {% if request.user.rol == 'TC' and instance.status == 'OP'%}
       <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
       <br><br>
+        {% elif request.user.pk == instance.user_response.pk  and instance.status == 'RP'%}
+      <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
+      <br><br>
+        {% else %}
+        {% endif %}
     </div>
     <div id="galleryContainer">
       <div id="gallery" style="display:none;">

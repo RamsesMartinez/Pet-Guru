@@ -8,15 +8,15 @@
 	<link rel="stylesheet" href="{% static 'css/chat.css' %} "/>
 {% endblock link %}
 
-  <div class="container">
+  <div id="chatContainer" class="container">
 	  <h1>{{ room.label }}</h1>  
 	  <p>
 	    <label for="handle">Bienvenido</label>
 	    <label id="handle"> {{ request.user.username }} </label>
 	  </p>
 	  <form id="chatform">
-	    <table class="table" id="chat">
-	      <tbody>
+	    <table class="table" id="chatmessages">
+	      <tbody id="bodymessages">
 	        {% for message in messages %}
 	          <tr>
 	            <td>{{ message.formatted_timestamp }}</td>
@@ -26,8 +26,8 @@
 	        {% endfor %}
 	      </tbody>	      
 	    </table>
-		<div class="container">
-		    <input id="message" type="text">
+		<div class="container sendChat position-static">
+		    <input id="message" type="text" autofocus>
 		    <button type="submit" id="go">Enviar</button>			
 		</div>	    	
 	  </form>  	
@@ -72,6 +72,14 @@ $(function() {
         $("#message").val('').focus();
         return false;
     });
+
+    // Reload chat
+    $('#go').click(function() {
+      setTimeout(location.reload.bind(location), 1000);
+    });
+
+    // Scroll to bottom of conversation
+    $("form#chatform").animate({ scrollTop:$('#bodymessages').offset().top+$('#bodymessages')[0].scrollHeight}, 0);
 });
 </script>
 

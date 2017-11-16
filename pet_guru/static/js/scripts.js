@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     // Forms handlers
     // $(".mailitbtn").on("click", function(e) {
     //   e.preventDefault();
@@ -225,6 +226,7 @@ $(document).ready(function() {
         $('#messagepass').html('Las contraseñas no coinciden').css('color', 'red');
       });
     })(jQuery);
+
 
 
 
