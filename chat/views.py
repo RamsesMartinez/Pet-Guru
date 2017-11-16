@@ -13,6 +13,7 @@ def chat_room(request, label):
     messages = reversed(room.messages.order_by('-timestamp')[:50])
     if question_sel.status == 'OP':
         question_sel.status = 'RP'
+        question_sel.user_response = request.user
         question_sel.save()
     
     return render(request, "room.html", {
