@@ -48,8 +48,6 @@ def index(request):
     if request.method == 'POST':
         user_log = request.POST['Usuario']
         pass_log = request.POST['Contraseña']        
-        print(user_log)
-        print(pass_log)
         user_auth = authenticate(request,username=user_log, password=pass_log)
 
         if user_auth is not None:            
