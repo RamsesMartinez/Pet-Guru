@@ -512,25 +512,19 @@ def user(request):
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
 
-        qualifications = []
-        for qualification in article:
-            qualifications.append(qualification.calification)
-            if qualifications != 0:
-                avg = sum(qualifications) / len(qualifications)
-            else:
-                avg = 0
+        # qualifications = []
+        # for qualification in article:
+        #     qualifications.append(qualification.calification)
+        #     if qualifications != 0:
+        #         avg = sum(qualifications) / len(qualifications)
+        #     else:
+        avg = 3
 
-        images_url = []
-        # for obj_article in article:
-        #     image = ImageQuestion.objects.filter(question=obj_article.id)[:]
-        #     images_url.append(image.image.url)
-        #     print(images_url)
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
             'articles': article,
             'avg': avg,
-            'images': images_url
         }
         return render(request, template, context)
 
