@@ -97,7 +97,7 @@
           <div class="card">
             <div class="card-body">
               <div class="card-title card-banner">
-                <img src="{% static 'images/questions/thumb3.jpg' %}" class="img-fluid" alt="Question image">
+                <img src="{% static 'images/banner.jpg' %}" class="img-fluid" alt="Question image">
               </div>
               <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
               <p class="card-text">{{ article.specie.race }}</p>
@@ -175,12 +175,9 @@
       <div class="modal-body">
         <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
           {% csrf_token %}
-
           {% include 'question/base.html' with form=baseForm %}
           {% include 'question/horse.html' with form=horse_form %}
           {% include 'question/image.html' %}
-
-
           <input type="submit" name="enviar" class="mailitbtn btn btn-success">
           <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
         </form>
