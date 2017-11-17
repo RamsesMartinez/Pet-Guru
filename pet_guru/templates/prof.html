@@ -24,11 +24,11 @@
                 <img src="{% static 'images/user.png' %}" alt="User image" class="mb-2 img-thumbnail rounded-circle mx-auto d-block userimg">
                 <p>Usuario: {{ user }}</p>
                 {% if request.user.rol == 'TC' %}
-                <p>Tipo de usuario: profesor</p>
-                <p>Especialidad: {{ user.speciality }}</p>
+                    <p>Tipo de usuario: profesor</p>
+                    <p>Especialidad: {{ user.speciality }}</p>
                 {% endif %}
                 {% if request.user.rol == 'AD' %}
-                <p>Tipo de usuario: request.user.get_rol_display</p>
+                    <p>Tipo de usuario: request.user.get_rol_display</p>
                 {% endif %}
                 <p>Calificacion: {{ avg }}</p>
                 <div class="row text-center d-flex justify-content-center profStar">
@@ -46,9 +46,9 @@
                   <div class="row d-flex justify-content-around align-items-center py-1">
                     <a href="{{ solved.get_absolute_url }}">{{ solved.title }}</a>
                     {% if solved.status == 'OP' %}
-                    <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">abierto</button> </a>
+                    <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">Tomar Pregunta</button> </a>
                     {% else %}
-                    <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">contestando</button></a>
+                    <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">Contestando</button></a>
                     {% endif %}
                   </div>
                   {% endfor %}
