@@ -18,8 +18,6 @@ from .models import ImageQuestion
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
-import django_filters
 import smtplib
 
 
@@ -41,8 +39,6 @@ def index(request):
 
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
-
-    filter = SpecieFilter(request.GET, queryset=articles)
     login_form = LogInForm(request.POST or None)
 
     if request.method == 'POST':
@@ -562,12 +558,6 @@ def register(request):
     #     return redirect('home:inicio')
 
         return render(request, template, context)
-
-
-class SpecieFilter(django_filters.FilterSet):
-    class Meta():
-        model = Specie
-        fields = ['specie']
 
 
 def search(request, id):

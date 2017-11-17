@@ -28,7 +28,6 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'chat',
-    'django_filters',
 ]
 
 THIRD_APPS = []
