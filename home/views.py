@@ -48,8 +48,6 @@ def index(request):
     if request.method == 'POST':
         user_log = request.POST['Usuario']
         pass_log = request.POST['Contraseña']        
-        print(user_log)
-        print(pass_log)
         user_auth = authenticate(request,username=user_log, password=pass_log)
 
         if user_auth is not None:            
@@ -109,7 +107,7 @@ def logout(request):
 def user(request):
     if request.user.rol == 'ST':
         template = 'user.html'
-        solved = Question.objects.filter(user_response=request.user.pk).order_by('-id')
+        solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
         articles = Question.objects.all().order_by('-id')
 
         ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=3)
@@ -525,18 +523,12 @@ def user(request):
                 avg = sum(qualifications) / len(qualifications)
             else:
                 avg = 0
-
-        images_url = []
-        # for obj_article in article:
-        #     image = ImageQuestion.objects.filter(question=obj_article.id)[:]
-        #     images_url.append(image.image.url)
-        #     print(images_url)
+                
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
             'articles': article,
             'avg': avg,
-            'images': images_url
         }
         return render(request, template, context)
 
