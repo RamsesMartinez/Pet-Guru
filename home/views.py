@@ -523,18 +523,12 @@ def user(request):
                 avg = sum(qualifications) / len(qualifications)
             else:
                 avg = 0
-
-        images_url = []
-        # for obj_article in article:
-        #     image = ImageQuestion.objects.filter(question=obj_article.id)[:]
-        #     images_url.append(image.image.url)
-        #     print(images_url)
+                
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
             'articles': article,
             'avg': avg,
-            'images': images_url
         }
         return render(request, template, context)
 
