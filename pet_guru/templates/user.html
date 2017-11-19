@@ -175,12 +175,9 @@
       <div class="modal-body">
         <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
           {% csrf_token %}
-
           {% include 'question/base.html' with form=baseForm %}
           {% include 'question/horse.html' with form=horse_form %}
           {% include 'question/image.html' %}
-
-
           <input type="submit" name="enviar" class="mailitbtn btn btn-success">
           <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
         </form>

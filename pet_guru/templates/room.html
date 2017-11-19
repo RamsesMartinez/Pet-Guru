@@ -15,7 +15,7 @@
 	    <label id="handle"> {{ request.user.username }} </label>
 	  </p>
 	  <form id="chatform">
-	    <table class="table" id="chatmessages">
+	    <table class="table" id="chat">
 	      <tbody id="bodymessages">
 	        {% for message in messages %}
 	          <tr>
@@ -38,6 +38,7 @@
     {% include 'base/footer.html' %}
   {% endblock footer %}
 {% block javascript%}
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js'></script>
 <script type="text/javascript" src='{% static "js/reconnecting-websocket.min.js" %}'></script>
 <script type="text/javascript">
 $(function() {
@@ -71,11 +72,6 @@ $(function() {
         chatsock.send(JSON.stringify(message));
         $("#message").val('').focus();
         return false;
-    });
-
-    // Reload chat
-    $('#go').click(function() {
-      setTimeout(location.reload.bind(location), 1000);
     });
 
     // Scroll to bottom of conversation
