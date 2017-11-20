@@ -72,6 +72,7 @@ class Specie(models.Model):
     CANINO = 'CN'
     FELINO = 'FL'
     SILVESTRE = 'SL'
+    AQUATICO = 'AQ'
     ABEJA = 'BJ'
 
 
@@ -86,6 +87,7 @@ class Specie(models.Model):
         (CANINO, 'Canino'),
         (FELINO, 'Felino'),
         (SILVESTRE, 'Silvestre'),
+        (AQUATICO, 'Organismos acuáticos'),
         (ABEJA, 'Abeja'),
     )
 

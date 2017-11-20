@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^pregunta/(?P<id>\d+)/$', views.question, name='pregunta'),
     url(r'^registro/$', views.register, name='register'),
     url(r'^logout/$', views.logout, name='logout'),
+    # Just for develop; delete on production
     url(r'^buscar/(?P<id>\d+)/$', views.search, name='buscar'),
     url(r'^mail/$', views.mail, name='mail'),
 ]
