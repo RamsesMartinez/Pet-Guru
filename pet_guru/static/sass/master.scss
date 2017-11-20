@@ -219,7 +219,7 @@ a.unam-dark:hover {
   align-items: center;
 }
 .card-banner img {
-  
+
 }
 .foroContainer {
   margin: 0;
@@ -274,10 +274,12 @@ a.unam-dark:hover {
 .Dashboard h3 {
   margin-top: 10px;
 }
-#userQuestions,
-#userChats,
-#userFilters {
-  height: 150px;
+#mailLike {
+  height: 600px;
+  width: 80%;
+}
+#userQuestions {
+  height: 450px;
   overflow-y: scroll;
 }
 .userimg {
@@ -319,6 +321,15 @@ p.calif {
   position: absolute !important;
   height: 70px !important;
   background-color: #fff;
+}
+// User mail like table styles
+#userTable td , th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+#userTable tr:nth-child(even) {
+  background-color: #dddddd;
 }
 
 
