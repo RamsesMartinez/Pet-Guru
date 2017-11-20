@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^registro/$', views.register, name='register'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^buscar/(?P<id>\d+)/$', views.search, name='buscar'),
+    url(r'^mail/$', views.mail, name='mail'),
 ]

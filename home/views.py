@@ -150,6 +150,11 @@ def user(request):
                     base.user_question = request.user
                     base.save()
                     cow.question = base
+                    new_context = {
+                    'title': base.title,
+                    'consult': base.description,
+                    'url': get_current_site(request).domain,
+                    }
                     message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
                             '\n\n\n Especie: '+cow.get_specie_display()+'\n Raza: '+cow.race+\
                             '\n Edad: '+str(cow.age)+'\n Género: '+str(cow.gender)+'\n Peso: '+str(cow.weight)+\
@@ -165,7 +170,7 @@ def user(request):
                     emails = User.objects.filter(speciality='BV').filter(rol='TC')
                     try:
                         for user_speciality in emails:
-                            sendmailform(request, message, user_speciality.email)
+                            sendmailform(request, message, user_speciality.email, new_context)
                     except Exception as e:
                         print('ERROR: ' + e.args)
 
@@ -604,7 +609,7 @@ def search(request, id):
     return render(request, 'article.html', context)
 
 
-def sendmailform(request, message, email_user):
+def sendmailform(request, message, email_user, new_context):
     fromaddr = "itzli2000@gmail.com"
     toaddr = email_user
     msg = MIMEMultipart()
@@ -612,8 +617,13 @@ def sendmailform(request, message, email_user):
     msg['To'] = toaddr
     msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
-    body = message
-    msg.attach(MIMEText(body, 'plain'))
+    html_content = render_to_string(
+        'pet_guru/templates/mail.html',
+        new_context{}
+        )
+
+    body = html_content
+    msg.attach(MIMEText(body, 'text/html'))
  
     # filename = "main.jpg"
     # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
@@ -634,3 +644,12 @@ def sendmailform(request, message, email_user):
 
     return None
 
+
+
+
+def mail(request):
+    template = 'mail.html'
+    context = {
+        'title': "PetGurú - mail",
+    }
+    return render(request, template, context)
