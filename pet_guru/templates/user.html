@@ -82,7 +82,7 @@
               <table id="userTable" class="w-100 justify-content-around">
                 <thead>
                   <tr class="bg-dark text-white h4 text-uppercase">
-                    <th width="250px" class="text-center">Pregunta</th>
+                    <th width="300px" class="text-center">Pregunta</th>
                     <th class="text-center">Fecha</th>
                     <th class="text-center">Estatus</th>
                   </tr>
@@ -98,11 +98,11 @@
                     </td>
                     <td class="text-center">
                       {% if solved.status == 'OP' %}
-                      <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">Tomar Pregunta</button> </a>
+                      <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">En espera</button> </a>
                       {% elif solved.status == 'RP' %}
-                      <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">Contestando</button></a>
+                      <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning" style="cursor: default">Contestando</button></a>
                       {% else %}
-                      <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning" style="cursor: default">Cerrada</button></a>
+                      <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">Cerrada</button></a>
                       {% endif %}
                     </td>
                   </tr>
