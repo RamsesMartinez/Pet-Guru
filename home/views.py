@@ -19,6 +19,9 @@ from .models import ImageQuestion
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
 
 
 def index(request):
@@ -155,6 +158,8 @@ def user(request):
                     'consult': base.description,
                     'url': get_current_site(request).domain,
                     }
+                    template = get_template('mail.html')
+                    html_content = template.render(new_context)
                     message = 'Pregunta: '+base.title+'\n consula: '+base.description+\
                             '\n\n\n Especie: '+cow.get_specie_display()+'\n Raza: '+cow.race+\
                             '\n Edad: '+str(cow.age)+'\n Género: '+str(cow.gender)+'\n Peso: '+str(cow.weight)+\
@@ -170,7 +175,7 @@ def user(request):
                     emails = User.objects.filter(speciality='BV').filter(rol='TC')
                     try:
                         for user_speciality in emails:
-                            sendmailform(request, message, user_speciality.email, new_context)
+                            sendmailform(request, message, user_speciality.email, html_content)
                     except Exception as e:
                         print('ERROR: ' + e.args)
 
@@ -609,21 +614,18 @@ def search(request, id):
     return render(request, 'article.html', context)
 
 
-def sendmailform(request, message, email_user, new_context):
+def sendmailform(request, message, email_user, html_content):
     fromaddr = "itzli2000@gmail.com"
     toaddr = email_user
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
     msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
-
-    html_content = render_to_string(
-        'pet_guru/templates/mail.html',
-        new_context{}
-        )
+    
 
     body = html_content
-    msg.attach(MIMEText(body, 'text/html'))
+
+    msg.attach(MIMEText(body, 'html'))
  
     # filename = "main.jpg"
     # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
