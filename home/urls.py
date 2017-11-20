@@ -6,6 +6,7 @@ app_name = 'home'
 urlpatterns = [
     url(r'^$', views.index, name='inicio'),
     url(r'^user/$', views.user, name='usuario'),
+    url(r'^cards/$', views.cards, name='articulos'),
     url(r'^nosotros/$', views.us, name='nosotros'),
     url(r'^reglamento/$', views.rules, name='reglamento'),
     url(r'^pregunta/(?P<id>\d+)/$', views.question, name='pregunta'),

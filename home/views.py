@@ -540,6 +540,51 @@ def user(request):
 
     elif request.user.rol == 'AD':
         return redirect('home:register')
+        
+
+
+@login_required(login_url='home:inicio')
+def cards(request):
+    if request.user.rol == 'ST':
+        template = 'cards.html'
+        articles = Question.objects.filter(user_question=request.user.pk).order_by('-id')
+
+        page = request.GET.get('page', 1)
+        paginator = Paginator(articles, 6)
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+
+        context = {
+            'title': "Bienvenido "+request.user.username,
+            'articles': articles,
+        }
+        return render(request, template, context)
+
+    elif request.user.rol == 'TC':
+        template = 'cards.html'
+        article = Question.objects.filter(Q(status='OP') | Q(status='RP')).order_by('-id')
+        page = request.GET.get('page', 1)
+        paginator = Paginator(article, 6)
+        try:
+            article = paginator.page(page)
+        except PageNotAnInteger:
+            article = paginator.page(1)
+        except EmptyPage:
+            article = paginator.page(paginator.num_pages)
+        
+        context = {
+            'title': "Profesional " + request.user.username,
+            'articles': article,
+        }
+        return render(request, template, context)
+
+    elif request.user.rol == 'AD':
+        return redirect('home:register')
+
 
 
 @login_required(login_url='home:inicio')
