@@ -55,7 +55,7 @@ class BaseForm(forms.ModelForm):
 
 
 class ImageQuestionForm(forms.ModelForm):
-    image = forms.ImageField(label='Imagen')
+    image = forms.ImageField(label='')
 
     class Meta:
         model = ImageQuestion
