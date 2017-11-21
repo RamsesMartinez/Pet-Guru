@@ -1,4 +1,8 @@
-{{ formset.management_form }}
-{% for form in formset %}
-{{ form }}
-{% endfor %}
+<hr>
+<div class="container">
+  <h4>Seleccione imágenes para la consulta:</h4>
+  {{ formset.management_form }}
+    {% for form in formset %}
+      {{ form.as_p }}
+    {% endfor %}
+</div>
