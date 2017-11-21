@@ -559,3 +559,26 @@ class Horse(Specie):
 
     def __str__(self):
         return '%s' % self.id
+
+
+class Reply(models.Model):
+    comment = models.TextField()
+    question = models.ForeignKey(Question)
+    user = models.ForeignKey(User)
+    date_created = models.DateField(auto_now_add=True)
+    date_modificated = models.DateField(auto_now=True)
+    file = models.FileField(upload_to='documents/comments/')
+    image = models.ImageField(upload_to=get_image_filename, verbose_name='images')
+
+    def __str__(self):
+        return '%s' % self.id
+
+
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    question = models.ForeignKey(Question)
+
+    def __str__(self):
+        return '%s' % self.id
