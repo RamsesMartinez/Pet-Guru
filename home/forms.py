@@ -38,6 +38,7 @@ class BaseForm(forms.ModelForm):
         super(BaseForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs.update({'class': 'form-control'})
         self.fields['description'].widget.attrs.update({'class': 'form-control'})
+        self.fields['specie'].widget.attrs.update({'class': 'form-control'})
         self.fields['user_question'].widget.attrs.update({'class': 'hidden'})
 
     class Meta:
@@ -46,10 +47,12 @@ class BaseForm(forms.ModelForm):
             'title',
             'description',
             'user_question',
+            'specie',
         )
         labels = {
             'title': 'Título de la consulta: ',
             'description': 'Descripción de la consulta: ',
+            'specie':'Especie',
             'user_question': 'Usuario',
         }
 
@@ -65,7 +68,6 @@ class ImageQuestionForm(forms.ModelForm):
 class CowForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CowForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'cowspecie'})
         self.fields['race'].widget.attrs.update({'class': 'form-control', 'id': 'cowrace'})
         self.fields['age'].widget.attrs.update({'class': 'form-control', 'id': 'cowage'})
         self.fields['gender'].widget.attrs.update({'class': 'form-control', 'id': 'cowgender'})
@@ -82,7 +84,6 @@ class CowForm(forms.ModelForm):
     class Meta:
         model = Bovine
         fields = (
-            'specie',
             'race',
             'age',
             'gender',
@@ -97,7 +98,6 @@ class CowForm(forms.ModelForm):
             'body_condition',
         )
         labels = {
-            'specie': 'Especie: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
             'gender': 'Género: ',
@@ -116,7 +116,6 @@ class CowForm(forms.ModelForm):
 class PorcineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PorcineForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'porspecie'})
         self.fields['physiological_stage'].widget.attrs.update({'class': 'form-control', 'id': 'porphysio'})
         self.fields['race'].widget.attrs.update({'class': 'form-control', 'id': 'porrace'})
         self.fields['age'].widget.attrs.update({'class': 'form-control', 'id': 'porage'})
@@ -134,7 +133,6 @@ class PorcineForm(forms.ModelForm):
     class Meta:
         model = Porcine
         fields = (
-            'specie',
             'physiological_stage',
             'race',
             'age',
@@ -150,7 +148,6 @@ class PorcineForm(forms.ModelForm):
             'body_condition',
         )
         labels = {
-            'specie': 'Especie: ',
             'physiological_stage': 'Etapa fisiológica: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
@@ -170,7 +167,6 @@ class PorcineForm(forms.ModelForm):
 class HorseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(HorseForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'horspecie'})
         self.fields['race'].widget.attrs.update({'class': 'form-control', 'id': 'horrace'})
         self.fields['age'].widget.attrs.update({'class': 'form-control', 'id': 'horage'})
         self.fields['gender'].widget.attrs.update({'class': 'form-control', 'id': 'horgender'})
@@ -186,7 +182,6 @@ class HorseForm(forms.ModelForm):
     class Meta:
         model = Horse
         fields = (
-            'specie',
             'race',
             'age',
             'gender',
@@ -200,7 +195,6 @@ class HorseForm(forms.ModelForm):
             'body_condition',
         )
         labels = {
-            'specie': 'Especie: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
             'gender': 'Género: ',
@@ -218,7 +212,6 @@ class HorseForm(forms.ModelForm):
 class GoatForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(GoatForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'goatspecie'})
         self.fields['physiological_stage'].widget.attrs.update({'class': 'form-control', 'id': 'goatphysio'})
         self.fields['race'].widget.attrs.update({'class': 'form-control', 'id': 'goatrace'})
         self.fields['age'].widget.attrs.update({'class': 'form-control', 'id': 'goatage'})
@@ -239,7 +232,6 @@ class GoatForm(forms.ModelForm):
     class Meta:
         model = Goat
         fields = (
-            'specie',
             'physiological_stage',
             'race',
             'age',
@@ -258,7 +250,6 @@ class GoatForm(forms.ModelForm):
             'body_condition',
         )
         labels = {
-            'specie': 'Especie: ',
             'physiological_stage': 'Etapa fisiológica: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
@@ -281,7 +272,6 @@ class GoatForm(forms.ModelForm):
 class OvineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(OvineForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'ovispecie'})
         self.fields['physiological_stage'].widget.attrs.update({'class': 'form-control', 'id': 'oviphysio'})
         self.fields['race'].widget.attrs.update({'class': 'form-control', 'id': 'ovirace'})
         self.fields['age'].widget.attrs.update({'class': 'form-control', 'id': 'oviage'})
@@ -300,7 +290,6 @@ class OvineForm(forms.ModelForm):
     class Meta:
         model = Ovine
         fields = (
-            'specie',
             'physiological_stage',
             'race',
             'age',
@@ -317,7 +306,6 @@ class OvineForm(forms.ModelForm):
             'body_condition',
         )
         labels = {
-            'specie': 'Especie: ',
             'physiological_stage': 'Etapa fisiológica: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
@@ -338,7 +326,6 @@ class OvineForm(forms.ModelForm):
 class RabbitForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RabbitForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'rabspecie'})
         self.fields['productive_stage'].widget.attrs.update({'class': 'form-control', 'id': 'rabprod'})
         self.fields['race'].widget.attrs.update({'class': 'form-control', 'id': 'rabrace'})
         self.fields['age'].widget.attrs.update({'class': 'form-control', 'id': 'rabage'})
@@ -356,7 +343,6 @@ class RabbitForm(forms.ModelForm):
     class Meta:
         model = Rabbit
         fields = (
-            'specie',
             'productive_stage',
             'race',
             'age',
@@ -372,7 +358,6 @@ class RabbitForm(forms.ModelForm):
             'body_condition',
         )
         labels = {
-            'specie': 'Especie: ',
             'productive_stage': 'Etapa productiva: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
@@ -470,7 +455,6 @@ class BirdForm(forms.ModelForm):
 class DogForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DogForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'dogspecie'})
         self.fields['race'].widget.attrs.update({'class': 'form-control', 'id': 'dograce'})
         self.fields['age'].widget.attrs.update({'class': 'form-control', 'id': 'dogage'})
         self.fields['gender'].widget.attrs.update({'class': 'form-control', 'id': 'doggender'})
@@ -487,7 +471,6 @@ class DogForm(forms.ModelForm):
     class Meta:
         model = Dog
         fields = (
-            'specie',
             'race',
             'age',
             'gender',
@@ -502,7 +485,6 @@ class DogForm(forms.ModelForm):
             'skin',
         )
         labels = {
-            'specie': 'Especie: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
             'gender': 'Género: ',
@@ -521,7 +503,6 @@ class DogForm(forms.ModelForm):
 class CatForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CatForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'catspecie'})
         self.fields['race'].widget.attrs.update({'class': 'form-control', 'id': 'catrace'})
         self.fields['age'].widget.attrs.update({'class': 'form-control', 'id': 'catage'})
         self.fields['gender'].widget.attrs.update({'class': 'form-control', 'id': 'catgender'})
@@ -538,7 +519,6 @@ class CatForm(forms.ModelForm):
     class Meta:
         model = Cat
         fields = (
-            'specie',
             'race',
             'age',
             'gender',
@@ -553,7 +533,6 @@ class CatForm(forms.ModelForm):
             'skin',
         )
         labels = {
-            'specie': 'Especie: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
             'gender': 'Género: ',
@@ -572,7 +551,6 @@ class CatForm(forms.ModelForm):
 class WildForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(WildForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'wildspecie'})
         self.fields['zootechnical'].widget.attrs.update({'class': 'form-control', 'id': 'wildzoo'})
         self.fields['ambiental_condition'].widget.attrs.update({'class': 'form-control', 'id': 'wildambiental'})
         self.fields['feeding'].widget.attrs.update({'class': 'form-control', 'id': 'wildfeed'})
@@ -589,7 +567,6 @@ class WildForm(forms.ModelForm):
     class Meta:
         model = Wild
         fields = (
-            'specie',
             'zootechnical',
             'ambiental_condition',
             'feeding',
@@ -604,7 +581,6 @@ class WildForm(forms.ModelForm):
             'ruminal',
         )
         labels = {
-            'specie': 'Especie: ',
             'zootechnical': 'Fin zootécnico: ',
             'ambiental_condition': 'Condiciones Medio-Ambientales: ',
             'feeding': 'Alimentación: ',
@@ -755,7 +731,6 @@ class AquaticForm(forms.ModelForm):
 class BeeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(BeeForm, self).__init__(*args, **kwargs)
-        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'beespecie'})
         self.fields['colony_type'].widget.attrs.update({'class': 'form-control', 'id': 'beecolony'})
         self.fields['hive_review'].widget.attrs.update({'class': 'form-control', 'id': 'beehive'})
         self.fields['queen_presence'].widget.attrs.update({'class': 'form-control', 'id': 'beequeen'})
@@ -777,7 +752,6 @@ class BeeForm(forms.ModelForm):
     class Meta:
         model = Bee
         fields = (
-            'specie',
             'colony_type',
             'hive_review',
             'queen_presence',
@@ -797,7 +771,6 @@ class BeeForm(forms.ModelForm):
             'number_racks',
         )
         labels = {
-            'specie': 'Especie: ',
             'colony_type': 'Tipo de colonia: ',
             'hive_review': 'Revisión de colmena: ',
             'queen_presence': 'Presencia de la reina: ',
