@@ -294,10 +294,8 @@ p.calif {
   font-size: 25px;
   margin-right: 5px;
 }
-// Styles for new question form
-.input-group-addon{
-  // background-color: #f3c94b;
-  // color: #FFF;
+#questionField {
+  max-width: 300px
 }
 // Chat styles
 #chatContainer {

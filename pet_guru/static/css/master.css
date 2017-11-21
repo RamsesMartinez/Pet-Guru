@@ -257,6 +257,9 @@ p.calif {
   font-size: 25px;
   margin-right: 5px; }
 
+#questionField {
+  max-width: 300px; }
+
 #chatContainer {
   min-height: 80vh;
   display: flex;
