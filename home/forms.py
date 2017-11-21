@@ -789,3 +789,15 @@ class BeeForm(forms.ModelForm):
             'food_racks': 'Presencia de alimento en bastidores: ',
             'number_racks': 'Número de bastidores con miel, polen o néctar: ',
         }
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = (
+            'description',
+            'document',
+            )
+        labels = {
+            'description': 'Descripcion de documento',
+            'document': 'Documento',
+        }
