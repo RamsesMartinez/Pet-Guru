@@ -39,45 +39,48 @@
                   <i class="fa fa-star" aria-hidden="true"></i>
                 </div>
               </div>
+              <div class="col-md-9 p-0">
+                <div id="mailLike" class="col-sm-12 p-0 text-center d-flex flex-column justify-content-around w-100">
+                  <h3 class=" mb-3">Mís preguntas:</h3>
+                  <div id="userQuestions" class="col questContainer">
+                    <table id="userTable" class="w-100 justify-content-around">
+                      <thead>
+                        <tr class="bg-dark text-white h4 text-uppercase">
+                          <th id="questionField" class="text-center">Pregunta</th>
+                          <th class="text-center">Fecha</th>
+                          <th class="text-center">Estatus</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for solved in solveds %}
+                        <tr>
+                          <td>
+                            <a href="{{ solved.get_absolute_url }}" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
+                          </td>
+                          <td class="text-center">
+                            {% if solved.status == 'OP' %}
+                            <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">Tomar Pregunta</button> </a>
+                            {% else %}
+                            <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">Contestando</button></a>
+                            {% endif %}
+                          </td>
+                          <td  class="text-center">
+                            {{ solved.date }}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="row">
 
-          <div id="mailLike" class="col-sm-12 mx-auto p-0 text-center d-flex flex-column justify-content-around">
-            <h3 class=" mb-3">Mís preguntas:</h3>
-            <div id="userQuestions" class="col questContainer">
-              <table id="userTable" class="w-100 justify-content-around">
-                <thead>
-                  <tr class="bg-dark text-white h4 text-uppercase">
-                    <th width="300px" class="text-center">Pregunta</th>
-                    <th class="text-center">Fecha</th>
-                    <th class="text-center">Estatus</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for solved in solveds %}
-                  <tr>
-                    <td>
-                      <a href="{{ solved.get_absolute_url }}" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
-                    </td>
-                    <td  class="text-center">
-                      {{ solved.date }}
-                    </td>
-                    <td class="text-center">
-                      {% if solved.status == 'OP' %}
-                      <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">Tomar Pregunta</button> </a>
-                      {% else %}
-                      <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">Contestando</button></a>
-                      {% endif %}
-                    </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-
-          </div>
+          
         </div>
       </main>
     </div>

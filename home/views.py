@@ -30,7 +30,7 @@ def index(request):
 
     template = 'index.html'
     message = None
-    articles = Question.objects.filter(status='CL').order_by('-id')
+    articles = Question.objects.filter(Q(status='CL')).order_by('-id')
     page = request.GET.get('page', 1)
     paginator = Paginator(articles, 6)
 
