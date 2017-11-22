@@ -71,7 +71,13 @@ a.unam-dark:hover {
 }
 .btn {
   cursor: pointer !important;
+}
+.mail-btn {
+  cursor: pointer !important;
   min-width: 160px;
+}
+card-btn {
+  padding: .5rem .75rem;
 }
 .btn-outline-light:hover {
   color: #353535;
@@ -336,6 +342,11 @@ p.calif {
 }
 #userTable tr:nth-child(even) {
   background-color: #dddddd;
+}
+// User card articles
+.articleCard {
+  width: 300px;
+  height: 180px;
 }
 
 
