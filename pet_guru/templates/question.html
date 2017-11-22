@@ -55,13 +55,13 @@
         <form id="chatform">
           <table class="table" id="chat">
             <tbody id="bodymessages">
-              <!--{% for message in messages %}
+              {% for message in messages %}
               <tr>
                 <td>{{ message.formatted_timestamp }}</td>
                 <td>{{ message.handle }}</td>
                 <td>{{ message.message }}</td>
               </tr> 
-              {% endfor %}-->
+              {% endfor %}
               <td id="chatmine"></td>
             </tbody>        
           </table>
@@ -74,14 +74,3 @@
     </div>
   </div>
   {% endblock %} 
-
-  {% block javascript%}
-  <script>
-  $(function() {
-    var div = document.getElementById('divID');
-
-    div.innerHTML += 'Extra stuff';
-  });
-  </script>
-
-  {% endblock javascript%}
