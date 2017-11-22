@@ -27,6 +27,11 @@
             <div class="col-sm-12 col-md-9 p-0">
               <div id="mailLike" class="col-sm-12 w-100 p-0 text-center d-flex flex-column justify-content-around">
                 <h3 class=" mb-3">Mís preguntas:</h3>
+                <div class="row pl-5 py-3">
+                  <button id="mailToogle" class="btn btn-primary m-1" style="min-width:50px;" onclick="showMail();"><i class="fa fa-list" aria-hidden="true"></i></button>
+                  <button id="cardToggle" class="btn btn-primary m-1" style="min-width:50px;" onclick="showCard()"><i class="fa fa-credit-card" aria-hidden="true"></i></button>
+                </div>
+
                 <div id="userQuestions" class="col questContainer">
                   <table id="userTable" class="w-100 justify-content-around">
                     <thead>
@@ -42,8 +47,38 @@
                         <td>
                           <a href="{{ solved.get_absolute_url }}" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
                         </td>
+                        <td class="text-center">
+                          {% if solved.status == 'OP' %}
+                          <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">En espera</button> </a>
+                          {% elif solved.status == 'RP' %}
+                          <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning" style="cursor: default">Contestando</button></a>
+                          {% else %}
+                          <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">Cerrada</button></a>
+                          {% endif %}
+                        </td>
                         <td  class="text-center">
                           {{ solved.date }}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div id="userCards" class="col questContainer">
+                  <!--<table id="userTable" class="w-100 justify-content-around">
+                    <thead>
+                      <tr class="bg-dark text-white h4 text-uppercase">
+                        <th id="questionField" class="text-center">Pregunta</th>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Estatus</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for solved in solveds %}
+                      <tr>
+                        <td>
+                          <a href="{{ solved.get_absolute_url }}" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
                         </td>
                         <td class="text-center">
                           {% if solved.status == 'OP' %}
@@ -54,12 +89,67 @@
                           <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">Cerrada</button></a>
                           {% endif %}
                         </td>
+                        <td  class="text-center">
+                          {{ solved.date }}
+                        </td>
                       </tr>
                       {% endfor %}
                     </tbody>
-                  </table>
+                  </table>-->
                 </div>
 
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row d-flex justify-content-center">
+            <div class="col-12 text-center">
+              <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Realiza una pregunta
+              </a>
+            </div>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body speciesMenu">
+                <h5 class="text-center">Elige un espécimen</h5>
+                <div class="animals m-auto d-flex flex-row flex-wrap">
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Bovino">
+                    <a data-toggle="modal" data-target="#vacaModal"><img src="{% static 'images/animal/vaca.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Porcino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#cerdoModal"><img src="{% static 'images/animal/cerdo.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Equino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#caballoModal"><img src="{% static 'images/animal/caballo.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ovino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#ovejaModal"><img src="{% static 'images/animal/oveja.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Goat">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#cabraModal"><img src="{% static 'images/animal/cabra.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Lepórido">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#conejoModal"><img src="{% static 'images/animal/conejo.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Aves">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#avesModal"><img src="{% static 'images/animal/pato.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Canino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#perroModal"><img src="{% static 'images/animal/perro.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Felino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#gatoModal"><img src="{% static 'images/animal/gato.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Fauna silvestre">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#silvestreModal"><img src="{% static 'images/animal/fauna.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Organismos acuaticos">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#acuaticModal"><img src="{% static 'images/animal/pez.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Abejas">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#abejaModal"><img src="{% static 'images/animal/abeja.png' %}" alt="animal icon"></a>
+                  </div> 
+                </div>
               </div>
             </div>
           </div>

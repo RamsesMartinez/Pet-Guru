@@ -2027,3 +2027,14 @@ function beechangerack() {
     $('#beerack').prop("readonly", false);
   }
 }
+
+
+// Toggle mail list and card list
+function showMail() {
+  document.getElementById("userQuestions" ).style.display = 'initial';
+  document.getElementById("userCards" ).style.display = 'none';
+}
+function showCard() {
+  document.getElementById("userQuestions" ).style.display = 'none';
+  document.getElementById("userCards" ).style.display = 'initial';
+}

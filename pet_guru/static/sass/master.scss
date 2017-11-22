@@ -71,7 +71,7 @@ a.unam-dark:hover {
 }
 .btn {
   cursor: pointer !important;
-  width: 160px;
+  min-width: 160px;
 }
 .btn-outline-light:hover {
   color: #353535;
@@ -282,9 +282,13 @@ a.unam-dark:hover {
 #mailLike button {
   padding: .2rem;
 }
-#userQuestions {
+#userQuestions,
+#userCards {
   height: 450px;
   overflow-y: scroll;
+}
+#userCards {
+  display: none;
 }
 .userimg {
   width: 100px;
