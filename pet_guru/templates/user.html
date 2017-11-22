@@ -97,7 +97,7 @@
                       {% for solved in solveds %}
                       <tr>
                         <td>
-                          <a href="{{ solved.get_absolute_url }}" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
+                          <a href="{{ solved.get_absolute_url }}" class="pl-2" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
                         </td>
                         <td class="text-center">
                           {% if solved.status == 'OP' %}
