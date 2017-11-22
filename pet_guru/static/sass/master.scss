@@ -286,7 +286,7 @@ card-btn {
   margin-top: 10px;
 }
 #mailLike {
-  height: 400px;
+  height: 600px;
   width: 80%;
 }
 #mailLike button {
@@ -356,8 +356,9 @@ p.calif {
 }
 // User card articles
 .articleCard {
-  width: 300px;
-  height: 180px;
+  min-width: 280px;
+  width: 30%;
+  height: 350px;
 }
 
 
