@@ -256,6 +256,7 @@ card-btn {
   .questionSingle {
     max-width: 900px;
     margin: 0 auto;
+    position: relative;
   }
 }
 // Footer styles
@@ -322,7 +323,8 @@ p.calif {
   overflow: scroll;
 }
 #chatform {
-  height: inherit;
+  min-height: 200px;
+  max-height: 350px;
   overflow-y: scroll;
 }
 #chatmessages {
@@ -331,8 +333,14 @@ p.calif {
   position: relative;
   margin-bottom: 100px;
 }
+#message {
+  max-width: 300px;
+  min-width: 250px;
+}
 .sendChat {
   bottom: 0;
+  right: 30px;
+  width: inherit;
   position: absolute !important;
   height: 70px !important;
   background-color: #fff;
