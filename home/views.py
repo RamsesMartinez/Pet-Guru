@@ -13,7 +13,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from .forms import *
 
 from .models import Question
-from .models import Specie
+from .models import Specie, Reply
 from .models import ImageQuestion
 
 from email.mime.multipart import MIMEMultipart
@@ -70,11 +70,12 @@ def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
     image = ImageQuestion.objects.filter(question=instance.id)
+    comments = Reply.objects.filter(question=instance.id)
     context = {
-        'CN': "listo esto funciona",
         'images': image,
         'titulo': instance.title,
         'instance': instance,
+        'comments': comments,
     }
 
     return render(request, template, context)
@@ -380,7 +381,7 @@ def user(request):
                     emails = User.objects.filter(speciality='SL').filter(rol='TC')
                     try:
                         for user_speciality in emails:
-                            wildmail(request, user_speciality.email, html_content)
+                            sendmailform(request, user_speciality.email, html_content)
                     except Exception as e:
                         print('ERROR: ' + e.args)
 
@@ -541,7 +542,7 @@ def cards(request):
 
 @login_required(login_url='home:inicio')
 def register(request):
-    # if request.user.rol == 'AD':
+    if request.user.rol == 'AD':
         template = "user_register.html"
         f = RegisterForm()
         messages = None
@@ -552,42 +553,23 @@ def register(request):
         if request.method == 'POST':
             f = RegisterForm(request.POST)
             if f.is_valid():
-                f.save()
-                messages='Usuario creado correctamente'
-                return redirect('home:register')
-    # else:
-    #     return redirect('home:inicio')
-
+                if f.rol == 'AD':
+                    f.is_staff = True
+                    f.save()
+                    messages='Usuario creado correctamente'
+                    return redirect('home:register')
+                else:
+                    f.save()
+                    messages = 'Usuario creado correctamente'
+                    return redirect('home:register')
         return render(request, template, context)
-
-
-def search(request, id):
-    id = int(id)
-    message = None
-    if id == 1:
-        articles = Bovine.objects.all()
-    elif id == 2:
-        articles = Goat.objects.all()
-    elif id == 3:
-        articles = Rabbit.objects.all()
-    elif id == 4:
-        articles = Horse.objects.all()
-    elif id == 5:
-        articles = Dog.objects.all()
-    elif id == 6:
-        articles = Cat.objects.all()
-    elif id == 7:
-        articles = Porcine.objects.all()
-    elif id == 8:
-        articles = Bee.objects.all()
-    elif id == 9:
-        articles = Bird.objects.all()
-    elif id == 10:
-        articles = Wild.objects.all()
-    elif id == 11:
-        articles = Aquatic.objects.all()
     else:
-        redirect('home:inicio')
+        return redirect('home:inicio')
+
+
+def search(request, label):
+    message = None
+    articles = Question.objects.filter(specie=label)
 
     login_form = LogInForm(request.POST or None)
 
