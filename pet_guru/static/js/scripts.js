@@ -227,7 +227,4 @@ $(document).ready(function() {
       });
     })(jQuery);
 
-
-
-
 });
