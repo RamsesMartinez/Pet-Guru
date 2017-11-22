@@ -30,7 +30,7 @@
       {% else %}
       {% endif %}
     </div>
-    <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
+    <div id="cuestion" class="pt-5 pb-1 d-flex flex-column justify-content-center align-items-center">
       <div class="alert alert-success w-100 px-3 py-5" role="alert">
         <div class="row">
           <div class="col-sm-12 col-md-4">
@@ -47,12 +47,29 @@
                 data-description="Image 1 Description">
                 {% endfor %}
               </div>
-            </div></div>
+            </div>
           </div>
         </div>
-        <p class="questionSingle pt-5">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam nobis, laudantium ab. Perferendis, libero id corporis labore harum. Fugiat obcaecati, laudantium tempora delectus quae tempore, voluptate fugit architecto soluta ratione.
-        </p>
+      </div>
+      <div class="questionSingle pt-5 w-100">
+        <form id="chatform">
+          <table class="table" id="chat">
+            <tbody id="bodymessages">
+              {% for message in messages %}
+              <tr>
+                <td>{{ message.formatted_timestamp }}</td>
+                <td>{{ message.handle }}</td>
+                <td>{{ message.message }}</td>
+              </tr> 
+              {% endfor %}
+            </tbody>        
+          </table>
+          <div class="container sendChat position-static mx-auto">
+            <input id="message" type="text" autofocus>
+            <button type="submit" class="btn btn-primary"  id="go">Enviar</button>     
+          </div>        
+        </form>   
       </div>
     </div>
-    {% endblock %}
+  </div>
+  {% endblock %}

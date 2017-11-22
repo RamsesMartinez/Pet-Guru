@@ -18,8 +18,60 @@
       <main id="foroMain" class="col-12 pt-3">
         <div class="jumbotron">
           <h3 class="text-center text-uppercase pb-4">Información de: {{ request.user.username }}</h3>
+          <hr>
+          <div class="row d-flex justify-content-center">
+            <div class="col-12 text-center">
+              <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Realiza una pregunta
+              </a>
+            </div>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body speciesMenu">
+                <h5 class="text-center">Elige un espécimen</h5>
+                <div class="animals m-auto d-flex flex-row flex-wrap">
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Bovino">
+                    <a data-toggle="modal" data-target="#vacaModal"><img src="{% static 'images/animal/vaca.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Porcino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#cerdoModal"><img src="{% static 'images/animal/cerdo.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Equino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#caballoModal"><img src="{% static 'images/animal/caballo.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ovino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#ovejaModal"><img src="{% static 'images/animal/oveja.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Goat">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#cabraModal"><img src="{% static 'images/animal/cabra.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Lepórido">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#conejoModal"><img src="{% static 'images/animal/conejo.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Aves">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#avesModal"><img src="{% static 'images/animal/pato.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Canino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#perroModal"><img src="{% static 'images/animal/perro.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Felino">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#gatoModal"><img src="{% static 'images/animal/gato.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Fauna silvestre">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#silvestreModal"><img src="{% static 'images/animal/fauna.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Organismos acuaticos">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#acuaticModal"><img src="{% static 'images/animal/pez.png' %}" alt="animal icon"></a>
+                  </div>
+                  <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Abejas">
+                    <a data-toggle="modal" data-dismiss="modal" data-target="#abejaModal"><img src="{% static 'images/animal/abeja.png' %}" alt="animal icon"></a>
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
           <div class="Dashboard row container-fluid m-auto p-0">
-            <div class="col-sm-12 col-md-3 d-flex p-0 text-center flex-column justify-content-start">
+            <div class="col-sm-12 col-md-3 d-flex p-0 text-center flex-column justify-content-start mtp-5">
               <img src="{% static 'images/user.png' %}" alt="User image" class="mb-2 img-thumbnail rounded-circle mx-auto d-block userimg">
               <p>Usuario: {{ user }}</p>
               <p>Tipo de usuario: {{ request.user.get_rol_display }}</p>
@@ -27,13 +79,18 @@
             <div class="col-sm-12 col-md-9 p-0">
               <div id="mailLike" class="col-sm-12 w-100 p-0 text-center d-flex flex-column justify-content-around">
                 <h3 class=" mb-3">Mís preguntas:</h3>
+                <div class="row pl-5 py-3">
+                  <button id="mailToogle" class="btn btn-primary m-1" style="min-width:50px;" onclick="showMail();"><i class="fa fa-list" aria-hidden="true"></i></button>
+                  <button id="cardToggle" class="btn btn-primary m-1" style="min-width:50px;" onclick="showCard()"><i class="fa fa-credit-card" aria-hidden="true"></i></button>
+                </div>
+
                 <div id="userQuestions" class="col questContainer">
                   <table id="userTable" class="w-100 justify-content-around">
                     <thead>
                       <tr class="bg-dark text-white h4 text-uppercase">
                         <th id="questionField" class="text-center">Pregunta</th>
-                        <th class="text-center">Fecha</th>
                         <th class="text-center">Estatus</th>
+                        <th class="text-center">Fecha</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -42,22 +99,44 @@
                         <td>
                           <a href="{{ solved.get_absolute_url }}" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
                         </td>
-                        <td  class="text-center">
-                          {{ solved.date }}
-                        </td>
                         <td class="text-center">
                           {% if solved.status == 'OP' %}
-                          <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success">En espera</button> </a>
+                          <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success mail-btn">En espera</button> </a>
                           {% elif solved.status == 'RP' %}
-                          <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning" style="cursor: default">Contestando</button></a>
+                          <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Contestando</button></a>
                           {% else %}
-                          <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger" style="cursor: default">Cerrada</button></a>
+                          <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger mail-btn" style="cursor: default">Cerrada</button></a>
                           {% endif %}
+                        </td>
+                        <td  class="text-center">
+                          {{ solved.date }}
                         </td>
                       </tr>
                       {% endfor %}
                     </tbody>
                   </table>
+                </div>
+
+                <div id="userCards" class="col questContainer">
+                  <div class="row d-flex flex-row justify-content-around">
+                    {% for solved in solveds %}
+                    <div class="card articleCard">
+                      <div class="card-header">
+                        <h4 class="card-title">{{ solved.title }}</h4>
+                      </div>
+                      <div class="card-body d-flex flex-column justify-content-lg-around">
+                        <p class="card-text text-truncate">{{ solved.description }}.</p>
+                        {% if solved.status == 'OP' %}
+                        <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success mail-btn">En espera</button> </a>
+                        {% elif solved.status == 'RP' %}
+                        <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Contestando</button></a>
+                        {% else %}
+                        <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger mail-btn" style="cursor: default">Cerrada</button></a>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
                 </div>
 
               </div>
@@ -116,255 +195,254 @@
       </div>
     </div>
   </div> 
-</div>
-<!-- Oveja -->
-<div class="modal fade" id="ovejaModal" tabindex="-1" role="dialog" aria-labelledby="ovejaModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Ovino)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+  <!-- Oveja -->
+  <div class="modal fade" id="ovejaModal" tabindex="-1" role="dialog" aria-labelledby="ovejaModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Ovino)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/sheep.html' with form=ovine_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/sheep.html' with form=ovine_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-<!-- Cerdo -->
-<div class="modal fade" id="cerdoModal" tabindex="-1" role="dialog" aria-labelledby="cerdoModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Porcino)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div> 
+  </div>
+  <!-- Cerdo -->
+  <div class="modal fade" id="cerdoModal" tabindex="-1" role="dialog" aria-labelledby="cerdoModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Porcino)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/pig.html' with form=porcine_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/pig.html' with form=porcine_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-<!-- Conejo -->
-<div class="modal fade" id="conejoModal" tabindex="-1" role="dialog" aria-labelledby="conejoModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Lepórido)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div> 
+  </div>
+  <!-- Conejo -->
+  <div class="modal fade" id="conejoModal" tabindex="-1" role="dialog" aria-labelledby="conejoModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Lepórido)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/rabbit.html' with form=rabbit_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/rabbit.html' with form=rabbit_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div>  
-</div>
-<!-- Caprinos -->
-<div class="modal fade" id="cabraModal" tabindex="-1" role="dialog" aria-labelledby="cabraModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Caprino)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div>  
+  </div>
+  <!-- Caprinos -->
+  <div class="modal fade" id="cabraModal" tabindex="-1" role="dialog" aria-labelledby="cabraModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Caprino)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/goat.html' with form=goat_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/goat.html' with form=goat_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-<!-- Aves -->
-<div class="modal fade" id="avesModal" tabindex="-1" role="dialog" aria-labelledby="avesModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Aves)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div> 
+  </div>
+  <!-- Aves -->
+  <div class="modal fade" id="avesModal" tabindex="-1" role="dialog" aria-labelledby="avesModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Aves)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/bird.html' with form=bird_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/bird.html' with form=bird_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-<!-- Perros -->
-<div class="modal fade" id="perroModal" tabindex="-1" role="dialog" aria-labelledby="perroModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Canino)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div> 
+  </div>
+  <!-- Perros -->
+  <div class="modal fade" id="perroModal" tabindex="-1" role="dialog" aria-labelledby="perroModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Canino)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/dog.html' with form=dog_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/dog.html' with form=dog_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-<!-- Gatos -->
-<div class="modal fade" id="gatoModal" tabindex="-1" role="dialog" aria-labelledby="gatoModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Felino)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div> 
+  </div>
+  <!-- Gatos -->
+  <div class="modal fade" id="gatoModal" tabindex="-1" role="dialog" aria-labelledby="gatoModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Espécimen Felino)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/cat.html' with form=cat_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/cat.html' with form=cat_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-<!-- Fauna Silvestre -->
-<div class="modal fade" id="silvestreModal" tabindex="-1" role="dialog" aria-labelledby="faunaModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Fauna silvestre)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div> 
+  </div>
+  <!-- Fauna Silvestre -->
+  <div class="modal fade" id="silvestreModal" tabindex="-1" role="dialog" aria-labelledby="faunaModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Fauna silvestre)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/wild.html' with form=wild_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/wild.html' with form=wild_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-<!-- Abeja Silvestre -->
-<div class="modal fade" id="abejaModal" tabindex="-1" role="dialog" aria-labelledby="faunaModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Abeja)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div> 
+  </div>
+  <!-- Abeja Silvestre -->
+  <div class="modal fade" id="abejaModal" tabindex="-1" role="dialog" aria-labelledby="faunaModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Abeja)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/bee.html' with form=bee_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/bee.html' with form=bee_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-<!-- Organismos acuaticos -->
-<div class="modal fade" id="acuaticModal" tabindex="-1" role="dialog" aria-labelledby="faunaModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Organismos Acuáticos)</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
-          {% csrf_token %}
+    </div> 
+  </div>
+  <!-- Organismos acuaticos -->
+  <div class="modal fade" id="acuaticModal" tabindex="-1" role="dialog" aria-labelledby="faunaModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vacaModalLabel">Nueva pregunta (Organismos Acuáticos)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST" name="vacaquest"  accept-charset="utf-8" enctype="multipart/form-data" >
+            {% csrf_token %}
 
-          {% include 'question/base.html' with form=baseForm %}
-          {% include 'question/aquatic.html' with form=aquatic_form %}
-          {% include 'question/image.html' %}
+            {% include 'question/base.html' with form=baseForm %}
+            {% include 'question/aquatic.html' with form=aquatic_form %}
+            {% include 'question/image.html' %}
 
-          <input type="submit" name="enviar" class="mailitbtn btn btn-success">
-          <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
-        </form>
+            <input type="submit" name="enviar" class="mailitbtn btn btn-success">
+            <input type="reset" class="btn btn-danger" data-dismiss="modal" aria-label="Close" value="Salir" />
+          </form>
+        </div>
       </div>
-    </div>
-  </div> 
-</div>
-{% endblock %}
+    </div> 
+  </div>
+  {% endblock %}
