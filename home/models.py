@@ -33,6 +33,7 @@ class Question(models.Model):
     FELINO = 'FL'
     SILVESTRE = 'SL'
     ABEJA = 'BJ'
+    AQUATICO = 'AQ'
 
     SPECIES = (
         (BOVINO, 'Bovino'),
@@ -46,6 +47,7 @@ class Question(models.Model):
         (FELINO, 'Felino'),
         (SILVESTRE, 'Silvestre'),
         (ABEJA, 'Abeja'),
+        (AQUATICO, 'Organismos acuaticos'),
     )
 
     title = models.CharField(max_length=100, null=True)
