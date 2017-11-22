@@ -76,6 +76,9 @@ card-btn {
 .jumbotron {
   background-color: rgba(233, 236, 239, 0.8); }
 
+.input-group-addon {
+  border-left: none; }
+
 .bck1 {
   background-image: url(../images/erizo.jpg);
   background-size: contain;
