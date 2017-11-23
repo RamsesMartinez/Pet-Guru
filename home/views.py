@@ -13,7 +13,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from .forms import *
 
 from .models import Question
-from .models import Specie, Reply
+from .models import Specie
 from .models import ImageQuestion
 
 from email.mime.multipart import MIMEMultipart
@@ -569,6 +569,7 @@ def register(request):
 
 def search(request, label):
     message = None
+    template = 'article.html'
     articles = Question.objects.filter(specie=label)
 
     login_form = LogInForm(request.POST or None)
@@ -590,7 +591,7 @@ def search(request, label):
         'articles': articles,
         'form': login_form,
     }
-    return render(request, 'article.html', context)
+    return render(request, template, context)
 
 
 def sendmailform(request, email_user, html_content):

@@ -134,7 +134,7 @@ class Specie(models.Model):
         ABEJA: 'Abeja',
     }
 
-    question = models.OneToOneField(Question, default='')
+    question = models.OneToOneField(Question, default='', related_name='specie_question')
     race = models.CharField(max_length=20, null=False)
     age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
     gender = models.CharField(max_length=3, choices=SEX, default=MALE)

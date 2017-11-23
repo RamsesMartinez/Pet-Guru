@@ -13,6 +13,6 @@ urlpatterns = [
     url(r'^registro/$', views.register, name='register'),
     url(r'^logout/$', views.logout, name='logout'),
     # Just for develop; delete on production
-    url(r'^buscar/(?P<id>\d+)/$', views.search, name='search'),
+    url(r'^buscar/(?P<label>\w+)/$', views.search, name='search'),
     url(r'^mail/$', views.mail, name='mail'),
 ]
