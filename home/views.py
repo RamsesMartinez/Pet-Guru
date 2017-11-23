@@ -552,7 +552,7 @@ def register(request):
         if request.method == 'POST':
             f = RegisterForm(request.POST)
             if f.is_valid():
-                if f.rol == 'AD':
+                if f.cleaned_data['rol'] == 'AD':
                     f.is_staff = True
                     f.save()
                     messages='Usuario creado correctamente'
