@@ -22,7 +22,10 @@
         <div class="row">
           <div class="col-sm-12 col-md-4">
             <h2 class="alert-heading text-center mb-4">Datos clínicos.</h2>
-            <p>Especie: {{ instance.specie.get_specie_display }}</p>
+            <p>Especie: {{ instance.specie }}</p>
+            {% for op in nombres %}
+              <p>{{ op.name }}</p>
+            {% endfor %}
           </div>
           <hr>
           <div class="col-sm-12 col-md-8">

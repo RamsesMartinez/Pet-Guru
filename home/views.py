@@ -69,6 +69,7 @@ def index(request):
 def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
+    nombres = instance._meta.get_fields()
     image = ImageQuestion.objects.filter(question=instance.id)
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id;
@@ -85,6 +86,7 @@ def question(request, id=None):
         'titulo': instance.title,
         'instance': instance,
         'messages': messages,
+        'nombres': nombres,
     }
 
     return render(request, template, context)
