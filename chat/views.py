@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from chat.models import Room
+from chat.models import Room, Message
 from home.models import Question
 from home.forms import BaseForm
 
@@ -15,8 +15,16 @@ def chat_room(request, label):
         question_sel.status = 'RP'
         question_sel.user_response = request.user
         question_sel.save()
+
+    if request.method == 'POST':                
+        message = request.POST.get('message')        
+        handler = request.POST.get('handler')
+        new_mess = Message.objects.create(room=room,handle=handler,message=message)
+        new_mess.save()
+        
     
     return render(request, "room.html", {
+        'label': label,
         'room': room,
         'messages': messages,
     })
