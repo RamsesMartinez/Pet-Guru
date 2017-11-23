@@ -1,7 +1,5 @@
 from django.contrib import admin
-
 from .models import *
-
 
 class ImageQuestionInline(admin.TabularInline):
     model = ImageQuestion
@@ -14,6 +12,10 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [
         ImageQuestionInline,
     ]
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('question', 'handle', 'message', 'timestamp',)    
 
 
 @admin.register(Bovine)

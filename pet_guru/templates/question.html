@@ -1,36 +1,23 @@
-{% extends 'base/base.html' %}
-{% load static %}
+{% extends 'base/base.html' %} 
+{% load static %} 
 {% block content %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/chat.css' %} "/>
+  {% endblock link %}
 <div class="pageContainer">
   <header class="unam-primary sticky-top">
     <div class="container-fluid mainMenu">
-      {% block navigation %}
-      {% include 'base/nav.html' %}
-      {% endblock %}
+      {% block navigation %} {% include 'base/nav.html' %} {% endblock %}
     </div>
   </header>
-
   <div id="cuestionContainer">
-    <div class="container">
-      <h2 class="py-3 text-center display-4">{{ titulo }}</h2>
+    <div class="py-3 container">
+      <h2 class="text-center display-4">{{ titulo }}</h2>
       <h3 class="alert-heading text-center">Descripción de la consulta:</h3>
       <p class="py-3">{{instance.description}}</p>
-      <p class="py-2 h4">Calificacón: (agregar) <i class="fa fa-star" aria-hidden="true"></i></p>
+      <p class="py-2 h4">Calificacón: <i class="fa fa-star" aria-hidden="true"></i></p>
     </div>
-    <div class="container">
-      {% if request.user.rol == 'TC' and instance.status == 'OP'%}
-      <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
-      <br><br>
-      {% elif request.user.rol == 'ST' and instance.status == 'RP'%}
-      <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
-      <br><br>
-      {% elif request.user.pk == instance.user_response.pk  and instance.status == 'RP'%}
-      <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
-      <br><br>
-      {% else %}
-      {% endif %}
-    </div>
-    <div id="cuestion" class="pt-5 pb-1 d-flex flex-column justify-content-center align-items-center">
+    <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
       <div class="alert alert-success w-100 px-3 py-5" role="alert">
         <div class="row">
           <div class="col-sm-12 col-md-4">
@@ -42,35 +29,91 @@
             <div id="galleryContainer">
               <div id="gallery" style="display:none;">
                 {% for image in images %}
-                <img alt="Image 1 Title" src="{{image.image.url}}"
-                data-image="{{image.image.url}}"
-                data-description="Image 1 Description">
+                <img alt="Image 1 Title" src="{{image.image.url}}" data-image="{{image.image.url}}" data-description="Image 1 Description"> 
                 {% endfor %}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="questionSingle pt-5 w-100">
-        <form id="chatform">
-          <table class="table" id="chat">
-            <tbody id="bodymessages">
-              {% for message in messages %}
-              <tr>
-                <td>{{ message.formatted_timestamp }}</td>
-                <td>{{ message.handle }}</td>
-                <td>{{ message.message }}</td>
-              </tr> 
-              {% endfor %}
-              <td id="chatmine"></td>
-            </tbody>        
-          </table>
-          <div class="container sendChat position-static mx-auto">
-            <input id="message" type="text" autofocus>
-            <button type="submit" class="btn btn-primary"  id="go">Enviar</button>     
-          </div>        
-        </form>   
-      </div>
+      <div class="container text-center">
+        <h1>Comentarios</h1>
+        <div class="row justify-content-end">
+          <div class="">
+            <input id="message" type="text">
+            <button type="submit" class="btn_send btn btn-primary">Enviar</button>
+          </div>
+        </div>
+      </div>      
+      <div class="container messages-cont">
+        {% for message in messages %}
+          {% if request.user.username == message.handle|stringformat:"s" %}
+            <div class="row justify-content-end">
+              <div class="col-md-7 col-sm-7">
+                <div class="card card-message">
+                  <div class="card-header text-left">
+                    {{message.handle}}
+                  </div>
+                  <div class="card-body text-left">
+                    <p class="card-text">{{message.message}}</p>
+                  </div>
+                  <div class="card-footer text-muted text-right">
+                    <p>{{ message.formatted_timestamp }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <div class="row justify-content-start">
+              <div class="col-md-7">
+                <div class="card card-message">
+                  <div class="card-header text-left">
+                    {{message.handle}}
+                  </div>
+                  <div class="card-body text-left">
+                    <p class="card-text">{{message.message}}</p>
+                  </div>
+                  <div class="card-footer text-muted text-right">
+                    <p>{{ message.formatted_timestamp }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>      
     </div>
-  </div>
-  {% endblock %} 
+    {% endblock %} 
+    {% block javascript%}
+    <script type="text/javascript">
+    $(function() {
+      function send_data() {
+        var message = $('#message').val();
+        var handler = $('#handle').text();
+        $.ajax({
+          url: "{% url 'home:pregunta' label %}",
+          type: 'POST',
+          data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            'message': message,
+            'handler': '{{request.user.username}}',
+          },
+          traditional: true,
+          datatype: 'jsonp',
+          success: function(result) {
+            location.reload()
+          },
+        });
+      }
+      $(".messages-cont").animate({ scrollTop: $('#div1').prop("scrollHeight")}, 1000);
+      $('.btn_send').click(function() {
+        send_data();
+      });
+      $("#message").on('keyup', function(e) {
+        if (e.keyCode == 13) {
+          send_data();
+        }
+      });
+    });
+    </script>
+    {% endblock javascript%}
