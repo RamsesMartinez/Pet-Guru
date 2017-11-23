@@ -71,7 +71,13 @@ a.unam-dark:hover {
 }
 .btn {
   cursor: pointer !important;
-  width: 160px;
+}
+.mail-btn {
+  cursor: pointer !important;
+  min-width: 160px;
+}
+card-btn {
+  padding: .5rem .75rem;
 }
 .btn-outline-light:hover {
   color: #353535;
@@ -87,6 +93,9 @@ a.unam-dark:hover {
 }
 .jumbotron {
   background-color: rgba(233,236,239,0.8);
+}
+.input-group-addon {
+  border-left: none;
 }
 // Page styles
 .bck1 {
@@ -247,6 +256,7 @@ a.unam-dark:hover {
   .questionSingle {
     max-width: 900px;
     margin: 0 auto;
+    position: relative;
   }
 }
 // Footer styles
@@ -276,15 +286,19 @@ a.unam-dark:hover {
   margin-top: 10px;
 }
 #mailLike {
-  height: 400px;
+  height: 600px;
   width: 80%;
 }
 #mailLike button {
   padding: .2rem;
 }
-#userQuestions {
+#userQuestions,
+#userCards {
   height: 450px;
   overflow-y: scroll;
+}
+#userCards {
+  display: none;
 }
 .userimg {
   width: 100px;
@@ -309,7 +323,8 @@ p.calif {
   overflow: scroll;
 }
 #chatform {
-  height: inherit;
+  min-height: 200px;
+  max-height: 350px;
   overflow-y: scroll;
 }
 #chatmessages {
@@ -318,8 +333,14 @@ p.calif {
   position: relative;
   margin-bottom: 100px;
 }
+#message {
+  max-width: 300px;
+  min-width: 250px;
+}
 .sendChat {
   bottom: 0;
+  right: 30px;
+  width: inherit;
   position: absolute !important;
   height: 70px !important;
   background-color: #fff;
@@ -332,6 +353,12 @@ p.calif {
 }
 #userTable tr:nth-child(even) {
   background-color: #dddddd;
+}
+// User card articles
+.articleCard {
+  min-width: 280px;
+  width: 20%;
+  height: 350px;
 }
 
 

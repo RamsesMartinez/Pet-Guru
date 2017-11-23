@@ -53,8 +53,14 @@ a.unam-dark:hover {
   line-height: 30px; }
 
 .btn {
+  cursor: pointer !important; }
+
+.mail-btn {
   cursor: pointer !important;
-  width: 160px; }
+  min-width: 160px; }
+
+card-btn {
+  padding: .5rem .75rem; }
 
 .btn-outline-light:hover {
   color: #353535; }
@@ -69,6 +75,9 @@ a.unam-dark:hover {
 
 .jumbotron {
   background-color: rgba(233, 236, 239, 0.8); }
+
+.input-group-addon {
+  border-left: none; }
 
 .bck1 {
   background-image: url(../images/erizo.jpg);
@@ -214,7 +223,8 @@ a.unam-dark:hover {
 
 #cuestion .questionSingle {
   max-width: 900px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  position: relative; }
 
 .footer {
   font-size: 1.2rem;
@@ -239,15 +249,19 @@ a.unam-dark:hover {
   margin-top: 10px; }
 
 #mailLike {
-  height: 400px;
+  height: 600px;
   width: 80%; }
 
 #mailLike button {
   padding: .2rem; }
 
-#userQuestions {
+#userQuestions,
+#userCards {
   height: 450px;
   overflow-y: scroll; }
+
+#userCards {
+  display: none; }
 
 .userimg {
   width: 100px;
@@ -280,12 +294,9 @@ p.calif {
   margin-bottom: 100px; 
 }
 
-.sendChat {
-  bottom: 0;
-  position: absolute !important;
-  height: 70px !important;
-  background-color: #fff; 
-}
+#message {
+  max-width: 300px;
+  min-width: 250px; }
 
 #userTable td, th {
   border: 1px solid #dddddd;
@@ -294,6 +305,11 @@ p.calif {
 
 #userTable tr:nth-child(even) {
   background-color: #dddddd; }
+
+.articleCard {
+  min-width: 280px;
+  width: 20%;
+  height: 350px; }
 
 @media screen and (min-width: 550px) {
   .logIn {

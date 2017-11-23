@@ -1,16 +1,6 @@
 from django.contrib import admin
 
-from .models import Question
-from .models import ImageQuestion
-from .models import Bovine
-from .models import Porcine
-from .models import Horse
-from .models import Ovine
-from .models import Goat
-from .models import Rabbit
-from .models import Bee
-from .models import Bird
-
+from .models import Question, ImageQuestion, Message, Bovine, Porcine, Horse, Ovine, Goat, Rabbit, Bee, Bird
 
 class ImageQuestionInline(admin.TabularInline):
     model = ImageQuestion
@@ -23,6 +13,10 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [
         ImageQuestionInline,
     ]
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('question', 'handle', 'message', 'timestamp',)    
 
 
 @admin.register(Bovine)
