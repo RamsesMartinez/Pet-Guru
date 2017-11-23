@@ -264,27 +264,28 @@ p.calif {
 #questionField {
   max-width: 300px; }
 
-#chatContainer {
-  min-height: 80vh;
+#chatContainer {  
   display: flex;
   flex-direction: column;
   overflow: scroll; }
 
 #chatform {
   height: inherit;
-  overflow-y: scroll; }
+  overflow-y: scroll; 
+}
 
 #chatmessages {
-  min-height: 80%;
-  overflow-y: scroll;
+  min-height: 80%;  
   position: relative;
-  margin-bottom: 100px; }
+  margin-bottom: 100px; 
+}
 
 .sendChat {
   bottom: 0;
   position: absolute !important;
   height: 70px !important;
-  background-color: #fff; }
+  background-color: #fff; 
+}
 
 #userTable td, th {
   border: 1px solid #dddddd;

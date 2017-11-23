@@ -1,7 +1,14 @@
-.container{
-	position: relative;
-	height: 80vh;
+.messages-cont{
+	position: relative;	
+	overflow-y: scroll;
+	height: 60rem;
 }
+
+.card-message{
+	border-radius: 10%;
+
+}
+
 body{
 	background: white;
 }
