@@ -38,7 +38,7 @@ class BaseForm(forms.ModelForm):
         super(BaseForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs.update({'class': 'form-control'})
         self.fields['description'].widget.attrs.update({'class': 'form-control'})
-        self.fields['specie'].widget.attrs.update({'class': 'form-control'})
+        self.fields['specie'].widget.attrs.update({'class': 'form-control', 'id': 'specieID'})
         self.fields['user_question'].widget.attrs.update({'class': 'hidden'})
 
     class Meta:

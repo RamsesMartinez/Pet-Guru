@@ -70,12 +70,10 @@ def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
     image = ImageQuestion.objects.filter(question=instance.id)
-    comments = Reply.objects.filter(question=instance.id)
     context = {
         'images': image,
         'titulo': instance.title,
         'instance': instance,
-        'comments': comments,
     }
 
     return render(request, template, context)
@@ -149,7 +147,7 @@ def user(request):
                         photo.save()
 
             if base_form.is_valid():
-                if cow_form.is_valid() and base_form.specie == 'BV':
+                if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
                     base = base_form.save(commit=False)
                     cow = cow_form.save(commit=False)
                     base.user_question = request.user
@@ -173,7 +171,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif porcine_form.is_valid() and base_form.specie == 'PR':
+                elif porcine_form.is_valid() and base_form.cleaned_data['specie'] == 'PR':
                     base = base_form.save(commit=False)
                     pig = porcine_form.save(commit=False)
                     base.user_question = request.user
@@ -197,7 +195,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif horse_form.is_valid() and base_form.specie == 'EQ':
+                elif horse_form.is_valid() and base_form.cleaned_data['specie'] == 'EQ':
                     base = base_form.save(commit=False)
                     horse = horse_form.save(commit=False)
                     base.user_question = request.user
@@ -221,7 +219,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif ovine_form.is_valid() and base_form.specie == 'OV':
+                elif ovine_form.is_valid() and base_form.cleaned_data['specie'] == 'OV':
                     base = base_form.save(commit=False)
                     ovine = ovine_form.save(commit=False)
                     base.user_question = request.user
@@ -245,7 +243,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif goat_form.is_valid() and base_form.specie == 'CP':
+                elif goat_form.is_valid() and base_form.cleaned_data['specie'] == 'CP':
                     base = base_form.save(commit=False)
                     goat = goat_form.save(commit=False)
                     base.user_question = request.user
@@ -268,7 +266,7 @@ def user(request):
                         print('ERROR: ' + e.args)
                     return redirect('home:usuario')
 
-                elif rabbit_form.is_valid() and base_form.specie == 'LP':
+                elif rabbit_form.is_valid() and base_form.cleaned_data['specie'] == 'LP':
                     base = base_form.save(commit=False)
                     rab = rabbit_form.save(commit=False)
                     base.user_question = request.user
@@ -292,7 +290,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif bird_form.is_valid() and base_form.specie == 'AV':
+                elif bird_form.is_valid() and base_form.cleaned_data['specie'] == 'AV':
                     base = base_form.save(commit=False)
                     bird = bird_form.save(commit=False)
                     base.user_question = request.user
@@ -316,7 +314,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif dog_form.is_valid() and base_form.specie == 'CN':
+                elif dog_form.is_valid() and base_form.cleaned_data['specie'] == 'CN':
                     base = base_form.save(commit=False)
                     dog = dog_form.save(commit=False)
                     base.user_question = request.user
@@ -340,7 +338,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif cat_form.is_valid() and base_form.specie == 'FL':
+                elif cat_form.is_valid() and base_form.cleaned_data['specie'] == 'FL':
                     base = base_form.save(commit=False)
                     cat = cat_form.save(commit=False)
                     base.user_question = request.user
@@ -364,7 +362,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif wild_form.is_valid() and base_form.specie == 'SL':
+                elif wild_form.is_valid() and base_form.cleaned_data['specie'] == 'SL':
                     base = base_form.save(commit=False)
                     wild = wild_form.save(commit=False)
                     base.user_question = request.user
@@ -388,7 +386,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif aquatic_form.is_valid() and base_form.specie == 'PR':
+                elif aquatic_form.is_valid() and base_form.cleaned_data['specie'] == 'AQ':
                     base = base_form.save(commit=False)
                     aq = aquatic_form.save(commit=False)
                     base.user_question = request.user
@@ -412,7 +410,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif bee_form.is_valid() and base_form.specie == 'BJ':
+                elif bee_form.is_valid() and base_form.cleaned_data['specie'] == 'BJ':
                     base = base_form.save(commit=False)
                     bee = bee_form.save(commit=False)
                     base.user_question = request.user
