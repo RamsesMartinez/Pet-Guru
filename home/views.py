@@ -70,11 +70,19 @@ def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
     image = ImageQuestion.objects.filter(question=instance.id)
-    context = {
-        'CN': "listo esto funciona",
+    messages = reversed(instance.messages.order_by('-timestamp')[:50])
+
+    if request.method == 'POST':                
+        message = request.POST.get('message')        
+        handler = request.POST.get('handler')
+        new_mess = Message.objects.create(room=room,handle=handler,message=message)
+        new_mess.save()
+
+    context = {        
         'images': image,
         'titulo': instance.title,
         'instance': instance,
+        'messages': messages,
     }
 
     return render(request, template, context)

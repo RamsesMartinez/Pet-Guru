@@ -4,6 +4,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
 from django.utils.text import slugify
+from django.utils import timezone
 
 from users.models import User
 
@@ -50,6 +51,23 @@ class ImageQuestion(models.Model):
 
     def __str__(self):
         return '%s' % self.id
+
+class Message(models.Model):    
+    question = models.ForeignKey(Question, default=None,related_name='messages')
+    handle = models.TextField()
+    message = models.TextField()
+    timestamp = models.DateTimeField(default=timezone.now, db_index=True)
+
+    def __unicode__(self):
+        return '[{timestamp}] {handle}: {message}'.format(**self.as_dict())
+
+    @property
+    def formatted_timestamp(self):
+        return self.timestamp.strftime("%m-%d-%Y %H:%I%p")
+    
+    def as_dict(self):
+        return {'handle': self.handle, 'message': self.message, 'timestamp': self.formatted_timestamp}
+
 
 
 class Specie(models.Model):

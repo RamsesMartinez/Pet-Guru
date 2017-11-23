@@ -6,30 +6,17 @@
     <div class="container-fluid mainMenu">
       {% block navigation %}
       {% include 'base/nav.html' %}
-      {% endblock %}
+      {% endblock %} 
     </div>
   </header>
 
   <div id="cuestionContainer">
-    <div class="container">
-      <h2 class="py-3 text-center display-4">{{ titulo }}</h2>
+    <div class="py-3 container">
+      <h2 class="text-center display-4">{{ titulo }}</h2>
       <h3 class="alert-heading text-center">Descripción de la consulta:</h3>
       <p class="py-3">{{instance.description}}</p>
-      <p class="py-2 h4">Calificacón: (agregar) <i class="fa fa-star" aria-hidden="true"></i></p>
-    </div>
-    <div class="container">
-      {% if request.user.rol == 'TC' and instance.status == 'OP'%}
-      <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
-      <br><br>
-      {% elif request.user.rol == 'ST' and instance.status == 'RP'%}
-      <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
-      <br><br>
-      {% elif request.user.pk == instance.user_response.pk  and instance.status == 'RP'%}
-      <a class="btn btn-primary" href="{% url 'chat:chat_room' instance.pk %}" role="button">Chat en Vivo</a>
-      <br><br>
-      {% else %}
-      {% endif %}
-    </div>
+      <p class="py-2 h4">Calificacón: <i class="fa fa-star" aria-hidden="true"></i></p>
+    </div>    
     <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
       <div class="alert alert-success w-100 px-3 py-5" role="alert">
         <div class="row">
