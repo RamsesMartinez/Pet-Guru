@@ -142,13 +142,14 @@ def user(request):
 
             def save_images(base):
                 # Save images
-                for form in formset.cleaned_data:
-                    image = form['image']
-                    photo = ImageQuestion(question=base, image=image)
-                    photo.save()
+                if formset.is_valid():
+                    for form in formset.cleaned_data:
+                        image = form['image']
+                        photo = ImageQuestion(question=base, image=image)
+                        photo.save()
 
-            if base_form.is_valid() and formset.is_valid():
-                if cow_form.is_valid():
+            if base_form.is_valid():
+                if cow_form.is_valid() and base_form.specie == 'BV':
                     base = base_form.save(commit=False)
                     cow = cow_form.save(commit=False)
                     base.user_question = request.user
@@ -172,7 +173,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif porcine_form.is_valid():
+                elif porcine_form.is_valid() and base_form.specie == 'PR':
                     base = base_form.save(commit=False)
                     pig = porcine_form.save(commit=False)
                     base.user_question = request.user
@@ -196,7 +197,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif horse_form.is_valid():
+                elif horse_form.is_valid() and base_form.specie == 'EQ':
                     base = base_form.save(commit=False)
                     horse = horse_form.save(commit=False)
                     base.user_question = request.user
@@ -220,7 +221,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif ovine_form.is_valid():
+                elif ovine_form.is_valid() and base_form.specie == 'OV':
                     base = base_form.save(commit=False)
                     ovine = ovine_form.save(commit=False)
                     base.user_question = request.user
@@ -244,7 +245,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif goat_form.is_valid():
+                elif goat_form.is_valid() and base_form.specie == 'CP':
                     base = base_form.save(commit=False)
                     goat = goat_form.save(commit=False)
                     base.user_question = request.user
@@ -267,7 +268,7 @@ def user(request):
                         print('ERROR: ' + e.args)
                     return redirect('home:usuario')
 
-                elif rabbit_form.is_valid():
+                elif rabbit_form.is_valid() and base_form.specie == 'LP':
                     base = base_form.save(commit=False)
                     rab = rabbit_form.save(commit=False)
                     base.user_question = request.user
@@ -291,7 +292,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif bird_form.is_valid():
+                elif bird_form.is_valid() and base_form.specie == 'AV':
                     base = base_form.save(commit=False)
                     bird = bird_form.save(commit=False)
                     base.user_question = request.user
@@ -315,7 +316,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif dog_form.is_valid():
+                elif dog_form.is_valid() and base_form.specie == 'CN':
                     base = base_form.save(commit=False)
                     dog = dog_form.save(commit=False)
                     base.user_question = request.user
@@ -339,7 +340,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif cat_form.is_valid():
+                elif cat_form.is_valid() and base_form.specie == 'FL':
                     base = base_form.save(commit=False)
                     cat = cat_form.save(commit=False)
                     base.user_question = request.user
@@ -363,7 +364,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif wild_form.is_valid():
+                elif wild_form.is_valid() and base_form.specie == 'SL':
                     base = base_form.save(commit=False)
                     wild = wild_form.save(commit=False)
                     base.user_question = request.user
@@ -387,7 +388,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif aquatic_form.is_valid():
+                elif aquatic_form.is_valid() and base_form.specie == 'PR':
                     base = base_form.save(commit=False)
                     aq = aquatic_form.save(commit=False)
                     base.user_question = request.user
@@ -411,7 +412,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif bee_form.is_valid():
+                elif bee_form.is_valid() and base_form.specie == 'BJ':
                     base = base_form.save(commit=False)
                     bee = bee_form.save(commit=False)
                     base.user_question = request.user
@@ -595,36 +596,39 @@ def search(request, label):
 
 
 def sendmailform(request, email_user, html_content):
-    fromaddr = "itzli2000@gmail.com"
-    toaddr = email_user
-    msg = MIMEMultipart()
-    msg['From'] = fromaddr
-    msg['To'] = toaddr
-    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
-    
+    if email_user == None:
+        return None
+    else:
+        fromaddr = "itzli2000@gmail.com"
+        toaddr = email_user
+        msg = MIMEMultipart()
+        msg['From'] = fromaddr
+        msg['To'] = toaddr
+        msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
-    body = html_content
 
-    msg.attach(MIMEText(body, 'html'))
- 
-    # filename = "main.jpg"
-    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+        body = html_content
 
-    # part = MIMEBase('application', 'octet-stream')
-    # part.set_payload((attachment).read())
-    # encoders.encode_base64(part)
-    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-     
-    # msg.attach(part)
+        msg.attach(MIMEText(body, 'html'))
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(fromaddr, "molinona&9")
-    text = msg.as_string()
-    server.sendmail(fromaddr, toaddr, text)
-    server.quit()
+        # filename = "main.jpg"
+        # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
 
-    return None
+        # part = MIMEBase('application', 'octet-stream')
+        # part.set_payload((attachment).read())
+        # encoders.encode_base64(part)
+        # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+        # msg.attach(part)
+
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(fromaddr, "molinona&9")
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
+
+        return None
 
 
 
