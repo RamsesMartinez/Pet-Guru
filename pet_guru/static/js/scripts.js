@@ -151,43 +151,7 @@ $(document).ready(function() {
           document.faunaquest.submit();
         });
     });
-    // Login form handler
 
-    $("#LogInOut").click(function (e) {
-      e.preventDefault();
-      var username = $('#email').val();
-      var password = $('#password').val();
-      console.log(username)      
-      console.log(password)
-
-      $.ajax({
-        url: "{% url 'home:inicio' %}",
-        type: 'POST',
-        data: {
-          'username': username,
-          'password': password,
-          csrfmiddlewaretoken: '{{ csrf_token }}',          
-        },
-        dataType: 'json',
-        success: function (data) {
-          if (data.check == 'Valido') {
-            swal({
-            title: "¡Bienvenido!",
-            text: "Bienvenido Juan Perez",
-            type: "success",
-            confirmButtonText: "Vamos",
-            confirmButtonClass: 'btn btn-success'
-            }).then(function () {
-                $(".logIn").css('display', 'none');
-                $(".newQuestion").css("display","inline");
-            });            
-          }else{
-            alert("La contrasenia es incorrecta.");
-          }
-        }
-      });
-
-    });
 
     $( "#LogInOuta" ).click(function(e) {
       e.preventDefault();
@@ -202,16 +166,14 @@ $(document).ready(function() {
             $(".newQuestion").css("display","inline");
         });
     });
+
+
     // Sinlge Question gallery
     jQuery(document).ready(function(){ 
         jQuery("#gallery").unitegallery(); 
-    }); 
-    // Animal icons popover
-    $(document).ready(function(){
-        if (screen.width>=1100) {
-            $('[data-toggle="popover"]').popover();   
-        }
     });
+
+
     // Register form password validation
     (function($) {
       $('#id_password1, #id_password2').keyup(function() {

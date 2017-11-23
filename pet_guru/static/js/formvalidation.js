@@ -2027,6 +2027,30 @@ function beechangerack() {
     $('#beerack').prop("readonly", false);
   }
 }
+function beechangehive() {
+  var hrrack = document.getElementById('beehive');
+  var hrrackcheck = document.getElementById('beehivec');
+  if (hrrackcheck.checked) {
+    hrrack.value="Sin datos";
+    $('#beehive').prop("readonly", true);
+  }
+  else {
+    hrrack.value="";
+    $('#beehive').prop("readonly", false);
+  }
+}
+function beechangesigns() {
+  var hrrack = document.getElementById('beesigns');
+  var hrrackcheck = document.getElementById('beesignsc');
+  if (hrrackcheck.checked) {
+    hrrack.value="Sin datos";
+    $('#beesigns').prop("readonly", true);
+  }
+  else {
+    hrrack.value="";
+    $('#beesigns').prop("readonly", false);
+  }
+}
 
 
 // Toggle mail list and card list

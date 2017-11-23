@@ -22,6 +22,34 @@ class Question(models.Model):
         (RESPONDING, 'Respondiendo'),
     )
 
+    BOVINO = 'BV'
+    PORCINO = 'PR'
+    EQUINO = 'EQ'
+    OVINO = 'OV'
+    CAPRINO = 'CP'
+    LEPORIDO = 'LP'
+    AVE = 'AV'
+    CANINO = 'CN'
+    FELINO = 'FL'
+    SILVESTRE = 'SL'
+    ABEJA = 'BJ'
+    AQUATICO = 'AQ'
+
+    SPECIES = (
+        (BOVINO, 'Bovino'),
+        (PORCINO, 'Porcino'),
+        (EQUINO, 'Equino'),
+        (OVINO, 'Ovino'),
+        (CAPRINO, 'Caprino'),
+        (LEPORIDO, 'Lepórido'),
+        (AVE, 'Ave'),
+        (CANINO, 'Canino'),
+        (FELINO, 'Felino'),
+        (SILVESTRE, 'Silvestre'),
+        (ABEJA, 'Abeja'),
+        (AQUATICO, 'Organismos acuaticos'),
+    )
+
     title = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True)
     status = models.CharField(max_length=2, null=True, choices=STATUS, default='OP')
@@ -29,6 +57,7 @@ class Question(models.Model):
     user_response = models.ForeignKey(User, related_name='teacher_question', default=User.DEFAULT_USER)
     calification = models.PositiveSmallIntegerField(default=0)
     date = models.DateTimeField(editable=False, auto_now=True, null=True)
+    specie = models.CharField(max_length=10, choices=SPECIES)
 
     def __str__(self):
         return '%s' % self.title
@@ -105,8 +134,7 @@ class Specie(models.Model):
         ABEJA: 'Abeja',
     }
 
-    question = models.OneToOneField(Question, default='')
-    specie = models.CharField(max_length=10, choices=SPECIES)
+    question = models.OneToOneField(Question, default='', related_name='specie_question')
     race = models.CharField(max_length=20, null=False)
     age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
     gender = models.CharField(max_length=3, choices=SEX, default=MALE)
@@ -556,6 +584,16 @@ class Horse(Specie):
     mucosal_color = models.CharField(max_length=30, null=True)
     lymph_nodes = models.CharField(max_length=50, null=True)
     body_condition = models.TextField(null=True)
+
+    def __str__(self):
+        return '%s' % self.id
+
+
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    question = models.ForeignKey(Question)
 
     def __str__(self):
         return '%s' % self.id

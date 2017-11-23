@@ -2,17 +2,6 @@
 <hr>
 <h4>Reseña</h4>
 <div class="form-group">
-  {{ form.specie.errors }}
-  <label for="{{ form.specie.id_for_label }}">{{ form.specie.label }}</label>
-  <div class="input-group">
-    {{ form.specie }}
-    <span class="input-group-addon">
-      <input id="beespeciec" type="checkbox" aria-label="Checkbox for following text input" onclick="beechangespecie()">
-    </span>
-    <span class="input-group-addon">Sin datos</span>
-  </div>
-</div>
-<div class="form-group">
   {{ form.colony_type.errors }}
   <label for="{{ form.colony_type.id_for_label }}">{{ form.colony_type.label }}</label>
   {{ form.colony_type }}
@@ -20,12 +9,29 @@
 <div class="form-group">
   {{ form.hive_review.errors }}
   <label for="{{ form.hive_review.id_for_label }}">{{ form.hive_review.label }}</label>
-  {{ form.hive_review }}
+  <div class="input-group">
+    {{ form.hive_review }}
+    <span class="input-group-addon">
+      <input id="beehivec" type="checkbox" aria-label="Checkbox for following text input" onclick="beechangehive()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <div class="form-group">
   {{ form.queen_presence.errors }}
   <label for="{{ form.queen_presence.id_for_label }}">{{ form.queen_presence.label }}</label>
   {{ form.queen_presence }}
+</div>
+<div class="form-group">
+  {{ form.disease_signs.errors }}
+  <label for="{{ form.disease_signs.id_for_label }}">{{ form.disease_signs.label }}</label>
+  <div class="input-group">
+    {{ form.disease_signs }}
+    <span class="input-group-addon">
+      <input id="beesignsc" type="checkbox" aria-label="Checkbox for following text input" onclick="beechangesigns()">
+    </span>
+    <span class="input-group-addon">Sin datos</span>
+  </div>
 </div>
 <div class="form-group">
   {{ form.breeding.errors }}

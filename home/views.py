@@ -65,13 +65,12 @@ def index(request):
 
     return render(request, template, context)
 
-
+@login_required(login_url='home:inicio')
 def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
     image = ImageQuestion.objects.filter(question=instance.id)
     context = {
-        'CN': "listo esto funciona",
         'images': image,
         'titulo': instance.title,
         'instance': instance,
@@ -141,13 +140,14 @@ def user(request):
 
             def save_images(base):
                 # Save images
-                for form in formset.cleaned_data:
-                    image = form['image']
-                    photo = ImageQuestion(question=base, image=image)
-                    photo.save()
+                if formset.is_valid():
+                    for form in formset.cleaned_data:
+                        image = form['image']
+                        photo = ImageQuestion(question=base, image=image)
+                        photo.save()
 
-            if base_form.is_valid() and formset.is_valid():
-                if cow_form.is_valid():
+            if base_form.is_valid():
+                if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
                     base = base_form.save(commit=False)
                     cow = cow_form.save(commit=False)
                     base.user_question = request.user
@@ -171,7 +171,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif porcine_form.is_valid():
+                elif porcine_form.is_valid() and base_form.cleaned_data['specie'] == 'PR':
                     base = base_form.save(commit=False)
                     pig = porcine_form.save(commit=False)
                     base.user_question = request.user
@@ -195,7 +195,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif horse_form.is_valid():
+                elif horse_form.is_valid() and base_form.cleaned_data['specie'] == 'EQ':
                     base = base_form.save(commit=False)
                     horse = horse_form.save(commit=False)
                     base.user_question = request.user
@@ -219,7 +219,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif ovine_form.is_valid():
+                elif ovine_form.is_valid() and base_form.cleaned_data['specie'] == 'OV':
                     base = base_form.save(commit=False)
                     ovine = ovine_form.save(commit=False)
                     base.user_question = request.user
@@ -243,7 +243,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif goat_form.is_valid():
+                elif goat_form.is_valid() and base_form.cleaned_data['specie'] == 'CP':
                     base = base_form.save(commit=False)
                     goat = goat_form.save(commit=False)
                     base.user_question = request.user
@@ -266,7 +266,7 @@ def user(request):
                         print('ERROR: ' + e.args)
                     return redirect('home:usuario')
 
-                elif rabbit_form.is_valid():
+                elif rabbit_form.is_valid() and base_form.cleaned_data['specie'] == 'LP':
                     base = base_form.save(commit=False)
                     rab = rabbit_form.save(commit=False)
                     base.user_question = request.user
@@ -290,7 +290,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif bird_form.is_valid():
+                elif bird_form.is_valid() and base_form.cleaned_data['specie'] == 'AV':
                     base = base_form.save(commit=False)
                     bird = bird_form.save(commit=False)
                     base.user_question = request.user
@@ -314,7 +314,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif dog_form.is_valid():
+                elif dog_form.is_valid() and base_form.cleaned_data['specie'] == 'CN':
                     base = base_form.save(commit=False)
                     dog = dog_form.save(commit=False)
                     base.user_question = request.user
@@ -338,7 +338,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif cat_form.is_valid():
+                elif cat_form.is_valid() and base_form.cleaned_data['specie'] == 'FL':
                     base = base_form.save(commit=False)
                     cat = cat_form.save(commit=False)
                     base.user_question = request.user
@@ -362,7 +362,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif wild_form.is_valid():
+                elif wild_form.is_valid() and base_form.cleaned_data['specie'] == 'SL':
                     base = base_form.save(commit=False)
                     wild = wild_form.save(commit=False)
                     base.user_question = request.user
@@ -380,13 +380,13 @@ def user(request):
                     emails = User.objects.filter(speciality='SL').filter(rol='TC')
                     try:
                         for user_speciality in emails:
-                            wildmail(request, user_speciality.email, html_content)
+                            sendmailform(request, user_speciality.email, html_content)
                     except Exception as e:
                         print('ERROR: ' + e.args)
 
                     return redirect('home:usuario')
 
-                elif aquatic_form.is_valid():
+                elif aquatic_form.is_valid() and base_form.cleaned_data['specie'] == 'AQ':
                     base = base_form.save(commit=False)
                     aq = aquatic_form.save(commit=False)
                     base.user_question = request.user
@@ -410,7 +410,7 @@ def user(request):
 
                     return redirect('home:usuario')
 
-                elif bee_form.is_valid():
+                elif bee_form.is_valid() and base_form.cleaned_data['specie'] == 'BJ':
                     base = base_form.save(commit=False)
                     bee = bee_form.save(commit=False)
                     base.user_question = request.user
@@ -541,7 +541,7 @@ def cards(request):
 
 @login_required(login_url='home:inicio')
 def register(request):
-    # if request.user.rol == 'AD':
+    if request.user.rol == 'AD':
         template = "user_register.html"
         f = RegisterForm()
         messages = None
@@ -552,42 +552,24 @@ def register(request):
         if request.method == 'POST':
             f = RegisterForm(request.POST)
             if f.is_valid():
-                f.save()
-                messages='Usuario creado correctamente'
-                return redirect('home:register')
-    # else:
-    #     return redirect('home:inicio')
-
+                if f.cleaned_data['rol'] == 'AD':
+                    f.is_staff = True
+                    f.save()
+                    messages='Usuario creado correctamente'
+                    return redirect('home:register')
+                else:
+                    f.save()
+                    messages = 'Usuario creado correctamente'
+                    return redirect('home:register')
         return render(request, template, context)
-
-
-def search(request, id):
-    id = int(id)
-    message = None
-    if id == 1:
-        articles = Bovine.objects.all()
-    elif id == 2:
-        articles = Goat.objects.all()
-    elif id == 3:
-        articles = Rabbit.objects.all()
-    elif id == 4:
-        articles = Horse.objects.all()
-    elif id == 5:
-        articles = Dog.objects.all()
-    elif id == 6:
-        articles = Cat.objects.all()
-    elif id == 7:
-        articles = Porcine.objects.all()
-    elif id == 8:
-        articles = Bee.objects.all()
-    elif id == 9:
-        articles = Bird.objects.all()
-    elif id == 10:
-        articles = Wild.objects.all()
-    elif id == 11:
-        articles = Aquatic.objects.all()
     else:
-        redirect('home:inicio')
+        return redirect('home:inicio')
+
+
+def search(request, label):
+    message = None
+    template = 'article.html'
+    articles = Question.objects.filter(specie=label)
 
     login_form = LogInForm(request.POST or None)
 
@@ -608,40 +590,43 @@ def search(request, id):
         'articles': articles,
         'form': login_form,
     }
-    return render(request, 'article.html', context)
+    return render(request, template, context)
 
 
 def sendmailform(request, email_user, html_content):
-    fromaddr = "itzli2000@gmail.com"
-    toaddr = email_user
-    msg = MIMEMultipart()
-    msg['From'] = fromaddr
-    msg['To'] = toaddr
-    msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
-    
+    if email_user == None:
+        return None
+    else:
+        fromaddr = "itzli2000@gmail.com"
+        toaddr = email_user
+        msg = MIMEMultipart()
+        msg['From'] = fromaddr
+        msg['To'] = toaddr
+        msg['Subject'] = "Se ha generado una nueva pregunta en el grupo del cual usted es especialista."
 
-    body = html_content
 
-    msg.attach(MIMEText(body, 'html'))
- 
-    # filename = "main.jpg"
-    # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
+        body = html_content
 
-    # part = MIMEBase('application', 'octet-stream')
-    # part.set_payload((attachment).read())
-    # encoders.encode_base64(part)
-    # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-     
-    # msg.attach(part)
+        msg.attach(MIMEText(body, 'html'))
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(fromaddr, "molinona&9")
-    text = msg.as_string()
-    server.sendmail(fromaddr, toaddr, text)
-    server.quit()
+        # filename = "main.jpg"
+        # attachment = open("C:/Users/Itzli/Documents/GitHub/Pet-Guru/pet_guru/static/images/", "rb")
 
-    return None
+        # part = MIMEBase('application', 'octet-stream')
+        # part.set_payload((attachment).read())
+        # encoders.encode_base64(part)
+        # part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+        # msg.attach(part)
+
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(fromaddr, "molinona&9")
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
+
+        return None
 
 
 
