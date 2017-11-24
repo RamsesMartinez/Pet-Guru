@@ -66,6 +66,9 @@ class Question(models.Model):
     def get_absolute_url(self):
         return reverse("home:pregunta", kwargs={'id':self.id})
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Question._meta.fields]
+
 
 def get_image_filename(instance, filename):
     title = instance.question.title

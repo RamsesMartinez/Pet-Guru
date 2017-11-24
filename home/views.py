@@ -65,6 +65,8 @@ def index(request):
 
     return render(request, template, context)
 
+
+
 @login_required(login_url='home:inicio')
 def question(request, id=None):
     template = 'question.html'
@@ -73,13 +75,7 @@ def question(request, id=None):
     # nombres = instance._meta.get_fields().value()
     image = ImageQuestion.objects.filter(question=instance.id)
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
-    label = id;
-
-
-    for nombres in insta2:
-        nombres.fields = dict((field.name, field.value_to_string(nombres))
-                                            for field in nombres._meta.fields)
-
+    label = id
 
     if request.method == 'POST':                
         message = request.POST.get('message')        
@@ -93,7 +89,7 @@ def question(request, id=None):
         'titulo': instance.title,
         'instance': instance,
         'messages': messages,
-        'nombres': nombres,
+        #'nombres': nombres,
     }
 
     return render(request, template, context)

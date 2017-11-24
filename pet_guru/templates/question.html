@@ -23,9 +23,12 @@
           <div class="col-sm-12 col-md-4">
             <h2 class="alert-heading text-center mb-4">Datos clínicos.</h2>
             <p>Especie: {{ instance.specie }}</p>
-            {% for op in nombres %}
-              <p>{{ op.name }}</p>
+            <p>{% for name, value in instance.get_fields %}
+            {% if value %}
+            {{ name }} => {{ value }}
+            {% endif %}
             {% endfor %}
+            </p>
           </div>
           <hr>
           <div class="col-sm-12 col-md-8">
