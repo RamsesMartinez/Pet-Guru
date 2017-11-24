@@ -69,10 +69,17 @@ def index(request):
 def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
-    nombres = instance._meta.get_fields()
+    insta2 = Question.objects.all().values()
+    # nombres = instance._meta.get_fields().value()
     image = ImageQuestion.objects.filter(question=instance.id)
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id;
+
+
+    for nombres in insta2:
+        nombres.fields = dict((field.name, field.value_to_string(nombres))
+                                            for field in nombres._meta.fields)
+
 
     if request.method == 'POST':                
         message = request.POST.get('message')        
