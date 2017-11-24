@@ -119,7 +119,7 @@ def user(request):
     if request.user.rol == 'ST':
         template = 'user.html'
         solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
-        articles = Question.objects.all().order_by('-id')
+        articles = Question.objects.filter(Q(status='CL')).order_by('-id')
 
         ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=3)
 
@@ -475,7 +475,7 @@ def user(request):
     elif request.user.rol == 'TC':
         template = 'prof.html'
         solved = Question.objects.filter(Q(status='OP') | Q(status='RP')).order_by('-id')
-        article = Question.objects.filter(status='OP').order_by('-id')
+        article = Question.objects.filter(Q(status='CL')).order_by('-id')
         avg = 0
         print("")
         page = request.GET.get('page', 1)
@@ -512,7 +512,7 @@ def user(request):
 def cards(request):
     if request.user.rol == 'ST':
         template = 'cards.html'
-        articles = Question.objects.filter(user_question=request.user.pk).order_by('-id')
+        articles = Question.objects.filter(Q(status='CL')).order_by('-id').order_by('-id')
 
         page = request.GET.get('page', 1)
         paginator = Paginator(articles, 6)
@@ -531,7 +531,7 @@ def cards(request):
 
     elif request.user.rol == 'TC':
         template = 'cards.html'
-        article = Question.objects.filter(Q(status='OP') | Q(status='RP')).order_by('-id')
+        article = Question.objects.filter(Q(status='CL')).order_by('-id')
         page = request.GET.get('page', 1)
         paginator = Paginator(article, 6)
         try:
