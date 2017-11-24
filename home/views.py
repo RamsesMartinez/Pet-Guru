@@ -72,13 +72,14 @@ def question(request, id=None):
     nombres = instance._meta.get_fields()
     image = ImageQuestion.objects.filter(question=instance.id)
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
-    label = id;
+    label = id
 
     if request.method == 'POST':                
         message = request.POST.get('message')        
         handler = request.POST.get('handler')
         new_mess = Message.objects.create(question=instance,handle=handler,message=message)
         new_mess.save()
+
 
     context = {        
         'label': label,
