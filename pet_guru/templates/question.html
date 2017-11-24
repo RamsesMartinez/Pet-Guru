@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="container">
-        {% if user.rol == 'ST' and instance.status == 'RP' %}
+        {% if user == instance.user_question and instance.status == 'RP' %}
         <div class="container text-center">
           <h1>Comentarios</h1>
           <div class="row justify-content-end">
@@ -87,7 +87,7 @@
           {% endif %}
           {% endfor %}
         </div>
-        {% elif user.rol == 'TC' and instance.status == 'RP' %}
+        {% elif user == instance.user_response and instance.status == 'RP' %}
         <div class="container text-center">
           <h1>Comentarios</h1>
           <div class="row justify-content-end">
@@ -136,7 +136,8 @@
         </div>
         {% elif user.rol == 'TC' and instance.status == 'OP' %}
         <div class="container text-center">
-          <button type="" class="btn btn-primary">Responde la pregunta!</button>
+          <p class="h2 mb-5 mt-5">¿{{ user }} quieres responder a esta pregunta?</p>
+          <button type="" class="btn btn-primary">Responder</button>
         </div>
         {% else %}
         <div class="container text-center">
