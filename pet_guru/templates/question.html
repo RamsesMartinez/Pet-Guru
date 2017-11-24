@@ -22,16 +22,11 @@
         <div class="row">
           <div class="col-sm-12 col-md-4">
             <h2 class="alert-heading text-center mb-4">Datos clínicos.</h2>
-            <p>Especie: {{ instance.specie }}</p>
+            <p>Especie: {{ instance.get_specie_display }}</p>
             <p>{% for name, value in specie.get_fields %}
             {% if value %}
-            {{ name }} => {{ value }}
-            {% endif %}
-            {% endfor %}
-            </p>
-            <p>{% for name, value in instance.get_specie_fields %}
-            {% if value %}
-            {{ name }} => {{ value }}
+            {{ name }} : {{ value }}
+              <br>
             {% endif %}
             {% endfor %}
             </p>

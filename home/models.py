@@ -55,7 +55,7 @@ class Question(models.Model):
     title = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True)
     status = models.CharField(max_length=2, null=True, choices=STATUS, default='OP')
-    user_question = models.ForeignKey(User, related_name='student_question', default=User.DEFAULT_USER)
+    user_question = models.ForeignKey(User, related_name='student_question', default=User.DEFAULT_USER, )
     user_response = models.ForeignKey(User, related_name='teacher_question', default=User.DEFAULT_USER)
     calification = models.PositiveSmallIntegerField(default=0)
     date = models.DateTimeField(editable=False, auto_now=True, null=True)
