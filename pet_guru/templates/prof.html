@@ -59,6 +59,7 @@
                       </thead>
                       <tbody>
                         {% for solved in solveds %}
+                        {% if solved.specie == user.speciality %}  
                         <tr>
                           <td>
                             <a href="{{ solved.get_absolute_url }}" class="pl-2" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
@@ -76,6 +77,7 @@
                             {{ solved.date }}
                           </td>
                         </tr>
+                        {% endif %}
                         {% endfor %}
                       </tbody>
                     </table>
@@ -84,6 +86,7 @@
                   <div id="userCards" class="col questContainer">
                     <div class="row d-flex flex-row justify-content-start">
                       {% for solved in solveds %}
+                      {% if solved.specie == user.speciality %} 
                       <div class="card articleCard">
                         <div class="card-body d-flex flex-column justify-content-lg-around">
                           <div class="card-title card-banner">
@@ -100,6 +103,7 @@
                           {% endif %}
                         </div>
                       </div>
+                      {% endif %}
                       {% endfor %}
                     </div>
                   </div>

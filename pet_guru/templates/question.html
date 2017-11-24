@@ -2,8 +2,8 @@
 {% load static %} 
 {% block content %}
 {% block link %}
-    <link rel="stylesheet" href="{% static 'css/chat.css' %} "/>
-  {% endblock link %}
+<link rel="stylesheet" href="{% static 'css/chat.css' %} "/>
+{% endblock link %}
 <div class="pageContainer">
   <header class="unam-primary sticky-top">
     <div class="container-fluid mainMenu">
@@ -24,7 +24,7 @@
             <h2 class="alert-heading text-center mb-4">Datos clínicos.</h2>
             <p>Especie: {{ instance.specie }}</p>
             {% for op in nombres %}
-              <p>{{ op.name }}</p>
+            <p>{{ op.name }}</p>
             {% endfor %}
           </div>
           <hr>
@@ -39,51 +39,111 @@
           </div>
         </div>
       </div>
-      <div class="container text-center">
-        <h1>Comentarios</h1>
-        <div class="row justify-content-end">
-          <div class="">
-            <input id="message" type="text">
-            <button type="submit" class="btn_send btn btn-primary">Enviar</button>
+      <div class="container">
+        {% if user == instance.user_question and instance.status == 'RP' %}
+        <div class="container text-center">
+          <h1>Comentarios</h1>
+          <div class="row justify-content-end">
+            <div class="">
+              <input id="message" type="text">
+              <button type="submit" class="btn_send btn btn-primary">Enviar</button>
+            </div>
           </div>
-        </div>
-      </div>      
-      <div class="container messages-cont">
-        {% for message in messages %}
+        </div>      
+        <div class="container messages-cont">
+          {% for message in messages %}
           {% if request.user.username == message.handle|stringformat:"s" %}
-            <div class="row justify-content-end">
-              <div class="col-md-7 col-sm-7">
-                <div class="card card-message">
-                  <div class="card-header text-left">
-                    {{message.handle}}
-                  </div>
-                  <div class="card-body text-left">
-                    <p class="card-text">{{message.message}}</p>
-                  </div>
-                  <div class="card-footer text-muted text-right">
-                    <p>{{ message.formatted_timestamp }}</p>
-                  </div>
+          <div class="row justify-content-end">
+            <div class="col-md-7 col-sm-7">
+              <div class="card card-message">
+                <div class="card-header text-left">
+                  {{message.handle}}
+                </div>
+                <div class="card-body text-left">
+                  <p class="card-text">{{message.message}}</p>
+                </div>
+                <div class="card-footer text-muted text-right">
+                  <p>{{ message.formatted_timestamp }}</p>
                 </div>
               </div>
             </div>
+          </div>
           {% else %}
-            <div class="row justify-content-start">
-              <div class="col-md-7">
-                <div class="card card-message">
-                  <div class="card-header text-left">
-                    {{message.handle}}
-                  </div>
-                  <div class="card-body text-left">
-                    <p class="card-text">{{message.message}}</p>
-                  </div>
-                  <div class="card-footer text-muted text-right">
-                    <p>{{ message.formatted_timestamp }}</p>
-                  </div>
+          <div class="row justify-content-start">
+            <div class="col-md-7">
+              <div class="card card-message">
+                <div class="card-header text-left">
+                  {{message.handle}}
+                </div>
+                <div class="card-body text-left">
+                  <p class="card-text">{{message.message}}</p>
+                </div>
+                <div class="card-footer text-muted text-right">
+                  <p>{{ message.formatted_timestamp }}</p>
                 </div>
               </div>
             </div>
+          </div>
           {% endif %}
-        {% endfor %}
+          {% endfor %}
+        </div>
+        {% elif user == instance.user_response and instance.status == 'RP' %}
+        <div class="container text-center">
+          <h1>Comentarios</h1>
+          <div class="row justify-content-end">
+            <div class="">
+              <input id="message" type="text">
+              <button type="submit" class="btn_send btn btn-primary">Enviar</button>
+            </div>
+          </div>
+        </div>      
+        <div class="container messages-cont">
+          {% for message in messages %}
+          {% if request.user.username == message.handle|stringformat:"s" %}
+          <div class="row justify-content-end">
+            <div class="col-md-7 col-sm-7">
+              <div class="card card-message">
+                <div class="card-header text-left">
+                  {{message.handle}}
+                </div>
+                <div class="card-body text-left">
+                  <p class="card-text">{{message.message}}</p>
+                </div>
+                <div class="card-footer text-muted text-right">
+                  <p>{{ message.formatted_timestamp }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="row justify-content-start">
+            <div class="col-md-7">
+              <div class="card card-message">
+                <div class="card-header text-left">
+                  {{message.handle}}
+                </div>
+                <div class="card-body text-left">
+                  <p class="card-text">{{message.message}}</p>
+                </div>
+                <div class="card-footer text-muted text-right">
+                  <p>{{ message.formatted_timestamp }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% elif user.rol == 'TC' and instance.status == 'OP' %}
+        <div class="container text-center">
+          <p class="h2 mb-5 mt-5">¿{{ user }} quieres responder a esta pregunta?</p>
+          <input type="submit" class="btn btn-primary" name="" value="Responder">
+        </div>
+        {% else %}
+        <div class="container text-center">
+          <p class="display-4">En espera de que un profesor responda tu pregunta.</p>
+        </div>
+        {% endif %}
       </div>      
     </div>
     {% endblock %} 
