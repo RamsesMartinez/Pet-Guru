@@ -64,7 +64,7 @@ class Question(models.Model):
         return '%s' % self.title
 
     def get_absolute_url(self):
-        return reverse("home:pregunta", kwargs={'id':self.id})
+        return reverse("home:pregunta", kwargs={'id': self.id})
 
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Question._meta.fields]
@@ -83,6 +83,7 @@ class ImageQuestion(models.Model):
 
     def __str__(self):
         return '%s' % self.id
+
 
 class Message(models.Model):    
     question = models.ForeignKey(Question, default=None,related_name='messages')
@@ -112,49 +113,6 @@ class Specie(models.Model):
         (FEMALE, 'Hembra'),
     )
 
-    BOVINO = 'BV'
-    PORCINO  = 'PR'
-    EQUINO  = 'EQ'
-    OVINO = 'OV'
-    CAPRINO = 'CP'
-    LEPORIDO = 'LP'
-    AVE = 'AV'
-    CANINO = 'CN'
-    FELINO = 'FL'
-    SILVESTRE = 'SL'
-    AQUATICO = 'AQ'
-    ABEJA = 'BJ'
-
-
-    SPECIES = (
-        (BOVINO, 'Bovino'),
-        (PORCINO, 'Porcino'),
-        (EQUINO, 'Equino'),
-        (OVINO, 'Ovino'),
-        (CAPRINO, 'Caprino'),
-        (LEPORIDO, 'Lepórido'),
-        (AVE, 'Ave'),
-        (CANINO, 'Canino'),
-        (FELINO, 'Felino'),
-        (SILVESTRE, 'Silvestre'),
-        (AQUATICO, 'Organismos acuáticos'),
-        (ABEJA, 'Abeja'),
-    )
-
-    SPECIES_NUM = {
-        BOVINO: 'Bovino',
-        PORCINO: 'Porcino',
-        EQUINO: 'Equino',
-        OVINO: 'Ovino',
-        CAPRINO: 'Caprino',
-        LEPORIDO: 'Lepórido',
-        AVE: 'Ave',
-        CANINO: 'Canino',
-        FELINO: 'Felino',
-        SILVESTRE: 'Silvestre',
-        ABEJA: 'Abeja',
-    }
-
     question = models.OneToOneField(Question, default='', related_name='specie_question')
     race = models.CharField(max_length=20, null=False)
     age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
@@ -178,6 +136,9 @@ class Bovine(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Bovine._meta.fields]
+
 
 class Goat(Specie):
     physiological_stage = models.CharField(max_length=30, null=True)
@@ -194,6 +155,9 @@ class Goat(Specie):
     cough = models.CharField(max_length=80, null=True)
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Goat._meta.fields]
 
 
 class Rabbit(Specie):
@@ -222,6 +186,9 @@ class Rabbit(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Rabbit._meta.fields]
+
 
 class Ovine(Specie):
     physiological_stage = models.CharField(max_length=30, null=True)
@@ -238,6 +205,9 @@ class Ovine(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Ovine._meta.fields]
+
 
 class Dog(Specie):
     heart_rate = models.IntegerField()
@@ -251,6 +221,9 @@ class Dog(Specie):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Dog._meta.fields]
 
 
 class Cat(Specie):
@@ -266,6 +239,9 @@ class Cat(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Dog._meta.fields]
+
 
 class Porcine(Specie):
     physiological_stage = models.CharField(max_length=30, null=True)
@@ -280,6 +256,9 @@ class Porcine(Specie):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Porcine._meta.fields]
 
 
 class Bee(models.Model):
@@ -357,6 +336,9 @@ class Bee(models.Model):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Bee._meta.fields]
 
 
 class Bird(models.Model):
@@ -449,6 +431,9 @@ class Bird(models.Model):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Bird._meta.fields]
+
 
 class Wild(models.Model):
     question = models.OneToOneField(Question, default='')
@@ -468,6 +453,9 @@ class Wild(models.Model):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Wild._meta.fields]
 
 
 class Aquatic(models.Model):
@@ -596,6 +584,9 @@ class Aquatic(models.Model):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Aquatic._meta.fields]
+
 
 class Horse(Specie):
     heart_rate = models.IntegerField()
@@ -608,6 +599,9 @@ class Horse(Specie):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Horse._meta.fields]
 
 
 class Document(models.Model):

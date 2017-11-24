@@ -76,11 +76,37 @@ def question(request, id=None):
     image = ImageQuestion.objects.filter(question=instance.id)
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
+    print(instance.specie)
+    if instance.specie == 'BV':
+        objspecie = Bovine.objects.filter(question=instance.pk)
+        print(objspecie.id)
+    elif instance.specie == 'PR':
+        objspecie = Porcine.objects.filter(question=label)
+    elif instance.specie == 'EQ':
+        objspecie = Horse.objects.filter(question=label)
+    elif instance.specie == 'OV':
+        objspecie = Ovine.objects.filter(question=label)
+    elif instance.specie == 'CP':
+        objspecie = Goat.objects.filter(question=label)
+    elif instance.specie == 'LP':
+        objspecie = Rabbit.objects.filter(question=label)
+    elif instance.specie == 'AV':
+        objspecie = Bird.objects.filter(question=label)
+    elif instance.specie == 'CN':
+        objspecie = Dog.objects.filter(question=label)
+    elif instance.specie == 'FL':
+        objspecie = Cat.objects.filter(question=label)
+    elif instance.specie == 'SL':
+        objspecie = Wild.objects.filter(question=label)
+    elif instance.specie == 'BJ':
+        objspecie = Bee.objects.filter(question=label)
+    elif instance.specie == 'AQ':
+        objspecie = Aquatic.objects.filter(question=label)
 
     if request.method == 'POST':                
         message = request.POST.get('message')        
         handler = request.POST.get('handler')
-        new_mess = Message.objects.create(question=instance,handle=handler,message=message)
+        new_mess = Message.objects.create(question=instance, handle=handler, message=message)
         new_mess.save()
 
     context = {        
@@ -90,6 +116,7 @@ def question(request, id=None):
         'instance': instance,
         'messages': messages,
         #'nombres': nombres,
+        'specie': objspecie,
     }
 
     return render(request, template, context)
@@ -645,7 +672,8 @@ def sendmailform(request, email_user, html_content):
         return None
 
 
-
+def get_obj_specie(instancespecie, label):
+    pass
 
 def mail(request):
     template = 'mail.html'
