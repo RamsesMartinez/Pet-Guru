@@ -47,7 +47,7 @@ def index(request):
     if request.method == 'POST':
         user_log = request.POST['Usuario']
         pass_log = request.POST['Contraseña']        
-        user_auth = authenticate(request,username=user_log, password=pass_log)
+        user_auth = authenticate(request, username=user_log, password=pass_log)
 
         if user_auth is not None:            
             login_django(request, user_auth)
@@ -71,37 +71,9 @@ def index(request):
 def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
-    insta2 = Question.objects.all().values()
-    # nombres = instance._meta.get_fields().value()
     image = ImageQuestion.objects.filter(question=instance.id)
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
-    label = id
-    print(instance.specie)
-    if instance.specie == 'BV':
-        objspecie = Bovine.objects.filter(question=instance.pk)
-        print(objspecie.id)
-    elif instance.specie == 'PR':
-        objspecie = Porcine.objects.filter(question=label)
-    elif instance.specie == 'EQ':
-        objspecie = Horse.objects.filter(question=label)
-    elif instance.specie == 'OV':
-        objspecie = Ovine.objects.filter(question=label)
-    elif instance.specie == 'CP':
-        objspecie = Goat.objects.filter(question=label)
-    elif instance.specie == 'LP':
-        objspecie = Rabbit.objects.filter(question=label)
-    elif instance.specie == 'AV':
-        objspecie = Bird.objects.filter(question=label)
-    elif instance.specie == 'CN':
-        objspecie = Dog.objects.filter(question=label)
-    elif instance.specie == 'FL':
-        objspecie = Cat.objects.filter(question=label)
-    elif instance.specie == 'SL':
-        objspecie = Wild.objects.filter(question=label)
-    elif instance.specie == 'BJ':
-        objspecie = Bee.objects.filter(question=label)
-    elif instance.specie == 'AQ':
-        objspecie = Aquatic.objects.filter(question=label)
+    objspecie = instance.get_obj_specie()
 
     if request.method == 'POST':                
         message = request.POST.get('message')        
@@ -110,12 +82,11 @@ def question(request, id=None):
         new_mess.save()
 
     context = {        
-        'label': label,
+        'label': id,
         'images': image,
         'titulo': instance.title,
         'instance': instance,
         'messages': messages,
-        #'nombres': nombres,
         'specie': objspecie,
     }
 
@@ -150,11 +121,9 @@ def user(request):
         template = 'user.html'
         solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
         articles = Question.objects.all().order_by('-id')
-
         ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=3)
 
         base_form = BaseForm(request.POST or None)
-
         cow_form = CowForm(request.POST or None)
         porcine_form = PorcineForm(request.POST or None)
         horse_form = HorseForm(request.POST or None)
@@ -671,9 +640,6 @@ def sendmailform(request, email_user, html_content):
 
         return None
 
-
-def get_obj_specie(instancespecie, label):
-    pass
 
 def mail(request):
     template = 'mail.html'

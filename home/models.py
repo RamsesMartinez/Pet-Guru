@@ -5,6 +5,7 @@ from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
 from django.utils.text import slugify
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 from users.models import User
 
@@ -68,6 +69,33 @@ class Question(models.Model):
 
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Question._meta.fields]
+
+    def get_obj_specie(self):
+        if self.specie == 'BV':
+            objspecie = get_object_or_404(Bovine, question=self.id)
+        elif self.specie == 'PR':
+            objspecie = get_object_or_404(Porcine, question=self.id)
+        elif self.specie == 'EQ':
+            objspecie = get_object_or_404(Horse, question=self.id)
+        elif self.specie == 'OV':
+            objspecie = get_object_or_404(Ovine, question=self.id)
+        elif self.specie == 'CP':
+            objspecie = get_object_or_404(Goat, question=self.id)
+        elif self.specie == 'LP':
+            objspecie = get_object_or_404(Rabbit, question=self.id)
+        elif self.specie == 'AV':
+            objspecie = get_object_or_404(Bird, question=self.id)
+        elif self.specie == 'CN':
+            objspecie = get_object_or_404(Dog, question=self.id)
+        elif self.specie == 'FL':
+            objspecie = get_object_or_404(Cat, question=self.id)
+        elif self.specie == 'SL':
+            objspecie = get_object_or_404(Wild, question=self.id)
+        elif self.specie == 'BJ':
+            objspecie = get_object_or_404(Bee, question=self.id)
+        elif self.specie == 'AQ':
+            objspecie = get_object_or_404(Aquatic, question=self.id)
+        return objspecie
 
 
 def get_image_filename(instance, filename):
