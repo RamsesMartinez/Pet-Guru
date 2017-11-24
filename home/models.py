@@ -122,6 +122,9 @@ class Specie(models.Model):
     def __str__(self):
         return '%s' % self.SPECIES_NUM[self.specie]
 
+    def get_specie_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Specie._meta.fields]
+
 
 class Bovine(Specie):
     heart_rate = models.IntegerField()

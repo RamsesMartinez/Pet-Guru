@@ -29,6 +29,12 @@
             {% endif %}
             {% endfor %}
             </p>
+            <p>{% for name, value in instance.get_specie_fields %}
+            {% if value %}
+            {{ name }} => {{ value }}
+            {% endif %}
+            {% endfor %}
+            </p>
           </div>
           <hr>
           <div class="col-sm-12 col-md-8">
