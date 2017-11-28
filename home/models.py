@@ -68,10 +68,12 @@ class Question(models.Model):
         return reverse("home:pregunta", kwargs={'id':self.id})
 
     def get_first_image(self):
-        image = ImageQuestion.objects.get(question=self.pk)
-
-        return image.image.url
-
+        images = ImageQuestion.objects.filter(question=self.pk)
+        if images:
+            image = images[0]
+            return image.image.url
+        else:
+            return ""
 
 def get_image_filename(instance, filename):
     title = instance.question.title
