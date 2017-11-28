@@ -147,7 +147,7 @@ def user(request):
             articles = paginator.page(paginator.num_pages)
 
         if request.method == 'POST':
-            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())
+            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())            
 
             def save_images(base):
                 # Save images
@@ -473,8 +473,7 @@ def user(request):
         template = 'prof.html'
         solved = Question.objects.filter(Q(status='OP') | Q(status='RP')).order_by('-id')
         article = Question.objects.filter(status='OP').order_by('-id')
-        avg = 0
-        print("")
+        avg = 0        
         page = request.GET.get('page', 1)
         paginator = Paginator(solved, 6)
         try:
@@ -483,6 +482,14 @@ def user(request):
             solved = paginator.page(1)
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
+
+        if request.method == 'POST':                 
+            if request.POST['type'] == 'changestate':
+                pk = request.POST['pk']
+                change = Question.objects.get(pk=pk);
+                change.status = 'RP'
+                change.user_response = request.user
+                change.save();
 
         # qualifications = []
         # for qualification in article:

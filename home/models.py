@@ -20,7 +20,7 @@ class Question(models.Model):
     STATUS = (
         (OPEN, 'Abierta'),
         (CLOSE, 'Cerrada'),
-        (RESPONDING, 'Respondiendo'),
+        (RESPONDING, 'Respondiendo'), 
     )
 
     title = models.CharField(max_length=100, null=True)
