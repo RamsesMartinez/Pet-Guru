@@ -102,7 +102,7 @@
                     <div class="card articleCard">
                       <div class="card-body d-flex flex-column justify-content-lg-around">
                         <div class="card-title card-banner">
-                          <img src="{% static 'images/banner.jpg' %}" class="img-fluid" alt="Question image">
+                          <img src="{{ solved.get_first_image }}" class="img-fluid" alt="Question image">
                         </div>
                         <h4 class="card-title">{{ solved.title }}</h4>
                         <p class="card-text text-truncate">{{ solved.description }}.</p>
@@ -433,9 +433,5 @@
 
 {% block javascript%}
 <script type="text/javascript">
-function loadRabbit() {
-  var element = document.getElementById('specieID');
-  element.value = 'RB';
-}
 </script>
 {% endblock javascript%}

@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
@@ -21,7 +22,7 @@ class Question(models.Model):
     STATUS = (
         (OPEN, 'Abierta'),
         (CLOSE, 'Cerrada'),
-        (RESPONDING, 'Respondiendo'),
+        (RESPONDING, 'Respondiendo'), 
     )
 
     BOVINO = 'BV'
@@ -97,6 +98,13 @@ class Question(models.Model):
             objspecie = get_object_or_404(Aquatic, question=self.id)
         return objspecie
 
+    def get_first_image(self):
+        images = ImageQuestion.objects.filter(question=self.pk)
+        if images:
+            image = images[0]
+            return image.image.url
+        else:
+            return ""
 
 def get_image_filename(instance, filename):
     title = instance.question.title

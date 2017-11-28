@@ -33,7 +33,6 @@ USER_APPS = [
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
     'analytics.apps.AnalyticsConfig',
-    'chat.apps.ChatConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + USER_APPS
@@ -119,12 +118,11 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
-
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
 
 LOGIN_URL = '/index/'
 
