@@ -2,6 +2,7 @@
 {% load static %} 
 {% block content %}
 {% block link %}
+<link rel="stylesheet" href="{% static 'css/5star.css' %} "/>
 <link rel="stylesheet" href="{% static 'css/chat.css' %} "/>
 {% endblock link %}
 <div class="pageContainer">
@@ -58,6 +59,7 @@
           <div class="col-10 pt-3">
             <p class="text-left mb-1">Ingresa tu comentario:</p>
             <textarea id="message" style="min-width:280px; max-width:1000px; width:100%;" rows="5"></textarea>
+            <textarea id="usertype" class="d-none" cols="30" rows="10">student</textarea>
             <button type="submit" style="width:200px;" class="btn_send btn btn-primary py-2">Enviar</button>
           </div>
         </div>
@@ -103,8 +105,10 @@
       <div class="container text-center">
         <h1>Comentarios</h1>
         <div class="row justify-content-end">
-          <div class="">
-            <input id="message" type="text">
+          <div class="col-10 pt-3">
+            <p class="text-left mb-1">Ingresa tu comentario:</p>
+            <textarea id="message" style="min-width:280px; max-width:1000px; width:100%;" rows="5"></textarea>
+            <textarea id="usertype" class="d-none" cols="30" rows="10">profesor</textarea>
             <button type="submit" class="btn_send btn btn-primary">Enviar</button>
           </div>
         </div>
@@ -238,6 +242,7 @@
           csrfmiddlewaretoken: '{{ csrf_token }}',
           'message': message,
           'handler': '{{request.user.username}}',
+          'type': usertype,
         },
         traditional: true,
         datatype: 'jsonp',

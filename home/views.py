@@ -79,8 +79,29 @@ def question(request, id=None):
     if request.method == 'POST':                
         message = request.POST.get('message')        
         handler = request.POST.get('handler')
+        usertype = request.POST.get('type')
         new_mess = Message.objects.create(question=instance, handle=handler, message=message)
         new_mess.save()
+        if usertype == 'student':
+            new_context = {
+            'title': instance.title,
+            'consult': message,
+            'url': get_current_site(request).domain,
+            }
+            template = get_template('mail.html')
+            html_content = template.render(new_context)
+            emails = instance.user_response.email
+            sendmailform(request, emails, html_content)
+        else:
+            new_context = {
+            'title': instance.title,
+            'consult': message,
+            'url': get_current_site(request).domain,
+            }
+            template = get_template('studentmail.html')
+            html_content = template.render(new_context)
+            emails = instance.user_question.email
+            sendstudentmail(request, emails, html_content)
 
 
     context = {        
@@ -522,7 +543,7 @@ def user(request):
 def cards(request):
     if request.user.rol == 'ST':
         template = 'cards.html'
-        articles = Question.objects.filter(Q(status='CL')).order_by('-id').order_by('-id')
+        articles = Question.objects.filter(Q(status='CL')).order_by('-id')
 
         page = request.GET.get('page', 1)
         paginator = Paginator(articles, 6)
@@ -642,6 +663,29 @@ def sendmailform(request, email_user, html_content):
 
         # msg.attach(part)
 
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(fromaddr, "molinona&9")
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
+
+        return None
+
+
+
+def sendstudentmail(request, email_user, html_content):
+    if email_user == None:
+        return None
+    else:
+        fromaddr = "itzli2000@gmail.com"
+        toaddr = email_user
+        msg = MIMEMultipart()
+        msg['From'] = fromaddr
+        msg['To'] = toaddr
+        msg['Subject'] = "Tu pregunta ha sido respondida."
+        body = html_content
+        msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(fromaddr, "molinona&9")
