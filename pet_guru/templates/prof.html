@@ -66,7 +66,7 @@
                           </td>
                           <td class="text-center">
                             {% if solved.status == 'OP' %}
-                            <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success mail-btn">Tomar pregunta</button> </a>
+                            <a href="{{ solved.get_absolute_url }}"><button id="{{solved.pk}}" class="btn btn-success mail-btn change_state">Tomar pregunta</button> </a>
                             {% elif solved.status == 'RP' %}
                             <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Activa</button></a>
                             {% else %}
@@ -95,7 +95,7 @@
                           <h4 class="card-title">{{ solved.title }}</h4>
                           <p class="card-text text-truncate">{{ solved.description }}.</p>
                           {% if solved.status == 'OP' %}
-                          <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success mail-btn">En espera</button> </a>
+                          <a href="{{ solved.get_absolute_url }}"> <button id="{{solved.pk}}" class="btn btn-success mail-btn change_state">En espera</button> </a>
                           {% elif solved.status == 'RP' %}
                           <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Contestando</button></a>
                           {% else %}
@@ -121,3 +121,38 @@
     </div>
   </div>
   {% endblock %}
+
+{%block javascript%}
+
+<script type="text/javascript">
+  $(function () {
+
+    function change_state(pk) {      
+      $.ajax({
+        url: '{% url "home:usuario" %}',
+        type: 'POST',
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          'type': 'changestate',
+          'pk': pk,
+        },
+        traditional: true,
+        datatype: 'jsonp',
+        success: function (result) {
+          console.log("wuuju");
+        },
+      });  
+    }
+    $('.change_state').click(function () {
+      var pk = $(this).attr('id');
+      console.log(pk)
+      change_state(pk);      
+    });
+
+    
+  });
+
+
+</script>
+
+{%endblock javascript%}

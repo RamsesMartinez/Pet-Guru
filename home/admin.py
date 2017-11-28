@@ -76,3 +76,7 @@ class BovineAdmin(admin.ModelAdmin):
 @admin.register(Aquatic)
 class BovineAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
+
+@admin.register(ImageQuestion)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question')

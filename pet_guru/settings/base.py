@@ -33,7 +33,6 @@ USER_APPS = [
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
     'analytics.apps.AnalyticsConfig',
-    'chat.apps.ChatConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + USER_APPS

@@ -122,7 +122,7 @@ def user(request):
         solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
         articles = Question.objects.filter(Q(status='CL')).order_by('-id')
 
-        ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=1)
+        ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=3)
 
         base_form = BaseForm(request.POST or None)
 
@@ -150,7 +150,15 @@ def user(request):
             articles = paginator.page(paginator.num_pages)
 
         if request.method == 'POST':
-            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())
+            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())            
+
+            def save_images(base):
+                # Save images
+                if formset.is_valid():
+                    for form in formset.cleaned_data:
+                        image = form['image']
+                        photo = ImageQuestion(question=base, image=image)
+                        photo.save()
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
@@ -471,8 +479,7 @@ def user(request):
         template = 'prof.html'
         solved = Question.objects.filter(Q(status='OP') | Q(status='RP')).order_by('-id')
         article = Question.objects.filter(Q(status='CL')).order_by('-id')
-        avg = 0
-        print("")
+        avg = 0        
         page = request.GET.get('page', 1)
         paginator = Paginator(solved, 6)
         try:
@@ -481,6 +488,14 @@ def user(request):
             solved = paginator.page(1)
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
+
+        if request.method == 'POST':                 
+            if request.POST['type'] == 'changestate':
+                pk = request.POST['pk']
+                change = Question.objects.get(pk=pk);
+                change.status = 'RP'
+                change.user_response = request.user
+                change.save();
 
         # qualifications = []
         # for qualification in article:
