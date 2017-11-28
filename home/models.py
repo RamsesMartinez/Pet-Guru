@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 from django.utils import timezone
 
@@ -65,6 +66,11 @@ class Question(models.Model):
 
     def get_absolute_url(self):
         return reverse("home:pregunta", kwargs={'id':self.id})
+
+    def get_first_image(self):
+        image = ImageQuestion.objects.get(question=self.pk)
+
+        return image.image.url
 
 
 def get_image_filename(instance, filename):
