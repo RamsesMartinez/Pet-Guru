@@ -66,7 +66,7 @@
                           </td>
                           <td class="text-center">
                             {% if solved.status == 'OP' %}
-                            <a href=""><button id="{{solved.pk}}" class="btn btn-success mail-btn change_state">Tomar pregunta</button> </a>
+                            <a href="{{ solved.get_absolute_url }}"><button id="{{solved.pk}}" class="btn btn-success mail-btn change_state">Tomar pregunta</button> </a>
                             {% elif solved.status == 'RP' %}
                             <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Activa</button></a>
                             {% else %}
