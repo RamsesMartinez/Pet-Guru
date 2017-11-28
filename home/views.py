@@ -71,6 +71,7 @@ def index(request):
 def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
+    name = instance.user_response #Revisar esta linea para validacion en linea 85
     image = ImageQuestion.objects.filter(question=instance.id)
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
@@ -79,10 +80,9 @@ def question(request, id=None):
     if request.method == 'POST':                
         message = request.POST.get('message')        
         handler = request.POST.get('handler')
-        usertype = request.POST.get('type')
         new_mess = Message.objects.create(question=instance, handle=handler, message=message)
         new_mess.save()
-        if usertype == 'student':
+        if handler == str(name):
             new_context = {
             'title': instance.title,
             'consult': message,
