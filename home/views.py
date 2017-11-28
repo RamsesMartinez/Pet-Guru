@@ -122,7 +122,7 @@ def user(request):
         solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
         articles = Question.objects.filter(Q(status='CL')).order_by('-id')
 
-        ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=1)
+        ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=3)
 
         base_form = BaseForm(request.POST or None)
 
@@ -151,6 +151,14 @@ def user(request):
 
         if request.method == 'POST':
             formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())            
+
+            def save_images(base):
+                # Save images
+                if formset.is_valid():
+                    for form in formset.cleaned_data:
+                        image = form['image']
+                        photo = ImageQuestion(question=base, image=image)
+                        photo.save()
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
