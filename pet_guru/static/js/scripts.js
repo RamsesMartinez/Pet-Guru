@@ -1,230 +1,93 @@
 $(document).ready(function() {
 
-    // Forms handlers
-    // $(".mailitbtn").on("click", function(e) {
-    //   e.preventDefault();
-    //   swal({
-    //     title: "Su pregunta será enviada!",
-    //     text: "Espere pronto una respuesta",
-    //     type: "success",
-    //     showCancelButton: true,
-    //     cancelButtonText: "Cancelar",
-    //     cancelButtonClass: 'btn btn-danger',
-    //     confirmButtonText: "Entendido",
-    //     confirmButtonClass: 'btn btn-success'
-    //     }).then(function () {
-    //       document.vacaquest.submit();
-    //     });
-    // });
-    $(".caballomailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.caballoquest.submit();
-        });
-    });
-    $(".ovejamailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.ovejaquest.submit();
-        });
-    });
-    $(".cerdomailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.cerdoquest.submit();
-        });
-    });
-    $(".conejomailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.conejoquest.submit();
-        });
-    });
-    $(".gallomailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.galloquest.submit();
-        });
-    });
-    $(".avemailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.avequest.submit();
-        });
-    });
-    $(".perromailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.perroquest.submit();
-        });
-    });
-    $(".gatomailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.gatoquest.submit();
-        });
-    });
-    $(".faunamailitbtn").on("click", function(e) {
-      e.preventDefault();
-      swal({
-        title: "Su pregunta será enviada!",
-        text: "Espere pronto una respuesta",
-        type: "success",
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        cancelButtonClass: 'btn btn-danger',
-        confirmButtonText: "Entendido",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-          document.faunaquest.submit();
-        });
-    });
-    // Login form handler
+// Forms handlers
+// $(".mailitbtn").on("click", function(e) {
+//   e.preventDefault();
+//   swal({
+//     title: "Su pregunta será enviada!",
+//     text: "Espere pronto una respuesta",
+//     type: "success",
+//     showCancelButton: true,
+//     cancelButtonText: "Cancelar",
+//     cancelButtonClass: 'btn btn-danger',
+//     confirmButtonText: "Entendido",
+//     confirmButtonClass: 'btn btn-success'
+//     }).then(function () {
+//       document.vacaquest.submit();
+//     });
+// });
 
-    $("#LogInOut").click(function (e) {
-      e.preventDefault();
-      var username = $('#email').val();
-      var password = $('#password').val();
-      console.log(username)      
-      console.log(password)
 
-      $.ajax({
-        url: "{% url 'home:inicio' %}",
-        type: 'POST',
-        data: {
-          'username': username,
-          'password': password,
-          csrfmiddlewaretoken: '{{ csrf_token }}',          
-        },
-        dataType: 'json',
-        success: function (data) {
-          if (data.check == 'Valido') {
-            swal({
-            title: "¡Bienvenido!",
-            text: "Bienvenido Juan Perez",
-            type: "success",
-            confirmButtonText: "Vamos",
-            confirmButtonClass: 'btn btn-success'
-            }).then(function () {
-                $(".logIn").css('display', 'none');
-                $(".newQuestion").css("display","inline");
-            });            
-          }else{
-            alert("La contrasenia es incorrecta.");
-          }
-        }
-      });
+// Sinlge Question gallery
+jQuery(document).ready(function(){ 
+    jQuery("#gallery").unitegallery(); 
+});
 
-    });
 
-    $( "#LogInOuta" ).click(function(e) {
-      e.preventDefault();
-      swal({
-        title: "¡Bienvenido!",
-        text: "Bienvenido Juan Perez",
-        type: "success",
-        confirmButtonText: "Vamos",
-        confirmButtonClass: 'btn btn-success'
-        }).then(function () {
-            $(".logIn").css('display', 'none');
-            $(".newQuestion").css("display","inline");
-        });
-    });
-    // Sinlge Question gallery
-    jQuery(document).ready(function(){ 
-        jQuery("#gallery").unitegallery(); 
-    }); 
-    // Animal icons popover
-    $(document).ready(function(){
-        if (screen.width>=1100) {
-            $('[data-toggle="popover"]').popover();   
-        }
-    });
-    // Register form password validation
-    (function($) {
-      $('#id_password1, #id_password2').keyup(function() {
+// Register form password validation
+(function($) {
+    $('#id_password1, #id_password2').keyup(function() {
         var pass1 = $('#id_password1').val();
         var pass2 = $('#id_password2').val();
         if ( pass1 == pass2) {
-          $('#messagepass').html('Las contraseñas coinciden').css('color', 'green');
-          if (pass1.length  > '7') {
-            $('#regisbtn').prop("disabled", false);
-          }
+            $('#messagepass').html('Las contraseñas coinciden').css('color', 'green');
+            if (pass1.length  > '7') {
+                $('#regisbtn').prop("disabled", false);
+            }
         } else 
         $('#messagepass').html('Las contraseñas no coinciden').css('color', 'red');
-      });
-    })(jQuery);
+    });
+})(jQuery);
+
+
+// Add images for new question
+(function($) {
+    var iCnt = 0;
+    var formCnt = 1;
+    var container = document.getElementById('imgcontainer');
+
+
+    $('#btAdd').click(function(e) {
+        e.preventDefault();
+        if (iCnt <= 19) {
+            iCnt = iCnt + 1;
+            formCnt = formCnt + 1;
+            $(container).append('<p> <input type="file" name="form-'+iCnt+'-image"\
+                id="id_form-'+iCnt+'-image" class="btn btn-info"><input type="hidden"\
+                name="form-'+iCnt+'-id" id="id_form-'+iCnt+'-id"></p>');
+            $('#id_form-TOTAL_FORMS').val(formCnt);
+            $('#id_form-'+iCnt+'-image').trigger('click');
+        }
+        else {
+
+            $(container).append('<br><label>Limite Alcanzado</label>');
+            $('#btAdd').attr('class', 'btn.secondary');
+            $('#btAdd').attr('disabled', 'disabled');
+
+        }
+    });
+
+    $('#btRemove').click(function(e) {
+        e.preventDefault();
+        if (iCnt != 0) { $('#image_' + iCnt).remove(); iCnt = iCnt - 1; formCnt= formCnt -1; }
+
+        if (iCnt == 0) { 
+            $(container).empty();
+            $('#btAdd').removeAttr('disabled');
+            $('#btAdd').attr('class', 'btn btn-primary')
+        }
+    });
+
+    $('#btRemoveAll').click(function(e) {
+        e.preventDefault();
+        $(container).empty();
+        iCnt = 0;
+        formCnt = 1;
+        $('#btAdd').removeAttr('disabled');
+        $('#btAdd').attr('class', 'btn btn-primary');
+
+    });
+})(jQuery);
+
 
 });

@@ -1,8 +1,16 @@
 <hr>
 <div class="container">
   <h4>Seleccione imágenes para la consulta:</h4>
+  <div calss="row my-3">
+    <a href="#" id="btAdd" class="btn btn-primary" role="button"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    <a href="#" id="btRemove" class="btn btn-warning" role="button"><i class="fa fa-minus" aria-hidden="true"></i></a>
+    <a href="#" id="btRemoveAll" class="btn btn-danger" role="button"><i class="fa fa-times" aria-hidden="true"></i></a>
+  </div>
+
   {{ formset.management_form }}
-    {% for form in formset %}
-      {{ form.as_p }}
-    {% endfor %}
+  <div id="imgcontainer" class="mt-1 mb-4" style="min-height: 50px;">
+  {% for form in formset %}
+    {{ form.as_p }}
+  {% endfor %}
+  </div>
 </div>

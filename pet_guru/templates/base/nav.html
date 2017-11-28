@@ -17,12 +17,17 @@
         <a class="nav-link" href="{% url 'admin:index' %}">Administración</a>
       </li>
       {% endif %}
+      {% if not user.is_authenticated %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'home:inicio' %}">Inicio</a>
       </li>
+      {% endif %}
       {% if user.rol == 'TC' or user.rol == 'ST' %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'home:articulos' %}">Preguntas</a>
+        <a class="nav-link" href="{% url 'home:inicio' %}">Mis preguntas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home:articulos' %}">Artículos</a>
       </li>
       {% endif %}
       <li class="nav-item">

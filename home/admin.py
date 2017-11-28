@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from .models import Question, ImageQuestion, Message, Bovine, Porcine, Horse, Ovine, Goat, Rabbit, Bee, Bird
+from .models import *
 
 class ImageQuestionInline(admin.TabularInline):
     model = ImageQuestion
@@ -55,5 +54,25 @@ class BovineAdmin(admin.ModelAdmin):
 
 
 @admin.register(Bird)
+class BovineAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question')
+
+
+@admin.register(Dog)
+class BovineAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question')
+
+
+@admin.register(Cat)
+class BovineAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question')
+
+
+@admin.register(Wild)
+class BovineAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question')
+
+
+@admin.register(Aquatic)
 class BovineAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
