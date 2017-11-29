@@ -104,7 +104,7 @@ class Question(models.Model):
             image = images[0]
             return image.image.url
         else:
-            return ""
+            return self.get_obj_specie().DEFAULT_IMAGE
 
 def get_image_filename(instance, filename):
     title = instance.question.title
@@ -163,6 +163,7 @@ class Specie(models.Model):
 
 
 class Bovine(Specie):
+    DEFAULT_IMAGE = ''
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -180,6 +181,7 @@ class Bovine(Specie):
 
 
 class Goat(Specie):
+    DEFAULT_IMAGE = ''
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -212,6 +214,7 @@ class Rabbit(Specie):
         (FATTEN, 'Engorda'),
     )
 
+    DEFAULT_IMAGE = ''
     productive_stage = models.CharField(max_length=10, choices=PRODUCTIVE, default=LACTATING)
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
@@ -230,6 +233,7 @@ class Rabbit(Specie):
 
 
 class Ovine(Specie):
+    DEFAULT_IMAGE = ''
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -249,6 +253,7 @@ class Ovine(Specie):
 
 
 class Dog(Specie):
+    DEFAULT_IMAGE = ''
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -266,6 +271,7 @@ class Dog(Specie):
 
 
 class Cat(Specie):
+    DEFAULT_IMAGE = ''
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -283,6 +289,7 @@ class Cat(Specie):
 
 
 class Porcine(Specie):
+    DEFAULT_IMAGE = ''
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
     curse = models.CharField(max_length=60, null=True)
@@ -353,6 +360,7 @@ class Bee(models.Model):
         (NOT_VERIFIED, 'NO Verificado'),
     )
 
+    DEFAULT_IMAGE = ''
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     colony_type = models.CharField(max_length=3, choices=COLONY)
@@ -443,6 +451,7 @@ class Bird(models.Model):
         (ORNAMENTAL, 'Ornamentales'),
     )
 
+    DEFAULT_IMAGE = ''
     question = models.OneToOneField(Question, default='')
     type_animal = models.CharField(max_length=60)
     zootechnical_purpose = models.CharField(max_length=30)
@@ -475,6 +484,7 @@ class Bird(models.Model):
 
 
 class Wild(models.Model):
+    DEFAULT_IMAGE = ''
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     zootechnical = models.CharField(max_length=50)
@@ -578,6 +588,7 @@ class Aquatic(models.Model):
     YES = 'YS'
     NO = 'NO'
 
+    DEFAULT_IMAGE = ''
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
@@ -628,6 +639,7 @@ class Aquatic(models.Model):
 
 
 class Horse(Specie):
+    DEFAULT_IMAGE = ''
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
