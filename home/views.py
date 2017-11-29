@@ -83,10 +83,10 @@ def question(request, id=None):
             'consult': message,
             'url': get_current_site(request).domain,
             }
-            template = get_template('mail.html')
+            template = get_template('profesormail.html')
             html_content = template.render(new_context)
             emails = instance.user_response.email
-            sendmailform(request, emails, html_content)
+            sendprofmail(request, emails, html_content)
         else:
             new_context = {
             'title': instance.title,
@@ -689,6 +689,28 @@ def sendstudentmail(request, email_user, html_content):
         msg['From'] = fromaddr
         msg['To'] = toaddr
         msg['Subject'] = "Tu pregunta ha sido respondida."
+        body = html_content
+        msg.attach(MIMEText(body, 'html'))
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(fromaddr, "molinona&9")
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
+
+        return None
+
+
+def sendprofmail(request, email_user, html_content):
+    if email_user == None:
+        return None
+    else:
+        fromaddr = "itzli2000@gmail.com"
+        toaddr = email_user
+        msg = MIMEMultipart()
+        msg['From'] = fromaddr
+        msg['To'] = toaddr
+        msg['Subject'] = "Se ha generado un comentario respecto a una de sus respuestas."
         body = html_content
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
