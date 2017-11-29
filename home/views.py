@@ -201,9 +201,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cow.save()
-                    if formset.is_valid():
-                        for form in formset.cleaned_data:
-                            print(type(form['image']))
+                    save_images(base)
                     emails = User.objects.filter(speciality='BV').filter(rol='TC')
                     try:
                         for user_speciality in emails:
