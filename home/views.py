@@ -71,7 +71,6 @@ def index(request):
 def question(request, id=None):
     template = 'question.html'
     instance = get_object_or_404(Question, id=id)
-    name = instance.user_response #Revisar esta linea para validacion en linea 85
     image = ImageQuestion.objects.filter(question=instance.id)
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
@@ -82,7 +81,7 @@ def question(request, id=None):
         handler = request.POST.get('handler')
         new_mess = Message.objects.create(question=instance, handle=handler, message=message)
         new_mess.save()
-        if handler == str(name):
+        if handler == instance.user_question.username:
             new_context = {
             'title': instance.title,
             'consult': message,
@@ -101,6 +100,7 @@ def question(request, id=None):
             template = get_template('studentmail.html')
             html_content = template.render(new_context)
             emails = instance.user_question.email
+            print('alumno')
             sendstudentmail(request, emails, html_content)
 
 
