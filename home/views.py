@@ -76,6 +76,16 @@ def question(request, id=None):
     label = id
     objspecie = instance.get_obj_specie()
 
+
+    context = {        
+        'label': id,
+        'images': image,
+        'titulo': instance.title,
+        'instance': instance,
+        'messages': messages,
+        'specie': objspecie,
+    }
+
     if request.method == 'POST':                
         message = request.POST.get('message')        
         handler = request.POST.get('handler')
@@ -102,16 +112,6 @@ def question(request, id=None):
             emails = instance.user_question.email
             print('alumno')
             sendstudentmail(request, emails, html_content)
-
-
-    context = {        
-        'label': id,
-        'images': image,
-        'titulo': instance.title,
-        'instance': instance,
-        'messages': messages,
-        'specie': objspecie,
-    }
 
     return render(request, template, context)
 

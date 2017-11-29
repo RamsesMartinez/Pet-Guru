@@ -24,13 +24,13 @@
           <div class="col-sm-4 col-md-4">
             <h2 class="alert-heading text-center mb-4">Datos clínicos.</h2>
             <p>Especie: {{ instance.get_specie_display }}</p>
-            <!--<p>{% for name, value in specie.get_fields %}
+            <p>{% for name, value in specie.get_fields %}
             {% if value %}
             {{ name }} : {{ value }}
               <br>
             {% endif %}
             {% endfor %}
-          </p>-->
+          </p>
         </div>
         <hr>
         <div class="col-sm-12 col-md-8">
@@ -210,7 +210,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <ul class="rate-area">
+          <ul id="rates" class="rate-area">
             <input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Amazing">5 stars</label>
             <input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="Good">4 stars</label>
             <input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="Average">3 stars</label>
@@ -257,6 +257,44 @@
         send_data();
       }
     });
+
+
+    $('.btn-close').click(function() {
+      send_close();
+    });
+    function send_close() {
+      if (document.getElementById('1-star').checked) {
+        rate_value = document.getElementById('1-star').value;
+      }
+      else if (document.getElementById('2-star').checked) {
+        rate_value = document.getElementById('2-star').value;
+      }
+      else if (document.getElementById('3-star').checked) {
+        rate_value = document.getElementById('3-star').value;
+      }
+      else if (document.getElementById('4-star').checked) {
+        rate_value = document.getElementById('4-star').value;
+      }
+      else {
+        rate_value = document.getElementById('5-star').value;
+      }
+      console.log(rate_value);
+
+      $.ajax({
+        url: "{% url 'home:pregunta' label %}",
+        type: 'POST',
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          'calif': rate_value,
+          'changeto': 'close',
+        },
+        traditional: true,
+        datatype: 'jsonp',
+        success: function(result) {
+          location.reload()
+        },
+      });
+    }
   });
   </script>
   {% endblock javascript%}
