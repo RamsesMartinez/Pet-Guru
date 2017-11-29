@@ -159,6 +159,7 @@ def user(request):
         wild_form = WildForm(request.POST or None)
         aquatic_form = AquaticForm(request.POST or None)
         bee_form = BeeForm(request.POST or None)
+        document_form = DocumentForm(request.POST, request.FILES)
 
         page = request.GET.get('page', 1)
         paginator = Paginator(articles, 6)
@@ -180,6 +181,10 @@ def user(request):
                         image = form['image']
                         photo = ImageQuestion(question=base, image=image)
                         photo.save()
+            def save_document(base):
+                if document_form.is_valid():
+                    document_form.question = base.id
+                    document_form.save()
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
@@ -196,6 +201,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cow.save()
+                    save_document(base)
                     if formset.is_valid():
                         for form in formset.cleaned_data:
                             print(type(form['image']))
@@ -493,6 +499,7 @@ def user(request):
             'aquatic_form': aquatic_form,
             'bee_form': bee_form,
             'formset': formset,
+            'document_form': document_form,
         }
         return render(request, template, context)
 

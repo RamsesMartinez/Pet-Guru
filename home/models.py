@@ -163,7 +163,7 @@ class Specie(models.Model):
 
 
 class Bovine(Specie):
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -181,7 +181,7 @@ class Bovine(Specie):
 
 
 class Goat(Specie):
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -214,7 +214,7 @@ class Rabbit(Specie):
         (FATTEN, 'Engorda'),
     )
 
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oryctolagus_cuniculus_Tasmania_2.jpg/1200px-Oryctolagus_cuniculus_Tasmania_2.jpg'
     productive_stage = models.CharField(max_length=10, choices=PRODUCTIVE, default=LACTATING)
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
@@ -233,7 +233,7 @@ class Rabbit(Specie):
 
 
 class Ovine(Specie):
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'http://www.infoanimales.com/wp-content/uploads/2016/06/Informaci%C3%B3n-sobre-la-oveja-1.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -253,7 +253,7 @@ class Ovine(Specie):
 
 
 class Dog(Specie):
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://www.anipedia.net/imagenes/que-comen-los-perros.jpg'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -271,7 +271,7 @@ class Dog(Specie):
 
 
 class Cat(Specie):
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'http://www.petmd.com/sites/default/files/scared-kitten-shutterstock_191443322.jpg'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -289,7 +289,7 @@ class Cat(Specie):
 
 
 class Porcine(Specie):
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://www.elisagenie.com/wp-content/uploads/2017/03/Porcine-Pig-ELISA-Assay-1.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
     curse = models.CharField(max_length=60, null=True)
@@ -360,7 +360,7 @@ class Bee(models.Model):
         (NOT_VERIFIED, 'NO Verificado'),
     )
 
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://media.mnn.com/assets/images/2017/07/HoneyBeeSittingOnAFlower.jpg.838x0_q80.jpg'
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     colony_type = models.CharField(max_length=3, choices=COLONY)
@@ -451,7 +451,7 @@ class Bird(models.Model):
         (ORNAMENTAL, 'Ornamentales'),
     )
 
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg'
     question = models.OneToOneField(Question, default='')
     type_animal = models.CharField(max_length=60)
     zootechnical_purpose = models.CharField(max_length=30)
@@ -484,7 +484,7 @@ class Bird(models.Model):
 
 
 class Wild(models.Model):
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://www.redjurista.com/AppFolders/Images/News/IMAGENES/agricultura/animales/ani1.JPG'
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     zootechnical = models.CharField(max_length=50)
@@ -588,7 +588,7 @@ class Aquatic(models.Model):
     YES = 'YS'
     NO = 'NO'
 
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/211/135/136625206.jpg'
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
@@ -639,7 +639,7 @@ class Aquatic(models.Model):
 
 
 class Horse(Specie):
-    DEFAULT_IMAGE = ''
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Palomino_Horse.jpg/220px-Palomino_Horse.jpg'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -656,10 +656,10 @@ class Horse(Specie):
 
 
 class Document(models.Model):
-    description = models.CharField(max_length=255, blank=True)
+    description = models.CharField(max_length=255, blank=True, null=True)
     document = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, default=1)
 
     def __str__(self):
         return '%s' % self.id
