@@ -76,21 +76,7 @@ def question(request, id=None):
     label = id
     objspecie = instance.get_obj_specie()
 
-
-    context = {        
-        'label': id,
-        'images': image,
-        'titulo': instance.title,
-        'instance': instance,
-        'messages': messages,
-        'specie': objspecie,
-    }
-
-    if request.method == 'POST':                
-        message = request.POST.get('message')        
-        handler = request.POST.get('handler')
-        new_mess = Message.objects.create(question=instance, handle=handler, message=message)
-        new_mess.save()
+    def send_comment(handler):
         if handler == instance.user_question.username:
             new_context = {
             'title': instance.title,
@@ -112,6 +98,25 @@ def question(request, id=None):
             emails = instance.user_question.email
             print('alumno')
             sendstudentmail(request, emails, html_content)
+        return None
+
+
+    context = {        
+        'label': id,
+        'images': image,
+        'titulo': instance.title,
+        'instance': instance,
+        'messages': messages,
+        'specie': objspecie,
+    }
+
+    if request.method == 'POST':                
+        message = request.POST.get('message')        
+        handler = request.POST.get('handler')
+        new_mess = Message.objects.create(question=instance, handle=handler, message=message)
+        send_comment(handler)
+        new_mess.save()
+        
 
     return render(request, template, context)
 
