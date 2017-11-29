@@ -91,6 +91,7 @@ class Message(models.Model):
     question = models.ForeignKey(Question, default=None,related_name='messages')
     handle = models.TextField()
     message = models.TextField()
+    document = models.FileField(upload_to='documents/')
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
 
     def __unicode__(self):

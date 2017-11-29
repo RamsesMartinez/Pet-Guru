@@ -46,10 +46,10 @@ def index(request):
 
     if request.method == 'POST':
         user_log = request.POST['Usuario']
-        pass_log = request.POST['Contraseña']        
+        pass_log = request.POST['Contraseña']
         user_auth = authenticate(request,username=user_log, password=pass_log)
 
-        if user_auth is not None:            
+        if user_auth is not None:
             login_django(request, user_auth)
             return redirect('home:usuario')
         else:
@@ -74,14 +74,26 @@ def question(request, id=None):
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
 
-    if request.method == 'POST':                
-        message = request.POST.get('message')        
-        handler = request.POST.get('handler')
-        new_mess = Message.objects.create(question=instance,handle=handler,message=message)
-        new_mess.save()
+    if request.method == 'POST':        
+        form = MessageForm(            
+            question=request.POST['question'],
+            handle=request.POST['handle'],
+            message=request.POST['message'],
+            document=request.FILES,            
+            timestamp=request.POST['timestamp'],
+        )
+        if form.is_valid():
+            print('ah nu ma, si guardo')
+            form.save()
+            return HttpResponseRedirect('/')
+        else:
+            print('tu madre no es valida')
+    else:
+        formMessage = MessageForm()
 
 
-    context = {        
+    context = {
+        'formMessage':formMessage,
         'label': label,
         'images': image,
         'titulo': instance.title,
@@ -150,7 +162,7 @@ def user(request):
             articles = paginator.page(paginator.num_pages)
 
         if request.method == 'POST':
-            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())            
+            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
@@ -471,7 +483,7 @@ def user(request):
         template = 'prof.html'
         solved = Question.objects.filter(Q(status='OP') | Q(status='RP')).order_by('-id')
         article = Question.objects.filter(Q(status='CL')).order_by('-id')
-        avg = 0        
+        avg = 0
         page = request.GET.get('page', 1)
         paginator = Paginator(solved, 6)
         try:
@@ -481,7 +493,7 @@ def user(request):
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
 
-        if request.method == 'POST':                 
+        if request.method == 'POST':
             if request.POST['type'] == 'changestate':
                 pk = request.POST['pk']
                 change = Question.objects.get(pk=pk);
@@ -496,7 +508,7 @@ def user(request):
         #         avg = sum(qualifications) / len(qualifications)
         #     else:
         avg = 3
-        
+
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
@@ -542,7 +554,7 @@ def cards(request):
             article = paginator.page(1)
         except EmptyPage:
             article = paginator.page(paginator.num_pages)
-        
+
         context = {
             'title': "Profesional " + request.user.username,
             'articles': article,
