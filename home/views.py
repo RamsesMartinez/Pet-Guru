@@ -147,7 +147,7 @@ def user(request):
         template = 'user.html'
         solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
         articles = Question.objects.filter(Q(status='CL')).order_by('-id')
-        ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=3)
+        ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=1)
 
         base_form = BaseForm(request.POST or None)
         cow_form = CowForm(request.POST or None)
