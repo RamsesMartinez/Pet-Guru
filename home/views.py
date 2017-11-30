@@ -77,20 +77,23 @@ def question(request, id=None):
     formMessage = MessageForm()
 
     if request.method == 'POST':
-        form = MessageForm(request.POST,request.FILES,)
+        form = MessageForm(request.POST, request.FILES)
         if form.is_valid():
+            new_message = Message.objects.create(
+                question=instance,
+                handle=request.user.username,
+                message=request.POST['message'],
+                image=None,
+                document=None)
             filepath = request.FILES.get('filepath', False)
-            new_message = Message.objects.create(question=instance,
-                                                handle=request.user.username,                                                
-                                                message=request.POST['message']                                  ,
-                                                document=None)
-            print(filepath)
-            if filepath:                                
-                new_message.image = request.FILES['imagen']
-                new_message.document = request.FILES['documento']
-                new_message.save();
-            else:            
-                new_message.save();
+            if filepath:
+                new_message.image = request.FILES['image']
+                print(request.FILES['image'])
+                new_message.document = request.FILES['document']                
+                new_message.save()
+            else:
+                print('no entra tu chingadera')
+                new_message.save()
 
             return HttpResponseRedirect('/pregunta/'+id)
 

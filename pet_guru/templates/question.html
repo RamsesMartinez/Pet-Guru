@@ -40,15 +40,18 @@
           </div>
         </div>
       </div>
+      <!-- Seccion de Comentarios -->
       <div class="container">
         {% if user == instance.user_question and instance.status == 'RP' %}
         <div class="container text-center">
           <h1>Comentarios</h1>
           <div class="row">
             <div class="">
-              <input id="message" type="text">
-              <button type="submit" class="btn_send btn btn-primary">Enviar</button>
-              <i class="material-icons">attach_file</i>
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %} 
+                {{formMessage.as_p}}
+                <button type="submit" class="btn_send btn btn-primary">Enviar</button>
+              </form>
             </div>
           </div>
         </div>      
@@ -62,7 +65,12 @@
                   {{message.handle}}
                 </div>
                 <div class="card-body text-left">
-                  <p class="card-text">{{message.message}}</p>
+                  {% if message.document %}
+                  <a href="{{message.document.url}}">Download {{message.document}}</a>
+                  {% endif%} 
+                  {% if message.image %}                  
+                  <img src="{{message.image.url}}" alt="">
+                  {% endif%}
                 </div>
                 <div class="card-footer text-muted text-right">
                   <p>{{ message.formatted_timestamp }}</p>
@@ -113,7 +121,12 @@
                 </div>
                 <div class="card-body text-left">
                   <p class="card-text">{{message.message}}</p>
+                  {% if message.document %}
                   <a href="{{message.document.url}}">Download {{message.document}}</a>
+                  {% endif%}                   
+                  {% if message.image %}                  
+                  <img class="image_card" src="{{message.image.url}}" alt="Nada">                  
+                  {% endif%}
                 </div>
                 <div class="card-footer text-muted text-right">
                   <p>{{ message.formatted_timestamp }}</p>                  
@@ -156,20 +169,8 @@
     {% block javascript%}
     <script type="text/javascript">
     $(function() {
-      function send_data() {
-        var message = $('#message').val();
-        var handler = $('#handle').text();
-       
-      }
-      $(".messages-cont").animate({ scrollTop: $('#div1').prop("scrollHeight")}, 1000);
-      $('.btn_send').click(function() {
-        send_data();
-      });
-      $("#message").on('keyup', function(e) {
-        if (e.keyCode == 13) {
-          send_data();
-        }
-      });
+
+
     });
     </script>
     {% endblock javascript%}

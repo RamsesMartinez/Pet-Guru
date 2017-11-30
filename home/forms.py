@@ -8,7 +8,7 @@ from users.models import User
 
 class MessageForm(forms.Form):
     message = forms.CharField(label='Mensaje',max_length=200)
-    imagen = forms.ImageField(label='Imagen',required=False)
+    image = forms.ImageField(label='Imagen',required=False)
     document = forms.FileField(label='Documento',required=False)
 
 
