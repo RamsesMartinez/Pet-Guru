@@ -664,7 +664,7 @@ class Document(models.Model):
     description = models.CharField(max_length=255, blank=True, null=True)
     document = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    question = models.ForeignKey(Question, default=1)
+    question = models.ForeignKey(Question, default=None)
 
     def __str__(self):
         return '%s' % self.id

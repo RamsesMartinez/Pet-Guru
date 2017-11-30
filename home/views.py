@@ -186,8 +186,9 @@ def user(request):
                         photo.save()
             def save_document(base):
                 if document_form.is_valid():
-                    document_form.question = base.id
-                    document_form.save()
+                    doc = document_form.save(commit=False)
+                    doc.question = base
+                    doc.save()
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
@@ -204,8 +205,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cow.save()
-                    save_images(base)
                     save_document(base)
+                    save_images(base)
                     emails = User.objects.filter(speciality='BV').filter(rol='TC')
                     try:
                         for user_speciality in emails:
