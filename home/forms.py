@@ -795,13 +795,15 @@ class BeeForm(forms.ModelForm):
         }
 
 class DocumentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(DocumentForm, self).__init__(*args, **kwargs)
+        self.fields['document'].widget.attrs.update({'class': 'btn btn-info'})
+
     class Meta:
         model = Document
         fields = (
-            'description',
             'document',
             )
         labels = {
-            'description': 'Descripcion de documento',
             'document': 'Documento',
         }

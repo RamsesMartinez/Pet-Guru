@@ -24,59 +24,63 @@ class BovineAdmin(admin.ModelAdmin):
 
 
 @admin.register(Porcine)
-class BovineAdmin(admin.ModelAdmin):
+class PorcineAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Horse)
-class BovineAdmin(admin.ModelAdmin):
+class HorseAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Ovine)
-class BovineAdmin(admin.ModelAdmin):
+class OvineAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Goat)
-class BovineAdmin(admin.ModelAdmin):
+class GoatAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Rabbit)
-class BovineAdmin(admin.ModelAdmin):
+class RabbitAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Bee)
-class BovineAdmin(admin.ModelAdmin):
+class BeeAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Bird)
-class BovineAdmin(admin.ModelAdmin):
+class BirdAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Dog)
-class BovineAdmin(admin.ModelAdmin):
+class DogAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Cat)
-class BovineAdmin(admin.ModelAdmin):
+class CatAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Wild)
-class BovineAdmin(admin.ModelAdmin):
+class WildAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 
 @admin.register(Aquatic)
-class BovineAdmin(admin.ModelAdmin):
+class AquaticAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
 
 @admin.register(ImageQuestion)
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'question')
+
+@admin.register(Document)
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'question', 'document')
