@@ -40,10 +40,16 @@
               <img alt="Image 1 Title" src="{{image.image.url}}" data-image="{{image.image.url}}" data-description="Image 1 Description"> 
               {% endfor %}
             </div>
+            {% if document %}
+            <a href="{{document.document.url}}" download="{{instance.title}}">
+            Descargar Documento
+            </a>
+            {% endif %}
           </div>
         </div>
       </div>
     </div>
+
     <div class="container">
       {% if user == instance.user_question and instance.status == 'RP' %}
       <div class="container">
