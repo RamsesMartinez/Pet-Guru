@@ -109,7 +109,8 @@ class Question(models.Model):
     def get_document(self):
         document = Document.objects.get(question=self.pk)
         if document:
-            return document
+            document = document[0]
+            return document.document.url
 
 def get_image_filename(instance, filename):
     title = instance.question.title
@@ -667,4 +668,4 @@ class Document(models.Model):
     question = models.ForeignKey(Question, default=None)
 
     def __str__(self):
-        return '%s' % self.id
+        return '%s' % self.document

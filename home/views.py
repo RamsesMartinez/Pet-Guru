@@ -76,7 +76,7 @@ def question(request, id=None):
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
     objspecie = instance.get_obj_specie()
-    document = Document.objects.filter(question=instance.id)
+    document = Document.objects.filter(question=instance.id).first()
 
     if request.method == 'POST':                
         message = request.POST.get('message')        
