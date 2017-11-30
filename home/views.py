@@ -15,6 +15,7 @@ from .forms import *
 from .models import Question
 from .models import Specie
 from .models import ImageQuestion
+from .models import Document
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -75,7 +76,7 @@ def question(request, id=None):
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
     objspecie = instance.get_obj_specie()
-    document = instance.get_document()
+    document = Document.objects.filter(question=instance.id)
 
     if request.method == 'POST':                
         message = request.POST.get('message')        
