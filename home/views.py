@@ -9,9 +9,9 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.sites.shortcuts import get_current_site
-
+from django.http import HttpResponseRedirect
 from .forms import *
-
+from django.utils.datastructures import MultiValueDictKeyError
 from .models import Question
 from .models import Specie
 from .models import ImageQuestion
@@ -74,26 +74,29 @@ def question(request, id=None):
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
 
-    if request.method == 'POST':        
-        form = MessageForm(            
-            question=request.POST['question'],
-            handle=request.POST['handle'],
-            message=request.POST['message'],
-            document=request.FILES,            
-            timestamp=request.POST['timestamp'],
-        )
+    formMessage = MessageForm()
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST,request.FILES,)
         if form.is_valid():
-            print('ah nu ma, si guardo')
-            form.save()
-            return HttpResponseRedirect('/')
-        else:
-            print('tu madre no es valida')
-    else:
-        formMessage = MessageForm()
+            filepath = request.FILES.get('filepath', False)
+            new_message = Message.objects.create(question=instance,
+                                                handle=request.user.username,                                                
+                                                message=request.POST['message']                                  ,
+                                                document=None)
+            print(filepath)
+            if filepath:                                
+                new_message.image = request.FILES['imagen']
+                new_message.document = request.FILES['documento']
+                new_message.save();
+            else:            
+                new_message.save();
+
+            return HttpResponseRedirect('/pregunta/'+id)
 
 
     context = {
-        'formMessage':formMessage,
+        'formMessage': formMessage,
         'label': label,
         'images': image,
         'titulo': instance.title,

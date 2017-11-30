@@ -44,7 +44,7 @@
         {% if user == instance.user_question and instance.status == 'RP' %}
         <div class="container text-center">
           <h1>Comentarios</h1>
-          <div class="row justify-content-end">
+          <div class="row">
             <div class="">
               <input id="message" type="text">
               <button type="submit" class="btn_send btn btn-primary">Enviar</button>
@@ -92,11 +92,11 @@
         {% elif user == instance.user_response and instance.status == 'RP' %}
         <div class="container text-center">
           <h1>Comentarios</h1>
-          <div class="row justify-content-end">
+          <div class="row">
             <div class="">
               <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{formMessage.as_p}}
+                {% csrf_token %}                
+                {{formMessage.as_p}}                
                 <button type="submit" class="btn_send btn btn-primary">Enviar</button>
               </form>                            
             </div>
@@ -113,9 +113,10 @@
                 </div>
                 <div class="card-body text-left">
                   <p class="card-text">{{message.message}}</p>
+                  <a href="{{message.document.url}}">Download {{message.document}}</a>
                 </div>
                 <div class="card-footer text-muted text-right">
-                  <p>{{ message.formatted_timestamp }}</p>
+                  <p>{{ message.formatted_timestamp }}</p>                  
                 </div>
               </div>
             </div>

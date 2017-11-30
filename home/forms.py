@@ -6,10 +6,11 @@ from django.core.exceptions import ValidationError
 from .models import *
 from users.models import User
 
-class MessageForm(forms.ModelForm):
-    class Meta:
-        model = Message
-        fields = ('question','handle','message','document','timestamp',)
+class MessageForm(forms.Form):
+    message = forms.CharField(label='Mensaje',max_length=200)
+    imagen = forms.ImageField(label='Imagen',required=False)
+    document = forms.FileField(label='Documento',required=False)
+
 
 class LogInForm(forms.Form):
     Usuario = forms.CharField(max_length=20)

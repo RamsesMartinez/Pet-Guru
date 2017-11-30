@@ -21,7 +21,7 @@ class Question(models.Model):
     STATUS = (
         (OPEN, 'Abierta'),
         (CLOSE, 'Cerrada'),
-        (RESPONDING, 'Respondiendo'), 
+        (RESPONDING, 'Respondiendo'),
     )
 
     BOVINO = 'BV'
@@ -87,12 +87,13 @@ class ImageQuestion(models.Model):
     def __str__(self):
         return '%s' % self.id
 
-class Message(models.Model):    
+class Message(models.Model):
     question = models.ForeignKey(Question, default=None,related_name='messages')
     handle = models.TextField()
-    message = models.TextField()
-    document = models.FileField(upload_to='documents/')
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
+    message = models.TextField()
+    image = models.ImageField(upload_to='image_messages/', blank=True, default=None)
+    document = models.FileField(upload_to='documents/', blank=True, default=None)
 
     def __unicode__(self):
         return '[{timestamp}] {handle}: {message}'.format(**self.as_dict())
@@ -100,10 +101,6 @@ class Message(models.Model):
     @property
     def formatted_timestamp(self):
         return self.timestamp.strftime("%m-%d-%Y %H:%I%p")
-    
-    def as_dict(self):
-        return {'handle': self.handle, 'message': self.message, 'timestamp': self.formatted_timestamp}
-
 
 
 class Specie(models.Model):
@@ -117,8 +114,8 @@ class Specie(models.Model):
     )
 
     BOVINO = 'BV'
-    PORCINO  = 'PR'
-    EQUINO  = 'EQ'
+    PORCINO = 'PR'
+    EQUINO = 'EQ'
     OVINO = 'OV'
     CAPRINO = 'CP'
     LEPORIDO = 'LP'
