@@ -60,7 +60,7 @@ class BaseForm(forms.ModelForm):
 class ImageQuestionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ImageQuestionForm, self).__init__(*args, **kwargs)
-        self.fields['image'].widget.attrs.update({'class': 'btn btn-info'})
+        self.fields['image'].widget.attrs.update({'class': 'btn btn-info', 'required':'True'})
 
     image = forms.ImageField(label='')
 
