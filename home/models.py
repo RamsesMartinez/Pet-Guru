@@ -106,6 +106,11 @@ class Question(models.Model):
         else:
             return self.get_obj_specie().DEFAULT_IMAGE
 
+    def get_document(self):
+        document = Document.objects.get(question=self.pk)
+        if document:
+            return document
+
 def get_image_filename(instance, filename):
     title = instance.question.title
     slug = slugify(title)
