@@ -20,6 +20,7 @@ from .models import Document
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
+from smtplib import SMTPRecipientsRefused
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
