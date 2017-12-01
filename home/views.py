@@ -78,6 +78,12 @@ def question(request, id=None):
     label = id
     objspecie = instance.get_obj_specie()
     document = Document.objects.filter(question=instance.id).first()
+    values = []
+    for trad in objspecie.get_fields():
+        values.append(trad[1])
+    dic = dict(zip(objspecie.FIELDS, values))
+    for field, value in dic.items():
+        print(field+" "+value)
 
     def send_comment(handler):
         if handler == instance.user_question.username:
@@ -112,6 +118,7 @@ def question(request, id=None):
         'messages': messages,
         'specie': objspecie,
         'document': document,
+        'values': dic,
     }
 
     if request.method == 'POST':                
@@ -526,7 +533,6 @@ def user(request):
         template = 'prof.html'
         solved = Question.objects.filter(Q(status='OP') | Q(status='RP')).order_by('-id')
         article = Question.objects.filter(Q(status='CL')).order_by('-id')
-        avg = 0        
         page = request.GET.get('page', 1)
         paginator = Paginator(solved, 6)
         try:
@@ -544,14 +550,9 @@ def user(request):
                 change.user_response = request.user
                 change.save();
 
-        # qualifications = []
-        # for qualification in article:
-        #     qualifications.append(qualification.calification)
-        #     if qualifications != 0:
-        #         avg = sum(qualifications) / len(qualifications)
-        #     else:
-        avg = 3
-        
+
+        avg = get_avg(request.user)
+
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
@@ -750,3 +751,17 @@ def mail(request):
         'title': "PetGurú - mail",
     }
     return render(request, template, context)
+
+def get_avg(user):
+    qualifications = []
+    article = Question.objects.filter(user_response=user.pk)
+    if article:
+        for qualification in article:
+            qualifications.append(qualification.calification)
+        if qualifications != 0:
+            avg = sum(qualifications) / len(qualifications)
+            return avg
+        else:
+            return 0
+    else:
+        return 'Aun no tienes preguntas contestadas'

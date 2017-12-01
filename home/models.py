@@ -154,7 +154,7 @@ class Specie(models.Model):
         (MALE, 'Macho'),
         (FEMALE, 'Hembra'),
     )
-
+    FIELDS_S = ('id', 'Pregunta', 'Raza', 'Edad', 'Sexo', 'Peso','numero de especie')
     question = models.OneToOneField(Question, default='', related_name='specie_question')
     race = models.CharField(max_length=20, null=False)
     age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
@@ -165,10 +165,12 @@ class Specie(models.Model):
         return '%s' % self.SPECIES_NUM[self.specie]
 
     def get_specie_fields(self):
-        return [(field.name, field.value_to_string(self)) for field in Specie._meta.fields]
+        return [(field.value_to_string(self)) for field in Specie._meta.fields]
 
 
 class Bovine(Specie):
+    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'Frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
+                                'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal')
     DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
@@ -187,6 +189,8 @@ class Bovine(Specie):
 
 
 class Goat(Specie):
+    FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Fin zootécnico', 'Sistema de produccion', 'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
+                                'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal', 'Reflejo tusígeno')
     DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
@@ -219,7 +223,8 @@ class Rabbit(Specie):
         (INCREASE, 'Crecimiento'),
         (FATTEN, 'Engorda'),
     )
-
+    FIELDS = Specie.FIELDS_S + ('Etapa productiva', 'Frecuencia cardiaca', 'Frecuencia respiratoria', 'Temperatura(C°)',
+                                'Llenado capilar', 'Color de mucosa', 'Linfonodos', 'Condicion corporal', 'Deshidratación')
     DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oryctolagus_cuniculus_Tasmania_2.jpg/1200px-Oryctolagus_cuniculus_Tasmania_2.jpg'
     productive_stage = models.CharField(max_length=10, choices=PRODUCTIVE, default=LACTATING)
     heart_rate = models.IntegerField()
@@ -240,6 +245,9 @@ class Rabbit(Specie):
 
 class Ovine(Specie):
     DEFAULT_IMAGE = 'http://www.infoanimales.com/wp-content/uploads/2016/06/Informaci%C3%B3n-sobre-la-oveja-1.jpg'
+    FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Fin zootécnico', 'Sistema de produccion', 'Frecuencia cardiaca',
+                                'frecuencia respiratoria', 'Temperatura(C°)', 'Color de mucosa', 'Linfonodos',
+                                'Movimientos Ruminales', 'Condicion corporal')
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -260,6 +268,8 @@ class Ovine(Specie):
 
 class Dog(Specie):
     DEFAULT_IMAGE = 'https://www.anipedia.net/imagenes/que-comen-los-perros.jpg'
+    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Color de mucosa',
+                                'Llenado capilar', 'Reflejo tusígeno', 'Pulso', 'Lesiones en piel')
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -278,6 +288,8 @@ class Dog(Specie):
 
 class Cat(Specie):
     DEFAULT_IMAGE = 'http://www.petmd.com/sites/default/files/scared-kitten-shutterstock_191443322.jpg'
+    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Color de mucosa',
+                                'Llenado capilar', 'Reflejo tusígeno', 'pulso', 'Lesiones en piel')
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -295,6 +307,9 @@ class Cat(Specie):
 
 
 class Porcine(Specie):
+    FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Sistema de produccion', 'Curso de padecimiento en dias',
+                                'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Condicion corporal'
+                                , 'Actitude', 'color')
     DEFAULT_IMAGE = 'https://www.elisagenie.com/wp-content/uploads/2017/03/Porcine-Pig-ELISA-Assay-1.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -367,6 +382,10 @@ class Bee(models.Model):
     )
 
     DEFAULT_IMAGE = 'https://media.mnn.com/assets/images/2017/07/HoneyBeeSittingOnAFlower.jpg.838x0_q80.jpg'
+    FIELDS = ('id','Pregunta', 'Especie', 'Tipo de colonia', 'Revision de colmena', 'Presnecia de reina',
+              'Signos de enfermedad', 'Cría', 'Abeja adulta', 'Número de bastidores cubiertos por abejas en la cámara de cría y en las alzas',
+              'Presencia de huevos', 'Cantidad de huevos', 'Observacion', 'Manchas de heces', 'Pedazos de larvas',
+              'Presencia de abejas muertas', 'Presencia de comida en bastidores', 'Numero de bastidores')
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     colony_type = models.CharField(max_length=3, choices=COLONY)
@@ -646,6 +665,8 @@ class Aquatic(models.Model):
 
 class Horse(Specie):
     DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Palomino_Horse.jpg/220px-Palomino_Horse.jpg'
+    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
+                                'Color de mucosa', 'Linfonodos', 'Condicion corporal')
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
