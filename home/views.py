@@ -533,7 +533,6 @@ def user(request):
         template = 'prof.html'
         solved = Question.objects.filter(Q(status='OP') | Q(status='RP')).order_by('-id')
         article = Question.objects.filter(Q(status='CL')).order_by('-id')
-        avg = 0        
         page = request.GET.get('page', 1)
         paginator = Paginator(solved, 6)
         try:
@@ -551,14 +550,9 @@ def user(request):
                 change.user_response = request.user
                 change.save();
 
-        # qualifications = []
-        # for qualification in article:
-        #     qualifications.append(qualification.calification)
-        #     if qualifications != 0:
-        #         avg = sum(qualifications) / len(qualifications)
-        #     else:
-        avg = 3
-        
+
+        avg = get_avg(request.user)
+
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
@@ -757,3 +751,17 @@ def mail(request):
         'title': "PetGurú - mail",
     }
     return render(request, template, context)
+
+def get_avg(user):
+    qualifications = []
+    article = Question.objects.filter(user_response=user.pk)
+    if article:
+        for qualification in article:
+            qualifications.append(qualification.calification)
+        if qualifications != 0:
+            avg = sum(qualifications) / len(qualifications)
+            return avg
+        else:
+            return 0
+    else:
+        return 'Aun no tienes preguntas contestadas'
