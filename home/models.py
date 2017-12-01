@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 from users.models import User
 
@@ -55,7 +56,7 @@ class Question(models.Model):
     title = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True)
     status = models.CharField(max_length=2, null=True, choices=STATUS, default='OP')
-    user_question = models.ForeignKey(User, related_name='student_question', default=User.DEFAULT_USER)
+    user_question = models.ForeignKey(User, related_name='student_question', default=User.DEFAULT_USER, )
     user_response = models.ForeignKey(User, related_name='teacher_question', default=User.DEFAULT_USER)
     calification = models.PositiveSmallIntegerField(default=0)
     date = models.DateTimeField(editable=False, auto_now=True, null=True)
@@ -65,13 +66,51 @@ class Question(models.Model):
         return '%s' % self.title
 
     def get_absolute_url(self):
-        return reverse("home:pregunta", kwargs={'id':self.id})
+        return reverse("home:pregunta", kwargs={'id': self.id})
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Question._meta.fields]
+
+    def get_obj_specie(self):
+        if self.specie == 'BV':
+            objspecie = get_object_or_404(Bovine, question=self.id)
+        elif self.specie == 'PR':
+            objspecie = get_object_or_404(Porcine, question=self.id)
+        elif self.specie == 'EQ':
+            objspecie = get_object_or_404(Horse, question=self.id)
+        elif self.specie == 'OV':
+            objspecie = get_object_or_404(Ovine, question=self.id)
+        elif self.specie == 'CP':
+            objspecie = get_object_or_404(Goat, question=self.id)
+        elif self.specie == 'LP':
+            objspecie = get_object_or_404(Rabbit, question=self.id)
+        elif self.specie == 'AV':
+            objspecie = get_object_or_404(Bird, question=self.id)
+        elif self.specie == 'CN':
+            objspecie = get_object_or_404(Dog, question=self.id)
+        elif self.specie == 'FL':
+            objspecie = get_object_or_404(Cat, question=self.id)
+        elif self.specie == 'SL':
+            objspecie = get_object_or_404(Wild, question=self.id)
+        elif self.specie == 'BJ':
+            objspecie = get_object_or_404(Bee, question=self.id)
+        elif self.specie == 'AQ':
+            objspecie = get_object_or_404(Aquatic, question=self.id)
+        return objspecie
 
     def get_first_image(self):
-        image = ImageQuestion.objects.get(question=self.pk)
+        images = ImageQuestion.objects.filter(question=self.pk)
+        if images:
+            image = images[0]
+            return image.image.url
+        else:
+            return self.get_obj_specie().DEFAULT_IMAGE
 
-        return image.image.url
-
+    def get_document(self):
+        document = Document.objects.get(question=self.pk)
+        if document:
+            document = document[0]
+            return document.document.url
 
 def get_image_filename(instance, filename):
     title = instance.question.title
@@ -87,7 +126,7 @@ class ImageQuestion(models.Model):
     def __str__(self):
         return '%s' % self.id
 
-class Message(models.Model):
+class Message(models.Model):    
     question = models.ForeignKey(Question, default=None,related_name='messages')
     handle = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
@@ -113,49 +152,6 @@ class Specie(models.Model):
         (FEMALE, 'Hembra'),
     )
 
-    BOVINO = 'BV'
-    PORCINO = 'PR'
-    EQUINO = 'EQ'
-    OVINO = 'OV'
-    CAPRINO = 'CP'
-    LEPORIDO = 'LP'
-    AVE = 'AV'
-    CANINO = 'CN'
-    FELINO = 'FL'
-    SILVESTRE = 'SL'
-    AQUATICO = 'AQ'
-    ABEJA = 'BJ'
-
-
-    SPECIES = (
-        (BOVINO, 'Bovino'),
-        (PORCINO, 'Porcino'),
-        (EQUINO, 'Equino'),
-        (OVINO, 'Ovino'),
-        (CAPRINO, 'Caprino'),
-        (LEPORIDO, 'Lepórido'),
-        (AVE, 'Ave'),
-        (CANINO, 'Canino'),
-        (FELINO, 'Felino'),
-        (SILVESTRE, 'Silvestre'),
-        (AQUATICO, 'Organismos acuáticos'),
-        (ABEJA, 'Abeja'),
-    )
-
-    SPECIES_NUM = {
-        BOVINO: 'Bovino',
-        PORCINO: 'Porcino',
-        EQUINO: 'Equino',
-        OVINO: 'Ovino',
-        CAPRINO: 'Caprino',
-        LEPORIDO: 'Lepórido',
-        AVE: 'Ave',
-        CANINO: 'Canino',
-        FELINO: 'Felino',
-        SILVESTRE: 'Silvestre',
-        ABEJA: 'Abeja',
-    }
-
     question = models.OneToOneField(Question, default='', related_name='specie_question')
     race = models.CharField(max_length=20, null=False)
     age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
@@ -165,8 +161,12 @@ class Specie(models.Model):
     def __str__(self):
         return '%s' % self.SPECIES_NUM[self.specie]
 
+    def get_specie_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Specie._meta.fields]
+
 
 class Bovine(Specie):
+    DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -179,8 +179,12 @@ class Bovine(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Bovine._meta.fields]
+
 
 class Goat(Specie):
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -195,6 +199,9 @@ class Goat(Specie):
     cough = models.CharField(max_length=80, null=True)
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Goat._meta.fields]
 
 
 class Rabbit(Specie):
@@ -210,6 +217,7 @@ class Rabbit(Specie):
         (FATTEN, 'Engorda'),
     )
 
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oryctolagus_cuniculus_Tasmania_2.jpg/1200px-Oryctolagus_cuniculus_Tasmania_2.jpg'
     productive_stage = models.CharField(max_length=10, choices=PRODUCTIVE, default=LACTATING)
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
@@ -223,8 +231,12 @@ class Rabbit(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Rabbit._meta.fields]
+
 
 class Ovine(Specie):
+    DEFAULT_IMAGE = 'http://www.infoanimales.com/wp-content/uploads/2016/06/Informaci%C3%B3n-sobre-la-oveja-1.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -239,8 +251,12 @@ class Ovine(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Ovine._meta.fields]
+
 
 class Dog(Specie):
+    DEFAULT_IMAGE = 'https://www.anipedia.net/imagenes/que-comen-los-perros.jpg'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -252,9 +268,13 @@ class Dog(Specie):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Dog._meta.fields]
 
 
 class Cat(Specie):
+    DEFAULT_IMAGE = 'http://www.petmd.com/sites/default/files/scared-kitten-shutterstock_191443322.jpg'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -267,8 +287,12 @@ class Cat(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Dog._meta.fields]
+
 
 class Porcine(Specie):
+    DEFAULT_IMAGE = 'https://www.elisagenie.com/wp-content/uploads/2017/03/Porcine-Pig-ELISA-Assay-1.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
     curse = models.CharField(max_length=60, null=True)
@@ -281,6 +305,9 @@ class Porcine(Specie):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Porcine._meta.fields]
 
 
 class Bee(models.Model):
@@ -336,6 +363,7 @@ class Bee(models.Model):
         (NOT_VERIFIED, 'NO Verificado'),
     )
 
+    DEFAULT_IMAGE = 'https://media.mnn.com/assets/images/2017/07/HoneyBeeSittingOnAFlower.jpg.838x0_q80.jpg'
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     colony_type = models.CharField(max_length=3, choices=COLONY)
@@ -358,6 +386,9 @@ class Bee(models.Model):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Bee._meta.fields]
 
 
 class Bird(models.Model):
@@ -423,6 +454,7 @@ class Bird(models.Model):
         (ORNAMENTAL, 'Ornamentales'),
     )
 
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg'
     question = models.OneToOneField(Question, default='')
     type_animal = models.CharField(max_length=60)
     zootechnical_purpose = models.CharField(max_length=30)
@@ -450,8 +482,12 @@ class Bird(models.Model):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Bird._meta.fields]
+
 
 class Wild(models.Model):
+    DEFAULT_IMAGE = 'https://www.redjurista.com/AppFolders/Images/News/IMAGENES/agricultura/animales/ani1.JPG'
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     zootechnical = models.CharField(max_length=50)
@@ -469,6 +505,9 @@ class Wild(models.Model):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Wild._meta.fields]
 
 
 class Aquatic(models.Model):
@@ -552,6 +591,7 @@ class Aquatic(models.Model):
     YES = 'YS'
     NO = 'NO'
 
+    DEFAULT_IMAGE = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/211/135/136625206.jpg'
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
@@ -597,8 +637,12 @@ class Aquatic(models.Model):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Aquatic._meta.fields]
+
 
 class Horse(Specie):
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Palomino_Horse.jpg/220px-Palomino_Horse.jpg'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -610,12 +654,15 @@ class Horse(Specie):
     def __str__(self):
         return '%s' % self.id
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Horse._meta.fields]
+
 
 class Document(models.Model):
-    description = models.CharField(max_length=255, blank=True)
+    description = models.CharField(max_length=255, blank=True, null=True)
     document = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, default=None)
 
     def __str__(self):
-        return '%s' % self.id
+        return '%s' % self.document

@@ -139,8 +139,9 @@ staticfiles/
 #Database
 questions/
 pet_guru/media/
+documents/
 # Databases
 *.sqlite3
 .Rproj.user
 .Rhistory
-
+media/
