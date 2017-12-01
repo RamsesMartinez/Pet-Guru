@@ -78,6 +78,12 @@ def question(request, id=None):
     label = id
     objspecie = instance.get_obj_specie()
     document = Document.objects.filter(question=instance.id).first()
+    values = []
+    for trad in objspecie.get_fields():
+        values.append(trad[1])
+    dic = dict(zip(objspecie.FIELDS, values))
+    for field, value in dic.items():
+        print(field+" "+value)
 
     def send_comment(handler):
         if handler == instance.user_question.username:
@@ -112,6 +118,7 @@ def question(request, id=None):
         'messages': messages,
         'specie': objspecie,
         'document': document,
+        'values': dic,
     }
 
     if request.method == 'POST':                
