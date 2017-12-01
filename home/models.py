@@ -91,7 +91,7 @@ class Message(models.Model):
     question = models.ForeignKey(Question, default=None,related_name='messages')
     handle = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
-    message = models.TextField()
+    message = models.TextField(max_length=200)
     image = models.ImageField(upload_to='image_messages/', blank=True, default=None)
     document = models.FileField(upload_to='documents/', blank=True, default=None)
 

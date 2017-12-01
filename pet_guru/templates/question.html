@@ -42,116 +42,68 @@
       </div>
       <!-- Seccion de Comentarios -->
       <div class="container">
-        {% if user == instance.user_question and instance.status == 'RP' %}
-        <div class="container text-center">
-          <h1>Comentarios</h1>
-          <div class="row">
-            <div class="">
-              <form method="post" enctype="multipart/form-data">
-                {% csrf_token %} 
-                {{formMessage.as_p}}
-                <button type="submit" class="btn_send btn btn-primary">Enviar</button>
-              </form>
+        {% if user == instance.user_question or user == instance.user_response and instance.status == 'RP' %}
+        <div>
+          <h1  class="text-center">Comentarios</h1>
+          <form class="col-md-12" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}               
+            <div class="form-row">
+              <label class="col-md-2" for="id_message">Message:</label>
+              <div class="col-md-10">
+                <textarea class="form-control" name="message" cols="40" rows="10" maxlength="200" required id="id_message"></textarea>              
+              </div>
             </div>
+            <div class="form-row">
+              <label class="col-md-2" for="id_document">Document:</label>
+              <div class="col-md-10">
+                <input class="form-control-file" type="file" name="document" id="id_document" />
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="col-md-2" for="id_image">Image:</label>
+              <div class="col-md-10">
+                <input class="form-control-file" type="file" name="image" id="id_image" />
+              </div>            
+            </div>
+            <div class="form-row">
+              <button type="submit" name="submit" class="col-md-2 ml-md-auto btn btn-primary">Enviar</button>              
+            </div>
+            </form>                        
           </div>
         </div>      
         <div class="container messages-cont">
           {% for message in messages %}
           {% if request.user.username == message.handle|stringformat:"s" %}
-          <div class="row justify-content-end">
+          <div class="row justify-content-end">            
+          {% else %}
+          <div class="row justify-content-start">
+          {% endif %}
             <div class="col-md-7 col-sm-7">
               <div class="card card-message">
                 <div class="card-header text-left">
                   {{message.handle}}
                 </div>
                 <div class="card-body text-left">
-                  {% if message.document %}
-                  <a href="{{message.document.url}}">Download {{message.document}}</a>
-                  {% endif%} 
-                  {% if message.image %}                  
-                  <img src="{{message.image.url}}" alt="">
+                  <p>{{message.message}}</p>
+                  {% if message.image %}
+                  <a href="{{message.image.url}}">
+                    <img style="height: 200px" src="{{message.image.url}}" alt=""> <br>
+                  </a>
                   {% endif%}
+                  {% if message.document %}
+                   Descargar:
+                  <a download href="{{message.document.url}}"> {{message.document|cut:"documents/"}}</a>
+                  {% endif%} 
                 </div>
                 <div class="card-footer text-muted text-right">
                   <p>{{ message.formatted_timestamp }}</p>
                 </div>
               </div>
             </div>
-          </div>
-          {% else %}
-          <div class="row justify-content-start">
-            <div class="col-md-7">
-              <div class="card card-message">
-                <div class="card-header text-left">
-                  {{message.handle}}
-                </div>
-                <div class="card-body text-left">
-                  <p class="card-text">{{message.message}}</p>
-                </div>
-                <div class="card-footer text-muted text-right">
-                  <p>{{ message.formatted_timestamp }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endif %}
+          </div>          
           {% endfor %}
         </div>
-        {% elif user == instance.user_response and instance.status == 'RP' %}
-        <div class="container text-center">
-          <h1>Comentarios</h1>
-          <div class="row">
-            <div class="">
-              <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}                
-                {{formMessage.as_p}}                
-                <button type="submit" class="btn_send btn btn-primary">Enviar</button>
-              </form>                            
-            </div>
-          </div>
-        </div>      
-        <div class="container messages-cont">
-          {% for message in messages %}
-          {% if request.user.username == message.handle|stringformat:"s" %}
-          <div class="row justify-content-end">
-            <div class="col-md-7 col-sm-7">
-              <div class="card card-message">
-                <div class="card-header text-left">
-                  {{message.handle}}
-                </div>
-                <div class="card-body text-left">
-                  <p class="card-text">{{message.message}}</p>
-                  {% if message.document %}
-                  <a href="{{message.document.url}}">Download {{message.document}}</a>
-                  {% endif%}                   
-                  {% if message.image %}                  
-                  <img class="image_card" src="{{message.image.url}}" alt="Nada">                  
-                  {% endif%}
-                </div>
-                <div class="card-footer text-muted text-right">
-                  <p>{{ message.formatted_timestamp }}</p>                  
-                </div>
-              </div>
-            </div>
-          </div>
-          {% else %}
-          <div class="row justify-content-start">
-            <div class="col-md-7">
-              <div class="card card-message">
-                <div class="card-header text-left">
-                  {{message.handle}}
-                </div>
-                <div class="card-body text-left">
-                  <p class="card-text">{{message.message}}</p>
-                </div>
-                <div class="card-footer text-muted text-right">
-                  <p>{{ message.formatted_timestamp }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          {% endfor %}
+        
         </div>
         {% elif user.rol == 'TC' and instance.status == 'OP' %}
         <div class="container text-center">

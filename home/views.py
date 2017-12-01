@@ -85,15 +85,14 @@ def question(request, id=None):
                 message=request.POST['message'],
                 image=None,
                 document=None)
-            filepath = request.FILES.get('filepath', False)
-            if filepath:
-                new_message.image = request.FILES['image']
-                print(request.FILES['image'])
-                new_message.document = request.FILES['document']                
-                new_message.save()
-            else:
-                print('no entra tu chingadera')
-                new_message.save()
+            if len(request.FILES) != 0:
+                print(request.FILES)
+                if 'image' in request.FILES:
+                    new_message.image = request.FILES['image']
+                    new_message.save()
+                if 'document' in request.FILES:
+                    new_message.document = request.FILES['document']
+                    new_message.save()
 
             return HttpResponseRedirect('/pregunta/'+id)
 
