@@ -382,7 +382,7 @@ class Bee(models.Model):
     )
 
     DEFAULT_IMAGE = 'https://media.mnn.com/assets/images/2017/07/HoneyBeeSittingOnAFlower.jpg.838x0_q80.jpg'
-    FIELDS = ('id','Pregunta', 'Especie', 'Tipo de colonia', 'Revision de colmena', 'Presnecia de reina',
+    FIELDS = ('id','Pregunta', 'Especie', 'Tipo de colonia', 'Revision de colmena', 'Presencia de reina',
               'Signos de enfermedad', 'Cría', 'Abeja adulta', 'Número de bastidores cubiertos por abejas en la cámara de cría y en las alzas',
               'Presencia de huevos', 'Cantidad de huevos', 'Observacion', 'Manchas de heces', 'Pedazos de larvas',
               'Presencia de abejas muertas', 'Presencia de comida en bastidores', 'Numero de bastidores')

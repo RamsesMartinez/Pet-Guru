@@ -881,6 +881,10 @@ def translate(objspecie):
             values.append('Hojuela')
         elif trad[1] == 'ALV':
             values.append('Vivo')
+        elif trad[1] == 'True':
+            values.append('Si')
+        elif trad[1] == 'False':
+            values.append('No')
         else:
             values.append(trad[1])
     return values
