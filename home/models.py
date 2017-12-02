@@ -415,7 +415,7 @@ class Bee(models.Model):
 
 class Bird(models.Model):
     YOUNG = 'YN'
-    ADULT = 'SL'
+    ADULT = 'DL'
     AGE = (
         (YOUNG, 'Joven'),
         (ADULT, 'Adulto'),
@@ -543,7 +543,7 @@ class Wild(models.Model):
 
 class Aquatic(models.Model):
     AQRUSTIC = 'RS'
-    AQCEMENT = 'CM'
+    AQCEMENT = 'ACM'
     AQGEOMEMBRANE = 'GM'
     AQFLOATINGCAGE = 'FC'
     AQOTHER = 'TH'
@@ -556,10 +556,10 @@ class Aquatic(models.Model):
         (AQOTHER, 'Otro'),
     )
 
-    TURBINE = 'TR'
-    PROPELLER = 'PR'
-    PALETTE = 'PL'
-    VERTICAL = 'VR'
+    TURBINE = 'ATR'
+    PROPELLER = 'APR'
+    PALETTE = 'APL'
+    VERTICAL = 'AVR'
     AEREATOROTHER = 'TH'
 
     AEREATOR = (
@@ -602,9 +602,9 @@ class Aquatic(models.Model):
         (FISHDARK, 'Obscuro'),
     )
 
-    PELLET = 'PL'
-    FLAKE = 'FL'
-    LIVE = 'LV'
+    PELLET = 'APL'
+    FLAKE = 'AFL'
+    LIVE = 'ALV'
     FDOTHER = 'TH'
 
     FOODTYPE = (
