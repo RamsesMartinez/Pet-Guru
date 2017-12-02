@@ -132,8 +132,17 @@ def question(request, id=None):
             if stat == 'CL':
                 instance.calification = calif
                 instance.status = stat
+                new_context = {
+                'title': instance.title,
+                'consult': 'La pregunta se ha cerrado',
+                'url': get_current_site(request).domain,
+                }
+                template = get_template('profesormail.html')
+                html_content = template.render(new_context)
+                emails = instance.user_response.email
+                sendclosemail(request, emails, html_content)
                 instance.save()
-                return HttpResponseRedirect('/pregunta/'+id)
+        return HttpResponseRedirect('/pregunta/'+id)
 
 
     context = {
@@ -739,6 +748,24 @@ def sendprofmail(request, email_user, html_content):
         msg['From'] = fromaddr
         msg['To'] = toaddr
         msg['Subject'] = "Se ha generado un comentario respecto a una de sus respuestas."
+        body = html_content
+        msg.attach(MIMEText(body, 'html'))
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(fromaddr, "molinona&9")
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
+
+
+def sendclosemail(request, email_user, html_content):
+    if email_user:
+        fromaddr = "itzli2000@gmail.com"
+        toaddr = email_user
+        msg = MIMEMultipart()
+        msg['From'] = fromaddr
+        msg['To'] = toaddr
+        msg['Subject'] = "Se ha marcado como RESUELTA una de las preguntas que ayudó a resolver."
         body = html_content
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
