@@ -56,7 +56,7 @@ class BaseForm(forms.ModelForm):
         labels = {
             'title': 'Título de la consulta: ',
             'description': 'Descripción de la consulta: ',
-            'specie':'Especie',
+            'specie': 'Especie',
             'user_question': 'Usuario',
         }
 

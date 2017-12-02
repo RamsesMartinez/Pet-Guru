@@ -62,19 +62,19 @@
         <form class="col-md-12" method="POST" enctype="multipart/form-data">
           {% csrf_token %}               
           <div class="form-row">
-            <label class="col-md-2" for="id_message">Message:</label>
+            <label class="col-md-2" for="id_message">Mensaje:</label>
             <div class="col-md-10">
               <textarea class="form-control" name="message" cols="40" rows="10" maxlength="200" required id="id_message"></textarea>              
             </div>
           </div>
           <div class="form-row">
-            <label class="col-md-2" for="id_document">Document:</label>
+            <label class="col-md-2" for="id_document">Documento:</label>
             <div class="col-md-10">
               <input class="form-control-file" type="file" name="document" id="id_document" />
             </div>
           </div>
           <div class="form-row">
-            <label class="col-md-2" for="id_image">Image:</label>
+            <label class="col-md-2" for="id_image">Imagen:</label>
             <div class="col-md-10">
               <input class="form-control-file" type="file" name="image" id="id_image" />
             </div>            
@@ -122,19 +122,19 @@
         <form class="col-md-12" method="POST" enctype="multipart/form-data">
           {% csrf_token %}               
           <div class="form-row">
-            <label class="col-md-2" for="id_message">Message:</label>
+            <label class="col-md-2" for="id_message">Mensaje:</label>
             <div class="col-md-10">
               <textarea class="form-control" name="message" cols="40" rows="10" maxlength="200" required id="id_message"></textarea>              
             </div>
           </div>
           <div class="form-row">
-            <label class="col-md-2" for="id_document">Document:</label>
+            <label class="col-md-2" for="id_document">Documento:</label>
             <div class="col-md-10">
               <input class="form-control-file" type="file" name="document" id="id_document" />
             </div>
           </div>
           <div class="form-row">
-            <label class="col-md-2" for="id_image">Image:</label>
+            <label class="col-md-2" for="id_image">Imagen:</label>
             <div class="col-md-10">
               <input class="form-control-file" type="file" name="image" id="id_image" />
             </div>            
@@ -181,7 +181,7 @@
         <p class="h2 mb-5 mt-5">¿{{ user }} quieres responder a esta pregunta?</p>
         <input type="submit" class="btn btn-primary" name="" value="Responder">
       </div>
-      {% instance.status == 'CL' %}
+      {% elif instance.status == 'CL' %}
       <div class="container messages-cont">
         {% for message in messages %}
         <div class="row justify-content-start">
@@ -248,47 +248,46 @@
       </div>
     </div>
   </div>
-</div>
-{% endblock %} 
-{% block javascript%}
-<script type="text/javascript">
-$(function() {
-  $('.btn-close').click(function () {
-    send_close();
-  });
-  function send_close() {
-    if (document.getElementById('1-star').checked) {
-      rate_value = document.getElementById('1-star').value;
-    }
-    else if (document.getElementById('2-star').checked) {
-      rate_value = document.getElementById('2-star').value;
-    }
-    else if (document.getElementById('3-star').checked) {
-      rate_value = document.getElementById('3-star').value;
-    }
-    else if (document.getElementById('4-star').checked) {
-      rate_value = document.getElementById('4-star').value;
-    }
-    else {
-      rate_value = document.getElementById('5-star').value;
-    }
-    console.log(rate_value);
-
-    $.ajax({
-      url: "{% url 'home:pregunta' label %}",
-      type: 'POST',
-      data: {
-        csrfmiddlewaretoken: '{{ csrf_token }}',
-        'calif': rate_value,
-        'changeto': 'close',
-      },
-      traditional: true,
-      datatype: 'jsonp',
-      success: function (result) {
-        location.reload()
-      },
+  {% endblock %} 
+  {% block javascript%}
+  <script type="text/javascript">
+  $(function() {
+    $('.btn-close').click(function () {
+      send_close();
     });
-  }
-});
-</script>
-{% endblock javascript%}
+    function send_close() {
+      if (document.getElementById('1-star').checked) {
+        rate_value = document.getElementById('1-star').value;
+      }
+      else if (document.getElementById('2-star').checked) {
+        rate_value = document.getElementById('2-star').value;
+      }
+      else if (document.getElementById('3-star').checked) {
+        rate_value = document.getElementById('3-star').value;
+      }
+      else if (document.getElementById('4-star').checked) {
+        rate_value = document.getElementById('4-star').value;
+      }
+      else {
+        rate_value = document.getElementById('5-star').value;
+      }
+      console.log(rate_value);
+
+      $.ajax({
+        url: "{% url 'home:pregunta' label %}",
+        type: 'POST',
+        data: {
+          csrfmiddlewaretoken: '{{ csrf_token }}',
+          'calif': rate_value,
+          'changeto': 'CL',
+        },
+        traditional: true,
+        datatype: 'jsonp',
+        success: function (result) {
+          location.reload()
+        },
+      });
+    }
+  });
+  </script>
+  {% endblock javascript%}
