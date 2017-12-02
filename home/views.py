@@ -684,9 +684,7 @@ def search(request, label):
 
 
 def sendmailform(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
+    if email_user:
         fromaddr = "itzli2000@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
@@ -716,14 +714,9 @@ def sendmailform(request, email_user, html_content):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
-
-
 
 def sendstudentmail(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
+    if email_user:
         fromaddr = "itzli2000@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
@@ -739,13 +732,9 @@ def sendstudentmail(request, email_user, html_content):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
-
 
 def sendprofmail(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
+    if email_user:
         fromaddr = "itzli2000@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
@@ -761,7 +750,6 @@ def sendprofmail(request, email_user, html_content):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
 
 
 def mail(request):
@@ -770,6 +758,7 @@ def mail(request):
         'title': "PetGurú - mail",
     }
     return render(request, template, context)
+
 
 def get_avg(user):
     qualifications = []
