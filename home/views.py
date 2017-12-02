@@ -132,6 +132,11 @@ def question(request, id=None):
                 if 'document' in request.FILES:
                     new_message.document = request.FILES['document']
                     new_message.save()
+        else:
+            calif = request.POST.get('calif')        
+            stat = request.POST.get('changeto')
+            print(calif)
+            print(stat)
 
             return HttpResponseRedirect('/pregunta/'+id)
 
