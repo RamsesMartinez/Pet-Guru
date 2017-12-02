@@ -9,9 +9,9 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.sites.shortcuts import get_current_site
-
+from django.http import HttpResponseRedirect
 from .forms import *
-
+from django.utils.datastructures import MultiValueDictKeyError
 from .models import Question
 from .models import Specie
 from .models import ImageQuestion
@@ -48,10 +48,10 @@ def index(request):
 
     if request.method == 'POST':
         user_log = request.POST['Usuario']
-        pass_log = request.POST['Contraseña']        
-        user_auth = authenticate(request, username=user_log, password=pass_log)
+        pass_log = request.POST['Contraseña']
+        user_auth = authenticate(request,username=user_log,password=pass_log)
 
-        if user_auth is not None:            
+        if user_auth is not None:
             login_django(request, user_auth)
             return redirect('home:usuario')
         else:
@@ -85,12 +85,16 @@ def question(request, id=None):
     for field, value in dic.items():
         print(field+" "+value)
 
-    def send_comment(handler):
+    formMessage = MessageForm()
+
+
+
+    def send_comment(handler, message):
         if handler == instance.user_question.username:
             new_context = {
-            'title': instance.title,
-            'consult': message,
-            'url': get_current_site(request).domain,
+                'title': instance.title,
+                'consult': message,
+                'url': get_current_site(request).domain,
             }
             template = get_template('profesormail.html')
             html_content = template.render(new_context)
@@ -98,9 +102,9 @@ def question(request, id=None):
             sendprofmail(request, emails, html_content)
         else:
             new_context = {
-            'title': instance.title,
-            'consult': message,
-            'url': get_current_site(request).domain,
+                'title': instance.title,
+                'consult': message,
+                'url': get_current_site(request).domain,
             }
             template = get_template('studentmail.html')
             html_content = template.render(new_context)
@@ -110,8 +114,31 @@ def question(request, id=None):
         return None
 
 
-    context = {        
-        'label': id,
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_message = Message.objects.create(
+                question=instance,
+                handle=request.user.username,
+                message=request.POST['message'],
+                image=None,
+                document=None)
+            send_comment(new_message.handle, new_message.message)
+            if len(request.FILES) != 0:                
+                if 'image' in request.FILES:
+                    new_message.image = request.FILES['image']
+                    new_message.save()
+                if 'document' in request.FILES:
+                    new_message.document = request.FILES['document']
+                    new_message.save()
+
+            return HttpResponseRedirect('/pregunta/'+id)
+
+
+    context = {
+        'formMessage': formMessage,
+        'label': label,
         'images': image,
         'titulo': instance.title,
         'instance': instance,
@@ -121,13 +148,6 @@ def question(request, id=None):
         'values': dic,
     }
 
-    if request.method == 'POST':                
-        message = request.POST.get('message')        
-        handler = request.POST.get('handler')
-        new_mess = Message.objects.create(question=instance, handle=handler, message=message)
-        send_comment(handler)
-        new_mess.save()
-        
 
     return render(request, template, context)
 
@@ -188,7 +208,7 @@ def user(request):
             articles = paginator.page(paginator.num_pages)
 
         if request.method == 'POST':
-            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())            
+            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())
 
             def save_images(base):
                 # Save images
@@ -542,15 +562,14 @@ def user(request):
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
 
-        if request.method == 'POST':                 
+        if request.method == 'POST':
             if request.POST['type'] == 'changestate':
                 pk = request.POST['pk']
                 change = Question.objects.get(pk=pk);
                 change.status = 'RP'
                 change.user_response = request.user
                 change.save();
-
-
+                
         avg = get_avg(request.user)
 
         context = {
@@ -598,7 +617,7 @@ def cards(request):
             article = paginator.page(1)
         except EmptyPage:
             article = paginator.page(paginator.num_pages)
-        
+
         context = {
             'title': "Profesional " + request.user.username,
             'articles': article,
