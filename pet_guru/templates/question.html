@@ -89,7 +89,11 @@
             <div class="col-md-7 col-sm-7">
               <div class="card card-message">
                 <div class="card-header text-left">
-                  {{message.handle}}
+                  {% if message.handle == instance.user_response.username %}
+                      <p>Albeitar </p>
+                  {% else %}  
+                    {{message.handle}}
+                  {% endif %}
                 </div>
                 <div class="card-body text-left">
                   <p>{{message.message}}</p>
@@ -145,7 +149,11 @@
             <div class="col-md-7 col-sm-7">
               <div class="card card-message">
                 <div class="card-header text-left">
-                  {{message.handle}}
+                  {% if message.handle == instance.user_response.username %}
+                      <p>Albeitar </p>
+                  {% else %}  
+                    {{message.handle}}
+                  {% endif %}
                 </div>
                 <div class="card-body text-left">
                   <p>{{message.message}}</p>
