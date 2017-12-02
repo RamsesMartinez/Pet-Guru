@@ -477,6 +477,11 @@ class Bird(models.Model):
     )
 
     DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg'
+    FIELDS = ('id', 'Pregunta', 'Tipo de animal', 'fin zootécnico', 'Edad', 'Edad semanas', 'Edad meses',
+              'Lugar de encierro', 'Cantidad de animales', 'Convivencia con otras aves', 'Origen del agua', 'Morbilidad'
+              , 'Mortalidad', 'Fecha de inicio de los signos', 'Consumo de agua', 'Consumo de alimentos',
+              'Calendario de vacunación', 'Defecacion', 'condicion corporal', 'Condicion del plumaje',
+              'Condicion de las patas', 'Frecuencia respiratoria', 'Deshidratación', 'Actitude')
     question = models.OneToOneField(Question, default='')
     type_animal = models.CharField(max_length=60)
     zootechnical_purpose = models.CharField(max_length=30)
@@ -489,7 +494,7 @@ class Bird(models.Model):
     origin_water = models.CharField(max_length=30)
     morbidity = models.IntegerField()
     mortality = models.IntegerField()
-    date_signs = models.IntegerField()
+    date_signs = models.CharField(max_length=10)
     water = models.CharField(max_length=3, choices=DRINK)
     eat = models.CharField(max_length=3, choices=FOOD)
     vaccine = models.CharField(max_length=30)
@@ -510,6 +515,10 @@ class Bird(models.Model):
 
 class Wild(models.Model):
     DEFAULT_IMAGE = 'https://www.redjurista.com/AppFolders/Images/News/IMAGENES/agricultura/animales/ani1.JPG'
+    FIELDS = ('Pregunta', 'Especie', 'Fin zootécnico', 'Condicion medio ambientales', 'Alimentación',
+              'Antecedentes patológicos/hereditarios','Evolución de la enfermedad actual', 'Frecuencia cardiaca',
+              'Frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar', 'Color de mucosa', 'Linfonodos',
+              'Movimientos Ruminales')
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     zootechnical = models.CharField(max_length=50)
@@ -614,6 +623,7 @@ class Aquatic(models.Model):
     NO = 'NO'
 
     DEFAULT_IMAGE = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/211/135/136625206.jpg'
+
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)

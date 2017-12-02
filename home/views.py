@@ -78,9 +78,7 @@ def question(request, id=None):
     label = id
     objspecie = instance.get_obj_specie()
     document = Document.objects.filter(question=instance.id).first()
-    values = []
-    for trad in objspecie.get_fields():
-        values.append(trad[1])
+    values = translate(objspecie)
     dic = dict(zip(objspecie.FIELDS, values))
     for field, value in dic.items():
         print(field+" "+value)
@@ -765,3 +763,16 @@ def get_avg(user):
             return 0
     else:
         return 'Aun no tienes preguntas contestadas'
+
+def translate(objspecie):
+    values = []
+    for trad in objspecie.get_fields():
+        if trad[1] == 'ML':
+            values.append('Macho')
+        elif trad[1] == 'FM':
+            values.append('Hembra')
+        elif trad[1] == 'YS':
+            values.append('Si')
+        else:
+            values.append(trad[1])
+    return values
