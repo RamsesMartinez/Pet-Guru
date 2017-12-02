@@ -5,6 +5,10 @@
 	margin-top: 30px;
 }
 
+.image_card{
+	height: 100px;
+}
+
 .card-message{	
 	box-shadow: 5px 5px 5px #888888;
 }
