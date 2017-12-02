@@ -78,9 +78,7 @@ def question(request, id=None):
     label = id
     objspecie = instance.get_obj_specie()
     document = Document.objects.filter(question=instance.id).first()
-    values = []
-    for trad in objspecie.get_fields():
-        values.append(trad[1])
+    values = translate(objspecie)
     dic = dict(zip(objspecie.FIELDS, values))
     for field, value in dic.items():
         print(field+" "+value)
@@ -789,3 +787,132 @@ def get_avg(user):
             return 0
     else:
         return 'Aun no tienes preguntas contestadas'
+
+def translate(objspecie):
+    values = []
+    for trad in objspecie.get_fields():
+        if trad[1] == 'ML':
+            values.append('Macho')
+        elif trad[1] == 'FM':
+            values.append('Hembra')
+        elif trad[1] == 'YS':
+            values.append('Si')
+        elif trad[1] == 'NO':
+            values.append('No')
+        elif trad[1] == 'LC':
+            values.append('Lactante')
+        elif trad[1] == 'PG':
+            values.append('Gestante')
+        elif trad[1] == 'IC':
+            values.append('Crecimiento')
+        elif trad[1] == 'FT':
+            values.append('Engorda')
+        elif trad[1] == 'RS':
+            values.append('Rústica')
+        elif trad[1] == 'WL':
+            values.append('Silvestre')
+        elif trad[1] == 'TC':
+            values.append('Tecnificada Lamgstroth')
+        elif trad[1] == 'JM':
+            values.append('Tecnificada Jumbo')
+        elif trad[1] == 'BC':
+            values.append('Larvas de color normal')
+        elif trad[1] == 'PR':
+            values.append('Perforadas')
+        elif trad[1] == 'FT':
+            values.append('Aspecto grasoso')
+        elif trad[1] == 'APR':
+            values.append('Opérculos raídos')
+        elif trad[1] == 'NV':
+            values.append('No Verificado')
+        elif trad[1] == 'ST':
+            values.append('Abdomen distendido')
+        elif trad[1] == 'SL':
+            values.append('Lentas')
+        elif trad[1] == 'CH':
+            values.append('Pérdida del instinto de picar')
+        elif trad[1] == 'LP':
+            values.append('Alopécicas')
+        elif trad[1] == 'SH':
+            values.append('Brillosas')
+        elif trad[1] == 'PS':
+            values.append('Presente')
+        elif trad[1] == 'NT':
+            values.append('No presente')
+        elif trad[1] == 'YN':
+            values.append('Joven')
+        elif trad[1] == 'DL':
+            values.append('Adulto')
+        elif trad[1] == 'CG':
+            values.append('Jaula')
+        elif trad[1] == 'FR':
+            values.append('Libre')
+        elif trad[1] == 'HH':
+            values.append('Gallinero')
+        elif trad[1] == 'CM':
+            values.append('Compactas')
+        elif trad[1] == 'LQ':
+            values.append('Líquidas')
+        elif trad[1] == 'GR':
+            values.append('Verdes')
+        elif trad[1] == 'WH':
+            values.append('Blancas')
+        elif trad[1] == 'TH':
+            values.append('Otros')
+        elif trad[1] == 'SC':
+            values.append('Escamosas')
+        elif trad[1] == 'FL':
+            values.append('Enrojecidas')
+        elif trad[1] == 'RP':
+            values.append('Reproductores')
+        elif trad[1] == 'RN':
+            values.append('Ornamentales')
+        elif trad[1] == 'ACM':
+            values.append('Cemento')
+        elif trad[1] == 'GM':
+            values.append('Geomembrana')
+        elif trad[1] == 'FC':
+            values.append('Jaula flotante')
+        elif trad[1] == 'ATR':
+            values.append('Turbina')
+        elif trad[1] == 'APR':
+            values.append('Hélice')
+        elif trad[1] == 'APL':
+            values.append('Paleta')
+        elif trad[1] == 'AVR':
+            values.append('Flujo vertical')
+        elif trad[1] == 'BT':
+            values.append('Fondo')
+        elif trad[1] == 'MD':
+            values.append('Medio')
+        elif trad[1] == 'SR':
+            values.append('Superficie')
+        elif trad[1] == 'NR':
+            values.append('Normal')
+        elif trad[1] == 'LT':
+            values.append('Letárgico')
+        elif trad[1] == 'RT':
+            values.append('Errático')
+        elif trad[1] == 'SP':
+            values.append('En espiral')
+        elif trad[1] == 'RB':
+            values.append('Se frotan con la superficie')
+        elif trad[1] == 'DR':
+            values.append('Obscuro')
+        elif trad[1] == 'APL':
+            values.append('Pellet')
+        elif trad[1] == 'AFL':
+            values.append('Hojuela')
+        elif trad[1] == 'ALV':
+            values.append('Vivo')
+        elif trad[1] == 'True':
+            values.append('Si')
+        elif trad[1] == 'False':
+            values.append('No')
+        elif trad[1] == '0.000':
+            values.append('Sin datos')
+        elif trad[1] == '0':
+            values.append('Sin datos')
+        else:
+            values.append(trad[1])
+    return values
