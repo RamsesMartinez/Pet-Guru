@@ -19,16 +19,17 @@
       <p class="py-2 h4">Calificacón: <i class="fa fa-star" aria-hidden="true"></i></p>
     </div>
     <div id="cuestion" class="py-5 d-flex flex-column justify-content-center align-items-center">
-      <div class="alert alert-success w-100 px-3 py-5" role="alert">
+      <div class="alert alert-dark w-100 px-3 py-5" role="alert">
         <div class="row">
           <div class="col-sm-4 col-md-4">
             <h2 class="alert-heading text-center mb-4">Datos clínicos.</h2>
             <p>Especie: {{ instance.get_specie_display }}</p>
-            <p>{% for field, value in values.items %}
-               {{ field }} : {{ value }}
+            <div class="">{% for field, value in values.items %}
+               <div class="d-inline text-dark">{{ field }} :</div>
+               <div class="d-inline font-weight-bold">{{ value }}</div> 
               <br>
             {% endfor %}
-          </p>
+          </div>
         </div>
         <hr>
           <div class="col-sm-12 col-md-8 justify-content-center align-self-center">

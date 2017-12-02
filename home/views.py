@@ -885,6 +885,10 @@ def translate(objspecie):
             values.append('Si')
         elif trad[1] == 'False':
             values.append('No')
+        elif trad[1] == '0.000':
+            values.append('Sin datos')
+        elif trad[1] == '0':
+            values.append('Sin datos')
         else:
             values.append(trad[1])
     return values
