@@ -82,9 +82,6 @@ def question(request, id=None):
     for trad in objspecie.get_fields():
         values.append(trad[1])
     dic = dict(zip(objspecie.FIELDS, values))
-    for field, value in dic.items():
-        print(field+" "+value)
-
     formMessage = MessageForm()
 
 
@@ -109,7 +106,6 @@ def question(request, id=None):
             template = get_template('studentmail.html')
             html_content = template.render(new_context)
             emails = instance.user_question.email
-            print('alumno')
             sendstudentmail(request, emails, html_content)
         return None
 
@@ -135,14 +131,11 @@ def question(request, id=None):
         else:
             calif = request.POST.get('calif')        
             stat = request.POST.get('changeto')
-            print(calif)
-            print(stat)
-            formq = BaseForm(request.POST, instance=instance)
-            formq.calification = calif
-            formq.status = stat
-            if formq.is_valid():
-                formq.save()
-            return HttpResponseRedirect('/pregunta/'+id)
+            if stat == 'CL':
+                instance.calification = calif
+                instance.status = stat
+                instance.save()
+                return HttpResponseRedirect('/pregunta/'+id)
 
 
     context = {
@@ -574,10 +567,10 @@ def user(request):
         if request.method == 'POST':
             if request.POST['type'] == 'changestate':
                 pk = request.POST['pk']
-                change = Question.objects.get(pk=pk);
+                change = Question.objects.get(pk=pk)
                 change.status = 'RP'
                 change.user_response = request.user
-                change.save();
+                change.save()
                 
         avg = get_avg(request.user)
 
