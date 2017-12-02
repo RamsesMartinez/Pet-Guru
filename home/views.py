@@ -137,7 +137,11 @@ def question(request, id=None):
             stat = request.POST.get('changeto')
             print(calif)
             print(stat)
-
+            formq = BaseForm(request.POST, instance=instance)
+            formq.calification = calif
+            formq.status = stat
+            if formq.is_valid():
+                formq.save()
             return HttpResponseRedirect('/pregunta/'+id)
 
 
