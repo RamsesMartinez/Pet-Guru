@@ -169,9 +169,9 @@ class Specie(models.Model):
 
 
 class Bovine(Specie):
+    DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
     FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'Frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal')
-    DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -189,9 +189,9 @@ class Bovine(Specie):
 
 
 class Goat(Specie):
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
     FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Fin zootécnico', 'Sistema de produccion', 'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal', 'Reflejo tusígeno')
-    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -307,10 +307,10 @@ class Cat(Specie):
 
 
 class Porcine(Specie):
+    DEFAULT_IMAGE = 'https://www.elisagenie.com/wp-content/uploads/2017/03/Porcine-Pig-ELISA-Assay-1.jpg'
     FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Sistema de produccion', 'Curso de padecimiento en dias',
                                 'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Condicion corporal'
                                 , 'Actitude', 'color')
-    DEFAULT_IMAGE = 'https://www.elisagenie.com/wp-content/uploads/2017/03/Porcine-Pig-ELISA-Assay-1.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
     curse = models.CharField(max_length=60, null=True)
@@ -627,7 +627,9 @@ class Aquatic(models.Model):
               'Tipo de estanque','Densidad','Biomasa', 'Presencia de sistema de aeracion','Presencia de sistema de recirculación de agua',
               'Tipo de aireador', 'Recambio diario de agua', 'Fecha de siembra', 'Temperatura (6 am)', 'Temperatura (3 pm)', 'pH (6 am)', 'pH (3 pm)',
               'Nitritos (NO2)','Amonio (NH4)','Amoniaco (NH3)','Transparencia','Mortandad acumulada','Inicio de la mortandad','Posición de los peces en la columna de agua',
-              'Coloración del cuerpo de los peces','','','',)
+              'Coloración del cuerpo de los peces','Tipo de movimiento de los peces en el agua','Inapetencia','Tipo de alimentación',
+              'Cantidad de alimento administrado por día','Coloración','Vientre abultado','Exoftalmia','Petequias en base de aletas',
+              'Aletas desilachadas','Úlceras','Llagas en piel','Estructuras algodonosas','Necrosis en capa epidérmica','Opacidad ocular')
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
