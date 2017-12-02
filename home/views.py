@@ -9,9 +9,9 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.sites.shortcuts import get_current_site
-
+from django.http import HttpResponseRedirect
 from .forms import *
-
+from django.utils.datastructures import MultiValueDictKeyError
 from .models import Question
 from .models import Specie
 from .models import ImageQuestion
@@ -48,10 +48,10 @@ def index(request):
 
     if request.method == 'POST':
         user_log = request.POST['Usuario']
-        pass_log = request.POST['Contraseña']        
-        user_auth = authenticate(request, username=user_log, password=pass_log)
+        pass_log = request.POST['Contraseña']
+        user_auth = authenticate(request,username=user_log,password=pass_log)
 
-        if user_auth is not None:            
+        if user_auth is not None:
             login_django(request, user_auth)
             return redirect('home:usuario')
         else:
@@ -78,19 +78,18 @@ def question(request, id=None):
     label = id
     objspecie = instance.get_obj_specie()
     document = Document.objects.filter(question=instance.id).first()
-    values = []
-    for trad in objspecie.get_fields():
-        values.append(trad[1])
+    values = translate(objspecie)
     dic = dict(zip(objspecie.FIELDS, values))
-    for field, value in dic.items():
-        print(field+" "+value)
+    formMessage = MessageForm()
 
-    def send_comment(handler):
+
+
+    def send_comment(handler, message):
         if handler == instance.user_question.username:
             new_context = {
-            'title': instance.title,
-            'consult': message,
-            'url': get_current_site(request).domain,
+                'title': instance.title,
+                'consult': message,
+                'url': get_current_site(request).domain,
             }
             template = get_template('profesormail.html')
             html_content = template.render(new_context)
@@ -98,20 +97,48 @@ def question(request, id=None):
             sendprofmail(request, emails, html_content)
         else:
             new_context = {
-            'title': instance.title,
-            'consult': message,
-            'url': get_current_site(request).domain,
+                'title': instance.title,
+                'consult': message,
+                'url': get_current_site(request).domain,
             }
             template = get_template('studentmail.html')
             html_content = template.render(new_context)
             emails = instance.user_question.email
-            print('alumno')
             sendstudentmail(request, emails, html_content)
         return None
 
 
-    context = {        
-        'label': id,
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_message = Message.objects.create(
+                question=instance,
+                handle=request.user.username,
+                message=request.POST['message'],
+                image=None,
+                document=None)
+            send_comment(new_message.handle, new_message.message)
+            if len(request.FILES) != 0:                
+                if 'image' in request.FILES:
+                    new_message.image = request.FILES['image']
+                    new_message.save()
+                if 'document' in request.FILES:
+                    new_message.document = request.FILES['document']
+                    new_message.save()
+        else:
+            calif = request.POST.get('calif')        
+            stat = request.POST.get('changeto')
+            if stat == 'CL':
+                instance.calification = calif
+                instance.status = stat
+                instance.save()
+                return HttpResponseRedirect('/pregunta/'+id)
+
+
+    context = {
+        'formMessage': formMessage,
+        'label': label,
         'images': image,
         'titulo': instance.title,
         'instance': instance,
@@ -121,13 +148,6 @@ def question(request, id=None):
         'values': dic,
     }
 
-    if request.method == 'POST':                
-        message = request.POST.get('message')        
-        handler = request.POST.get('handler')
-        new_mess = Message.objects.create(question=instance, handle=handler, message=message)
-        send_comment(handler)
-        new_mess.save()
-        
 
     return render(request, template, context)
 
@@ -188,7 +208,7 @@ def user(request):
             articles = paginator.page(paginator.num_pages)
 
         if request.method == 'POST':
-            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())            
+            formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())
 
             def save_images(base):
                 # Save images
@@ -542,22 +562,19 @@ def user(request):
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
 
-        if request.method == 'POST':                 
+        if request.method == 'POST':
             if request.POST['type'] == 'changestate':
                 pk = request.POST['pk']
-                change = Question.objects.get(pk=pk);
+                change = Question.objects.get(pk=pk)
                 change.status = 'RP'
                 change.user_response = request.user
-                change.save();
-
-
-        avg = get_avg(request.user)
+                change.save()
 
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
             'articles': article,
-            'avg': avg,
+            'avg': get_avg(request.user),
         }
         return render(request, template, context)
 
@@ -598,7 +615,7 @@ def cards(request):
             article = paginator.page(1)
         except EmptyPage:
             article = paginator.page(paginator.num_pages)
-        
+
         context = {
             'title': "Profesional " + request.user.username,
             'articles': article,
@@ -665,9 +682,7 @@ def search(request, label):
 
 
 def sendmailform(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
+    if email_user:
         fromaddr = "itzli2000@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
@@ -697,14 +712,9 @@ def sendmailform(request, email_user, html_content):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
-
-
 
 def sendstudentmail(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
+    if email_user:
         fromaddr = "itzli2000@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
@@ -720,13 +730,9 @@ def sendstudentmail(request, email_user, html_content):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
-
 
 def sendprofmail(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
+    if email_user:
         fromaddr = "itzli2000@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
@@ -742,7 +748,6 @@ def sendprofmail(request, email_user, html_content):
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
 
 
 def mail(request):
@@ -751,6 +756,7 @@ def mail(request):
         'title': "PetGurú - mail",
     }
     return render(request, template, context)
+
 
 def get_avg(user):
     qualifications = []
@@ -765,3 +771,132 @@ def get_avg(user):
             return 0
     else:
         return 'Aun no tienes preguntas contestadas'
+
+def translate(objspecie):
+    values = []
+    for trad in objspecie.get_fields():
+        if trad[1] == 'ML':
+            values.append('Macho')
+        elif trad[1] == 'FM':
+            values.append('Hembra')
+        elif trad[1] == 'YS':
+            values.append('Si')
+        elif trad[1] == 'NO':
+            values.append('No')
+        elif trad[1] == 'LC':
+            values.append('Lactante')
+        elif trad[1] == 'PG':
+            values.append('Gestante')
+        elif trad[1] == 'IC':
+            values.append('Crecimiento')
+        elif trad[1] == 'FT':
+            values.append('Engorda')
+        elif trad[1] == 'RS':
+            values.append('Rústica')
+        elif trad[1] == 'WL':
+            values.append('Silvestre')
+        elif trad[1] == 'TC':
+            values.append('Tecnificada Lamgstroth')
+        elif trad[1] == 'JM':
+            values.append('Tecnificada Jumbo')
+        elif trad[1] == 'BC':
+            values.append('Larvas de color normal')
+        elif trad[1] == 'PR':
+            values.append('Perforadas')
+        elif trad[1] == 'FT':
+            values.append('Aspecto grasoso')
+        elif trad[1] == 'APR':
+            values.append('Opérculos raídos')
+        elif trad[1] == 'NV':
+            values.append('No Verificado')
+        elif trad[1] == 'ST':
+            values.append('Abdomen distendido')
+        elif trad[1] == 'SL':
+            values.append('Lentas')
+        elif trad[1] == 'CH':
+            values.append('Pérdida del instinto de picar')
+        elif trad[1] == 'LP':
+            values.append('Alopécicas')
+        elif trad[1] == 'SH':
+            values.append('Brillosas')
+        elif trad[1] == 'PS':
+            values.append('Presente')
+        elif trad[1] == 'NT':
+            values.append('No presente')
+        elif trad[1] == 'YN':
+            values.append('Joven')
+        elif trad[1] == 'DL':
+            values.append('Adulto')
+        elif trad[1] == 'CG':
+            values.append('Jaula')
+        elif trad[1] == 'FR':
+            values.append('Libre')
+        elif trad[1] == 'HH':
+            values.append('Gallinero')
+        elif trad[1] == 'CM':
+            values.append('Compactas')
+        elif trad[1] == 'LQ':
+            values.append('Líquidas')
+        elif trad[1] == 'GR':
+            values.append('Verdes')
+        elif trad[1] == 'WH':
+            values.append('Blancas')
+        elif trad[1] == 'TH':
+            values.append('Otros')
+        elif trad[1] == 'SC':
+            values.append('Escamosas')
+        elif trad[1] == 'FL':
+            values.append('Enrojecidas')
+        elif trad[1] == 'RP':
+            values.append('Reproductores')
+        elif trad[1] == 'RN':
+            values.append('Ornamentales')
+        elif trad[1] == 'ACM':
+            values.append('Cemento')
+        elif trad[1] == 'GM':
+            values.append('Geomembrana')
+        elif trad[1] == 'FC':
+            values.append('Jaula flotante')
+        elif trad[1] == 'ATR':
+            values.append('Turbina')
+        elif trad[1] == 'APR':
+            values.append('Hélice')
+        elif trad[1] == 'APL':
+            values.append('Paleta')
+        elif trad[1] == 'AVR':
+            values.append('Flujo vertical')
+        elif trad[1] == 'BT':
+            values.append('Fondo')
+        elif trad[1] == 'MD':
+            values.append('Medio')
+        elif trad[1] == 'SR':
+            values.append('Superficie')
+        elif trad[1] == 'NR':
+            values.append('Normal')
+        elif trad[1] == 'LT':
+            values.append('Letárgico')
+        elif trad[1] == 'RT':
+            values.append('Errático')
+        elif trad[1] == 'SP':
+            values.append('En espiral')
+        elif trad[1] == 'RB':
+            values.append('Se frotan con la superficie')
+        elif trad[1] == 'DR':
+            values.append('Obscuro')
+        elif trad[1] == 'APL':
+            values.append('Pellet')
+        elif trad[1] == 'AFL':
+            values.append('Hojuela')
+        elif trad[1] == 'ALV':
+            values.append('Vivo')
+        elif trad[1] == 'True':
+            values.append('Si')
+        elif trad[1] == 'False':
+            values.append('No')
+        elif trad[1] == '0.000':
+            values.append('Sin datos')
+        elif trad[1] == '0':
+            values.append('Sin datos')
+        else:
+            values.append(trad[1])
+    return values

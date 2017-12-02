@@ -6,6 +6,10 @@ from django.core.exceptions import ValidationError
 from .models import *
 from users.models import User
 
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ('message','document','image',)
 
 class LogInForm(forms.Form):
     Usuario = forms.CharField(max_length=20)
@@ -52,7 +56,7 @@ class BaseForm(forms.ModelForm):
         labels = {
             'title': 'Título de la consulta: ',
             'description': 'Descripción de la consulta: ',
-            'specie':'Especie',
+            'specie': 'Especie',
             'user_question': 'Usuario',
         }
 

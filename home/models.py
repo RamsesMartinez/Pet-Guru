@@ -22,7 +22,7 @@ class Question(models.Model):
     STATUS = (
         (OPEN, 'Abierta'),
         (CLOSE, 'Cerrada'),
-        (RESPONDING, 'Respondiendo'), 
+        (RESPONDING, 'Respondiendo'),
     )
 
     BOVINO = 'BV'
@@ -126,12 +126,13 @@ class ImageQuestion(models.Model):
     def __str__(self):
         return '%s' % self.id
 
-
 class Message(models.Model):    
     question = models.ForeignKey(Question, default=None,related_name='messages')
     handle = models.TextField()
-    message = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
+    message = models.TextField(max_length=200)
+    image = models.ImageField(upload_to='image_messages/', blank=True, default=None)
+    document = models.FileField(upload_to='documents/', blank=True, default=None)
 
     def __unicode__(self):
         return '[{timestamp}] {handle}: {message}'.format(**self.as_dict())
@@ -139,10 +140,6 @@ class Message(models.Model):
     @property
     def formatted_timestamp(self):
         return self.timestamp.strftime("%m-%d-%Y %H:%I%p")
-    
-    def as_dict(self):
-        return {'handle': self.handle, 'message': self.message, 'timestamp': self.formatted_timestamp}
-
 
 
 class Specie(models.Model):
@@ -169,9 +166,9 @@ class Specie(models.Model):
 
 
 class Bovine(Specie):
+    DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
     FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'Frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal')
-    DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
@@ -189,9 +186,9 @@ class Bovine(Specie):
 
 
 class Goat(Specie):
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
     FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Fin zootécnico', 'Sistema de produccion', 'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal', 'Reflejo tusígeno')
-    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     zootechnical = models.CharField(max_length=50, null=True)
     production_system = models.CharField(max_length=30, null=True)
@@ -307,10 +304,10 @@ class Cat(Specie):
 
 
 class Porcine(Specie):
+    DEFAULT_IMAGE = 'https://www.elisagenie.com/wp-content/uploads/2017/03/Porcine-Pig-ELISA-Assay-1.jpg'
     FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Sistema de produccion', 'Curso de padecimiento en dias',
                                 'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Condicion corporal'
                                 , 'Actitude', 'color')
-    DEFAULT_IMAGE = 'https://www.elisagenie.com/wp-content/uploads/2017/03/Porcine-Pig-ELISA-Assay-1.jpg'
     physiological_stage = models.CharField(max_length=30, null=True)
     production_system = models.CharField(max_length=30, null=True)
     curse = models.CharField(max_length=60, null=True)
@@ -382,7 +379,7 @@ class Bee(models.Model):
     )
 
     DEFAULT_IMAGE = 'https://media.mnn.com/assets/images/2017/07/HoneyBeeSittingOnAFlower.jpg.838x0_q80.jpg'
-    FIELDS = ('id','Pregunta', 'Especie', 'Tipo de colonia', 'Revision de colmena', 'Presnecia de reina',
+    FIELDS = ('id','Pregunta', 'Especie', 'Tipo de colonia', 'Revision de colmena', 'Presencia de reina',
               'Signos de enfermedad', 'Cría', 'Abeja adulta', 'Número de bastidores cubiertos por abejas en la cámara de cría y en las alzas',
               'Presencia de huevos', 'Cantidad de huevos', 'Observacion', 'Manchas de heces', 'Pedazos de larvas',
               'Presencia de abejas muertas', 'Presencia de comida en bastidores', 'Numero de bastidores')
@@ -415,7 +412,7 @@ class Bee(models.Model):
 
 class Bird(models.Model):
     YOUNG = 'YN'
-    ADULT = 'SL'
+    ADULT = 'DL'
     AGE = (
         (YOUNG, 'Joven'),
         (ADULT, 'Adulto'),
@@ -477,6 +474,11 @@ class Bird(models.Model):
     )
 
     DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg'
+    FIELDS = ('id', 'Pregunta', 'Tipo de animal', 'fin zootécnico', 'Edad', 'Edad semanas', 'Edad meses',
+              'Lugar de encierro', 'Cantidad de animales', 'Convivencia con otras aves', 'Origen del agua', 'Morbilidad'
+              , 'Mortalidad', 'Fecha de inicio de los signos', 'Consumo de agua', 'Consumo de alimentos',
+              'Calendario de vacunación', 'Defecacion', 'condicion corporal', 'Condicion del plumaje',
+              'Condicion de las patas', 'Frecuencia respiratoria', 'Deshidratación', 'Actitude')
     question = models.OneToOneField(Question, default='')
     type_animal = models.CharField(max_length=60)
     zootechnical_purpose = models.CharField(max_length=30)
@@ -489,7 +491,7 @@ class Bird(models.Model):
     origin_water = models.CharField(max_length=30)
     morbidity = models.IntegerField()
     mortality = models.IntegerField()
-    date_signs = models.IntegerField()
+    date_signs = models.CharField(max_length=10)
     water = models.CharField(max_length=3, choices=DRINK)
     eat = models.CharField(max_length=3, choices=FOOD)
     vaccine = models.CharField(max_length=30)
@@ -510,6 +512,10 @@ class Bird(models.Model):
 
 class Wild(models.Model):
     DEFAULT_IMAGE = 'https://www.redjurista.com/AppFolders/Images/News/IMAGENES/agricultura/animales/ani1.JPG'
+    FIELDS = ('Pregunta', 'Especie', 'Fin zootécnico', 'Condicion medio ambientales', 'Alimentación',
+              'Antecedentes patológicos/hereditarios','Evolución de la enfermedad actual', 'Frecuencia cardiaca',
+              'Frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar', 'Color de mucosa', 'Linfonodos',
+              'Movimientos Ruminales')
     question = models.OneToOneField(Question, default='')
     specie = models.CharField(max_length=30)
     zootechnical = models.CharField(max_length=50)
@@ -534,7 +540,7 @@ class Wild(models.Model):
 
 class Aquatic(models.Model):
     AQRUSTIC = 'RS'
-    AQCEMENT = 'CM'
+    AQCEMENT = 'ACM'
     AQGEOMEMBRANE = 'GM'
     AQFLOATINGCAGE = 'FC'
     AQOTHER = 'TH'
@@ -547,10 +553,10 @@ class Aquatic(models.Model):
         (AQOTHER, 'Otro'),
     )
 
-    TURBINE = 'TR'
-    PROPELLER = 'PR'
-    PALETTE = 'PL'
-    VERTICAL = 'VR'
+    TURBINE = 'ATR'
+    PROPELLER = 'APR'
+    PALETTE = 'APL'
+    VERTICAL = 'AVR'
     AEREATOROTHER = 'TH'
 
     AEREATOR = (
@@ -593,9 +599,9 @@ class Aquatic(models.Model):
         (FISHDARK, 'Obscuro'),
     )
 
-    PELLET = 'PL'
-    FLAKE = 'FL'
-    LIVE = 'LV'
+    PELLET = 'APL'
+    FLAKE = 'AFL'
+    LIVE = 'ALV'
     FDOTHER = 'TH'
 
     FOODTYPE = (
@@ -614,6 +620,13 @@ class Aquatic(models.Model):
     NO = 'NO'
 
     DEFAULT_IMAGE = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/211/135/136625206.jpg'
+    FIELDS = ('Pregunta', 'Grupo genético', 'Fin zootécnico', 'Edad', 'Peso promedio de la población',
+              'Tipo de estanque','Densidad','Biomasa', 'Presencia de sistema de aeracion','Presencia de sistema de recirculación de agua',
+              'Tipo de aireador', 'Recambio diario de agua', 'Fecha de siembra', 'Temperatura (6 am)', 'Temperatura (3 pm)', 'pH (6 am)', 'pH (3 pm)',
+              'Nitritos (NO2)','Amonio (NH4)','Amoniaco (NH3)','Transparencia','Mortandad acumulada','Inicio de la mortandad','Posición de los peces en la columna de agua',
+              'Coloración del cuerpo de los peces','Tipo de movimiento de los peces en el agua','Inapetencia','Tipo de alimentación',
+              'Cantidad de alimento administrado por día','Coloración','Vientre abultado','Exoftalmia','Petequias en base de aletas',
+              'Aletas desilachadas','Úlceras','Llagas en piel','Estructuras algodonosas','Necrosis en capa epidérmica','Opacidad ocular')
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
