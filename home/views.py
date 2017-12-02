@@ -571,14 +571,12 @@ def user(request):
                 change.status = 'RP'
                 change.user_response = request.user
                 change.save()
-                
-        avg = get_avg(request.user)
 
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
             'articles': article,
-            'avg': avg,
+            'avg': get_avg(request.user),
         }
         return render(request, template, context)
 
