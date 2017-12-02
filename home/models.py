@@ -623,7 +623,11 @@ class Aquatic(models.Model):
     NO = 'NO'
 
     DEFAULT_IMAGE = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/211/135/136625206.jpg'
-
+    FIELDS = ('Pregunta', 'Grupo genético', 'Fin zootécnico', 'Edad', 'Peso promedio de la población',
+              'Tipo de estanque','Densidad','Biomasa', 'Presencia de sistema de aeracion','Presencia de sistema de recirculación de agua',
+              'Tipo de aireador', 'Recambio diario de agua', 'Fecha de siembra', 'Temperatura (6 am)', 'Temperatura (3 pm)', 'pH (6 am)', 'pH (3 pm)',
+              'Nitritos (NO2)','Amonio (NH4)','Amoniaco (NH3)','Transparencia','Mortandad acumulada','Inicio de la mortandad','Posición de los peces en la columna de agua',
+              'Coloración del cuerpo de los peces','','','',)
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
