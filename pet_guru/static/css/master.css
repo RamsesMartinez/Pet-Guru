@@ -210,7 +210,7 @@ card-btn {
 
 .card-container .card {
   width: 100%;
-  max-width: 650px; }
+  max-width: 530px; }
 
 #cuestionContainer {
   min-height: 100vh; }
@@ -278,25 +278,34 @@ p.calif {
 #questionField {
   max-width: 300px; }
 
-#chatContainer {  
+#chatContainer {
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   overflow: scroll; }
 
 #chatform {
-  height: inherit;
-  overflow-y: scroll; 
-}
+  min-height: 200px;
+  max-height: 350px;
+  overflow-y: scroll; }
 
 #chatmessages {
-  min-height: 80%;  
+  min-height: 80%;
+  overflow-y: scroll;
   position: relative;
-  margin-bottom: 100px; 
-}
+  margin-bottom: 100px; }
 
 #message {
   max-width: 300px;
   min-width: 250px; }
+
+.sendChat {
+  bottom: 0;
+  right: 30px;
+  width: inherit;
+  position: absolute !important;
+  height: 70px !important;
+  background-color: #fff; }
 
 #userTable td, th {
   border: 1px solid #dddddd;
