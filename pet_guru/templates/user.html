@@ -80,7 +80,7 @@
                           {% if solved.status == 'OP' %}
                           <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success mail-btn">En espera</button> </a>
                           {% elif solved.status == 'RP' %}
-                          <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Activa</button></a>
+                          <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Contestando</button></a>
                           {% else %}
                           <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger mail-btn" style="cursor: default">Cerrada</button></a>
                           {% endif %}
