@@ -79,19 +79,19 @@
                       </thead>
                       <tbody>
                         {% for solved in solveds %}
-                        {% if solved.specie == user.speciality %}  
+                        {% if solved.specie == user.speciality and solved.user_response == request.user or solved.user_response.pk == 1 and solved.specie == user.speciality %}  
                         <tr>
                           <td>
                             <a href="{{ solved.get_absolute_url }}" class="pl-2" style="color:#000000; text-decoration:none;">{{ solved.title }}</a>
                           </td>
-                          <td class="text-center">
+                          <td class="text-center">                          
                             {% if solved.status == 'OP' %}
-                            <a href="{{ solved.get_absolute_url }}"><button id="{{solved.pk}}" class="btn btn-success mail-btn change_state">Tomar pregunta</button> </a>
+                            <a href="{{ solved.get_absolute_url }}"><button class="btn btn-success mail-btn change_state">Ver pregunta</button> </a>                            
                             {% elif solved.status == 'RP' %}
-                            <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Activa</button></a>
+                            <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Contestando</button></a>                            
                             {% else %}
                             <a href="{{ solved.get_absolute_url }}"><button class="btn btn-danger mail-btn" style="cursor: default">Cerrada</button></a>
-                            {% endif %}
+                            {% endif %}                            
                           </td>
                           <td  class="text-center">
                             {{ solved.date }}
@@ -106,7 +106,7 @@
                   <div id="userCards" class="col questContainer">
                     <div class="row d-flex flex-row justify-content-start">
                       {% for solved in solveds %}
-                      {% if solved.specie == user.speciality %} 
+                      {% if solved.specie == user.speciality and solved.user_response == request.user or solved.user_response.pk == 1 and solved.specie == user.speciality %} 
                       <div class="card articleCard">
                         <div class="card-body d-flex flex-column justify-content-lg-around">
                           <div class="card-title card-banner">
@@ -115,7 +115,7 @@
                           <h4 class="card-title">{{ solved.title }}</h4>
                           <p class="card-text text-truncate">{{ solved.description }}.</p>
                           {% if solved.status == 'OP' %}
-                          <a href="{{ solved.get_absolute_url }}"> <button id="{{solved.pk}}" class="btn btn-success mail-btn change_state">En espera</button> </a>
+                          <a href="{{ solved.get_absolute_url }}"> <button class="btn btn-success mail-btn change_state">Ver pregunta</button> </a>
                           {% elif solved.status == 'RP' %}
                           <a href="{{ solved.get_absolute_url }}"><button class="btn btn-warning mail-btn" style="cursor: default">Contestando</button></a>
                           {% else %}
@@ -127,7 +127,6 @@
                       {% endfor %}
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
