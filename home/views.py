@@ -105,9 +105,16 @@ def question(request, id=None):
             sendstudentmail(request, emails, html_content)
         return None
 
-
-
     if request.method == 'POST':
+
+        if 'type' in request.POST:
+            if request.POST['type'] == 'changestate':
+                pk = request.POST['pk']
+                change = Question.objects.get(pk=pk)
+                change.status = 'RP'
+                change.user_response = request.user
+                change.save()
+
         form = MessageForm(request.POST, request.FILES)
         if form.is_valid():
             new_message = Message.objects.create(
@@ -117,7 +124,7 @@ def question(request, id=None):
                 image=None,
                 document=None)
             send_comment(new_message.handle, new_message.message)
-            if len(request.FILES) != 0:                
+            if len(request.FILES) != 0:
                 if 'image' in request.FILES:
                     new_message.image = request.FILES['image']
                     new_message.save()
@@ -125,7 +132,7 @@ def question(request, id=None):
                     new_message.document = request.FILES['document']
                     new_message.save()
         else:
-            calif = request.POST.get('calif')        
+            calif = request.POST.get('calif')
             stat = request.POST.get('changeto')
             if stat == 'CL':
                 instance.calification = calif
@@ -569,14 +576,6 @@ def user(request):
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
 
-        if request.method == 'POST':
-            if request.POST['type'] == 'changestate':
-                pk = request.POST['pk']
-                change = Question.objects.get(pk=pk)
-                change.status = 'RP'
-                change.user_response = request.user
-                change.save()
-
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
@@ -587,7 +586,6 @@ def user(request):
 
     elif request.user.rol == 'AD':
         return redirect('home:register')
-
 
 
 @login_required(login_url='home:inicio')
@@ -631,7 +629,6 @@ def cards(request):
 
     elif request.user.rol == 'AD':
         return redirect('home:register')
-
 
 
 @login_required(login_url='home:inicio')
@@ -690,7 +687,7 @@ def search(request, label):
 
 def sendmailform(request, email_user, html_content):
     if email_user:
-        fromaddr = "itzli2000@gmail.com"
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -714,7 +711,7 @@ def sendmailform(request, email_user, html_content):
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
@@ -722,7 +719,7 @@ def sendmailform(request, email_user, html_content):
 
 def sendstudentmail(request, email_user, html_content):
     if email_user:
-        fromaddr = "itzli2000@gmail.com"
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -732,7 +729,7 @@ def sendstudentmail(request, email_user, html_content):
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
@@ -740,7 +737,7 @@ def sendstudentmail(request, email_user, html_content):
 
 def sendprofmail(request, email_user, html_content):
     if email_user:
-        fromaddr = "itzli2000@gmail.com"
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -750,7 +747,7 @@ def sendprofmail(request, email_user, html_content):
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
@@ -758,7 +755,7 @@ def sendprofmail(request, email_user, html_content):
 
 def sendclosemail(request, email_user, html_content):
     if email_user:
-        fromaddr = "itzli2000@gmail.com"
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -768,11 +765,10 @@ def sendclosemail(request, email_user, html_content):
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
-
 
 
 def mail(request):
@@ -796,6 +792,7 @@ def get_avg(user):
             return 0
     else:
         return 'Aun no tienes preguntas contestadas'
+
 
 def translate(objspecie):
     values = []
