@@ -90,13 +90,18 @@ def question(request, id=None):
                 message=request.POST['message'],
                 image=None,
                 document=None)
-            if len(request.FILES) != 0:                
+            if len(request.FILES) != 0:
                 if 'image' in request.FILES:
                     new_message.image = request.FILES['image']
+                    send_comment(handler)
                     new_message.save()
                 if 'document' in request.FILES:
                     new_message.document = request.FILES['document']
+                    send_comment(handler)
                     new_message.save()
+            else:
+                send_comment(handler)
+                new_message.save()
 
             return HttpResponseRedirect('/pregunta/'+id)
 
@@ -135,13 +140,6 @@ def question(request, id=None):
         'specie': objspecie,
         'document': document,
     }
-
-    if request.method == 'POST':
-        message = request.POST.get('message')
-        handler = request.POST.get('handler')
-        new_mess = Message.objects.create(question=instance, handle=handler, message=message)
-        send_comment(handler)
-        new_mess.save()
 
 
     return render(request, template, context)
