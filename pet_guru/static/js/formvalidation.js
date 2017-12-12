@@ -18,10 +18,16 @@ function changecowage() {
   if (cagecheck.checked) {
     cage.value="0000";
     $('#cowage').prop("readonly", true);
+    $('#cowday').prop("disabled", true);
+    $('#cowmonth').prop("disabled", true);
+    $('#cowyear').prop("disabled", true);
   }
   else {
     cage.value="";
     $('#cowage').prop("readonly", false);
+    $('#cowday').prop("disabled", false);
+    $('#cowmonth').prop("disabled", false);
+    $('#cowyear').prop("disabled", false);
   }
 }
 function changecowweight() {
@@ -154,10 +160,16 @@ function porchangeage() {
   if (pagecheck.checked) {
     page.value="0000";
     $('#porage').prop("readonly", true);
+    $('#porday').prop("disabled", true);
+    $('#pormonth').prop("disabled", true);
+    $('#poryear').prop("disabled", true);
   }
   else {
     page.value="";
     $('#porage').prop("readonly", false);
+    $('#porday').prop("disabled", false);
+    $('#pormonth').prop("disabled", false);
+    $('#poryear').prop("disabled", false);
   }
 }
 function porchangeweight() {
@@ -302,10 +314,16 @@ function changehorseage() {
   if (hragecheck.checked) {
     hrage.value="0000";
     $('#horage').prop("readonly", true);
+    $('#horseday').prop("disabled", true);
+    $('#horsemonth').prop("disabled", true);
+    $('#horseyear').prop("disabled", true);
   }
   else {
     hrage.value="";
     $('#horage').prop("readonly", false);
+    $('#horseday').prop("disabled", false);
+    $('#horsemonth').prop("disabled", false);
+    $('#horseyear').prop("disabled", false);
   }
 }
 function changehorseweight() {
@@ -426,10 +444,16 @@ function ovichangeage() {
   if (pagecheck.checked) {
     page.value="0000";
     $('#oviage').prop("readonly", true);
+    $('#oviday').prop("disabled", true);
+    $('#ovimonth').prop("disabled", true);
+    $('#oviyear').prop("disabled", true);
   }
   else {
     page.value="";
     $('#oviage').prop("readonly", false);
+    $('#oviday').prop("disabled", false);
+    $('#ovimonth').prop("disabled", false);
+    $('#oviyear').prop("disabled", false);
   }
 }
 function ovichangeweight() {
@@ -586,10 +610,16 @@ function goatchangeage() {
   if (pagecheck.checked) {
     page.value="0000";
     $('#goatage').prop("readonly", true);
+    $('#goatday').prop("disabled", true);
+    $('#goatmonth').prop("disabled", true);
+    $('#goatyear').prop("disabled", true);
   }
   else {
     page.value="";
     $('#goatage').prop("readonly", false);
+    $('#goatday').prop("disabled", false);
+    $('#goatmonth').prop("disabled", false);
+    $('#goatyear').prop("disabled", false);
   }
 }
 function goatchangeweight() {
@@ -770,10 +800,16 @@ function rabchangeage() {
   if (pagecheck.checked) {
     page.value="0000";
     $('#rabage').prop("readonly", true);
+    $('#rabday').prop("disabled", true);
+    $('#rabmonth').prop("disabled", true);
+    $('#rabyear').prop("disabled", true);
   }
   else {
     page.value="";
     $('#rabage').prop("readonly", false);
+    $('#rabday').prop("disabled", false);
+    $('#rabmonth').prop("disabled", false);
+    $('#rabyear').prop("disabled", false);
   }
 }
 function rabchangeweight() {
@@ -1143,129 +1179,6 @@ function birdchangeatt() {
 
 
 
-// Horse form validation
-function changehorserace() {
-  var hrrace = document.getElementById('horrace');
-  var hrracecheck = document.getElementById('horracec');
-  if (hrracecheck.checked) {
-    hrrace.value="Sin datos";
-    $('#horrace').prop("readonly", true);
-  }
-  else {
-    hrrace.value="";
-    $('#horrace').prop("readonly", false);
-  }
-}
-function changehorseage() {
-  var hrage = document.getElementById('horage');
-  var hragecheck = document.getElementById('horagec');
-  if (hragecheck.checked) {
-    hrage.value="0000";
-    $('#horage').prop("readonly", true);
-  }
-  else {
-    hrage.value="";
-    $('#horage').prop("readonly", false);
-  }
-}
-function changehorseweight() {
-  var hrweight = document.getElementById('horweight');
-  var hrweightcheck = document.getElementById('horweightc');
-  if (hrweightcheck.checked) {
-    hrweight.value="0000";
-    $('#horweight').prop("readonly", true);
-  }
-  else {
-    hrweight.value="";
-    $('#horweight').prop("readonly", false);
-  }
-}
-function changehorseheart() {
-  var hrheart = document.getElementById('horheart');
-  var hrheartcheck = document.getElementById('horheartc');
-  if (hrheartcheck.checked) {
-    hrheart.value="0000";
-    $('#horheart').prop("readonly", true);
-  }
-  else {
-    hrheart.value="";
-    $('#horheart').prop("readonly", false);
-  }
-}
-function changehorseresp() {
-  var hrresp = document.getElementById('horresp');
-  var hrrespcheck = document.getElementById('horrespc');
-  if (hrrespcheck.checked) {
-    hrresp.value="0000";
-    $('#horresp').prop("readonly", true);
-  }
-  else {
-    hrresp.value="";
-    $('#horresp').prop("readonly", false);
-  }
-}
-function changehorsetemp() {
-  var hrtemp = document.getElementById('hortemp');
-  var hrtempcheck = document.getElementById('hortempc');
-  if (hrtempcheck.checked) {
-    hrtemp.value="0000";
-    $('#hortemp').prop("readonly", true);
-  }
-  else {
-    hrtemp.value="";
-    $('#hortemp').prop("readonly", false);
-  }
-}
-function changehorsecap() {
-  var hrcap = document.getElementById('horcapilar');
-  var hrcapcheck = document.getElementById('horcapc');
-  if (hrcapcheck.checked) {
-    hrcap.value="0000";
-    $('#horcapilar').prop("readonly", true);
-  }
-  else {
-    hrcap.value="";
-    $('#horcapilar').prop("readonly", false);
-  }
-}
-function changehorsemucos() {
-  var hrmucos = document.getElementById('hormucosal');
-  var hrmucoscheck = document.getElementById('hormucoc');
-  if (hrmucoscheck.checked) {
-    hrmucos.value="Sin datos";
-    $('#hormucosal').prop("readonly", true);
-  }
-  else {
-    hrmucos.value="";
-    $('#hormucosal').prop("readonly", false);
-  }
-}
-function changehorselymph() {
-  var hrlymph = document.getElementById('horlymph');
-  var hrlymphcheck = document.getElementById('horlymphc');
-  if (hrlymphcheck.checked) {
-    hrlymph.value="Sin datos";
-    $('#horlymph').prop("readonly", true);
-  }
-  else {
-    hrlymph.value="";
-    $('#horlymph').prop("readonly", false);
-  }
-}
-function changehorsecondition() {
-  var hrage = document.getElementById('horcondition');
-  var hragecheck = document.getElementById('horcondc');
-  if (hragecheck.checked) {
-    hrage.value="Sin datos";
-    $('#horcondition').prop("readonly", true);
-  }
-  else {
-    hrage.value="";
-    $('#horcondition').prop("readonly", false);
-  }
-}
-
-
 
 // Dog form validation
 function changedograce() {
@@ -1286,10 +1199,16 @@ function changedogage() {
   if (hragecheck.checked) {
     hrage.value="0000";
     $('#dogage').prop("readonly", true);
+    $('#dogday').prop("disabled", true);
+    $('#dogmonth').prop("disabled", true);
+    $('#dogyear').prop("disabled", true);
   }
   else {
     hrage.value="";
     $('#dogage').prop("readonly", false);
+    $('#dogday').prop("disabled", false);
+    $('#dogmonth').prop("disabled", false);
+    $('#dogyear').prop("disabled", false);
   }
 }
 function changedogweight() {
@@ -1422,10 +1341,16 @@ function changecatage() {
   if (catagecheck.checked) {
     catage.value="0000";
     $('#catage').prop("readonly", true);
+    $('#catday').prop("disabled", true);
+    $('#catmonth').prop("disabled", true);
+    $('#catyear').prop("disabled", true);
   }
   else {
     catage.value="";
     $('#catage').prop("readonly", false);
+    $('#catday').prop("disabled", false);
+    $('#catmonth').prop("disabled", false);
+    $('#catyear').prop("disabled", false);
   }
 }
 function changecatweight() {
@@ -1718,10 +1643,16 @@ function aqchangeage() {
   if (aqagecheck.checked) {
     aqage.value="0000";
     $('#aqage').prop("readonly", true);
+    $('#aqday').prop("disabled", true);
+    $('#aqmonth').prop("disabled", true);
+    $('#aqyear').prop("disabled", true);
   }
   else {
     aqage.value="";
     $('#aqage').prop("readonly", false);
+    $('#aqday').prop("disabled", false);
+    $('#aqmonth').prop("disabled", false);
+    $('#aqyear').prop("disabled", false);
   }
 }
 function aqchangeweight() {
@@ -2062,3 +1993,204 @@ function showCard() {
   document.getElementById("userQuestions" ).style.display = 'none';
   document.getElementById("userCards" ).style.display = 'initial';
 }
+
+
+// Validations for age input
+// Cow
+$('#cowday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#cowage').val($('#cowage').val() + $(this).val());
+    } else {
+        $('#cowage').val($('#cowage').val().replace($(this).val(), ''));
+    }
+});
+$('#cowmonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#cowage').val($('#cowage').val() + $(this).val());
+    } else {
+        $('#cowage').val($('#cowage').val().replace($(this).val(), ''));
+    }
+});
+$('#cowyear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#cowage').val($('#cowage').val() + $(this).val());
+    } else {
+        $('#cowage').val($('#cowage').val().replace($(this).val(), ''));
+    }
+});
+// Porcine
+$('#porday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#porage').val($('#porage').val() + $(this).val());
+    } else {
+        $('#porage').val($('#porage').val().replace($(this).val(), ''));
+    }
+});
+$('#pormonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#porage').val($('#porage').val() + $(this).val());
+    } else {
+        $('#porage').val($('#porage').val().replace($(this).val(), ''));
+    }
+});
+$('#poryear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#porage').val($('#porage').val() + $(this).val());
+    } else {
+        $('#porage').val($('#porage').val().replace($(this).val(), ''));
+    }
+});
+// Horse
+$('#horseday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#horage').val($('#horage').val() + $(this).val());
+    } else {
+        $('#horage').val($('#horage').val().replace($(this).val(), ''));
+    }
+});
+$('#horsemonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#horage').val($('#horage').val() + $(this).val());
+    } else {
+        $('#horage').val($('#horage').val().replace($(this).val(), ''));
+    }
+});
+$('#horseyear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#horage').val($('#horage').val() + $(this).val());
+    } else {
+        $('#horage').val($('#horage').val().replace($(this).val(), ''));
+    }
+});
+// Ovine
+$('#oviday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#oviage').val($('#oviage').val() + $(this).val());
+    } else {
+        $('#oviage').val($('#oviage').val().replace($(this).val(), ''));
+    }
+});
+$('#ovimonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#oviage').val($('#oviage').val() + $(this).val());
+    } else {
+        $('#oviage').val($('#oviage').val().replace($(this).val(), ''));
+    }
+});
+$('#oviyear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#oviage').val($('#oviage').val() + $(this).val());
+    } else {
+        $('#oviage').val($('#oviage').val().replace($(this).val(), ''));
+    }
+});
+// Goat
+$('#goatday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#goatage').val($('#goatage').val() + $(this).val());
+    } else {
+        $('#goatage').val($('#goatage').val().replace($(this).val(), ''));
+    }
+});
+$('#goatmonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#goatage').val($('#goatage').val() + $(this).val());
+    } else {
+        $('#goatage').val($('#goatage').val().replace($(this).val(), ''));
+    }
+});
+$('#goatyear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#goatage').val($('#goatage').val() + $(this).val());
+    } else {
+        $('#goatage').val($('#goatage').val().replace($(this).val(), ''));
+    }
+});
+// Rabbir
+$('#rabday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#rabage').val($('#rabage').val() + $(this).val());
+    } else {
+        $('#rabage').val($('#rabage').val().replace($(this).val(), ''));
+    }
+});
+$('#rabmonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#rabage').val($('#rabage').val() + $(this).val());
+    } else {
+        $('#rabage').val($('#rabage').val().replace($(this).val(), ''));
+    }
+});
+$('#rabyear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#rabage').val($('#rabage').val() + $(this).val());
+    } else {
+        $('#rabage').val($('#rabage').val().replace($(this).val(), ''));
+    }
+});
+// Dog
+$('#dogday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#dogage').val($('#dogage').val() + $(this).val());
+    } else {
+        $('#dogage').val($('#dogage').val().replace($(this).val(), ''));
+    }
+});
+$('#dogmonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#dogage').val($('#dogage').val() + $(this).val());
+    } else {
+        $('#dogage').val($('#dogage').val().replace($(this).val(), ''));
+    }
+});
+$('#dogyear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#dogage').val($('#dogage').val() + $(this).val());
+    } else {
+        $('#dogage').val($('#dogage').val().replace($(this).val(), ''));
+    }
+});
+// Cat
+$('#catday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#catage').val($('#catage').val() + $(this).val());
+    } else {
+        $('#catage').val($('#catage').val().replace($(this).val(), ''));
+    }
+});
+$('#catmonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#catage').val($('#catage').val() + $(this).val());
+    } else {
+        $('#catage').val($('#catage').val().replace($(this).val(), ''));
+    }
+});
+$('#catyear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#catage').val($('#catage').val() + $(this).val());
+    } else {
+        $('#catage').val($('#catage').val().replace($(this).val(), ''));
+    }
+});
+// Aquatic organisms
+$('#aqday').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#aqage').val($('#aqage').val() + $(this).val());
+    } else {
+        $('#aqage').val($('#aqage').val().replace($(this).val(), ''));
+    }
+});
+$('#aqmonth').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#aqage').val($('#aqage').val() + $(this).val());
+    } else {
+        $('#aqage').val($('#aqage').val().replace($(this).val(), ''));
+    }
+});
+$('#aqyear').on('change', function () {
+    if ($(this).is(':checked')) {
+        $('#aqage').val($('#aqage').val() + $(this).val());
+    } else {
+        $('#aqage').val($('#aqage').val().replace($(this).val(), ''));
+    }
+});
