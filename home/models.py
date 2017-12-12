@@ -154,7 +154,7 @@ class Specie(models.Model):
     FIELDS_S = ('id', 'Pregunta', 'Raza', 'Edad', 'Sexo', 'Peso','numero de especie')
     question = models.OneToOneField(Question, default='', related_name='specie_question')
     race = models.CharField(max_length=20, null=False)
-    age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
+    age = models.CharField(max_length=20, null=False)
     gender = models.CharField(max_length=3, choices=SEX, default=MALE)
     weight = models.DecimalField(max_digits=5, decimal_places=3)
 
@@ -630,7 +630,7 @@ class Aquatic(models.Model):
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
-    age = models.IntegerField()
+    age = models.CharField(max_length=20, null=False)
     weight = models.IntegerField()
     pond = models.CharField(max_length=3, choices=POND)
     density = models.IntegerField()

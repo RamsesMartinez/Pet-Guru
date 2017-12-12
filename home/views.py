@@ -137,7 +137,7 @@ def question(request, id=None):
                 'consult': 'La pregunta se ha cerrado',
                 'url': get_current_site(request).domain,
                 }
-                template = get_template('profesormail.html')
+                template = get_template('closequestion.html')
                 html_content = template.render(new_context)
                 emails = instance.user_response.email
                 sendclosemail(request, emails, html_content)
