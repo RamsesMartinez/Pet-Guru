@@ -179,7 +179,7 @@
       {% elif user.rol == 'TC' and instance.status == 'OP' %}
       <div class="container text-center">
         <p class="h2 mb-5 mt-5">¿{{ user }} quieres responder a esta pregunta?</p>
-        <input type="submit" class="btn btn-primary" name="" value="Responder">
+        <button onclick="myFunction()" class="btn btn-primary">Responder</button>
       </div>
       {% elif instance.status == 'CL' %}
       <div class="container messages-cont">
