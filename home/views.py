@@ -177,6 +177,14 @@ def rules(request):
     return render(request, template, context)
 
 
+def tuto(request):
+    template = 'tutorial.html'
+    context = {
+        'title': "PetGurú - tutorial",
+    }
+    return render(request, template, context)
+
+
 @login_required(login_url='home:inicio')
 def logout(request):
     logout_django(request)

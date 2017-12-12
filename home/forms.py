@@ -28,7 +28,7 @@ class RegisterForm(UserCreationForm):
             'password2',
         )
         labels = {
-            'username': 'Nombre de usuario',
+            'username': 'Usuario',
             'email': 'Correo electronico',
             'rol': 'Tipo de usuario',
             'speciality': 'Especialidad',
