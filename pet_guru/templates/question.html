@@ -26,23 +26,31 @@
             <h2 class="alert-heading text-center mb-4">Datos clínicos.</h2>
             <p>Especie: {{ instance.get_specie_display }}</p>
             <div class="">{% for field, value in values.items %}
+              {% if field == 'id' or field == 'Pregunta' or field == 'numero de especie' or field == 'Especie'%}
+              {% else %}
              <div class="d-inline text-dark">{{ field }} :</div>
              <div class="d-inline font-weight-bold">{{ value }}</div> 
              <br>
+             {% endif %}
              {% endfor %}
+
            </div>
          </div>
          <hr>
          <div class="col-sm-12 col-md-8 justify-content-center align-self-center">
           <div id="galleryContainer">
             <div id="gallery" style="display:none;">
+              {% if images.image %}
               {% for image in images %}
               <img alt="Image 1 Title" src="{{image.image.url}}" data-image="{{image.image.url}}" data-description="Image 1 Description"> 
               {% endfor %}
+              {% else %}
+              <img src="{{ instance.get_first_image }}" alt="Image 1 Title" data-description="Image 1 Description">
+              {% endif %}
             </div>
           </div>
           <div class="mt-3">
-            {% if document %}  
+            {% if document.document %}
             <a href="{% get_media_prefix %}{{document}}" target="_blank">
             Ver el documento.</a>
             {% endif %}
