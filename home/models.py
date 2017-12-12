@@ -39,18 +39,18 @@ class Question(models.Model):
     AQUATICO = 'AQ'
 
     SPECIES = (
-        (BOVINO, 'Bovino'),
-        (PORCINO, 'Porcino'),
-        (EQUINO, 'Equino'),
-        (OVINO, 'Ovino'),
-        (CAPRINO, 'Caprino'),
-        (LEPORIDO, 'Lepórido'),
+        (BOVINO, 'Vaca'),
+        (PORCINO, 'Cerdo'),
+        (EQUINO, 'Caballo'),
+        (OVINO, 'Oveja'),
+        (CAPRINO, 'Cabra'),
+        (LEPORIDO, 'Conejo'),
         (AVE, 'Ave'),
-        (CANINO, 'Canino'),
-        (FELINO, 'Felino'),
-        (SILVESTRE, 'Silvestre'),
+        (CANINO, 'Perro'),
+        (FELINO, 'Gato'),
+        (SILVESTRE, 'Fauna silvestre'),
         (ABEJA, 'Abeja'),
-        (AQUATICO, 'Organismos acuaticos'),
+        (AQUATICO, 'Organismos acuáticos'),
     )
 
     title = models.CharField(max_length=100, null=True)
@@ -697,7 +697,7 @@ class Horse(Specie):
 
 class Document(models.Model):
     description = models.CharField(max_length=255, blank=True, null=True)
-    document = models.FileField(upload_to='documents/')
+    document = models.FileField(upload_to='documents/', null=True, blank=True,)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, default=None)
 
