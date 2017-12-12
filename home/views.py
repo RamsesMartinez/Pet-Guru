@@ -231,14 +231,10 @@ def user(request):
                 # Save images
                 if formset.is_valid():
                     for form in formset.cleaned_data:
-                        image = form['image']
-                        photo = ImageQuestion(question=base, image=image)
-                        photo.save()
-            def save_document(base):
-                if document_form.is_valid():
-                    doc = document_form.save(commit=False)
-                    doc.question = base
-                    doc.save()
+                        if form:
+                            image = form['image']
+                            photo = ImageQuestion(question=base, image=image)
+                            photo.save()
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
@@ -255,7 +251,10 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cow.save()
-                    save_document(base)
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
                     emails = User.objects.filter(speciality='BV').filter(rol='TC')
                     try:

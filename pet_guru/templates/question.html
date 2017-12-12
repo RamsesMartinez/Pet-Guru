@@ -26,23 +26,31 @@
             <h2 class="alert-heading text-center mb-4">Datos clínicos.</h2>
             <p>Especie: {{ instance.get_specie_display }}</p>
             <div class="">{% for field, value in values.items %}
+              {% if field == 'id' or field == 'Pregunta' or field == 'numero de especie' or field == 'Especie'%}
+              {% else %}
              <div class="d-inline text-dark">{{ field }} :</div>
              <div class="d-inline font-weight-bold">{{ value }}</div> 
              <br>
+             {% endif %}
              {% endfor %}
+
            </div>
          </div>
          <hr>
          <div class="col-sm-12 col-md-8 justify-content-center align-self-center">
           <div id="galleryContainer">
             <div id="gallery" style="display:none;">
+              {% if images.image %}
               {% for image in images %}
               <img alt="Image 1 Title" src="{{image.image.url}}" data-image="{{image.image.url}}" data-description="Image 1 Description"> 
               {% endfor %}
+              {% else %}
+              <img src="{{ instance.get_first_image }}" alt="Image 1 Title" data-description="Image 1 Description">
+              {% endif %}
             </div>
           </div>
           <div class="mt-3">
-            {% if document %}  
+            {% if document.document %}
             <a href="{% get_media_prefix %}{{document}}" target="_blank">
             Ver el documento.</a>
             {% endif %}
@@ -123,17 +131,13 @@
               <textarea class="form-control" name="message" cols="40" rows="10" maxlength="200" required id="id_message"></textarea>              
             </div>
           </div>
-          <div class="form-row">
+          <div class="form-row fileContainer">
             <label class="col-md-2" for="id_document">Documento:</label>
-            <div class="col-md-10">
-              <input class="form-control-file" type="file" name="document" id="id_document" />
-            </div>
+            <input class="form-control-file" type="file" name="document" id="id_document" />
           </div>
-          <div class="form-row">
+          <div class="form-row fileContainer">
             <label class="col-md-2" for="id_image">Imagen:</label>
-            <div class="col-md-10">
-              <input class="form-control-file" type="file" name="image" id="id_image" />
-            </div>            
+            <input class="form-control-file" type="file" name="image" id="id_image" />        
           </div>
           <div class="form-row">
             <button type="submit" name="submit" class="col-md-2 ml-md-auto btn btn-primary">Enviar</button>              
@@ -175,7 +179,7 @@
       {% elif user.rol == 'TC' and instance.status == 'OP' %}
       <div class="container text-center">
         <p class="h2 mb-5 mt-5">¿{{ user }} quieres responder a esta pregunta?</p>
-        <input type="submit" class="btn btn-primary" name="" value="Responder">
+        <button onclick="myFunction()" class="btn btn-primary">Responder</button>
       </div>
       {% elif instance.status == 'CL' %}
       <div class="container messages-cont">
