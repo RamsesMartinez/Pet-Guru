@@ -28,7 +28,7 @@ class RegisterForm(UserCreationForm):
             'password2',
         )
         labels = {
-            'username': 'Nombre de usuario',
+            'username': 'Usuario',
             'email': 'Correo electronico',
             'rol': 'Tipo de usuario',
             'speciality': 'Especialidad',
@@ -64,7 +64,7 @@ class BaseForm(forms.ModelForm):
 class ImageQuestionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ImageQuestionForm, self).__init__(*args, **kwargs)
-        self.fields['image'].widget.attrs.update({'class': 'btn btn-info', 'required':'True'})
+        self.fields['image'].widget.attrs.update({'class': 'btn btn-info', })
 
     image = forms.ImageField(label='')
 
@@ -108,7 +108,7 @@ class CowForm(forms.ModelForm):
         labels = {
             'race': 'Raza: ',
             'age': 'Edad: ',
-            'gender': 'Género: ',
+            'gender': 'Sexo: ',
             'weight': 'Peso: ',
             'heart_rate': 'Frecuencia cardiaca (lpm): ',
             'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
@@ -159,7 +159,7 @@ class PorcineForm(forms.ModelForm):
             'physiological_stage': 'Etapa fisiológica: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
-            'gender': 'Género: ',
+            'gender': 'Sexo: ',
             'weight': 'Peso: ',
             'heart_rate': 'Frecuencia cardiaca (lpm): ',
             'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
@@ -205,7 +205,7 @@ class HorseForm(forms.ModelForm):
         labels = {
             'race': 'Raza: ',
             'age': 'Edad: ',
-            'gender': 'Género: ',
+            'gender': 'Sexo: ',
             'weight': 'Peso: ',
             'heart_rate': 'Frecuencia cardiaca (lpm): ',
             'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
@@ -263,7 +263,7 @@ class GoatForm(forms.ModelForm):
             'age': 'Edad: ',
             'capilar': 'Tiempo de llenado capilar: ',
             'cough': 'Relfejo tusígeno: ',
-            'gender': 'Género: ',
+            'gender': 'Sexo: ',
             'ruminal': 'Movimientos ruminales: ',
             'weight': 'Peso: ',
             'heart_rate': 'Frecuencia cardiaca (lpm): ',
@@ -317,7 +317,7 @@ class OvineForm(forms.ModelForm):
             'physiological_stage': 'Etapa fisiológica: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
-            'gender': 'Género: ',
+            'gender': 'Sexo: ',
             'ruminal': 'Movimientos ruminales: ',
             'weight': 'Peso: ',
             'heart_rate': 'Frecuencia cardiaca (lpm): ',
@@ -369,7 +369,7 @@ class RabbitForm(forms.ModelForm):
             'productive_stage': 'Etapa productiva: ',
             'race': 'Raza: ',
             'age': 'Edad: ',
-            'gender': 'Género: ',
+            'gender': 'Sexo: ',
             'weight': 'Peso: ',
             'heart_rate': 'Frecuencia cardiaca (lpm): ',
             'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
@@ -495,7 +495,7 @@ class DogForm(forms.ModelForm):
         labels = {
             'race': 'Raza: ',
             'age': 'Edad: ',
-            'gender': 'Género: ',
+            'gender': 'Sexo: ',
             'weight': 'Peso: ',
             'heart_rate': 'Frecuencia cardiaca (lpm): ',
             'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
@@ -543,7 +543,7 @@ class CatForm(forms.ModelForm):
         labels = {
             'race': 'Raza: ',
             'age': 'Edad: ',
-            'gender': 'Género: ',
+            'gender': 'Sexo: ',
             'weight': 'Peso: ',
             'heart_rate': 'Frecuencia cardiaca (lpm): ',
             'respiratory_rate': 'Frecuencia respiratoria (rpm): ',
@@ -801,7 +801,7 @@ class BeeForm(forms.ModelForm):
 class DocumentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DocumentForm, self).__init__(*args, **kwargs)
-        self.fields['document'].widget.attrs.update({'class': 'btn btn-info'})
+        self.fields['document'].widget.attrs.update({'class': 'btn btn-info', })
 
     class Meta:
         model = Document

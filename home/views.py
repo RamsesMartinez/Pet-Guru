@@ -142,7 +142,7 @@ def question(request, id=None):
                 'consult': 'La pregunta se ha cerrado',
                 'url': get_current_site(request).domain,
                 }
-                template = get_template('profesormail.html')
+                template = get_template('closequestion.html')
                 html_content = template.render(new_context)
                 emails = instance.user_response.email
                 sendclosemail(request, emails, html_content)
@@ -178,6 +178,14 @@ def rules(request):
     template = 'reglamento.html'
     context = {
         'title': "PetGurú - Reglamento",
+    }
+    return render(request, template, context)
+
+
+def tuto(request):
+    template = 'tutorial.html'
+    context = {
+        'title': "PetGurú - tutorial",
     }
     return render(request, template, context)
 
@@ -228,14 +236,10 @@ def user(request):
                 # Save images
                 if formset.is_valid():
                     for form in formset.cleaned_data:
-                        image = form['image']
-                        photo = ImageQuestion(question=base, image=image)
-                        photo.save()
-            def save_document(base):
-                if document_form.is_valid():
-                    doc = document_form.save(commit=False)
-                    doc.question = base
-                    doc.save()
+                        if form:
+                            image = form['image']
+                            photo = ImageQuestion(question=base, image=image)
+                            photo.save()
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
@@ -252,7 +256,10 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cow.save()
-                    save_document(base)
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
                     emails = User.objects.filter(speciality='BV').filter(rol='TC')
                     try:
@@ -277,8 +284,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     pig.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='PR').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -302,8 +312,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     horse.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='EQ').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -327,8 +340,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     ovine.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='OV').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -352,8 +368,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     goat.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='CP').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -376,8 +395,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     rab.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='LP').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -401,8 +423,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     bird.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='AV').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -426,8 +451,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     dog.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='CN').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -451,8 +479,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cat.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='FL').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -476,8 +507,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     wild.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='SL').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -501,8 +535,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     aq.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='AQ').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -526,8 +563,11 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     bee.save()
+                    if document_form.is_valid():
+                        doc = document_form.save(commit=False)
+                        doc.question = base
+                        doc.save()
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='BJ').filter(rol='TC')
                     try:
                         for user_speciality in emails:
