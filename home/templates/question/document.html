@@ -2,6 +2,9 @@
 <div class="container">
   <h4>Seleccione archivo para la consulta   1w:</h4>
   <div class="mt-1 mb-4" style="min-height: 50px;">
-    {{ form.document }}
+    {{ docset.management_form }}
+    {% for form in docset %}
+    {{ form.as_p }}
+    {% endfor %}
   </div>
 </div>

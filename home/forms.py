@@ -61,18 +61,6 @@ class BaseForm(forms.ModelForm):
         }
 
 
-class ImageQuestionForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(ImageQuestionForm, self).__init__(*args, **kwargs)
-        self.fields['image'].widget.attrs.update({'class': 'btn btn-info', })
-
-    image = forms.ImageField(label='')
-
-    class Meta:
-        model = ImageQuestion
-        fields = ('image', )
-
-
 class CowForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CowForm, self).__init__(*args, **kwargs)
@@ -798,16 +786,26 @@ class BeeForm(forms.ModelForm):
             'number_racks': 'Número de bastidores con miel, polen o néctar: ',
         }
 
+
+class ImageQuestionForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ImageQuestionForm, self).__init__(*args, **kwargs)
+        self.fields['image'].widget.attrs.update({'class': 'btn btn-info', })
+
+    image = forms.ImageField(label='')
+
+    class Meta:
+        model = ImageQuestion
+        fields = ('image', )
+
+
 class DocumentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DocumentForm, self).__init__(*args, **kwargs)
         self.fields['document'].widget.attrs.update({'class': 'btn btn-info', })
 
+    document = forms.FileField(label='')
+
     class Meta:
         model = Document
-        fields = (
-            'document',
-            )
-        labels = {
-            'document': 'Documento',
-        }
+        fields = ('document', )
