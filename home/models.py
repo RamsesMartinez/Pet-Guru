@@ -166,7 +166,7 @@ class Specie(models.Model):
 
 
 class Bovine(Specie):
-    DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Cowicon.svg/511px-Cowicon.svg.png'
     FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'Frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal')
     heart_rate = models.IntegerField()
@@ -186,7 +186,7 @@ class Bovine(Specie):
 
 
 class Goat(Specie):
-    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
+    DEFAULT_IMAGE = 'https://ae01.alicdn.com/kf/HTB1U26nKXXXXXaHXFXXq6xXFXXXO/Wild-Animals-with-Goats-Farm-Cute-font-b-Funny-b-font-font-b-Graphic-b-font.jpg'
     FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Fin zootécnico', 'Sistema de produccion', 'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal', 'Reflejo tusígeno')
     physiological_stage = models.CharField(max_length=30, null=True)
