@@ -198,6 +198,8 @@ def user(request):
         solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
         articles = Question.objects.filter(Q(status='CL')).order_by('-id')
         ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=1)
+        document_form = modelformset_factory(Document, form=DocumentForm, extra=1)
+        # document_form = DocumentForm(request.POST, request.FILES)
 
         base_form = BaseForm(request.POST or None)
         cow_form = CowForm(request.POST or None)
@@ -212,7 +214,6 @@ def user(request):
         wild_form = WildForm(request.POST or None)
         aquatic_form = AquaticForm(request.POST or None)
         bee_form = BeeForm(request.POST or None)
-        document_form = DocumentForm(request.POST, request.FILES)
 
         page = request.GET.get('page', 1)
         paginator = Paginator(articles, 6)
@@ -226,6 +227,7 @@ def user(request):
 
         if request.method == 'POST':
             formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())
+            docset = document_form(request.POST, request.FILES, queryset=Document.objects.none())
 
             def save_images(base):
                 # Save images
@@ -235,6 +237,15 @@ def user(request):
                             image = form['image']
                             photo = ImageQuestion(question=base, image=image)
                             photo.save()
+
+            def save_documents(base):
+                # Save documents
+                if docset.is_valid():
+                    for form in docset.cleaned_data:
+                        if form:
+                            document = form['document']
+                            doc = Document(question=base, document=document)
+                            doc.save()
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
@@ -251,10 +262,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cow.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='BV').filter(rol='TC')
                     try:
@@ -279,10 +287,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     pig.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='PR').filter(rol='TC')
                     try:
@@ -307,10 +312,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     horse.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='EQ').filter(rol='TC')
                     try:
@@ -335,10 +337,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     ovine.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='OV').filter(rol='TC')
                     try:
@@ -363,10 +362,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     goat.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='CP').filter(rol='TC')
                     try:
@@ -390,10 +386,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     rab.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='LP').filter(rol='TC')
                     try:
@@ -418,10 +411,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     bird.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='AV').filter(rol='TC')
                     try:
@@ -446,10 +436,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     dog.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='CN').filter(rol='TC')
                     try:
@@ -474,10 +461,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cat.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='FL').filter(rol='TC')
                     try:
@@ -502,10 +486,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     wild.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='SL').filter(rol='TC')
                     try:
@@ -530,10 +511,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     aq.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='AQ').filter(rol='TC')
                     try:
@@ -558,10 +536,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     bee.save()
-                    if document_form.is_valid():
-                        doc = document_form.save(commit=False)
-                        doc.question = base
-                        doc.save()
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='BJ').filter(rol='TC')
                     try:
@@ -576,6 +551,7 @@ def user(request):
                 print('formst errors: ', formset.errors)
 
         formset = ImageFormSet(queryset=ImageQuestion.objects.none())
+        docset = document_form(queryset=Document.objects.none())
         context = {
             'title': "Bienvenido "+request.user.username,
             'solveds': solved,
@@ -594,7 +570,7 @@ def user(request):
             'aquatic_form': aquatic_form,
             'bee_form': bee_form,
             'formset': formset,
-            'document_form': document_form,
+            'docset': docset,
         }
         return render(request, template, context)
 
