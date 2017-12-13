@@ -89,10 +89,12 @@ jQuery(document).ready(function(){
     });
 })(jQuery);
 
+
+});
+
+
+
 // reload page on answer
 function myFunction() {
     location.reload();
 }
-
-
-});
