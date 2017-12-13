@@ -732,7 +732,7 @@ def search(request, label):
 
 def sendmailform(request, email_user, html_content):
     if email_user:
-        fromaddr = "itzli2000@gmail.com"
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -756,7 +756,7 @@ def sendmailform(request, email_user, html_content):
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
@@ -764,7 +764,7 @@ def sendmailform(request, email_user, html_content):
 
 def sendstudentmail(request, email_user, html_content):
     if email_user:
-        fromaddr = "itzli2000@gmail.com"
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -774,7 +774,7 @@ def sendstudentmail(request, email_user, html_content):
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
@@ -782,7 +782,7 @@ def sendstudentmail(request, email_user, html_content):
 
 def sendprofmail(request, email_user, html_content):
     if email_user:
-        fromaddr = "itzli2000@gmail.com"
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -792,7 +792,7 @@ def sendprofmail(request, email_user, html_content):
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
@@ -800,7 +800,7 @@ def sendprofmail(request, email_user, html_content):
 
 def sendclosemail(request, email_user, html_content):
     if email_user:
-        fromaddr = "itzli2000@gmail.com"
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -810,7 +810,7 @@ def sendclosemail(request, email_user, html_content):
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
