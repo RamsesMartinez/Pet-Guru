@@ -2,10 +2,10 @@
 <div class="container">
   <h4>Seleccione imágen para la consulta:</h4>
 
-  <div class="" id="demo">
+  <div class="" id="demoCow">
     {{ formset.management_form }}
     <div id="imgcontainer" class="mt-1 mb-4" style="min-height: 50px;">
-      <input type="hidden" class="Total_Forms" name="form-TOTAL_FORMS" value="1" id="id_form-TOTAL_FORMS">
+      <input type="hidden" class="Total_Forms" name="form-TOTAL_FORMS" value="2" id="id_form-TOTAL_FORMS">
       <input type="hidden" class="Initial_Forms" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS">
 
       <fieldset disabled class="empty-form" style="display: none">
@@ -147,5 +147,5 @@ function Formset(element) {
   this.addForm = addForm;
 }
 
-new Formset(document.querySelector('#demo'));</script>
+new Formset(document.querySelector('#demoCow'));</script>
 {% endblock javascript %}

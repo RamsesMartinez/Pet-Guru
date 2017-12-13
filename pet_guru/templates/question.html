@@ -40,7 +40,7 @@
          <div class="col-sm-12 col-md-8 justify-content-center align-self-center">
           <div id="galleryContainer">
             <div id="gallery" style="display:none;">
-              {% if images.image %}
+              {% if images %}
               {% for image in images %}
               <img alt="Image 1 Title" src="{{image.image.url}}" data-image="{{image.image.url}}" data-description="Image 1 Description"> 
               {% endfor %}
