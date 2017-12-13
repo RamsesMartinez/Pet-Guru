@@ -698,7 +698,7 @@ def register(request):
         return redirect('home:inicio')
 
 
-def search(request, label):
+def search(request, label): 
     message = None
     template = 'article.html'
     articles = Question.objects.filter(specie=label)
