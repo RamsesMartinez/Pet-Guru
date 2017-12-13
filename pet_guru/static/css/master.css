@@ -343,6 +343,9 @@ p.calif {
   text-align: right;
   top: 0; }
 
+.ug-slider-wrapper {
+  background-color: #FFF !important; }
+
 @media screen and (min-width: 550px) {
   .logIn {
     max-width: 20rem; } }
