@@ -77,7 +77,7 @@ def question(request, id=None):
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
     objspecie = instance.get_obj_specie()
-    document = Document.objects.filter(question=instance.id).first()
+    document = Document.objects.filter(question=instance.id)
     values = translate(objspecie)
     dic = dict(zip(objspecie.FIELDS, values))
     formMessage = MessageForm()

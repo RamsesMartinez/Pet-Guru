@@ -51,8 +51,14 @@
             </div>
             <div class="mt-3">
               {% if document %}
-              <a href="{% get_media_prefix %}{{document.document}}" target="_blank">
-              Ver el documento.</a>
+              {% for doc in document %}
+              <div class="row">
+                <a href="{% get_media_prefix %}{{doc.document}}" target="_blank">
+                  <!--Ver el documento - {{doc.document}}-->
+                  Ver el documento
+                </a>
+              </div>
+              {% endfor %}
               {% endif %}
             </div>
           </div>
