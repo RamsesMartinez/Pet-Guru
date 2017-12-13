@@ -239,12 +239,12 @@ def user(request):
                             photo.save()
 
             def save_documents(base):
-                # Save images
+                # Save documents
                 if docset.is_valid():
                     for form in docset.cleaned_data:
                         if form:
                             document = form['document']
-                            doc = DocumentForm(question=base, document=document)
+                            doc = Document(question=base, document=document)
                             doc.save()
 
             if base_form.is_valid():

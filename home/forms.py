@@ -804,8 +804,7 @@ class DocumentForm(forms.ModelForm):
         super(DocumentForm, self).__init__(*args, **kwargs)
         self.fields['document'].widget.attrs.update({'class': 'btn btn-info', })
 
-    document = forms.FileField(label='')
-
     class Meta:
         model = Document
-        fields = ('document', )
+        fields = ('document',)
+        labels = { 'document': 'Documento',}
