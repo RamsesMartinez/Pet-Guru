@@ -17,16 +17,39 @@
         <img src="{% static 'images/fmvz.png' %}" alt="Albeitar FMVZ" style="width:20%; heigth:auto; max-width:290px;" class="m-auto">
       </div>
       <p class="bannerText lead mx-2 text-center">Sistéma de apoyo para los alumnos de la Facultad de Medicina Veterinaria y Zootecnia.</p>
-    </div>
+    </div>    
     <div class="jumbotron infoText">
+      <div class="container">
+        <div class="row justify-content-end">
+          <div class="col-md-3">
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select class="form-control select_specie " id="exampleFormControlSelect1">
+              <option>Todos</option>
+              <option>Vaca</option>
+              <option>Cerdo</option>
+              <option>Caballo</option>
+              <option>Oveja</option>
+              <option>Cabra</option>
+              <option>Conejo</option>
+              <option>Ave</option>
+              <option>Perro</option>
+              <option>Gato</option>
+              <option>Fauna Silvestre</option>
+              <option>Abeja</option>
+              <option>Organismos acuáticos</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
         {% for article in articles %}
-        <div class="card">
+        <div class="card {{ article.get_specie_display }} type-card">
           <div class="card-body">
             <div class="card-title card-banner">
               <img src="{{ article.get_first_image }}" class="img-fluid" alt="Question image">
             </div>
             <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.title }}</h5>
+            <h5 class="card-subtitle mb-2 mt-4 text-dark">{{ article.get_specie_display }}</h5>
             <p class="card-text">Calificación: {{ article.calification }} <i class="fa fa-star" aria-hidden="true"></i></p>
             <p class="card-text">{{ article.description }}</p>
             <a href="{{ article.get_absolute_url }}" class="card-link">Leer más</a>
@@ -44,11 +67,11 @@
             <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
             {% endif %}
             {% for i in articles.paginator.page_range %}
-            {% if articles.number == i %}
-            <li class="active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
-            {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
+              {% if articles.number == i %}
+              <li class="active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
             {% endfor %}
             {% if articles.has_next %}
             <li class="page-item"><a class="page-link" href="?page={{ articles.next_page_number }}">&raquo;</a></li>
@@ -62,3 +85,21 @@
     </div>
   </div>
   {% endblock %}
+
+  {% block javascript%}
+  <script type="text/javascript">
+
+    $('.select_specie').change(function(){
+      var selected = $(this).val();      
+      console.log(selected)
+      if(selected=="Todos"){
+        $(".type-card").show();
+      }else{
+        $(".type-card").hide();
+        $("." + selected).show();
+      }
+      
+    });
+    
+  </script> 
+  {% endblock javascript%}
