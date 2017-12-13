@@ -807,4 +807,4 @@ class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ('document',)
-        labels = { 'document': 'Documento',}
+        labels = { 'document': '',}
