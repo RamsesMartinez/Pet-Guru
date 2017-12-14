@@ -20,27 +20,22 @@
     </div>    
     <div class="jumbotron infoText">
       <div class="container">
-        <div class="row justify-content-end">
-          <div class="col-md-3">
-            <label for="exampleFormControlSelect1">Example select</label>
-            <select class="form-control select_specie " id="exampleFormControlSelect1">
-              <option>Todos</option>
-              <option>Vaca</option>
-              <option>Cerdo</option>
-              <option>Caballo</option>
-              <option>Oveja</option>
-              <option>Cabra</option>
-              <option>Conejo</option>
-              <option>Ave</option>
-              <option>Perro</option>
-              <option>Gato</option>
-              <option>Fauna Silvestre</option>
-              <option>Abeja</option>
-              <option>Organismos acuáticos</option>
-            </select>
-          </div>
+        <div class="row">
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Todos</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Vaca</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Cerdo</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Caballo</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Oveja</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Cabra</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Conejo</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Ave</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Perro</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Gato</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Fauna Silvestre</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Abeja</button>
+          <button type="button" style="margin-right: 10px; margin-bottom: 10px;" class="select_specie btn btn-primary">Organismos <br> Acuaticos</button>
         </div>
-      </div>
+      </div>      
       <div class="card-container d-flex flex-row flex-wrap justify-content-around align-items-center">
         {% for article in articles %}
         <div class="card {{ article.get_specie_display }} type-card">
@@ -89,8 +84,8 @@
   {% block javascript%}
   <script type="text/javascript">
 
-    $('.select_specie').change(function(){
-      var selected = $(this).val();      
+    $('.select_specie').click(function(){
+      var selected = $(this).text();      
       console.log(selected)
       if(selected=="Todos"){
         $(".type-card").show();
