@@ -50,16 +50,17 @@
               </div>
             </div>
             <div class="mt-3">
+              <div class="row">
               {% if document %}
               {% for doc in document %}
-              <div class="row">
+
                 <a href="{% get_media_prefix %}{{doc.document}}" target="_blank">
-                  <!--Ver el documento - {{doc.document}}-->
-                  Ver el documento
+                  <img src="{{ doc.get_icon_extension }}" alt="Image 1 Title" data-description="Image 1 Description" width="60px" height="60px">
                 </a>
-              </div>
+
               {% endfor %}
               {% endif %}
+              </div>
             </div>
           </div>
         </div>
