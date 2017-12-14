@@ -119,13 +119,6 @@ def get_image_filename(instance, filename):
     return "question_images/%s-%s" % (slug, filename)
 
 
-class ImageQuestion(models.Model):
-    question = models.ForeignKey(Question, default=None)
-    image = models.ImageField(upload_to=get_image_filename, verbose_name='images')
-
-    def __str__(self):
-        return '%s' % self.id
-
 class Message(models.Model):    
     question = models.ForeignKey(Question, default=None,related_name='messages')
     handle = models.TextField()
@@ -695,11 +688,17 @@ class Horse(Specie):
         return [(field.name, field.value_to_string(self)) for field in Horse._meta.fields]
 
 
+class ImageQuestion(models.Model):
+    question = models.ForeignKey(Question, default=None)
+    image = models.ImageField(upload_to=get_image_filename, verbose_name='images')
+
+    def __str__(self):
+        return '%s' % self.id
+
+
 class Document(models.Model):
-    description = models.CharField(max_length=255, blank=True, null=True)
-    document = models.FileField(upload_to='documents/', null=True, blank=True,)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+    document = models.FileField(upload_to='documents/', null=True, blank=True, verbose_name='documents')
     question = models.ForeignKey(Question, default=None)
 
     def __str__(self):
-        return '%s' % self.document
+        return '%s' % self.id
