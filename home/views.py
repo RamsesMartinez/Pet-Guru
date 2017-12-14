@@ -82,8 +82,6 @@ def question(request, id=None):
     dic = dict(zip(objspecie.FIELDS, values))
     formMessage = MessageForm()
 
-
-
     def send_comment(handler, message):
         if handler == instance.user_question.username:
             new_context = {
@@ -107,9 +105,16 @@ def question(request, id=None):
             sendstudentmail(request, emails, html_content)
         return None
 
-
-
     if request.method == 'POST':
+
+        if 'type' in request.POST:
+            if request.POST['type'] == 'changestate':
+                pk = request.POST['pk']
+                change = Question.objects.get(pk=pk)
+                change.status = 'RP'
+                change.user_response = request.user
+                change.save()
+
         form = MessageForm(request.POST, request.FILES)
         if form.is_valid():
             new_message = Message.objects.create(
@@ -119,7 +124,7 @@ def question(request, id=None):
                 image=None,
                 document=None)
             send_comment(new_message.handle, new_message.message)
-            if len(request.FILES) != 0:                
+            if len(request.FILES) != 0:
                 if 'image' in request.FILES:
                     new_message.image = request.FILES['image']
                     new_message.save()
@@ -127,7 +132,7 @@ def question(request, id=None):
                     new_message.document = request.FILES['document']
                     new_message.save()
         else:
-            calif = request.POST.get('calif')        
+            calif = request.POST.get('calif')
             stat = request.POST.get('changeto')
             if stat == 'CL':
                 instance.calification = calif
@@ -587,14 +592,6 @@ def user(request):
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
 
-        if request.method == 'POST':
-            if request.POST['type'] == 'changestate':
-                pk = request.POST['pk']
-                change = Question.objects.get(pk=pk)
-                change.status = 'RP'
-                change.user_response = request.user
-                change.save()
-
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
@@ -605,7 +602,6 @@ def user(request):
 
     elif request.user.rol == 'AD':
         return redirect('home:register')
-
 
 
 @login_required(login_url='home:inicio')
@@ -651,7 +647,6 @@ def cards(request):
         return redirect('home:register')
 
 
-
 @login_required(login_url='home:inicio')
 def register(request):
     if request.user.rol == 'AD':
@@ -679,7 +674,7 @@ def register(request):
         return redirect('home:inicio')
 
 
-def search(request, label):
+def search(request, label): 
     message = None
     template = 'article.html'
     articles = Question.objects.filter(specie=label)
@@ -792,7 +787,6 @@ def sendclosemail(request, email_user, html_content):
         server.quit()
 
 
-
 def mail(request):
     template = 'mail.html'
     context = {
@@ -814,6 +808,7 @@ def get_avg(user):
             return 0
     else:
         return 'Aun no tienes preguntas contestadas'
+
 
 def translate(objspecie):
     values = []
