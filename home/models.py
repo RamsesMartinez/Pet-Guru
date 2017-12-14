@@ -259,13 +259,13 @@ class Ovine(Specie):
 
 class Dog(Specie):
     DEFAULT_IMAGE = 'https://openclipart.org/image/2400px/svg_to_png/122197/dog.png'
-    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Color de mucosa',
-                                'Llenado capilar', 'Reflejo tusígeno', 'Pulso', 'Lesiones en piel')
+    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar', \
+                                'Color de mucosa', 'Reflejo tusígeno', 'Pulso', 'Lesiones en piel')
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    mucosal_color = models.CharField(max_length=30, null=True)
     capilar = models.IntegerField()
+    mucosal_color = models.CharField(max_length=30, null=True)
     cough = models.CharField(max_length=80, null=True)
     pulse = models.CharField(max_length=80, null=True)
     skin = models.CharField(max_length=80, null=True)
@@ -279,13 +279,13 @@ class Dog(Specie):
 
 class Cat(Specie):
     DEFAULT_IMAGE = 'https://images.onlinelabels.com/images/clip-art/GDJ/Fluffy%20Cat%20Silhouette%202-246946.png'
-    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Color de mucosa',
-                                'Llenado capilar', 'Reflejo tusígeno', 'pulso', 'Lesiones en piel')
+    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
+                                'Color de mucosa', 'Reflejo tusígeno', 'pulso', 'Lesiones en piel')
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    mucosal_color = models.CharField(max_length=30, null=True)
     capilar = models.IntegerField()
+    mucosal_color = models.CharField(max_length=30, null=True)
     cough = models.CharField(max_length=80, null=True)
     pulse = models.CharField(max_length=80, null=True)
     skin = models.CharField(max_length=80, null=True)
