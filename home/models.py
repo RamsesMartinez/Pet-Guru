@@ -1,5 +1,5 @@
 from decimal import Decimal
-
+import os
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from users.models import User
 
@@ -702,3 +703,16 @@ class Document(models.Model):
 
     def __str__(self):
         return '%s' % self.id
+
+    def get_extension(self):
+        name, extension = os.path.splitext(self.document.name)
+        return extension.replace('.','')
+
+    def get_icon_extension(self):
+        extension = self.get_extension()
+        if extension == 'mp4' or extension == 'jpeg' or extension == 'jpg' or extension == 'png' or extension == 'pdf' or \
+            extension == 'csv' or extension == 'docx' or extension == 'zip' or extension == 'rar' or extension == 'wmv' \
+            or extension == 'doc' or extension == 'ppt' or extension == 'mov':
+            return static('extensions/'+extension+'.png')
+        else:
+            return static('extensions/blank.png')
