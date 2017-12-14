@@ -711,7 +711,8 @@ class Document(models.Model):
     def get_icon_extension(self):
         extension = self.get_extension()
         if extension == 'mp4' or extension == 'jpeg' or extension == 'jpg' or extension == 'png' or extension == 'pdf' or \
-            extension == 'csv' or extension == 'docx' or extension == 'zip' or extension == 'rar':
+            extension == 'csv' or extension == 'docx' or extension == 'zip' or extension == 'rar' or extension == 'wmv' \
+            or extension == 'doc' or extension == 'ppt' or extension == 'mov':
             return static('extensions/'+extension+'.png')
         else:
             return static('extensions/blank.png')
