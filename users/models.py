@@ -26,6 +26,7 @@ class User(AbstractUser):
     FELINO = 'FL'
     SILVESTRE = 'SL'
     ABEJA = 'BJ'
+    AQUATICO = 'AQ'
 
 
     SPECIES = (
@@ -40,6 +41,7 @@ class User(AbstractUser):
         (FELINO, 'Felino'),
         (SILVESTRE, 'Silvestre'),
         (ABEJA, 'Abeja'),
+        (AQUATICO, 'Organismos acuáticos'),
     )
 
     rol = models.CharField(max_length=3, choices=ROL, default='ST')
