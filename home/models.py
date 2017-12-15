@@ -153,7 +153,7 @@ class Specie(models.Model):
     weight = models.DecimalField(max_digits=5, decimal_places=3)
 
     def __str__(self):
-        return '%s' % self.SPECIES_NUM[self.specie]
+        return '%s' % "self.SPECIES_NUM[self.specie]"
 
     def get_specie_fields(self):
         return [(field.value_to_string(self)) for field in Specie._meta.fields]
