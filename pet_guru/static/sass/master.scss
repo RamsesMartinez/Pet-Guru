@@ -144,7 +144,7 @@ card-btn {
 #mainLogo {
   background-color: #FFF;
   border-radius: 20px 20px 10px 10px;
-  height: 50px;
+  height: 30px;
   width: auto;
 }
 .bannerText {
@@ -238,7 +238,7 @@ card-btn {
 .card-container {
   .card {
     width: 100%;
-    max-width: 650px;
+    max-width: 530px;
 
   }
 }
@@ -360,6 +360,33 @@ p.calif {
   width: 20%;
   height: 350px;
 }
+// comments docs and images
+.fileContainer {
+  overflow: hidden;
+  position: relative;
+  background: lightgray;
+  width: 250px;
+  display: block;
+  border-radius: .5em;
+  padding: .5em;
+  cursor: pointer;
+}
+.fileContainer [type=file] {
+  cursor: inherit;
+  display: block;
+  font-size: 999px;
+  filter: alpha(opacity=0);
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0;
+}
+.ug-slider-wrapper {
+  background-color: #FFF !important;
+}
 
 
 
@@ -385,11 +412,32 @@ p.calif {
   .Dashboard h3 {
     margin-top: initial;
   }
+  // comments docs and images
+  .fileContainer {
+    overflow: initial;
+    position: initial;
+    background: transparent;
+    width: initial;
+    display: initial;
+    border-radius: 0;
+    padding: initial;
+    cursor: initial;
+  }
+  .fileContainer [type=file] {
+    cursor: initial;
+    display: initial;
+    font-size: initial;
+    filter: none;
+    min-height: 100%;
+    min-width: 100%;
+    opacity: initial;
+    position: initial;
+  }
 }
 @media screen and (min-width:  1024px) {
   #mainLogo {
     width: auto;
-    height: 70px;
+    height: 30px;
     margin-right: 20px;
   }
   .navbar-nav li a {

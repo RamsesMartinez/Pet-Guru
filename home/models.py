@@ -1,5 +1,5 @@
 from decimal import Decimal
-
+import os
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.text import slugify
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from users.models import User
 
@@ -39,18 +40,18 @@ class Question(models.Model):
     AQUATICO = 'AQ'
 
     SPECIES = (
-        (BOVINO, 'Bovino'),
-        (PORCINO, 'Porcino'),
-        (EQUINO, 'Equino'),
-        (OVINO, 'Ovino'),
-        (CAPRINO, 'Caprino'),
-        (LEPORIDO, 'Lepórido'),
+        (BOVINO, 'Vaca'),
+        (PORCINO, 'Cerdo'),
+        (EQUINO, 'Caballo'),
+        (OVINO, 'Oveja'),
+        (CAPRINO, 'Cabra'),
+        (LEPORIDO, 'Conejo'),
         (AVE, 'Ave'),
-        (CANINO, 'Canino'),
-        (FELINO, 'Felino'),
-        (SILVESTRE, 'Silvestre'),
+        (CANINO, 'Perro'),
+        (FELINO, 'Gato'),
+        (SILVESTRE, 'Fauna silvestre'),
         (ABEJA, 'Abeja'),
-        (AQUATICO, 'Organismos acuaticos'),
+        (AQUATICO, 'Organismos acuáticos'),
     )
 
     title = models.CharField(max_length=100, null=True)
@@ -119,13 +120,6 @@ def get_image_filename(instance, filename):
     return "question_images/%s-%s" % (slug, filename)
 
 
-class ImageQuestion(models.Model):
-    question = models.ForeignKey(Question, default=None)
-    image = models.ImageField(upload_to=get_image_filename, verbose_name='images')
-
-    def __str__(self):
-        return '%s' % self.id
-
 class Message(models.Model):    
     question = models.ForeignKey(Question, default=None,related_name='messages')
     handle = models.TextField()
@@ -154,19 +148,19 @@ class Specie(models.Model):
     FIELDS_S = ('id', 'Pregunta', 'Raza', 'Edad', 'Sexo', 'Peso','numero de especie')
     question = models.OneToOneField(Question, default='', related_name='specie_question')
     race = models.CharField(max_length=20, null=False)
-    age = models.IntegerField(validators=[MinValueValidator(Decimal('0'))])
+    age = models.CharField(max_length=20, null=False)
     gender = models.CharField(max_length=3, choices=SEX, default=MALE)
     weight = models.DecimalField(max_digits=5, decimal_places=3)
 
     def __str__(self):
-        return '%s' % self.SPECIES_NUM[self.specie]
+        return '%s' % "self.SPECIES_NUM[self.specie]"
 
     def get_specie_fields(self):
         return [(field.value_to_string(self)) for field in Specie._meta.fields]
 
 
 class Bovine(Specie):
-    DEFAULT_IMAGE = 'http://cdn5.dibujos.net/dibujos/pintados/201139/c6c2a31a420635956585ca265baa0118.png'
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Cowicon.svg/511px-Cowicon.svg.png'
     FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'Frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal')
     heart_rate = models.IntegerField()
@@ -186,7 +180,7 @@ class Bovine(Specie):
 
 
 class Goat(Specie):
-    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hausziege_04.jpg/250px-Hausziege_04.jpg'
+    DEFAULT_IMAGE = 'https://ae01.alicdn.com/kf/HTB1U26nKXXXXXaHXFXXq6xXFXXXO/Wild-Animals-with-Goats-Farm-Cute-font-b-Funny-b-font-font-b-Graphic-b-font.jpg'
     FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Fin zootécnico', 'Sistema de produccion', 'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Movimientos Ruminales', 'Condicion corporal', 'Reflejo tusígeno')
     physiological_stage = models.CharField(max_length=30, null=True)
@@ -222,7 +216,7 @@ class Rabbit(Specie):
     )
     FIELDS = Specie.FIELDS_S + ('Etapa productiva', 'Frecuencia cardiaca', 'Frecuencia respiratoria', 'Temperatura(C°)',
                                 'Llenado capilar', 'Color de mucosa', 'Linfonodos', 'Condicion corporal', 'Deshidratación')
-    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oryctolagus_cuniculus_Tasmania_2.jpg/1200px-Oryctolagus_cuniculus_Tasmania_2.jpg'
+    DEFAULT_IMAGE = 'https://s-media-cache-ak0.pinimg.com/originals/2d/74/16/2d7416c37512798a5ec46abb17f8ecda.jpg'
     productive_stage = models.CharField(max_length=10, choices=PRODUCTIVE, default=LACTATING)
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
@@ -241,7 +235,7 @@ class Rabbit(Specie):
 
 
 class Ovine(Specie):
-    DEFAULT_IMAGE = 'http://www.infoanimales.com/wp-content/uploads/2016/06/Informaci%C3%B3n-sobre-la-oveja-1.jpg'
+    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Silhouette_1_%28mouton%29.svg/2000px-Silhouette_1_%28mouton%29.svg.png'
     FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Fin zootécnico', 'Sistema de produccion', 'Frecuencia cardiaca',
                                 'frecuencia respiratoria', 'Temperatura(C°)', 'Color de mucosa', 'Linfonodos',
                                 'Movimientos Ruminales', 'Condicion corporal')
@@ -264,14 +258,14 @@ class Ovine(Specie):
 
 
 class Dog(Specie):
-    DEFAULT_IMAGE = 'https://www.anipedia.net/imagenes/que-comen-los-perros.jpg'
-    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Color de mucosa',
-                                'Llenado capilar', 'Reflejo tusígeno', 'Pulso', 'Lesiones en piel')
+    DEFAULT_IMAGE = 'https://openclipart.org/image/2400px/svg_to_png/122197/dog.png'
+    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar', \
+                                'Color de mucosa', 'Reflejo tusígeno', 'Pulso', 'Lesiones en piel')
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    mucosal_color = models.CharField(max_length=30, null=True)
     capilar = models.IntegerField()
+    mucosal_color = models.CharField(max_length=30, null=True)
     cough = models.CharField(max_length=80, null=True)
     pulse = models.CharField(max_length=80, null=True)
     skin = models.CharField(max_length=80, null=True)
@@ -284,14 +278,14 @@ class Dog(Specie):
 
 
 class Cat(Specie):
-    DEFAULT_IMAGE = 'http://www.petmd.com/sites/default/files/scared-kitten-shutterstock_191443322.jpg'
-    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Color de mucosa',
-                                'Llenado capilar', 'Reflejo tusígeno', 'pulso', 'Lesiones en piel')
+    DEFAULT_IMAGE = 'https://images.onlinelabels.com/images/clip-art/GDJ/Fluffy%20Cat%20Silhouette%202-246946.png'
+    FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
+                                'Color de mucosa', 'Reflejo tusígeno', 'pulso', 'Lesiones en piel')
     heart_rate = models.IntegerField()
     respiratory_rate = models.IntegerField()
     temperature = models.DecimalField(max_digits=5, decimal_places=3)
-    mucosal_color = models.CharField(max_length=30, null=True)
     capilar = models.IntegerField()
+    mucosal_color = models.CharField(max_length=30, null=True)
     cough = models.CharField(max_length=80, null=True)
     pulse = models.CharField(max_length=80, null=True)
     skin = models.CharField(max_length=80, null=True)
@@ -304,7 +298,7 @@ class Cat(Specie):
 
 
 class Porcine(Specie):
-    DEFAULT_IMAGE = 'https://www.elisagenie.com/wp-content/uploads/2017/03/Porcine-Pig-ELISA-Assay-1.jpg'
+    DEFAULT_IMAGE = 'https://images.vexels.com/media/users/3/140977/isolated/preview/6742cff06429c1440b9a2fb1c841a287-pig-silhouette-1-by-vexels.png'
     FIELDS = Specie.FIELDS_S + ('Etapa fisiológica', 'Sistema de produccion', 'Curso de padecimiento en dias',
                                 'Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Condicion corporal'
                                 , 'Actitude', 'color')
@@ -378,7 +372,7 @@ class Bee(models.Model):
         (NOT_VERIFIED, 'NO Verificado'),
     )
 
-    DEFAULT_IMAGE = 'https://media.mnn.com/assets/images/2017/07/HoneyBeeSittingOnAFlower.jpg.838x0_q80.jpg'
+    DEFAULT_IMAGE = 'http://plagasbajocontrol.es/wp-content/uploads/2015/12/PLAGA-DE-ABEJAS.png'
     FIELDS = ('id','Pregunta', 'Especie', 'Tipo de colonia', 'Revision de colmena', 'Presencia de reina',
               'Signos de enfermedad', 'Cría', 'Abeja adulta', 'Número de bastidores cubiertos por abejas en la cámara de cría y en las alzas',
               'Presencia de huevos', 'Cantidad de huevos', 'Observacion', 'Manchas de heces', 'Pedazos de larvas',
@@ -473,7 +467,7 @@ class Bird(models.Model):
         (ORNAMENTAL, 'Ornamentales'),
     )
 
-    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg'
+    DEFAULT_IMAGE = 'https://images.vexels.com/media/users/3/139694/isolated/preview/ef87f11007e9a062a4cf7f004fbe5443-bird-silhouette-4-by-vexels.png'
     FIELDS = ('id', 'Pregunta', 'Tipo de animal', 'fin zootécnico', 'Edad', 'Edad semanas', 'Edad meses',
               'Lugar de encierro', 'Cantidad de animales', 'Convivencia con otras aves', 'Origen del agua', 'Morbilidad'
               , 'Mortalidad', 'Fecha de inicio de los signos', 'Consumo de agua', 'Consumo de alimentos',
@@ -511,7 +505,7 @@ class Bird(models.Model):
 
 
 class Wild(models.Model):
-    DEFAULT_IMAGE = 'https://www.redjurista.com/AppFolders/Images/News/IMAGENES/agricultura/animales/ani1.JPG'
+    DEFAULT_IMAGE = 'http://www.freestencilgallery.com/wp-content/uploads/2013/09/Hedgehog-Silhouette-thumb.jpg'
     FIELDS = ('Pregunta', 'Especie', 'Fin zootécnico', 'Condicion medio ambientales', 'Alimentación',
               'Antecedentes patológicos/hereditarios','Evolución de la enfermedad actual', 'Frecuencia cardiaca',
               'Frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar', 'Color de mucosa', 'Linfonodos',
@@ -619,7 +613,7 @@ class Aquatic(models.Model):
     YES = 'YS'
     NO = 'NO'
 
-    DEFAULT_IMAGE = 'https://img-aws.ehowcdn.com/877x500p/photos.demandstudios.com/getty/article/211/135/136625206.jpg'
+    DEFAULT_IMAGE = 'https://png.pngtree.com/element_origin_min_pic/16/07/14/17578757d7f0a52.jpg'
     FIELDS = ('Pregunta', 'Grupo genético', 'Fin zootécnico', 'Edad', 'Peso promedio de la población',
               'Tipo de estanque','Densidad','Biomasa', 'Presencia de sistema de aeracion','Presencia de sistema de recirculación de agua',
               'Tipo de aireador', 'Recambio diario de agua', 'Fecha de siembra', 'Temperatura (6 am)', 'Temperatura (3 pm)', 'pH (6 am)', 'pH (3 pm)',
@@ -630,7 +624,7 @@ class Aquatic(models.Model):
     question = models.OneToOneField(Question, default='')
     genetic = models.CharField(max_length=50)
     zootechnical = models.CharField(max_length=50)
-    age = models.IntegerField()
+    age = models.CharField(max_length=20, null=False)
     weight = models.IntegerField()
     pond = models.CharField(max_length=3, choices=POND)
     density = models.IntegerField()
@@ -677,7 +671,7 @@ class Aquatic(models.Model):
 
 
 class Horse(Specie):
-    DEFAULT_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Palomino_Horse.jpg/220px-Palomino_Horse.jpg'
+    DEFAULT_IMAGE = 'http://www.stencilease.com/gif/CC4196.jpg'
     FIELDS = Specie.FIELDS_S + ('Frecuencia cardiaca', 'frecuencia respiratoria', 'Temperatura(C°)', 'Llenado capilar',
                                 'Color de mucosa', 'Linfonodos', 'Condicion corporal')
     heart_rate = models.IntegerField()
@@ -695,11 +689,30 @@ class Horse(Specie):
         return [(field.name, field.value_to_string(self)) for field in Horse._meta.fields]
 
 
+class ImageQuestion(models.Model):
+    question = models.ForeignKey(Question, default=None)
+    image = models.ImageField(upload_to=get_image_filename, verbose_name='images')
+
+    def __str__(self):
+        return '%s' % self.id
+
+
 class Document(models.Model):
-    description = models.CharField(max_length=255, blank=True, null=True)
-    document = models.FileField(upload_to='documents/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+    document = models.FileField(upload_to='documents/', null=True, blank=True, verbose_name='documents')
     question = models.ForeignKey(Question, default=None)
 
     def __str__(self):
-        return '%s' % self.document
+        return '%s' % self.id
+
+    def get_extension(self):
+        name, extension = os.path.splitext(self.document.name)
+        return extension.replace('.','')
+
+    def get_icon_extension(self):
+        extension = self.get_extension()
+        if extension == 'mp4' or extension == 'jpeg' or extension == 'jpg' or extension == 'png' or extension == 'pdf' or \
+            extension == 'csv' or extension == 'docx' or extension == 'zip' or extension == 'rar' or extension == 'wmv' \
+            or extension == 'doc' or extension == 'ppt' or extension == 'mov':
+            return static('extensions/'+extension+'.png')
+        else:
+            return static('extensions/blank.png')

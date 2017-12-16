@@ -91,3 +91,10 @@ jQuery(document).ready(function(){
 
 
 });
+
+
+
+// reload page on answer
+function myFunction() {
+    location.reload();
+}

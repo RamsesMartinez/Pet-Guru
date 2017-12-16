@@ -77,12 +77,10 @@ def question(request, id=None):
     messages = reversed(instance.messages.order_by('-timestamp')[:50])
     label = id
     objspecie = instance.get_obj_specie()
-    document = Document.objects.filter(question=instance.id).first()
+    document = Document.objects.filter(question=instance.id)
     values = translate(objspecie)
     dic = dict(zip(objspecie.FIELDS, values))
     formMessage = MessageForm()
-
-
 
     def send_comment(handler, message):
         if handler == instance.user_question.username:
@@ -107,9 +105,19 @@ def question(request, id=None):
             sendstudentmail(request, emails, html_content)
         return None
 
-
-
     if request.method == 'POST':
+
+        if 'type' in request.POST:
+            if request.POST['type'] == 'changestate':
+                if instance.status == 'OP':
+                    pk = request.POST['pk']
+                    change = Question.objects.get(pk=pk)
+                    change.status = 'RP'
+                    change.user_response = request.user
+                    change.save()
+                else:
+                    return redirect('home:usuario')
+
         form = MessageForm(request.POST, request.FILES)
         if form.is_valid():
             new_message = Message.objects.create(
@@ -119,7 +127,7 @@ def question(request, id=None):
                 image=None,
                 document=None)
             send_comment(new_message.handle, new_message.message)
-            if len(request.FILES) != 0:                
+            if len(request.FILES) != 0:
                 if 'image' in request.FILES:
                     new_message.image = request.FILES['image']
                     new_message.save()
@@ -127,13 +135,22 @@ def question(request, id=None):
                     new_message.document = request.FILES['document']
                     new_message.save()
         else:
-            calif = request.POST.get('calif')        
+            calif = request.POST.get('calif')
             stat = request.POST.get('changeto')
             if stat == 'CL':
                 instance.calification = calif
                 instance.status = stat
+                new_context = {
+                'title': instance.title,
+                'consult': 'La pregunta se ha cerrado',
+                'url': get_current_site(request).domain,
+                }
+                template = get_template('closequestion.html')
+                html_content = template.render(new_context)
+                emails = instance.user_response.email
+                sendclosemail(request, emails, html_content)
                 instance.save()
-                return HttpResponseRedirect('/pregunta/'+id)
+        return HttpResponseRedirect('/pregunta/'+id)
 
 
     context = {
@@ -168,6 +185,14 @@ def rules(request):
     return render(request, template, context)
 
 
+def tuto(request):
+    template = 'tutorial.html'
+    context = {
+        'title': "PetGurú - tutorial",
+    }
+    return render(request, template, context)
+
+
 @login_required(login_url='home:inicio')
 def logout(request):
     logout_django(request)
@@ -181,6 +206,8 @@ def user(request):
         solved = Question.objects.filter(user_question=request.user.pk).order_by('-id')
         articles = Question.objects.filter(Q(status='CL')).order_by('-id')
         ImageFormSet = modelformset_factory(ImageQuestion, form=ImageQuestionForm, extra=1)
+        document_form = modelformset_factory(Document, form=DocumentForm, extra=1)
+        # document_form = DocumentForm(request.POST, request.FILES)
 
         base_form = BaseForm(request.POST or None)
         cow_form = CowForm(request.POST or None)
@@ -195,7 +222,6 @@ def user(request):
         wild_form = WildForm(request.POST or None)
         aquatic_form = AquaticForm(request.POST or None)
         bee_form = BeeForm(request.POST or None)
-        document_form = DocumentForm(request.POST, request.FILES)
 
         page = request.GET.get('page', 1)
         paginator = Paginator(articles, 6)
@@ -209,19 +235,25 @@ def user(request):
 
         if request.method == 'POST':
             formset = ImageFormSet(request.POST, request.FILES, queryset=ImageQuestion.objects.none())
+            docset = document_form(request.POST, request.FILES, queryset=Document.objects.none())
 
             def save_images(base):
                 # Save images
                 if formset.is_valid():
                     for form in formset.cleaned_data:
-                        image = form['image']
-                        photo = ImageQuestion(question=base, image=image)
-                        photo.save()
-            def save_document(base):
-                if document_form.is_valid():
-                    doc = document_form.save(commit=False)
-                    doc.question = base
-                    doc.save()
+                        if form:
+                            image = form['image']
+                            photo = ImageQuestion(question=base, image=image)
+                            photo.save()
+
+            def save_documents(base):
+                # Save documents
+                if docset.is_valid():
+                    for form in docset.cleaned_data:
+                        if form:
+                            document = form['document']
+                            doc = Document(question=base, document=document)
+                            doc.save()
 
             if base_form.is_valid():
                 if cow_form.is_valid() and base_form.cleaned_data['specie'] == 'BV':
@@ -238,7 +270,7 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cow.save()
-                    save_document(base)
+                    save_documents(base)
                     save_images(base)
                     emails = User.objects.filter(speciality='BV').filter(rol='TC')
                     try:
@@ -263,8 +295,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     pig.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='PR').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -288,8 +320,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     horse.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='EQ').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -313,8 +345,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     ovine.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='OV').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -338,8 +370,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     goat.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='CP').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -362,8 +394,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     rab.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='LP').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -387,8 +419,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     bird.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='AV').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -412,8 +444,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     dog.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='CN').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -437,8 +469,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     cat.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='FL').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -462,8 +494,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     wild.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='SL').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -487,8 +519,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     aq.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='AQ').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -512,8 +544,8 @@ def user(request):
                     template = get_template('mail.html')
                     html_content = template.render(new_context)
                     bee.save()
+                    save_documents(base)
                     save_images(base)
-                    save_document(base)
                     emails = User.objects.filter(speciality='BJ').filter(rol='TC')
                     try:
                         for user_speciality in emails:
@@ -527,6 +559,7 @@ def user(request):
                 print('formst errors: ', formset.errors)
 
         formset = ImageFormSet(queryset=ImageQuestion.objects.none())
+        docset = document_form(queryset=Document.objects.none())
         context = {
             'title': "Bienvenido "+request.user.username,
             'solveds': solved,
@@ -545,7 +578,7 @@ def user(request):
             'aquatic_form': aquatic_form,
             'bee_form': bee_form,
             'formset': formset,
-            'document_form': document_form,
+            'docset': docset,
         }
         return render(request, template, context)
 
@@ -562,27 +595,16 @@ def user(request):
         except EmptyPage:
             solved = paginator.page(paginator.num_pages)
 
-        if request.method == 'POST':
-            if request.POST['type'] == 'changestate':
-                pk = request.POST['pk']
-                change = Question.objects.get(pk=pk)
-                change.status = 'RP'
-                change.user_response = request.user
-                change.save()
-                
-        avg = get_avg(request.user)
-
         context = {
             'title': "Profesional " + request.user.username,
             'solveds': solved,
             'articles': article,
-            'avg': avg,
+            'avg': get_avg(request.user),
         }
         return render(request, template, context)
 
     elif request.user.rol == 'AD':
         return redirect('home:register')
-
 
 
 @login_required(login_url='home:inicio')
@@ -628,7 +650,6 @@ def cards(request):
         return redirect('home:register')
 
 
-
 @login_required(login_url='home:inicio')
 def register(request):
     if request.user.rol == 'AD':
@@ -656,7 +677,7 @@ def register(request):
         return redirect('home:inicio')
 
 
-def search(request, label):
+def search(request, label): 
     message = None
     template = 'article.html'
     articles = Question.objects.filter(specie=label)
@@ -684,10 +705,8 @@ def search(request, label):
 
 
 def sendmailform(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
-        fromaddr = "itzli2000@gmail.com"
+    if email_user:
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -711,20 +730,15 @@ def sendmailform(request, email_user, html_content):
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
-
-
 
 def sendstudentmail(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
-        fromaddr = "itzli2000@gmail.com"
+    if email_user:
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -734,19 +748,15 @@ def sendstudentmail(request, email_user, html_content):
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
-
 
 def sendprofmail(request, email_user, html_content):
-    if email_user == None:
-        return None
-    else:
-        fromaddr = "itzli2000@gmail.com"
+    if email_user:
+        fromaddr = "albeitarunam@gmail.com"
         toaddr = email_user
         msg = MIMEMultipart()
         msg['From'] = fromaddr
@@ -756,12 +766,28 @@ def sendprofmail(request, email_user, html_content):
         msg.attach(MIMEText(body, 'html'))
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(fromaddr, "molinona&9")
+        server.login(fromaddr, "digimundounam")
         text = msg.as_string()
         server.sendmail(fromaddr, toaddr, text)
         server.quit()
 
-        return None
+
+def sendclosemail(request, email_user, html_content):
+    if email_user:
+        fromaddr = "albeitarunam@gmail.com"
+        toaddr = email_user
+        msg = MIMEMultipart()
+        msg['From'] = fromaddr
+        msg['To'] = toaddr
+        msg['Subject'] = "Se ha marcado como RESUELTA una de las preguntas que ayudó a resolver."
+        body = html_content
+        msg.attach(MIMEText(body, 'html'))
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(fromaddr, "digimundounam")
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
 
 
 def mail(request):
@@ -770,6 +796,7 @@ def mail(request):
         'title': "PetGurú - mail",
     }
     return render(request, template, context)
+
 
 def get_avg(user):
     qualifications = []
@@ -784,6 +811,7 @@ def get_avg(user):
             return 0
     else:
         return 'Aun no tienes preguntas contestadas'
+
 
 def translate(objspecie):
     values = []
