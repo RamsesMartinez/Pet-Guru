@@ -665,6 +665,7 @@ def register(request):
             if f.is_valid():
                 if f.cleaned_data['rol'] == 'AD':
                     f.is_staff = True
+                    f.is_superuser = True
                     f.save()
                     messages='Usuario creado correctamente'
                     return redirect('home:register')
